@@ -42,6 +42,7 @@ CARACTER            "'"."'"
 "("                 { GUARDAR_TOKEN(T_PARENTESIS_IZQUIERDO);}
 ")"                 { GUARDAR_TOKEN(T_PARENTESIS_DERECHO);}
 ":"                 { GUARDAR_TOKEN(T_DOS_PUNTOS);}
+","                 { GUARDAR_TOKEN(T_COMA);}
 
 "mod"               { GUARDAR_TOKEN(T_MODULO);}
 "div"               { GUARDAR_TOKEN(T_DIVISION_ENTERA);}
@@ -76,6 +77,7 @@ CARACTER            "'"."'"
 "definir"           { GUARDAR_TOKEN(T_DEFINIR);}
 "verdadero"         { GUARDAR_TOKEN(T_VERDADERO);}
 "falso"             { GUARDAR_TOKEN(T_FALSO);}
+"hasta"             { GUARDAR_TOKEN(T_HASTA);}
 
 {ID}                { GUARDAR_TOKEN(T_IDENTIFICADOR);}
 {NUMERO}            { GUARDAR_TOKEN(T_LITERAL_NUMERICA);}

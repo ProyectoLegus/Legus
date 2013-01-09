@@ -36,11 +36,15 @@
 #line 3 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
 
     #include <string>
+    #include "Expresion.h"
+    #include "Instruccion.h"
+    #include "Lista.h"
+    #include "ListaDeCaso.h"
 
 
 
 /* Line 2068 of yacc.c  */
-#line 44 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.h"
+#line 48 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.h"
 
 /* Tokens.  */
 #ifndef YYTOKENTYPE
@@ -73,41 +77,42 @@
      T_LITERAL_CARACTER = 280,
      T_LITERAL_FLOTANTE = 281,
      T_LITERAL_CADENA = 282,
-     T_MODULO = 283,
-     T_DIVISION_ENTERA = 284,
-     T_IGUAL = 285,
-     T_A = 286,
-     T_DISTINTO = 287,
-     T_DE = 288,
-     T_OPERADOR_Y = 289,
-     T_OPERADOR_O = 290,
-     T_NO = 291,
-     T_SI = 292,
-     T_ENTONCES = 293,
-     T_FIN = 294,
-     T_SINO = 295,
-     T_CASO = 296,
-     T_MIENTRAS = 297,
-     T_HAGA = 298,
-     T_EJECUTE = 299,
-     T_REPETIR = 300,
-     T_INFINITAS = 301,
-     T_VECES = 302,
-     T_PARA = 303,
-     T_DESDE = 304,
-     T_REPITA = 305,
-     T_CADA = 306,
-     T_EN = 307,
-     T_FUNCION = 308,
-     T_HASTA = 309,
-     T_RETORNA = 310,
-     T_RETORNAR = 311,
-     T_UTILIZAR = 312,
-     T_COMO = 313,
-     T_LITERAL_NUMERICA = 314,
-     T_DEFINIR = 315,
-     T_VERDADERO = 316,
-     T_FALSO = 317
+     T_COMA = 283,
+     T_MODULO = 284,
+     T_DIVISION_ENTERA = 285,
+     T_IGUAL = 286,
+     T_A = 287,
+     T_DISTINTO = 288,
+     T_DE = 289,
+     T_OPERADOR_Y = 290,
+     T_OPERADOR_O = 291,
+     T_NO = 292,
+     T_SI = 293,
+     T_ENTONCES = 294,
+     T_FIN = 295,
+     T_SINO = 296,
+     T_CASO = 297,
+     T_MIENTRAS = 298,
+     T_HAGA = 299,
+     T_EJECUTE = 300,
+     T_REPETIR = 301,
+     T_INFINITAS = 302,
+     T_VECES = 303,
+     T_PARA = 304,
+     T_DESDE = 305,
+     T_REPITA = 306,
+     T_CADA = 307,
+     T_EN = 308,
+     T_FUNCION = 309,
+     T_HASTA = 310,
+     T_RETORNA = 311,
+     T_RETORNAR = 312,
+     T_UTILIZAR = 313,
+     T_COMO = 314,
+     T_LITERAL_NUMERICA = 315,
+     T_DEFINIR = 316,
+     T_VERDADERO = 317,
+     T_FALSO = 318
    };
 #endif
 
@@ -118,14 +123,19 @@ typedef union YYSTYPE
 {
 
 /* Line 2068 of yacc.c  */
-#line 32 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 38 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
 
-    std::string *string;
+    std::string              *string;
+    Expresion                *expresion;
+    Instruccion              *instruccion;
+    Expresion                *vectorExpresiones;
+    Lista                    *lista;
+    ListaDeCaso              *lista_de_caso;
 
 
 
 /* Line 2068 of yacc.c  */
-#line 129 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.h"
+#line 139 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

@@ -8,6 +8,12 @@
 
 #include <iostream>
 #include <stdio.h>
+#include <vector>
+
+#include "tokens.h"
+#include "Programa.h"
+#include "Instruccion.h"
+#include "DeclaracionDeFuncion.h"
 
 extern int yyparse();
 extern FILE *yyin;

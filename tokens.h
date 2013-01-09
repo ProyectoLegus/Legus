@@ -310,7 +310,7 @@ extern int yylex (void);
 #undef YY_DECL
 #endif
 
-#line 92 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+#line 94 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
 
 
 #line 317 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.h"

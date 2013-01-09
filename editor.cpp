@@ -23,12 +23,15 @@ void Editor::on_btnCompilar_clicked()
     flujo.flush();
     archivo.close();
 
+
     yyin = fopen("prueba.txt","rt");
     if( yyin )
     {
+
         if( yyparse() )
             QMessageBox::about(this,"Parsing","Error?");
         else
             QMessageBox::about(this,"Parsing","Completado...");
     }
+    fclose(yyin);
 }
