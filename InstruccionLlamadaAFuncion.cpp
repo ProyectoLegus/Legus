@@ -6,3 +6,8 @@ InstruccionLlamadaAFuncion::InstruccionLlamadaAFuncion(string *identificador, Li
     this->identificador = identificador;
     this->lista_parametros = lista_parametros;
 }
+
+void InstruccionLlamadaAFuncion::validarSemantica()
+{
+
+}

@@ -1,7 +1,7 @@
 #ifndef TIPOCADENA_H
 #define TIPOCADENA_H
 
-#include "tipo.h"
+#include "Tipo.h"
 
 class TipoCadena : public Tipo
 {

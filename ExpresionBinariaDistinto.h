@@ -2,11 +2,13 @@
 #define EXPRESIONBINARIADISTINTO_H
 
 #include "ExpresionBinaria.h"
+#include "Programa.h"
 
 class ExpresionBinariaDistinto : public ExpresionBinaria
 {
 public:
     ExpresionBinariaDistinto(Expresion *izquierda, Expresion *derecha);
+    virtual Tipo* validarSemantica();
 };
 
 #endif // EXPRESIONBINARIADISTINTO_H

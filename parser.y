@@ -8,30 +8,26 @@
     #include "ListaDeCaso.h"
 }
 %{
-    #include <QMessageBox>
-    #include <QString>
-    #include <iostream>
-    #include <vector>
-    #include <stdio.h>
-    #include <stdlib.h>
-    #include "tokens.h"
-
     /* Imports Tree */
     #include "ParserImports.h"
 
-    using namespace std;
-
     extern int yylex();
     extern char *yytext;
-    extern int linea;
+    extern int linea, yytoken, yylineno;
     extern FILE *yyin;
-    extern int yytoken;
-    extern int yylineno;
 
-    void yyerror(const char *s) {
-        //char arr[100];
-        //sprintf(arr,"%d: error: '%s' at '%s'", yylineno, s, yytext);
-        QMessageBox::about(0,"","Error Sintactico: " + QString(s) + "linea: " + QString::number(yylineno));
+    int token_esperado = -1;
+
+    void yyerror(const char *s) {        
+        if( token_esperado == 1 )
+        {
+            QMessageBox::about(0,"","Esperando un T_IDENTIFICADOR linea: " + QString::number(yylineno));
+        }
+        else if( token_esperado = 2 )
+        {
+            QMessageBox::about(0,"","Error Sintactico: " + QString(s) + "linea: " + QString::number(yylineno));
+        }
+//        QMessageBox::about(0,"","Error Sintactico: " + QString(s) + "linea: " + QString::number(yylineno));
     }
 %}
 
@@ -92,9 +88,15 @@
     /******************** Declaraciones *******************/
 
     declaracion_funciones :
-        T_FUNCION T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO instrucciones T_FIN T_FUNCION declaracion_funciones
+        T_FUNCION   {}
+            T_IDENTIFICADOR
+                T_PARENTESIS_IZQUIERDO
+                    lista_parametros
+                        T_PARENTESIS_DERECHO
+                    instrucciones
+                    T_FIN T_FUNCION declaracion_funciones
         {
-            DeclaracionDeFuncion *declrFuncion = new DeclaracionDeFuncion(new Variable($2), $4, $6);
+            DeclaracionDeFuncion *declrFuncion = new DeclaracionDeFuncion(new Variable($3), $5, $7);
             Programa::obtenerInstancia()->tablaDeFunciones->push_back(declrFuncion);
         }
         |/*Epsilon*/
@@ -185,11 +187,6 @@
             /* Parametros: condicion, instruccionSiVerdadero, instruccionSiFalso,instruccionSiAnidado, Siguiente*/
             $$ = new InstruccionSi($2, $4, $6, 0, 0);
         }
-/*      |T_SI relacionales T_ENTONCES instrucciones T_SINO instruccion_si
-        {
-            $$ = new InstruccionSi($2, $4, 0, $6, 0);
-        }
-*/
         ;
 
     instruccion_caso:
@@ -213,7 +210,7 @@
         T_PARA T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_PARA
         {
             /*identificador, inicio, final, instrucciones, siguiente*/
-            $$ = new InstruccionPara($2, $4, $6, $8, 0);
+            $$ = new InstruccionPara(new InstruccionAsignacion(new Variable($2),$4,0), $6, $8, 0);
         };
 
     instruccion_repetir :
@@ -227,6 +224,7 @@
         T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales
         {
             /*Variable, Expresion, siguiente*/
+            Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada($1,$3->tipoInferido));
             $$ = new InstruccionAsignacion( new Variable($1), $3, 0 );
         }
         |id_arreglo T_SIMBOLO_IGUAL relacionales

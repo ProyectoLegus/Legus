@@ -9,6 +9,9 @@ class DeclaracionDeFuncion
 {
 public:
     DeclaracionDeFuncion(Variable *variable, Lista *lista_parametros, Instruccion *instrucciones);
+    Variable    *obtenerVariable();
+    Lista       *obtenerListaParametros();
+    Instruccion *obtenerInstruccion();
 
 private:
     Variable    *variable;

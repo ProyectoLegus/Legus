@@ -3,4 +3,5 @@
 TipoCaracter::TipoCaracter()
     :Tipo()
 {
+    this->tipo = Caracter;
 }

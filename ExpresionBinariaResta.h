@@ -7,6 +7,7 @@ class ExpresionBinariaResta : public ExpresionBinaria
 {
 public:
     ExpresionBinariaResta(Expresion *izquierda, Expresion *derecha);
+    virtual Tipo* validarSemantica();
 };
 
 #endif // EXPRESIONBINARIARESTA_H

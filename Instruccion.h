@@ -8,12 +8,17 @@ enum Instrucciones
     REPITA, REPITADESDE, RETORNAR
 };
 
+#include "ExcepcionLegus.h"
+
 class Instruccion
 {
 public:
     Instruccion( Instruccion *siguiente, Instrucciones tipo);
     void establecerSiguiente(Instruccion *siguiente);
     Instruccion* obtenerSiguiente();
+
+    Instrucciones obtenerTipo();
+    virtual void validarSemantica()=0;
 
 private:
     Instruccion *siguiente;

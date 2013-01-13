@@ -13,11 +13,11 @@ using namespace std;
 class InstruccionPara : public Instruccion
 {
 public:
-    InstruccionPara(string *identificador,Expresion *inicio, Expresion *final, Instruccion *instrucciones ,Instruccion *siguiente);
+    InstruccionPara(InstruccionAsignacion *instruccionAsignacion, Expresion *final, Instruccion *instrucciones ,Instruccion *siguiente);
+    virtual void validarSemantica();
 
 private:
-    string *identificador;
-    Expresion *inicio;
+    InstruccionAsignacion *instruccionAsignacion;
     Expresion *final;
     Instruccion *instrucciones;
 };

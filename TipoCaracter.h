@@ -1,7 +1,7 @@
 #ifndef TIPOCARACTER_H
 #define TIPOCARACTER_H
 
-#include "tipo.h"
+#include "Tipo.h"
 
 class TipoCaracter : public Tipo
 {

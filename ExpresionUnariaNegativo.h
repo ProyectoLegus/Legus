@@ -8,6 +8,7 @@ class ExpresionUnariaNegativo : public ExpresionUnaria
 {
 public:
     ExpresionUnariaNegativo(Expresion *expresion);
+    virtual Tipo* validarSemantica();
 };
 
 #endif // EXPRESIONUNARIANEGATIVO_H

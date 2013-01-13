@@ -12,6 +12,8 @@ class VariableArreglo : public Variable
 {
 public:
     VariableArreglo(string *identificador, Lista *lista_indices);
+    Lista *obtenerListaIndices();
+    virtual Tipo* validarSemantica();
 
 private:
     Lista *lista_indices;

@@ -1,7 +1,7 @@
 #ifndef TIPOENTERO_H
 #define TIPOENTERO_H
 
-#include "tipo.h"
+#include "Tipo.h"
 
 class TipoEntero : public Tipo
 {

@@ -6,3 +6,8 @@ InstruccionAsignacion::InstruccionAsignacion(Expresion *variable, Expresion *exp
     this->variable = variable;
     this->expresion = expresion;
 }
+
+void InstruccionAsignacion::validarSemantica()
+{
+
+}

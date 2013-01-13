@@ -7,6 +7,7 @@ class ExpresionBinariaDivision : public ExpresionBinaria
 {
 public:
     ExpresionBinariaDivision(Expresion *izquierda, Expresion *derecha);
+    virtual Tipo* validarSemantica();
 };
 
 #endif // EXPRESIONBINARIADIVISION_H

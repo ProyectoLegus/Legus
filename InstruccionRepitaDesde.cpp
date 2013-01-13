@@ -7,3 +7,8 @@ InstruccionRepitaDesde::InstruccionRepitaDesde(Expresion *inicio, Expresion *fin
     this->final = final;
     this->instrucciones = instrucciones;
 }
+
+void InstruccionRepitaDesde::validarSemantica()
+{
+
+}

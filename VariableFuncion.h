@@ -12,6 +12,8 @@ class VariableFuncion : public Variable
 {
 public:
     VariableFuncion(string *identificador, Lista *lista_parametros);
+    Lista* obtenerListaParametros();
+    virtual Tipo* validarSemantica();
 
 private:
     Lista *lista_parametros;

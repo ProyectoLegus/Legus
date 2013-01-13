@@ -5,15 +5,18 @@
 #include <QFile>
 #include <QTextStream>
 #include <QMessageBox>
+#include <QList>
 
 #include <iostream>
 #include <stdio.h>
 #include <vector>
 
 #include "tokens.h"
+#include "parser.h"
 #include "Programa.h"
 #include "Instruccion.h"
 #include "DeclaracionDeFuncion.h"
+#include "ExcepcionLegus.h"
 
 extern int yyparse();
 extern FILE *yyin;

@@ -7,3 +7,8 @@ InstruccionCaso::InstruccionCaso(Expresion *expresion, ListaDeCaso *listaDeCaso,
     this->listaDeCaso = listaDeCaso;
     this->instrucciones_sino = instrucciones_sino;
 }
+
+void InstruccionCaso::validarSemantica()
+{
+
+}

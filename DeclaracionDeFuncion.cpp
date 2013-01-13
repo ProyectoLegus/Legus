@@ -6,3 +6,18 @@ DeclaracionDeFuncion::DeclaracionDeFuncion(Variable *variable, Lista *lista_para
     this->lista_parametros = lista_parametros;
     this->instrucciones = instrucciones;
 }
+
+Variable* DeclaracionDeFuncion::obtenerVariable()
+{
+    return this->variable;
+}
+
+Lista* DeclaracionDeFuncion::obtenerListaParametros()
+{
+    return this->lista_parametros;
+}
+
+Instruccion* DeclaracionDeFuncion::obtenerInstruccion()
+{
+    return this->instrucciones;
+}

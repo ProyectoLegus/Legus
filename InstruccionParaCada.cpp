@@ -7,3 +7,8 @@ InstruccionParaCada::InstruccionParaCada(Expresion *variable, Expresion *colecci
     this->coleccion_arreglo = coleccion_arreglo;
     this->instrucciones = instrucciones;
 }
+
+void InstruccionParaCada::validarSemantica()
+{
+
+}

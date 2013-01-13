@@ -2,11 +2,13 @@
 #define EXPRESIONBINARIAO_H
 
 #include "ExpresionBinaria.h"
+#include "Programa.h"
 
 class ExpresionBinariaO : public ExpresionBinaria
 {
 public:
     ExpresionBinariaO(Expresion *izquierda, Expresion *derecha);
+    virtual Tipo* validarSemantica();
 };
 
 #endif // EXPRESIONBINARIAO_H

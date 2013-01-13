@@ -4,3 +4,8 @@ ExpresionBinariaDivision::ExpresionBinariaDivision(Expresion *izquierda, Expresi
     :ExpresionBinaria(izquierda, derecha, DIVISION)
 {
 }
+
+Tipo* ExpresionBinariaDivision::validarSemantica()
+{
+    return 0;
+}

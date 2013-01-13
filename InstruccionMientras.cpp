@@ -6,3 +6,15 @@ InstruccionMientras::InstruccionMientras(Expresion *condicion, Instruccion *inst
     this->condicion = condicion;
     this->instrucciones = instrucciones;
 }
+
+void InstruccionMientras::validarSemantica()
+{
+    Tipo *tipoExpresion = condicion->validarSemantica();
+
+    if( tipoExpresion != Booleano)
+    {
+        // ERROR
+    }
+
+    instrucciones->validarSemantica();
+}

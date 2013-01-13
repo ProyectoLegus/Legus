@@ -14,6 +14,7 @@ class InstruccionLlamadaAFuncion : public Instruccion
 {
 public:
     InstruccionLlamadaAFuncion(string *identificador, Lista *lista_parametros, Instruccion *siguiente);
+    virtual void validarSemantica();
 
 private:
     string *identificador;

@@ -6,3 +6,18 @@ DeclaracionUtilizar::DeclaracionUtilizar(VariablePuerto *puerto, VariableSensor 
     this->puerto = puerto;
     this->sensor = sensor;
 }
+
+Variable* DeclaracionUtilizar::obtenerVariable()
+{
+    return this->variable;
+}
+
+VariablePuerto* DeclaracionUtilizar::obtenerPuerto()
+{
+    return this->puerto;
+}
+
+VariableSensor* DeclaracionUtilizar::obtenerSensor()
+{
+    return this->sensor;
+}

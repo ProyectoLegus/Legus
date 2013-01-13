@@ -8,6 +8,7 @@ class InstruccionMientras : public Instruccion
 {
 public:
     InstruccionMientras(Expresion *condicion, Instruccion *instrucciones, Instruccion *siguiente);
+    virtual void validarSemantica();
 
 private:
     Expresion *condicion;

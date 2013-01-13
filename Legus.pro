@@ -66,7 +66,11 @@ SOURCES += main.cpp\
     Programa.cpp \
     DeclaracionUtilizar.cpp \
     VariablePuerto.cpp \
-    VariableSensor.cpp
+    VariableSensor.cpp \
+    EntradaSimbolo.cpp \
+    VariableDeclarada.cpp \
+    GeneradorDeErrores.cpp \
+    ExcepcionLegus.cpp
 
 HEADERS  += editor.h \
     tokens.h \
@@ -125,7 +129,11 @@ HEADERS  += editor.h \
     Programa.h \
     DeclaracionUtilizar.h \
     VariablePuerto.h \
-    VariableSensor.h
+    VariableSensor.h \
+    EntradaSimbolo.h \
+    VariableDeclarada.h \
+    GeneradorDeErrores.h \
+    ExcepcionLegus.h
 
 FORMS    += editor.ui
 

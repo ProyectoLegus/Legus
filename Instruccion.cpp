@@ -15,3 +15,8 @@ Instruccion* Instruccion::obtenerSiguiente()
 {
     return this->siguiente;
 }
+
+Instrucciones Instruccion::obtenerTipo()
+{
+    return tipo;
+}

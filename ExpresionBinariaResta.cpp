@@ -4,3 +4,8 @@ ExpresionBinariaResta::ExpresionBinariaResta(Expresion *izquierda, Expresion *de
     :ExpresionBinaria(izquierda, derecha, RESTA)
 {
 }
+
+Tipo* ExpresionBinariaResta::validarSemantica()
+{
+    return 0;
+}

@@ -207,6 +207,7 @@ extern char *yytext;
 
 #ifdef YY_HEADER_EXPORT_START_CONDITIONS
 #define INITIAL 0
+#define MULTI_COMMENT 1
 
 #endif
 
@@ -310,9 +311,9 @@ extern int yylex (void);
 #undef YY_DECL
 #endif
 
-#line 94 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+#line 107 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
 
 
-#line 317 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.h"
+#line 318 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.h"
 #undef yyIN_HEADER
 #endif /* yyHEADER_H */

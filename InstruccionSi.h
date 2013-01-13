@@ -8,9 +8,10 @@ class InstruccionSi : public Instruccion
 {
 public:
     InstruccionSi(Expresion *condicion, Instruccion *instruccionesSiVerdadero, Instruccion *instruccionesSiFalso, Instruccion *instruccionSiAnidado, Instruccion *siguiente);
+    virtual void validarSemantica();
 
 private:
-    Expresion *condicion;
+    Expresion   *condicion;
     Instruccion *instruccionesSiVerdadero;
     Instruccion *instruccionesSiFalso;
     Instruccion *instruccionSiAnidado;

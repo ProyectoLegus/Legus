@@ -123,7 +123,7 @@ typedef union YYSTYPE
 {
 
 /* Line 2068 of yacc.c  */
-#line 38 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 34 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
 
     std::string              *string;
     Expresion                *expresion;

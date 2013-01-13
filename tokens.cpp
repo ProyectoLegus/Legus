@@ -161,7 +161,20 @@ extern FILE *yyin, *yyout;
 #define EOB_ACT_END_OF_FILE 1
 #define EOB_ACT_LAST_MATCH 2
 
-    #define YY_LESS_LINENO(n)
+    /* Note: We specifically omit the test for yy_rule_can_match_eol because it requires
+     *       access to the local variable yy_act. Since yyless() is a macro, it would break
+     *       existing scanners that call yyless() from OUTSIDE yylex. 
+     *       One obvious solution it to make yy_act a global. I tried that, and saw
+     *       a 5% performance hit in a non-yylineno scanner, because yy_act is
+     *       normally declared as a register variable-- so it is not worth it.
+     */
+    #define  YY_LESS_LINENO(n) \
+            do { \
+                int yyl;\
+                for ( yyl = n; yyl < yyleng; ++yyl )\
+                    if ( yytext[yyl] == '\n' )\
+                        --yylineno;\
+            }while(0)
     
 /* Return all but the first "n" matched characters back to the input stream. */
 #define yyless(n) \
@@ -360,8 +373,8 @@ static void yy_fatal_error (yyconst char msg[]  );
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
 
-#define YY_NUM_RULES 64
-#define YY_END_OF_BUFFER 65
+#define YY_NUM_RULES 69
+#define YY_END_OF_BUFFER 70
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -369,27 +382,28 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static yyconst flex_int16_t yy_accept[178] =
+static yyconst flex_int16_t yy_accept[186] =
     {   0,
-        0,    0,   65,   63,   62,   62,   13,   63,    6,   63,
-       63,   19,   20,    4,    2,   22,    3,    5,   58,   21,
-       10,    1,   11,   26,   57,   57,   57,   57,   57,   57,
-       57,   57,   57,   30,   57,   57,   57,   57,   57,   29,
-       17,   18,    7,   62,   14,    0,   61,    0,   15,    0,
-        0,   58,    9,   12,    8,   57,   57,   57,   28,   57,
-       57,   47,   57,   57,   57,   57,   57,   57,   57,   57,
-       31,   57,   57,   32,   57,   57,   16,   60,   59,   57,
-       57,   57,   57,   57,   57,   24,   57,   57,   57,   34,
-       57,   57,   57,   57,   57,   57,   23,   57,   57,   57,
+        0,    0,    0,    0,   70,   64,   63,   63,   14,   64,
+        7,   64,   64,   20,   21,    5,    3,   23,    4,    6,
+       59,   22,   11,    2,   12,   27,   58,   58,   58,   58,
+       58,   58,   58,   58,   58,   31,   58,   58,   58,   58,
+       58,   30,   18,   19,    8,   63,   66,   68,   67,   15,
+        0,   62,    0,   16,    0,    1,    0,   59,   10,   13,
+        9,   58,   58,   58,   29,   58,   58,   48,   58,   58,
+       58,   58,   58,   58,   58,   58,   32,   58,   58,   33,
+       58,   58,   17,   66,   65,   61,   60,   58,   58,   58,
+       58,   58,   58,   25,   58,   58,   58,   35,   58,   58,
 
-       57,   57,   57,   57,   46,   36,   52,   57,   57,   57,
-       57,   57,   57,   57,   38,   57,   57,   57,   57,   43,
-       57,   57,   57,   35,   57,   57,   57,   57,   44,   57,
-       57,   57,   55,   57,   56,   25,   57,   57,   57,   57,
-       57,   57,   42,   57,   57,   57,   57,   57,   57,   57,
-       57,   57,   45,   57,   57,   57,   53,   57,   39,   57,
-       48,   57,   57,   40,   49,   57,   57,   27,   33,   57,
-       37,   50,   51,   57,   41,   54,    0
+       58,   58,   58,   58,   24,   58,   58,   58,   58,   58,
+       58,   58,   47,   37,   53,   58,   58,   58,   58,   58,
+       58,   58,   39,   58,   58,   58,   58,   44,   58,   58,
+       58,   36,   58,   58,   58,   58,   45,   58,   58,   58,
+       56,   58,   57,   26,   58,   58,   58,   58,   58,   58,
+       43,   58,   58,   58,   58,   58,   58,   58,   58,   58,
+       46,   58,   58,   58,   54,   58,   40,   58,   49,   58,
+       58,   41,   50,   58,   58,   28,   34,   58,   38,   51,
+       52,   58,   42,   55,    0
     } ;
 
 static yyconst flex_int32_t yy_ec[256] =
@@ -427,110 +441,113 @@ static yyconst flex_int32_t yy_ec[256] =
 static yyconst flex_int32_t yy_meta[70] =
     {   0,
         1,    1,    2,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    3,    1,    1,    1,
-        1,    3,    3,    3,    3,    3,    3,    3,    3,    3,
-        3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
-        3,    3,    3,    1,    1,    1,    1,    3,    3,    3,
-        3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
-        3,    3,    3,    3,    3,    3,    3,    3,    1
+        3,    1,    1,    1,    1,    1,    4,    1,    1,    1,
+        1,    4,    4,    4,    4,    4,    4,    4,    4,    4,
+        4,    4,    4,    4,    4,    4,    4,    4,    4,    4,
+        4,    4,    4,    1,    1,    1,    1,    4,    4,    4,
+        4,    4,    4,    4,    4,    4,    4,    4,    4,    4,
+        4,    4,    4,    4,    4,    4,    4,    4,    1
     } ;
 
-static yyconst flex_int16_t yy_base[181] =
+static yyconst flex_int16_t yy_base[191] =
     {   0,
-        0,    0,  312,  336,  336,  336,  288,   65,  336,  287,
-        0,  336,  336,  336,  336,  336,  336,  336,   56,  336,
-      173,  169,  165,    0,    0,   52,   46,   46,   56,   59,
-       55,   58,   49,    0,   68,   66,   64,   56,   72,    0,
-      336,  336,  336,   80,  336,   70,  336,   96,  336,   83,
-       68,  107,  336,  336,  336,    0,  100,   70,   99,   89,
-       80,   90,  100,   99,  100,  107,   96,  112,  114,  116,
-        0,  105,  107,  110,  117,  149,  336,  336,   65,  126,
-      118,  121,  145,  151,  138,    0,  155,  145,  144,    0,
-      159,  162,  148,  166,  160,  157,    0,  170,  169,  159,
+        0,    0,   67,   68,  341,  344,  344,  344,  317,   67,
+      344,  319,    0,  344,  344,  344,  344,  344,  344,  314,
+       58,  344,  304,  297,  291,    0,    0,   54,   54,   51,
+       68,   52,   58,   58,   46,    0,   55,   68,   65,   57,
+       71,    0,  344,  344,  344,  241,    0,  344,  291,  344,
+       82,  344,  301,  344,  285,  344,  169,   84,  344,  344,
+      344,    0,   90,   71,   97,   93,   99,   87,   98,   98,
+      102,  109,   98,  112,  115,  117,    0,  106,  109,  110,
+      116,  128,  344,    0,  344,  344,   74,  132,  123,  139,
+      145,  151,  139,    0,  155,  146,  144,    0,  160,  163,
 
-      161,  165,  177,  181,    0,    0,    0,  175,  187,  187,
-      183,  191,  191,  197,    0,  207,  200,  199,  196,    0,
-      197,  198,  202,    0,  210,  203,  208,  213,    0,  210,
-      206,  222,    0,  212,    0,    0,  219,  216,  224,  237,
-      229,  224,    0,  248,  238,  237,  251,  254,  247,  243,
-      261,  249,    0,  262,  265,  263,    0,  255,    0,  253,
-        0,  271,  257,    0,  259,  260,  262,    0,    0,  265,
-        0,    0,    0,  269,    0,    0,  336,  329,  332,   76
+      148,  166,  161,  158,    0,  167,  167,  159,  160,  164,
+      172,  177,    0,    0,    0,  171,  182,  180,  173,  190,
+      190,  196,    0,  206,  199,  198,  195,    0,  197,  198,
+      202,    0,  210,  203,  207,  212,    0,  209,  205,  221,
+        0,  211,    0,    0,  217,  211,  222,  231,  224,  217,
+        0,  238,  237,  236,  250,  252,  246,  242,  260,  247,
+        0,  264,  265,  263,    0,  255,    0,  253,    0,  270,
+      256,    0,  258,  259,  260,    0,    0,  260,    0,    0,
+        0,  267,    0,    0,  344,  327,  331,  335,   79,  339
     } ;
 
-static yyconst flex_int16_t yy_def[181] =
+static yyconst flex_int16_t yy_def[191] =
     {   0,
-      177,    1,  177,  177,  177,  177,  177,  178,  177,  177,
-      179,  177,  177,  177,  177,  177,  177,  177,  177,  177,
-      177,  177,  177,  180,  180,  180,  180,  180,  180,  180,
-      180,  180,  180,  180,  180,  180,  180,  180,  180,  180,
-      177,  177,  177,  177,  177,  178,  177,  178,  177,  177,
-      177,  177,  177,  177,  177,  180,  180,  180,  180,  180,
-      180,  180,  180,  180,  180,  180,  180,  180,  180,  180,
-      180,  180,  180,  180,  180,  180,  177,  177,  177,  180,
-      180,  180,  180,  180,  180,  180,  180,  180,  180,  180,
-      180,  180,  180,  180,  180,  180,  180,  180,  180,  180,
+      185,    1,  186,  186,  185,  185,  185,  185,  185,  187,
+      185,  185,  188,  185,  185,  185,  185,  185,  185,  185,
+      185,  185,  185,  185,  185,  189,  189,  189,  189,  189,
+      189,  189,  189,  189,  189,  189,  189,  189,  189,  189,
+      189,  189,  185,  185,  185,  185,  190,  185,  185,  185,
+      187,  185,  187,  185,  185,  185,  185,  185,  185,  185,
+      185,  189,  189,  189,  189,  189,  189,  189,  189,  189,
+      189,  189,  189,  189,  189,  189,  189,  189,  189,  189,
+      189,  189,  185,  190,  185,  185,  185,  189,  189,  189,
+      189,  189,  189,  189,  189,  189,  189,  189,  189,  189,
 
-      180,  180,  180,  180,  180,  180,  180,  180,  180,  180,
-      180,  180,  180,  180,  180,  180,  180,  180,  180,  180,
-      180,  180,  180,  180,  180,  180,  180,  180,  180,  180,
-      180,  180,  180,  180,  180,  180,  180,  180,  180,  180,
-      180,  180,  180,  180,  180,  180,  180,  180,  180,  180,
-      180,  180,  180,  180,  180,  180,  180,  180,  180,  180,
-      180,  180,  180,  180,  180,  180,  180,  180,  180,  180,
-      180,  180,  180,  180,  180,  180,    0,  177,  177,  177
+      189,  189,  189,  189,  189,  189,  189,  189,  189,  189,
+      189,  189,  189,  189,  189,  189,  189,  189,  189,  189,
+      189,  189,  189,  189,  189,  189,  189,  189,  189,  189,
+      189,  189,  189,  189,  189,  189,  189,  189,  189,  189,
+      189,  189,  189,  189,  189,  189,  189,  189,  189,  189,
+      189,  189,  189,  189,  189,  189,  189,  189,  189,  189,
+      189,  189,  189,  189,  189,  189,  189,  189,  189,  189,
+      189,  189,  189,  189,  189,  189,  189,  189,  189,  189,
+      189,  189,  189,  189,    0,  185,  185,  185,  185,  185
     } ;
 
-static yyconst flex_int16_t yy_nxt[406] =
+static yyconst flex_int16_t yy_nxt[414] =
     {   0,
-        4,    5,    6,    7,    8,    9,   10,   11,   12,   13,
-       14,   15,   16,   17,    4,   18,   19,   20,   21,   22,
-       23,   24,   25,   26,   27,   28,   29,   25,   30,   31,
-       25,   25,   32,   33,   34,   35,   36,   37,   25,   38,
-       39,   40,   25,   41,    4,   42,   43,   24,   26,   27,
-       28,   29,   25,   30,   31,   25,   25,   32,   33,   34,
-       35,   36,   37,   25,   38,   39,   40,   25,   44,   47,
-       51,   59,   52,   57,   47,   60,   61,   63,   56,   62,
-       66,   79,   67,   71,   79,   64,   58,   69,   68,   72,
-       78,   73,   70,   74,   75,   65,   59,   76,  177,   57,
+        6,    7,    8,    9,   10,   11,   12,   13,   14,   15,
+       16,   17,   18,   19,    6,   20,   21,   22,   23,   24,
+       25,   26,   27,   28,   29,   30,   31,   27,   32,   33,
+       27,   27,   34,   35,   36,   37,   38,   39,   27,   40,
+       41,   42,   27,   43,    6,   44,   45,   26,   28,   29,
+       30,   31,   27,   32,   33,   27,   27,   34,   35,   36,
+       37,   38,   39,   27,   40,   41,   42,   27,   46,   48,
+       48,   52,   57,   72,   58,   63,   78,   49,   49,   65,
+       77,   67,   62,   66,   68,   73,   52,   75,   64,   69,
+       87,   74,   76,   79,   80,   81,   82,   70,   57,   72,
 
-       60,   61,   82,   63,   62,   87,   66,   67,   71,   48,
-       64,   58,   69,   68,   48,   72,   73,   70,   74,   75,
-       65,   51,   76,   52,   80,   83,   85,   82,   88,   86,
-       87,   89,   90,   91,   92,   94,   84,   81,   95,   96,
-       97,   98,   99,  101,   93,  100,  102,  105,   77,   80,
-       83,   85,  106,   88,   86,  107,   89,   90,   91,   92,
-       94,   84,   81,   95,   96,   97,   98,   99,  101,   93,
-      100,  102,  103,  105,  108,  109,  110,  106,  111,  112,
-      107,  113,  114,  115,   55,  104,  116,  117,   54,  118,
-      119,  120,   53,  123,  121,  124,  125,  103,  122,  108,
+       58,   63,   78,   90,   65,   77,   67,   71,   66,   68,
+       73,   53,   75,   64,   88,   69,   74,   76,   79,   80,
+       81,   82,   70,   91,   95,   96,   53,   89,   90,   97,
+       93,   98,   71,   94,   92,   99,  100,  102,  103,   88,
+      104,  105,  106,  109,  107,  110,  101,  108,   91,   95,
+       96,  111,   89,  113,   97,   93,   98,  114,   94,   92,
+       99,  100,  102,  103,  112,  104,  105,  106,  109,  107,
+      110,  101,  108,  115,  116,  117,  111,  118,  119,  113,
+      120,  121,  114,  122,  123,   87,  124,  125,  128,  112,
+      126,  127,  129,  131,  132,  133,  130,  134,  115,  116,
 
-      109,  110,  126,  111,  112,  127,  113,  114,  128,  115,
-      104,  116,  129,  117,  118,  119,  130,  120,  123,  121,
-      124,  125,  131,  122,  132,  133,  134,  126,  135,  144,
-      127,  136,  137,  128,  138,  139,  140,  129,  141,  142,
-      143,  130,  145,  146,  147,  148,  149,  131,  150,  132,
-      133,  134,  151,  152,  135,  144,  136,  137,  153,  138,
-      139,  140,  154,  141,  142,  143,  155,  145,  146,  147,
-      148,  149,  156,  150,  157,  158,  159,  151,  152,  160,
-      161,  162,  163,  165,  153,  164,  166,  154,  167,  168,
-      169,  155,  170,   49,  171,  172,  173,  156,  174,  157,
+      117,  135,  118,  119,  136,  120,  121,  137,  122,  138,
+      123,  124,  139,  125,  128,  126,  127,  129,  131,  132,
+      133,  130,  134,  140,  141,  142,  135,  143,  152,  136,
+      144,  145,  137,  146,  138,  147,  148,  139,  149,  150,
+      151,  153,  154,  155,  156,  157,  158,  159,  140,  141,
+      142,  160,  161,  143,  152,  144,  145,  162,  146,  163,
+      147,  148,  164,  149,  150,  151,  153,  154,  155,  156,
+      157,  158,  159,  165,  166,  167,  160,  168,  161,  169,
+      170,  171,  162,  172,  163,  173,  174,  164,  175,  176,
+      177,  178,   86,  179,  180,  181,  182,  183,  165,  166,
 
-      158,  159,  175,  176,  160,  161,  162,   45,  163,  165,
-      164,  177,  166,  167,  168,  169,  177,  177,  170,  171,
-      172,  173,  177,  174,  177,  177,  177,  175,  176,   46,
-       46,   46,   50,  177,   50,    3,  177,  177,  177,  177,
-      177,  177,  177,  177,  177,  177,  177,  177,  177,  177,
-      177,  177,  177,  177,  177,  177,  177,  177,  177,  177,
-      177,  177,  177,  177,  177,  177,  177,  177,  177,  177,
-      177,  177,  177,  177,  177,  177,  177,  177,  177,  177,
-      177,  177,  177,  177,  177,  177,  177,  177,  177,  177,
-      177,  177,  177,  177,  177,  177,  177,  177,  177,  177,
+      167,  184,  168,  185,  169,  170,   85,  171,  172,   83,
+       61,  173,  174,  175,  176,  177,   60,  178,  179,  180,
+      181,  182,  183,   59,   56,   54,  184,   47,   47,   47,
+       47,   51,   51,   51,   51,   55,   50,   55,   55,   84,
+      185,  185,   84,    5,  185,  185,  185,  185,  185,  185,
+      185,  185,  185,  185,  185,  185,  185,  185,  185,  185,
+      185,  185,  185,  185,  185,  185,  185,  185,  185,  185,
+      185,  185,  185,  185,  185,  185,  185,  185,  185,  185,
+      185,  185,  185,  185,  185,  185,  185,  185,  185,  185,
+      185,  185,  185,  185,  185,  185,  185,  185,  185,  185,
 
-      177,  177,  177,  177,  177
+      185,  185,  185,  185,  185,  185,  185,  185,  185,  185,
+      185,  185,  185
     } ;
 
-static yyconst flex_int16_t yy_chk[406] =
+static yyconst flex_int16_t yy_chk[414] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -538,46 +555,55 @@ static yyconst flex_int16_t yy_chk[406] =
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    8,
-       19,   27,   19,   26,   46,   27,   28,   29,  180,   28,
-       30,   79,   31,   33,   51,   29,   26,   32,   31,   35,
-       50,   36,   32,   37,   38,   29,   27,   39,   48,   26,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    3,
+        4,   10,   21,   32,   21,   28,   37,    3,    4,   29,
+       35,   30,  189,   29,   30,   33,   51,   34,   28,   31,
+       87,   33,   34,   38,   39,   40,   41,   31,   58,   32,
 
-       27,   28,   58,   29,   28,   61,   30,   31,   33,    8,
-       29,   26,   32,   31,   46,   35,   36,   32,   37,   38,
-       29,   52,   39,   52,   57,   59,   60,   58,   62,   60,
-       61,   63,   64,   65,   66,   67,   59,   57,   68,   69,
-       70,   72,   73,   74,   66,   73,   75,   80,   44,   57,
-       59,   60,   81,   62,   60,   82,   63,   64,   65,   66,
-       67,   59,   57,   68,   69,   70,   72,   73,   74,   66,
-       73,   75,   76,   80,   83,   84,   85,   81,   87,   88,
-       82,   89,   91,   92,   23,   76,   93,   94,   22,   95,
-       96,   98,   21,  100,   99,  101,  102,   76,   99,   83,
+       58,   28,   37,   64,   29,   35,   30,   31,   29,   30,
+       33,   10,   34,   28,   63,   31,   33,   34,   38,   39,
+       40,   41,   31,   65,   67,   68,   51,   63,   64,   69,
+       66,   70,   31,   66,   65,   71,   72,   73,   74,   63,
+       75,   76,   78,   80,   79,   81,   72,   79,   65,   67,
+       68,   82,   63,   88,   69,   66,   70,   89,   66,   65,
+       71,   72,   73,   74,   82,   75,   76,   78,   80,   79,
+       81,   72,   79,   90,   91,   92,   82,   93,   95,   88,
+       96,   97,   89,   99,  100,   57,  101,  102,  106,   82,
+      103,  104,  107,  108,  109,  110,  107,  111,   90,   91,
 
-       84,   85,  103,   87,   88,  104,   89,   91,  108,   92,
-       76,   93,  109,   94,   95,   96,  110,   98,  100,   99,
-      101,  102,  111,   99,  112,  113,  114,  103,  116,  127,
-      104,  117,  118,  108,  119,  121,  122,  109,  123,  125,
-      126,  110,  128,  130,  131,  132,  134,  111,  137,  112,
-      113,  114,  138,  139,  116,  127,  117,  118,  140,  119,
-      121,  122,  141,  123,  125,  126,  142,  128,  130,  131,
-      132,  134,  144,  137,  145,  146,  147,  138,  139,  148,
-      149,  150,  151,  154,  140,  152,  155,  141,  156,  158,
-      160,  142,  162,   10,  163,  165,  166,  144,  167,  145,
+       92,  112,   93,   95,  116,   96,   97,  117,   99,  118,
+      100,  101,  119,  102,  106,  103,  104,  107,  108,  109,
+      110,  107,  111,  120,  121,  122,  112,  124,  135,  116,
+      125,  126,  117,  127,  118,  129,  130,  119,  131,  133,
+      134,  136,  138,  139,  140,  142,  145,  146,  120,  121,
+      122,  147,  148,  124,  135,  125,  126,  149,  127,  150,
+      129,  130,  152,  131,  133,  134,  136,  138,  139,  140,
+      142,  145,  146,  153,  154,  155,  147,  156,  148,  157,
+      158,  159,  149,  160,  150,  162,  163,  152,  164,  166,
+      168,  170,   55,  171,  173,  174,  175,  178,  153,  154,
 
-      146,  147,  170,  174,  148,  149,  150,    7,  151,  154,
-      152,    3,  155,  156,  158,  160,    0,    0,  162,  163,
-      165,  166,    0,  167,    0,    0,    0,  170,  174,  178,
-      178,  178,  179,    0,  179,  177,  177,  177,  177,  177,
-      177,  177,  177,  177,  177,  177,  177,  177,  177,  177,
-      177,  177,  177,  177,  177,  177,  177,  177,  177,  177,
-      177,  177,  177,  177,  177,  177,  177,  177,  177,  177,
-      177,  177,  177,  177,  177,  177,  177,  177,  177,  177,
-      177,  177,  177,  177,  177,  177,  177,  177,  177,  177,
-      177,  177,  177,  177,  177,  177,  177,  177,  177,  177,
+      155,  182,  156,   53,  157,  158,   49,  159,  160,   46,
+       25,  162,  163,  164,  166,  168,   24,  170,  171,  173,
+      174,  175,  178,   23,   20,   12,  182,  186,  186,  186,
+      186,  187,  187,  187,  187,  188,    9,  188,  188,  190,
+        5,    0,  190,  185,  185,  185,  185,  185,  185,  185,
+      185,  185,  185,  185,  185,  185,  185,  185,  185,  185,
+      185,  185,  185,  185,  185,  185,  185,  185,  185,  185,
+      185,  185,  185,  185,  185,  185,  185,  185,  185,  185,
+      185,  185,  185,  185,  185,  185,  185,  185,  185,  185,
+      185,  185,  185,  185,  185,  185,  185,  185,  185,  185,
 
-      177,  177,  177,  177,  177
+      185,  185,  185,  185,  185,  185,  185,  185,  185,  185,
+      185,  185,  185
     } ;
+
+/* Table of booleans, true if rule could match eol. */
+static yyconst flex_int32_t yy_rule_can_match_eol[70] =
+    {   0,
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 1, 1, 0, 0, 0, 0, 1, 0,     };
 
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
@@ -594,7 +620,8 @@ int yy_flex_debug = 0;
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
 #line 1 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-#line 2 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+
+#line 4 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
     #include "parser.h"
     #include <QMessageBox>
     #include <string>
@@ -604,10 +631,11 @@ char *yytext;
                                return T
 
     extern "C" int yywrap(){}
-/*FALTA: Comentario*/
-#line 609 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.cpp"
+/*FALTA: Comentario de 1 linea*/
+#line 636 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.cpp"
 
 #define INITIAL 0
+#define MULTI_COMMENT 1
 
 #ifndef YY_NO_UNISTD_H
 /* Special case for "unistd.h", since it is non-ANSI. We include it way
@@ -787,10 +815,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 22 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+#line 24 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
 
-
-#line 794 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.cpp"
+#line 821 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -843,13 +870,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 178 )
+				if ( yy_current_state >= 186 )
 					yy_c = yy_meta[(unsigned int) yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 336 );
+		while ( yy_base[yy_current_state] != 344 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -861,6 +888,16 @@ yy_find_action:
 			}
 
 		YY_DO_BEFORE_ACTION;
+
+		if ( yy_act != YY_END_OF_BUFFER && yy_rule_can_match_eol[yy_act] )
+			{
+			int yyl;
+			for ( yyl = 0; yyl < yyleng; ++yyl )
+				if ( yytext[yyl] == '\n' )
+					   
+    yylineno++;
+;
+			}
 
 do_action:	/* This label is used only to access EOF actions. */
 
@@ -875,332 +912,362 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 24 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_SIMBOLO_IGUAL); }
+#line 27 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{BEGIN(MULTI_COMMENT);}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 25 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_SUMA);}
+#line 29 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_SIMBOLO_IGUAL); }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 26 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_RESTA);}
+#line 30 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_SUMA);}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 27 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_MULTIPLICACION);}
+#line 31 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_RESTA);}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 28 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_DIVISION);}
+#line 32 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_MULTIPLICACION);}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 29 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_SIMBOLO_MODULO);}
+#line 33 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_DIVISION);}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 30 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_EXPONENCIACION);}
+#line 34 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_SIMBOLO_MODULO);}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 31 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_MAYOR_IGUAL);}
+#line 35 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_EXPONENCIACION);}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 32 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_MENOR_IGUAL);}
+#line 36 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_MAYOR_IGUAL);}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 33 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_MENOR);}
+#line 37 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_MENOR_IGUAL);}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 34 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_MAYOR);}
+#line 38 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_MENOR);}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 35 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_IGUALDAD);}
+#line 39 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_MAYOR);}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 36 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_NEGACION);}
+#line 40 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_IGUALDAD);}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 37 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_DESIGUALDAD);}
+#line 41 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_NEGACION);}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 38 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_SIMBOLO_OPERADOR_Y);}
+#line 42 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_DESIGUALDAD);}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 39 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_SIMBOLO_OPERADOR_O);}
+#line 43 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_SIMBOLO_OPERADOR_Y);}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 40 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_CORCHETE_IZQUIERDO);}
+#line 44 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_SIMBOLO_OPERADOR_O);}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 41 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_CORCHETE_DERECHO);}
+#line 45 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_CORCHETE_IZQUIERDO);}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 42 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_PARENTESIS_IZQUIERDO);}
+#line 46 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_CORCHETE_DERECHO);}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 43 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_PARENTESIS_DERECHO);}
+#line 47 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_PARENTESIS_IZQUIERDO);}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 44 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_DOS_PUNTOS);}
+#line 48 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_PARENTESIS_DERECHO);}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 45 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_COMA);}
+#line 49 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_DOS_PUNTOS);}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 47 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_MODULO);}
+#line 50 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_COMA);}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 48 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_DIVISION_ENTERA);}
+#line 52 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_MODULO);}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 49 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_IGUAL);}
+#line 53 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_DIVISION_ENTERA);}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 50 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_A);}
+#line 54 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_IGUAL);}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 51 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_DISTINTO);}
+#line 55 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_A);}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 52 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_DE);}
+#line 56 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_DISTINTO);}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 53 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_OPERADOR_Y);}
+#line 57 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_DE);}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 54 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_OPERADOR_O);}
+#line 58 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_OPERADOR_Y);}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 55 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_NO);}
+#line 59 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_OPERADOR_O);}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 56 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_SI);}
+#line 60 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_NO);}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 57 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_ENTONCES);}
+#line 61 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_SI);}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 58 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_FIN);}
+#line 62 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_ENTONCES);}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 59 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_SINO);}
+#line 63 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_FIN);}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 60 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_CASO);}
+#line 64 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_SINO);}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 61 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_MIENTRAS);}
+#line 65 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_CASO);}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 62 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_HAGA);}
+#line 66 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_MIENTRAS);}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 63 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_EJECUTE);}
+#line 67 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_HAGA);}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 64 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_REPETIR);}
+#line 68 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_EJECUTE);}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 65 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_INFINITAS);}
+#line 69 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_REPETIR);}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 66 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_VECES);}
+#line 70 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_INFINITAS);}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 67 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_PARA);}
+#line 71 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_VECES);}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 68 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_DESDE);}
+#line 72 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_PARA);}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 69 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_REPITA);}
+#line 73 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_DESDE);}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 70 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_CADA);}
+#line 74 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_REPITA);}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 71 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_EN);}
+#line 75 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_CADA);}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 72 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_FUNCION);}
+#line 76 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_EN);}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 73 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_RETORNA);}
+#line 77 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_FUNCION);}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 74 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_RETORNAR);}
+#line 78 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_RETORNA);}
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 75 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_UTILIZAR);}
+#line 79 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_RETORNAR);}
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 76 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_COMO);}
+#line 80 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_UTILIZAR);}
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 77 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_DEFINIR);}
+#line 81 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_COMO);}
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 78 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_VERDADERO);}
+#line 82 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_DEFINIR);}
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 79 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_FALSO);}
+#line 83 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_VERDADERO);}
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 80 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_HASTA);}
+#line 84 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_FALSO);}
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 82 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_IDENTIFICADOR);}
+#line 85 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_HASTA);}
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 83 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_LITERAL_NUMERICA);}
+#line 87 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_IDENTIFICADOR);}
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 84 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ GUARDAR_TOKEN(T_LITERAL_FLOTANTE);}
+#line 88 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_LITERAL_NUMERICA);}
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 85 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ yylval.string = new std::string(yytext[1],yyleng);
-                      return T_LITERAL_CARACTER;
-                    }
+#line 89 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ GUARDAR_TOKEN(T_LITERAL_FLOTANTE);}
 	YY_BREAK
 case 61:
-/* rule 61 can match eol */
 YY_RULE_SETUP
-#line 88 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{GUARDAR_TOKEN(T_LITERAL_CADENA);}
+#line 90 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{ yylval.string = new std::string(yytext[1],yyleng);
+                          return T_LITERAL_CARACTER;
+                        }
 	YY_BREAK
 case 62:
 /* rule 62 can match eol */
 YY_RULE_SETUP
-#line 89 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{;}
+#line 93 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{GUARDAR_TOKEN(T_LITERAL_CADENA);}
 	YY_BREAK
 case 63:
+/* rule 63 can match eol */
 YY_RULE_SETUP
-#line 91 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{
-                        yyterminate();
-                    }
+#line 94 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{;}
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 94 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+#line 96 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{
+                            yyterminate();
+                        }
+	YY_BREAK
+
+
+case 65:
+YY_RULE_SETUP
+#line 102 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{BEGIN(INITIAL);}
+	YY_BREAK
+case 66:
+YY_RULE_SETUP
+#line 103 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{}
+	YY_BREAK
+case 67:
+YY_RULE_SETUP
+#line 104 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{}
+	YY_BREAK
+case 68:
+/* rule 68 can match eol */
+YY_RULE_SETUP
+#line 105 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+{};
+	YY_BREAK
+
+case 69:
+YY_RULE_SETUP
+#line 107 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
 ECHO;
 	YY_BREAK
-#line 1203 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.cpp"
+#line 1269 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.cpp"
 case YY_STATE_EOF(INITIAL):
+case YY_STATE_EOF(MULTI_COMMENT):
 	yyterminate();
 
 	case YY_END_OF_BUFFER:
@@ -1491,7 +1558,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 178 )
+			if ( yy_current_state >= 186 )
 				yy_c = yy_meta[(unsigned int) yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
@@ -1519,11 +1586,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 178 )
+		if ( yy_current_state >= 186 )
 			yy_c = yy_meta[(unsigned int) yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
-	yy_is_jam = (yy_current_state == 177);
+	yy_is_jam = (yy_current_state == 185);
 
 	return yy_is_jam ? 0 : yy_current_state;
 }
@@ -1559,6 +1626,10 @@ static int yy_get_next_buffer (void)
 		}
 
 	*--yy_cp = (char) c;
+
+    if ( c == '\n' ){
+        --yylineno;
+    }
 
 	(yytext_ptr) = yy_bp;
 	(yy_hold_char) = *yy_cp;
@@ -1634,6 +1705,11 @@ static int yy_get_next_buffer (void)
 	c = *(unsigned char *) (yy_c_buf_p);	/* cast for 8-bit char's */
 	*(yy_c_buf_p) = '\0';	/* preserve yytext */
 	(yy_hold_char) = *++(yy_c_buf_p);
+
+	if ( c == '\n' )
+		   
+    yylineno++;
+;
 
 	return c;
 }
@@ -2105,6 +2181,9 @@ static int yy_init_globals (void)
      * This function is called from yylex_destroy(), so don't allocate here.
      */
 
+    /* We do not touch yylineno unless the option is enabled. */
+    yylineno =  1;
+    
     (yy_buffer_stack) = 0;
     (yy_buffer_stack_top) = 0;
     (yy_buffer_stack_max) = 0;
@@ -2197,7 +2276,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 94 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+#line 107 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
 
 
 

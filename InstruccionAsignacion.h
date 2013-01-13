@@ -9,6 +9,7 @@ class InstruccionAsignacion : public Instruccion
 {
 public:
     InstruccionAsignacion(Expresion *variable, Expresion *expresion, Instruccion *siguiente);
+    virtual void validarSemantica();
 
 private:
     Expresion *variable;

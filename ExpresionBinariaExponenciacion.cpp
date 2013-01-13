@@ -4,3 +4,8 @@ ExpresionBinariaExponenciacion::ExpresionBinariaExponenciacion(Expresion *izquie
     :ExpresionBinaria(izquierda, derecha, EXPONENCIACION)
 {
 }
+
+Tipo* ExpresionBinariaExponenciacion::validarSemantica()
+{
+    return 0;
+}

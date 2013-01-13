@@ -4,3 +4,8 @@ ExpresionBinariaModulo::ExpresionBinariaModulo(Expresion *izquierda, Expresion *
     :ExpresionBinaria(izquierda, derecha, MODULO)
 {
 }
+
+Tipo* ExpresionBinariaModulo::validarSemantica()
+{
+    return 0;
+}

@@ -11,6 +11,8 @@ class Variable : public Expresion
 {
 public:
     Variable(string *identificador, Expresiones tipo=VARIABLENORMAL);
+    string* obtenerIdentificador();
+    virtual Tipo* validarSemantica();
 
 private:
     string *identificador;

@@ -3,4 +3,5 @@
 TipoEntero::TipoEntero()
     :Tipo()
 {
+    this->tipo = Entero;
 }

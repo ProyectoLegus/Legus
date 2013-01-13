@@ -5,3 +5,13 @@ Variable::Variable(string *identificador, Expresiones tipo)
 {
     this->identificador = identificador;
 }
+
+string* Variable::obtenerIdentificador()
+{
+    return this->identificador;
+}
+
+Tipo* Variable::validarSemantica()
+{
+    return 0;
+}

@@ -8,6 +8,7 @@ class InstruccionRepetir : public Instruccion
 {
 public:
     InstruccionRepetir(Expresion *cantidad, Instruccion *instrucciones, Instruccion *siguiente);
+    virtual void validarSemantica();
 
 private:
     Expresion *cantidad;

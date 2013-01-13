@@ -2,11 +2,13 @@
 #define EXPRESIONLITERALENTERA_H
 
 #include "Expresion.h"
+#include "Programa.h"
 
 class ExpresionLiteralEntera : public Expresion
 {
 public:
     ExpresionLiteralEntera(int valor);
+    virtual Tipo* validarSemantica();
 
 private:
     int valor;

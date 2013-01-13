@@ -9,6 +9,9 @@ class DeclaracionUtilizar
 {
 public:
     DeclaracionUtilizar(VariablePuerto *puerto, VariableSensor *sensor, Variable *variable);
+    Variable*           obtenerVariable();
+    VariablePuerto*     obtenerPuerto();
+    VariableSensor*     obtenerSensor();
 
 private:
     Variable       *variable;

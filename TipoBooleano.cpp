@@ -3,4 +3,5 @@
 TipoBooleano::TipoBooleano()
     :Tipo()
 {
+    this->tipo = Booleano;
 }

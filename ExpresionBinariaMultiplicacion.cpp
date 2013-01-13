@@ -4,3 +4,8 @@ ExpresionBinariaMultiplicacion::ExpresionBinariaMultiplicacion(Expresion *izquie
     :ExpresionBinaria(izquierda, derecha, MULTIPLICACION)
 {
 }
+
+Tipo* ExpresionBinariaMultiplicacion::validarSemantica()
+{
+    return 0;
+}

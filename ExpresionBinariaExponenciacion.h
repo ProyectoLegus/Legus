@@ -7,6 +7,7 @@ class ExpresionBinariaExponenciacion : public ExpresionBinaria
 {
 public:
     ExpresionBinariaExponenciacion(Expresion *izquierda, Expresion *derecha);
+    virtual Tipo* validarSemantica();
 };
 
 #endif // EXPRESIONBINARIAEXPONENCIACION_H

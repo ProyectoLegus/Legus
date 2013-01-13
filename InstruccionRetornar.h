@@ -8,6 +8,7 @@ class InstruccionRetornar : public Instruccion
 {
 public:
     InstruccionRetornar(Expresion *expresion_de_retorno, Instruccion *siguiente);
+    virtual void validarSemantica();
 
 private:
     Expresion *expresion_de_retorno;

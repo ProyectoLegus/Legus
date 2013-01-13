@@ -8,6 +8,7 @@ class InstruccionParaCada : public Instruccion
 {
 public:
     InstruccionParaCada(Expresion *variable, Expresion *coleccion_arreglo, Instruccion *instrucciones, Instruccion *siguiente);
+    virtual void validarSemantica();
 
 private:
     Expresion *variable;

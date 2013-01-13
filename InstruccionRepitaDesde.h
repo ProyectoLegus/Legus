@@ -8,6 +8,7 @@ class InstruccionRepitaDesde : public Instruccion
 {
 public:
     InstruccionRepitaDesde(Expresion *inicio, Expresion *final, Instruccion *instrucciones, Instruccion *siguiente);
+    virtual void validarSemantica();
 
 private:
     Expresion *inicio;

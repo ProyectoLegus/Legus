@@ -2,6 +2,7 @@
 #define EXPRESIONLITERALCADENA_H
 
 #include "Expresion.h"
+#include "Programa.h"
 
 #include <iostream>
 #include <string>
@@ -12,6 +13,7 @@ class ExpresionLiteralCadena : public Expresion
 {
 public:
     ExpresionLiteralCadena(string *valor);
+    virtual Tipo* validarSemantica();
 
 private:
     string *valor;

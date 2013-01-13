@@ -1,6 +1,20 @@
 #ifndef PARSERIMPORTS_H
 #define PARSERIMPORTS_H
 
+enum TOKENS
+{
+
+};
+
+/*Necesarios*/
+#include <QMessageBox>
+#include <QString>
+#include <iostream>
+#include <vector>
+#include <stdio.h>
+#include <stdlib.h>
+#include "tokens.h"
+
 /* Expresiones */
 
 /*Expresion Binaria*/
@@ -35,11 +49,12 @@
 #include "Variable.h"
 #include "VariableArreglo.h"
 #include "VariableFuncion.h"
+#include "VariableDeclarada.h"
+#include "VariableDeclarada.h"
 
 /* Fin Expresiones */
 
 /* Instrucciones */
-
 #include "InstruccionSi.h"
 #include "InstruccionRepitaDesde.h"
 #include "InstruccionRepita.h"
@@ -57,5 +72,8 @@
 /*Otros*/
 #include "ListaDeCaso.h"
 #include "Programa.h"
+
+using namespace std;
+
 
 #endif // PARSERIMPORTS_H

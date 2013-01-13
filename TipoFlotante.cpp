@@ -3,4 +3,5 @@
 TipoFlotante::TipoFlotante()
     :Tipo()
 {
+    this->tipo = Flotante;
 }
