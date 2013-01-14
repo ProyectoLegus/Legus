@@ -6,7 +6,8 @@
 class ExpresionUnaria : public Expresion
 {
 public:
-    ExpresionUnaria(Expresion *expresion, Expresiones tipo);
+    ExpresionUnaria(Expresion *expresion, Expresiones tipo, int numeroDeLinea);
+    Expresion* obtenerExpresion();
 
 private:
     Expresion *expresion;

@@ -1,12 +1,12 @@
 #include "VariableDeclarada.h"
 
-VariableDeclarada::VariableDeclarada(string *variable, Tipo *tipoInferido)
+VariableDeclarada::VariableDeclarada(Variable *variable, Tipo *tipoInferido)
 {
     this->variable = variable;
     this->tipoInferido = tipoInferido;
 }
 
-string* VariableDeclarada::obtenerVariable()
+Variable* VariableDeclarada::obtenerVariable()
 {
     return this->variable;
 }
@@ -18,5 +18,5 @@ Tipo*    VariableDeclarada::obtenerTipo()
 
 Tipo* VariableDeclarada::validarSemantica()
 {
-    return 0;
+    return tipoInferido;
 }

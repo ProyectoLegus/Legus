@@ -1,7 +1,7 @@
 #include "VariableArreglo.h"
 
-VariableArreglo::VariableArreglo(string *identificador, Lista *lista_indices)
-    :Variable(identificador, ARREGLO)
+VariableArreglo::VariableArreglo(string *identificador, Lista *lista_indices, int numeroDeLinea)
+    :Variable(identificador,numeroDeLinea, ARREGLO)
 {
     this->lista_indices = lista_indices;
 }

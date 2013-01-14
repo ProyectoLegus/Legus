@@ -13,7 +13,7 @@
 %}
 
 /*FALTA: Comentario de 1 linea*/
-TDL [ |\r|\n|\r\n|\t|\f]
+TDL [ |\n|\r\n|\r|\t|\f]
 
 ID                  [A-Za-z_][A-Za-z_0-9]*
 NUMERO              [0-9][0-9]*
@@ -92,7 +92,6 @@ CARACTER            "'"."'"
                         }
     {CADENA}            {GUARDAR_TOKEN(T_LITERAL_CADENA);}
     {TDL}               {;}
-
     .                   {
                             yyterminate();
                         }

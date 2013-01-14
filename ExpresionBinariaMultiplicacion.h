@@ -2,11 +2,12 @@
 #define EXPRESIONBINARIAMULTIPLICACION_H
 
 #include "ExpresionBinaria.h"
+#include "Programa.h"
 
 class ExpresionBinariaMultiplicacion : public ExpresionBinaria
 {
 public:
-    ExpresionBinariaMultiplicacion(Expresion *izquierda, Expresion *derecha);
+    ExpresionBinariaMultiplicacion(Expresion *izquierda, Expresion *derecha, int numeroDeLineaw);
     virtual Tipo* validarSemantica();
 };
 

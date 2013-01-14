@@ -7,7 +7,7 @@
 class ExpresionBinariaY : public ExpresionBinaria
 {
 public:
-    ExpresionBinariaY(Expresion *izquierda, Expresion *derecha);
+    ExpresionBinariaY(Expresion *izquierda, Expresion *derecha, int numeroDeLinea);
     virtual Tipo* validarSemantica();
 };
 

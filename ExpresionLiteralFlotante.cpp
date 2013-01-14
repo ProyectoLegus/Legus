@@ -1,7 +1,7 @@
 #include "ExpresionLiteralFlotante.h"
 
-ExpresionLiteralFlotante::ExpresionLiteralFlotante(float valor)
-    :Expresion(LITERALFLOTANTE)
+ExpresionLiteralFlotante::ExpresionLiteralFlotante(float valor, int numeroDeLinea)
+    :Expresion(LITERALFLOTANTE, numeroDeLinea)
 {
     this->valor = valor;
     this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoFlotante();
@@ -9,5 +9,6 @@ ExpresionLiteralFlotante::ExpresionLiteralFlotante(float valor)
 
 Tipo* ExpresionLiteralFlotante::validarSemantica()
 {
-    return 0;
+    this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoFlotante();
+    return Programa::obtenerInstancia()->obtenerTipoFlotante();
 }

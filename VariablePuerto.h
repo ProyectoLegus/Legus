@@ -6,7 +6,7 @@
 class VariablePuerto : public Variable
 {
 public:
-    VariablePuerto(string *identificador);
+    VariablePuerto(string *identificador, int numeroDeLinea);
     virtual Tipo* validarSemantica();
 };
 

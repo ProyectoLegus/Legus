@@ -10,10 +10,13 @@ class ExcepcionLegus
 {
 public:
     ExcepcionLegus(const string &mensaje);
+    ExcepcionLegus(const string &mensaje, const int numeroDeLinea);
     string obtenerMensaje();
+    int    obtenerNumeroDeLinea();
 
 private:
     string mensaje;
+    int numeroDeLinea;
 };
 
 #endif // EXCEPCIONLEGUS_H

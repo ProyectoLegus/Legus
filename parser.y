@@ -17,6 +17,7 @@
     extern FILE *yyin;
 
     int token_esperado = -1;
+    int correlativo = 0;
 
     void yyerror(const char *s) {        
         if( token_esperado == 1 )
@@ -52,6 +53,7 @@
 %token <string> T_NEGACION T_SIMBOLO_OPERADOR_Y T_SIMBOLO_OPERADOR_O T_CORCHETE_IZQUIERDO
 %token <string> T_CORCHETE_DERECHO T_PARENTESIS_IZQUIERDO T_PARENTESIS_DERECHO T_DOS_PUNTOS
 %token <string> T_DESIGUALDAD T_LITERAL_CARACTER T_LITERAL_FLOTANTE T_LITERAL_CADENA T_COMA
+%token <string> T_ENTER T_EOF
 
 /* PALABRAS RESERVADAS */
 %token <string> T_MODULO T_DIVISION_ENTERA T_IGUAL T_A T_DISTINTO T_DE T_OPERADOR_Y T_OPERADOR_O
@@ -96,7 +98,7 @@
                     instrucciones
                     T_FIN T_FUNCION declaracion_funciones
         {
-            DeclaracionDeFuncion *declrFuncion = new DeclaracionDeFuncion(new Variable($3), $5, $7);
+            DeclaracionDeFuncion *declrFuncion = new DeclaracionDeFuncion(new Variable($3, yylineno), $5, $7);
             Programa::obtenerInstancia()->tablaDeFunciones->push_back(declrFuncion);
         }
         |/*Epsilon*/
@@ -108,7 +110,7 @@
     declaracion_sensores_motores :
         T_UTILIZAR T_IDENTIFICADOR T_COMO T_IDENTIFICADOR T_EN T_IDENTIFICADOR declaracion_sensores_motores
         {
-            DeclaracionUtilizar *declrUtilizar = new DeclaracionUtilizar(new VariablePuerto($2), new VariableSensor($4), new Variable($6));
+            DeclaracionUtilizar *declrUtilizar = new DeclaracionUtilizar(new VariablePuerto($2, yylineno), new VariableSensor($4, yylineno), new Variable($6, yylineno));
             Programa::obtenerInstancia()->tablaDePuertosYSensores->push_back(declrUtilizar);
         }
         |/*Epsilon*/
@@ -192,7 +194,7 @@
     instruccion_caso:
         T_CASO T_IDENTIFICADOR lista_casos sino_caso T_FIN T_CASO
         {
-            $$ = new InstruccionCaso( new Variable($2), $3, $4, 0);
+            $$ = new InstruccionCaso( new Variable($2, yylineno), $3, $4, 0);
         }
         |T_CASO lista_casos sino_caso T_FIN T_CASO
         {
@@ -210,7 +212,7 @@
         T_PARA T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_PARA
         {
             /*identificador, inicio, final, instrucciones, siguiente*/
-            $$ = new InstruccionPara(new InstruccionAsignacion(new Variable($2),$4,0), $6, $8, 0);
+            $$ = new InstruccionPara(new InstruccionAsignacion(new Variable($2, yylineno),$4,0), $6, $8, 0);
         };
 
     instruccion_repetir :
@@ -224,8 +226,9 @@
         T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales
         {
             /*Variable, Expresion, siguiente*/
-            Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada($1,$3->tipoInferido));
-            $$ = new InstruccionAsignacion( new Variable($1), $3, 0 );
+            Variable *var = new Variable($1, yylineno);
+            Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var,$3->tipoInferido));
+            $$ = new InstruccionAsignacion(var, $3, 0 );
         }
         |id_arreglo T_SIMBOLO_IGUAL relacionales
         {
@@ -264,27 +267,27 @@
     relacionales :
         relacionales T_MENOR         expresiones
         {
-            $$ = new ExpresionBinariaMenor($1, $3);
+            $$ = new ExpresionBinariaMenor($1, $3, yylineno);
         }
         |relacionales T_MAYOR         expresiones
         {
-            $$ = new ExpresionBinariaMayor($1, $3);
+            $$ = new ExpresionBinariaMayor($1, $3, yylineno);
         }
         |relacionales T_MAYOR_IGUAL   expresiones
         {
-            $$ = new ExpresionBinariaMayorIgual($1, $3);
+            $$ = new ExpresionBinariaMayorIgual($1, $3, yylineno);
         }
         |relacionales T_MENOR_IGUAL   expresiones
         {
-            $$ = new ExpresionBinariaMenorIgual($1, $3);
+            $$ = new ExpresionBinariaMenorIgual($1, $3, yylineno);
         }
         |relacionales T_IGUALDAD      expresiones
         {
-            $$ = new ExpresionBinariaIgualdad($1, $3);
+            $$ = new ExpresionBinariaIgualdad($1, $3, yylineno);
         }
         |relacionales T_DESIGUALDAD   expresiones
         {
-            $$ = new ExpresionBinariaDistinto($1, $3);
+            $$ = new ExpresionBinariaDistinto($1, $3, yylineno);
         }
         |expresiones
         {
@@ -294,19 +297,19 @@
     expresiones :
         expresiones T_SUMA                factores
         {
-            $$ = new ExpresionBinariaSuma($1, $3);
+            $$ = new ExpresionBinariaSuma($1, $3, yylineno);
         }
         |expresiones T_RESTA               factores
         {
-            $$ = new ExpresionBinariaResta($1, $3);
+            $$ = new ExpresionBinariaResta($1, $3, yylineno);
         }
         |expresiones T_OPERADOR_O          factores
         {
-            $$ = new ExpresionBinariaO($1, $3);
+            $$ = new ExpresionBinariaO($1, $3, yylineno);
         }
         |expresiones T_SIMBOLO_OPERADOR_O  factores
         {
-            $$ = new ExpresionBinariaO($1, $3);
+            $$ = new ExpresionBinariaO($1, $3, yylineno);
         }
         |factores
         {
@@ -316,23 +319,23 @@
     factores :
         factores T_MULTIPLICACION         terminales
         {
-            $$ = new ExpresionBinariaMultiplicacion($1, $3);
+            $$ = new ExpresionBinariaMultiplicacion($1, $3, yylineno);
         }
         |factores T_DIVISION               terminales
         {
-            $$ = new ExpresionBinariaDivision($1, $3);
+            $$ = new ExpresionBinariaDivision($1, $3, yylineno);
         }
         |factores T_OPERADOR_Y             terminales
         {
-            $$ = new ExpresionBinariaY($1, $3);
+            $$ = new ExpresionBinariaY($1, $3, yylineno);
         }
         |factores T_SIMBOLO_OPERADOR_Y     terminales
         {
-            $$ = new ExpresionBinariaY($1, $3);
+            $$ = new ExpresionBinariaY($1, $3, yylineno);
         }
         |factores T_SIMBOLO_MODULO         terminales
         {
-            $$ = new ExpresionBinariaModulo($1, $3);
+            $$ = new ExpresionBinariaModulo($1, $3, yylineno);
         }
         |terminales
         {
@@ -354,7 +357,7 @@
         }
         |T_IDENTIFICADOR
         {
-            $$ = new Variable($1);
+            $$ = new Variable($1, yylineno);
         };
 
     id_variable :
@@ -370,13 +373,13 @@
     id_funcion:
         T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO
         {
-            $$ = new VariableFuncion($1, $3);
+            $$ = new VariableFuncion($1, $3, yylineno);
         };
 
     id_arreglo :
         T_IDENTIFICADOR lista_indices
         {
-            $$ = new VariableArreglo($1, $2);
+            $$ = new VariableArreglo($1, $2, yylineno);
         };
 
     /*Literales*/
@@ -384,11 +387,11 @@
     literal_booleana :
         T_VERDADERO
         {
-            $$ = new ExpresionLiteralBooleana(true);
+            $$ = new ExpresionLiteralBooleana(true, yylineno);
         }
         |T_FALSO
         {
-            $$ = new ExpresionLiteralBooleana(false);
+            $$ = new ExpresionLiteralBooleana(false, yylineno);
         };
 
     literales:
@@ -398,19 +401,19 @@
         }
        |T_LITERAL_NUMERICA
        {
-            $$ = new ExpresionLiteralEntera( atoi( $1->c_str() ));
+            $$ = new ExpresionLiteralEntera( atoi( $1->c_str() ), yylineno);
        }
        |T_LITERAL_CARACTER
        {
-            $$ = new ExpresionLiteralCaracter( (char)$1->c_str()[0]);
+            $$ = new ExpresionLiteralCaracter( (char)$1->c_str()[0], yylineno);
        }
        |T_LITERAL_FLOTANTE
        {
-            $$ = new ExpresionLiteralFlotante( atof( $1->c_str() ));
+            $$ = new ExpresionLiteralFlotante( atof( $1->c_str() ), yylineno);
        }
        |T_LITERAL_CADENA
        {
-            $$ = new ExpresionLiteralCadena($1);
+            $$ = new ExpresionLiteralCadena($1, yylineno);
        };
 
     lista_indices:

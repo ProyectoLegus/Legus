@@ -3,11 +3,12 @@
 
 #include "Expresion.h"
 #include "ExpresionUnaria.h"
+#include "Programa.h"
 
 class ExpresionUnariaNegativo : public ExpresionUnaria
 {
 public:
-    ExpresionUnariaNegativo(Expresion *expresion);
+    ExpresionUnariaNegativo(Expresion *expresion, int numeroDeLinea);
     virtual Tipo* validarSemantica();
 };
 

@@ -1231,7 +1231,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 96 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+#line 95 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
 {
                             yyterminate();
                         }
@@ -1240,29 +1240,29 @@ YY_RULE_SETUP
 
 case 65:
 YY_RULE_SETUP
-#line 102 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+#line 101 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
 {BEGIN(INITIAL);}
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 103 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+#line 102 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
 {}
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 104 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+#line 103 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
 {}
 	YY_BREAK
 case 68:
 /* rule 68 can match eol */
 YY_RULE_SETUP
-#line 105 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+#line 104 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
 {};
 	YY_BREAK
 
 case 69:
 YY_RULE_SETUP
-#line 107 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+#line 106 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
 ECHO;
 	YY_BREAK
 #line 1269 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.cpp"
@@ -2276,7 +2276,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 107 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+#line 106 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
 
 
 

@@ -1,7 +1,7 @@
 #include "ExpresionLiteralBooleana.h"
 
-ExpresionLiteralBooleana::ExpresionLiteralBooleana(bool valor)
-    :Expresion(LITERALBOOLEANA)
+ExpresionLiteralBooleana::ExpresionLiteralBooleana(bool valor, int numeroDeLinea)
+    :Expresion(LITERALBOOLEANA,numeroDeLinea)
 {
     this->valor = valor;
     this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoBooleano();
@@ -9,5 +9,6 @@ ExpresionLiteralBooleana::ExpresionLiteralBooleana(bool valor)
 
 Tipo* ExpresionLiteralBooleana::validarSemantica()
 {
-    return 0;
+    this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoBooleano();
+    return Programa::obtenerInstancia()->obtenerTipoBooleano();
 }

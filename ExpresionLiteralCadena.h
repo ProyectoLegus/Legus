@@ -12,7 +12,7 @@ using namespace std;
 class ExpresionLiteralCadena : public Expresion
 {
 public:
-    ExpresionLiteralCadena(string *valor);
+    ExpresionLiteralCadena(string *valor, int numeroDeLinea);
     virtual Tipo* validarSemantica();
 
 private:

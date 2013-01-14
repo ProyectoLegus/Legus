@@ -7,7 +7,7 @@
 class ExpresionLiteralBooleana : public Expresion
 {
 public:
-    ExpresionLiteralBooleana(bool valor);
+    ExpresionLiteralBooleana(bool valor, int numeroDeLinea);
     virtual Tipo* validarSemantica();
 
 private:

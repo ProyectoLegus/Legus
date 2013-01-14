@@ -1,7 +1,7 @@
 #include "ExpresionLiteralCadena.h"
 
-ExpresionLiteralCadena::ExpresionLiteralCadena(string *valor)
-    :Expresion(LITERALCADENA)
+ExpresionLiteralCadena::ExpresionLiteralCadena(string *valor, int numeroDeLinea)
+    :Expresion(LITERALCADENA,numeroDeLinea)
 {
     this->valor = valor;
     this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoCadena();
@@ -9,5 +9,6 @@ ExpresionLiteralCadena::ExpresionLiteralCadena(string *valor)
 
 Tipo* ExpresionLiteralCadena::validarSemantica()
 {
-    return 0;
+    this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoCadena();
+    return Programa::obtenerInstancia()->obtenerTipoCadena();
 }

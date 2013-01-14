@@ -7,7 +7,7 @@
 class ExpresionBinariaDistinto : public ExpresionBinaria
 {
 public:
-    ExpresionBinariaDistinto(Expresion *izquierda, Expresion *derecha);
+    ExpresionBinariaDistinto(Expresion *izquierda, Expresion *derecha, int numeroDeLinea);
     virtual Tipo* validarSemantica();
 };
 

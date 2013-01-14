@@ -7,7 +7,7 @@
 class ExpresionBinariaIgualdad : public ExpresionBinaria
 {
 public:
-    ExpresionBinariaIgualdad(Expresion *izquierda, Expresion *derecha);
+    ExpresionBinariaIgualdad(Expresion *izquierda, Expresion *derecha, int numeroDeLinea);
     virtual Tipo* validarSemantica();
 };
 

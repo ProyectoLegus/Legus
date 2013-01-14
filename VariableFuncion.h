@@ -11,7 +11,7 @@ using namespace std;
 class VariableFuncion : public Variable
 {
 public:
-    VariableFuncion(string *identificador, Lista *lista_parametros);
+    VariableFuncion(string *identificador, Lista *lista_parametros, int numeroDeLinea);
     Lista* obtenerListaParametros();
     virtual Tipo* validarSemantica();
 

@@ -6,7 +6,7 @@
 class VariableSensor : public Variable
 {
 public:
-    VariableSensor(string *identificador);
+    VariableSensor(string *identificador, int numeroDeLinea);
     virtual Tipo* validarSemantica();
 };
 

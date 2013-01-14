@@ -1,7 +1,7 @@
 #include "VariablePuerto.h"
 
-VariablePuerto::VariablePuerto(string *identificador)
-    :Variable(identificador, PUERTO)
+VariablePuerto::VariablePuerto(string *identificador, int numeroDeLinea)
+    :Variable(identificador, numeroDeLinea, PUERTO)
 {
 }
 

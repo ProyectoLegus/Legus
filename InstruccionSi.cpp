@@ -13,26 +13,34 @@ void InstruccionSi::validarSemantica()
 {
     Tipo* tipoCondicion = this->condicion->validarSemantica();
 
-    if( tipoCondicion->tipo != Booleano )
+    if( tipoCondicion != Programa::obtenerInstancia()->obtenerTipoBooleano() )
     {
         /*Error*/
-        //throw( ExcepcionLegus( "La expresion de la instruccion 'si' debe evaluar a Booleano" ) );
+        throw( ExcepcionLegus( "La expresion de la instruccion 'si' debe evaluar a Booleano" ) );
     }
 
     if(instruccionesSiVerdadero!=0)
     {
         instruccionesSiVerdadero->validarSemantica();
+        if( instruccionesSiVerdadero->obtenerSiguiente() != 0)
+        {
+            instruccionesSiVerdadero->obtenerSiguiente()->validarSemantica();
+        }
     }
 
     if(instruccionesSiFalso!=0)
     {
         instruccionesSiFalso->validarSemantica();
+        if( instruccionesSiFalso->obtenerSiguiente() != 0)
+        {
+            instruccionesSiFalso->obtenerSiguiente()->validarSemantica();
+        }
     }
 
-    if(instruccionSiAnidado!=0)
+    /*if(instruccionSiAnidado!=0)
     {
         instruccionSiAnidado->validarSemantica();
-    }
+    }*/
 }
 
 

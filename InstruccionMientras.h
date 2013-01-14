@@ -3,6 +3,7 @@
 
 #include "Instruccion.h"
 #include "Expresion.h"
+#include "Programa.h"
 
 class InstruccionMientras : public Instruccion
 {

@@ -11,7 +11,7 @@ using namespace std;
 class VariableArreglo : public Variable
 {
 public:
-    VariableArreglo(string *identificador, Lista *lista_indices);
+    VariableArreglo(string *identificador, Lista *lista_indices, int numeroDeLinea);
     Lista *obtenerListaIndices();
     virtual Tipo* validarSemantica();
 

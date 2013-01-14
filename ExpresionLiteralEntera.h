@@ -7,7 +7,7 @@
 class ExpresionLiteralEntera : public Expresion
 {
 public:
-    ExpresionLiteralEntera(int valor);
+    ExpresionLiteralEntera(int valor, int numeroDeLinea);
     virtual Tipo* validarSemantica();
 
 private:

@@ -11,7 +11,7 @@ void InstruccionMientras::validarSemantica()
 {
     Tipo *tipoExpresion = condicion->validarSemantica();
 
-    if( tipoExpresion != Booleano)
+    if( tipoExpresion != Programa::obtenerInstancia()->obtenerTipoBooleano() )
     {
         // ERROR
     }

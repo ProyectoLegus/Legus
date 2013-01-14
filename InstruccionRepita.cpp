@@ -1,15 +1,16 @@
 #include "InstruccionRepita.h"
 
-InstruccionRepita::InstruccionRepita(Instruccion *siguiente)
+InstruccionRepita::InstruccionRepita(Expresion *condicion, Instruccion *siguiente)
     :Instruccion(siguiente, REPITA)
 {
+    this->condicion = condicion;
 }
 
 void InstruccionRepita::validarSemantica()
 {
     Tipo *tipoCondicion = condicion->validarSemantica();
 
-    if( tipoCondicion != Booleano)
+    if( tipoCondicion != Programa::obtenerInstancia()->obtenerTipoBooleano())
     {
         // ERROR
     }

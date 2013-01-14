@@ -6,7 +6,9 @@
 class ExpresionBinaria : public Expresion
 {
 public:
-    ExpresionBinaria(Expresion *izquierda, Expresion *derecha, Expresiones tipo);
+    ExpresionBinaria(Expresion *izquierda, Expresion *derecha, Expresiones tipo, int numeroDeLinea);
+    Expresion *obtenerExpresionIzquierda();
+    Expresion *obtenerExpresionDerecha();
 
 private:
     Expresion *izquierda;

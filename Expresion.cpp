@@ -1,6 +1,7 @@
 #include "Expresion.h"
 
-Expresion::Expresion(Expresiones tipo)
+Expresion::Expresion(Expresiones tipo, int numeroDeLinea)
 {
     this->tipo = tipo;
+    this->numeroDeLinea = numeroDeLinea;
 }

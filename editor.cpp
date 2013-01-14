@@ -20,10 +20,9 @@ void Editor::on_btnCompilar_clicked()
     if (!archivo.open(QIODevice::WriteOnly | QIODevice::Text))
              return;
     QTextStream flujo(&archivo);
-    flujo << ui->textEdit->toPlainText();
+    flujo << ui->textEdit->toPlainText() << "\n";
     flujo.flush();
     archivo.close();
-
 
     yyin = fopen("prueba.txt","rt");
     //YY_BUFFER_STATE bs = yy_create_buffer(yyin,YY_BUF_SIZE);
@@ -58,7 +57,7 @@ void Editor::on_btnCompilar_clicked()
         for(int i=0; i<vars->size() ;i++)
         {
             VariableDeclarada* vari = vars->at(i);
-            ui->listVariables->addItem(QString(vari->obtenerVariable()->c_str()));
+            ui->listVariables->addItem(QString(vari->obtenerVariable()->obtenerIdentificador()->c_str()));
         }
 
         vector<DeclaracionUtilizar*> *tblUti = Programa::obtenerInstancia()->tablaDePuertosYSensores;
@@ -80,6 +79,8 @@ void Editor::on_btnCompilar_clicked()
     }
     catch(ExcepcionLegus exa)
     {
-
+        QMessageBox::about(0,"Error",QString(exa.obtenerMensaje().c_str())+
+                                     QString("Alrededor de la linea")+
+                                     QString::number(exa.obtenerNumeroDeLinea()));
     }
 }

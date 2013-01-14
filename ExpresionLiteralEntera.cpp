@@ -1,7 +1,7 @@
 #include "ExpresionLiteralEntera.h"
 
-ExpresionLiteralEntera::ExpresionLiteralEntera(int valor)
-    :Expresion(LITERALENTERA)
+ExpresionLiteralEntera::ExpresionLiteralEntera(int valor, int numeroDeLinea)
+    :Expresion(LITERALENTERA,numeroDeLinea)
 {
     this->valor = valor;
     this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoEntero();
@@ -9,5 +9,6 @@ ExpresionLiteralEntera::ExpresionLiteralEntera(int valor)
 
 Tipo* ExpresionLiteralEntera::validarSemantica()
 {
-    return 0;
+    this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoEntero();
+    return Programa::obtenerInstancia()->obtenerTipoEntero();
 }

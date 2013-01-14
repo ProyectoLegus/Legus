@@ -1,7 +1,7 @@
 #include "ExpresionLiteralCaracter.h"
 
-ExpresionLiteralCaracter::ExpresionLiteralCaracter(char valor)
-    :Expresion(LITERALCARACTER)
+ExpresionLiteralCaracter::ExpresionLiteralCaracter(char valor, int numeroDeLinea)
+    :Expresion(LITERALCARACTER,numeroDeLinea)
 {
     this->valor = valor;
     this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoCaracter();
@@ -9,5 +9,6 @@ ExpresionLiteralCaracter::ExpresionLiteralCaracter(char valor)
 
 Tipo* ExpresionLiteralCaracter::validarSemantica()
 {
-    return 0;
+    this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoCaracter();
+    return Programa::obtenerInstancia()->obtenerTipoCaracter();
 }

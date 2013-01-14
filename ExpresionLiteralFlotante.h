@@ -7,7 +7,7 @@
 class ExpresionLiteralFlotante : public Expresion
 {
 public:
-    ExpresionLiteralFlotante(float valor);
+    ExpresionLiteralFlotante(float valor, int numeroDeLinea);
     virtual Tipo* validarSemantica();
 
 private:
