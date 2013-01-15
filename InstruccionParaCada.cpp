@@ -1,7 +1,7 @@
 #include "InstruccionParaCada.h"
 
-InstruccionParaCada::InstruccionParaCada(Expresion *variable, Expresion *coleccion_arreglo, Instruccion *instrucciones, Instruccion *siguiente)
-    :Instruccion(siguiente, PARACADA)
+InstruccionParaCada::InstruccionParaCada(Expresion *variable, Expresion *coleccion_arreglo, Instruccion *instrucciones, Instruccion *siguiente, int idDeExpresion)
+    :Instruccion(siguiente, PARACADA, idDeExpresion)
 {
     this->variable = variable;
     this->coleccion_arreglo = coleccion_arreglo;
@@ -10,5 +10,10 @@ InstruccionParaCada::InstruccionParaCada(Expresion *variable, Expresion *colecci
 
 void InstruccionParaCada::validarSemantica()
 {
+    /*Desarrollo de arreglos*/
+}
 
+string InstruccionParaCada::generarCodigoJava()
+{
+    return "";
 }

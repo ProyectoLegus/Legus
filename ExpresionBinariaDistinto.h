@@ -9,6 +9,7 @@ class ExpresionBinariaDistinto : public ExpresionBinaria
 public:
     ExpresionBinariaDistinto(Expresion *izquierda, Expresion *derecha, int numeroDeLinea);
     virtual Tipo* validarSemantica();
+    virtual string generarCodigoJava();
 };
 
 #endif // EXPRESIONBINARIADISTINTO_H

@@ -14,6 +14,7 @@ class ExpresionLiteralCadena : public Expresion
 public:
     ExpresionLiteralCadena(string *valor, int numeroDeLinea);
     virtual Tipo* validarSemantica();
+    virtual string generarCodigoJava();
 
 private:
     string *valor;

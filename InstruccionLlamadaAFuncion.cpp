@@ -1,7 +1,7 @@
 #include "InstruccionLlamadaAFuncion.h"
 
-InstruccionLlamadaAFuncion::InstruccionLlamadaAFuncion(string *identificador, Lista *lista_parametros, Instruccion *siguiente)
-    :Instruccion(siguiente, LLAMADAAFUNCION)
+InstruccionLlamadaAFuncion::InstruccionLlamadaAFuncion(string *identificador, Lista *lista_parametros, Instruccion *siguiente, int idDeExpresion)
+    :Instruccion(siguiente, LLAMADAAFUNCION, idDeExpresion)
 {
     this->identificador = identificador;
     this->lista_parametros = lista_parametros;
@@ -9,5 +9,28 @@ InstruccionLlamadaAFuncion::InstruccionLlamadaAFuncion(string *identificador, Li
 
 void InstruccionLlamadaAFuncion::validarSemantica()
 {
+    /*Implementar lo de XML y Jar
+        Hacer testing del jar en Lejos
+     */
 
+    /*Ver si existe la funcion*/
+    vector<DeclaracionDeFuncion*> *tablaDeFunciones = Programa::obtenerInstancia()->tablaDeFunciones;
+    for(unsigned int i = 0; i< tablaDeFunciones->size(); i++)
+    {
+        DeclaracionDeFuncion *declaracion = tablaDeFunciones->at(i);
+        if( this->identificador->compare(*declaracion->obtenerVariable()->obtenerIdentificador())==0)
+        {
+            /*Revisar la cantidad de parametros*/
+            if( declaracion->obtenerListaParametros()->lista->size() != lista_parametros->lista->size() )
+            {
+                throw(ExcepcionLegus("Llamada a funcion erronea"));
+            }
+        }
+    }
+
+}
+
+string InstruccionLlamadaAFuncion::generarCodigoJava()
+{
+    return "";
 }

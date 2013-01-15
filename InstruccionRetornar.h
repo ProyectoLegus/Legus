@@ -7,8 +7,9 @@
 class InstruccionRetornar : public Instruccion
 {
 public:
-    InstruccionRetornar(Expresion *expresion_de_retorno, Instruccion *siguiente);
+    InstruccionRetornar(Expresion *expresion_de_retorno, Instruccion *siguiente, int idDeExpresion);
     virtual void validarSemantica();
+    virtual string generarCodigoJava();
 
 private:
     Expresion *expresion_de_retorno;

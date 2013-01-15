@@ -1,7 +1,7 @@
 #include "InstruccionPara.h"
 
-InstruccionPara::InstruccionPara(InstruccionAsignacion *instruccionAsignacion, Expresion *final, Instruccion *instrucciones, Instruccion *siguiente)
-    :Instruccion(siguiente, PARA)
+InstruccionPara::InstruccionPara(InstruccionAsignacion *instruccionAsignacion, Expresion *final, Instruccion *instrucciones, Instruccion *siguiente, int idDeExpresion)
+    :Instruccion(siguiente, PARA, idDeExpresion)
 {
     this->instruccionAsignacion = instruccionAsignacion;
     this->final = final;
@@ -11,12 +11,17 @@ InstruccionPara::InstruccionPara(InstruccionAsignacion *instruccionAsignacion, E
 void InstruccionPara::validarSemantica()
 {
     /*Validar InstruccionAsignacion*/
-
+    Tipo* tipoExpresionInicial = instruccionAsignacion->obtenerExpresion()->validarSemantica();
     Tipo* tipoExpresionFinal = final->validarSemantica();
+
+    if( tipoExpresionInicial->tipo != Entero )
+    {
+        throw(ExcepcionLegus("Expresion inicial en instruccion 'para' debe evaluar a entero"));
+    }
 
     if( tipoExpresionFinal->tipo != Entero)
     {
-        // ERRORw
+        throw(ExcepcionLegus("Expresion final en instruccion 'para' debe evaluar a entero"));
     }
 
     if( instrucciones != 0)
@@ -27,4 +32,9 @@ void InstruccionPara::validarSemantica()
             instrucciones->obtenerSiguiente()->validarSemantica();
         }
     }
+}
+
+string InstruccionPara::generarCodigoJava()
+{
+    return "";
 }

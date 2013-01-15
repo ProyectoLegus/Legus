@@ -9,6 +9,7 @@ class ExpresionLiteralBooleana : public Expresion
 public:
     ExpresionLiteralBooleana(bool valor, int numeroDeLinea);
     virtual Tipo* validarSemantica();
+    virtual string generarCodigoJava();
 
 private:
     bool valor;

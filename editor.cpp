@@ -79,8 +79,9 @@ void Editor::on_btnCompilar_clicked()
     }
     catch(ExcepcionLegus exa)
     {
-        QMessageBox::about(0,"Error",QString(exa.obtenerMensaje().c_str())+
-                                     QString("Alrededor de la linea")+
-                                     QString::number(exa.obtenerNumeroDeLinea()));
+        int linea = exa.obtenerNumeroDeLinea();
+        QString lineaError = linea==0?"":QString("Alrededor de la linea: ")+QString::number(linea);
+        QMessageBox::about(0,"Error",QString(exa.obtenerMensaje().c_str())+lineaError);
     }
+    /*Agregar optimizador de codigo, Borrar variables que no se usan, ofuscar el codigo*/
 }

@@ -7,8 +7,9 @@
 class InstruccionRepitaDesde : public Instruccion
 {
 public:
-    InstruccionRepitaDesde(Expresion *inicio, Expresion *final, Instruccion *instrucciones, Instruccion *siguiente);
+    InstruccionRepitaDesde(Expresion *inicio, Expresion *final, Instruccion *instrucciones, Instruccion *siguiente, int idDeExpresion);
     virtual void validarSemantica();
+    virtual string generarCodigoJava();
 
 private:
     Expresion *inicio;

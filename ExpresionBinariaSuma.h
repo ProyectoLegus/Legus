@@ -9,6 +9,8 @@ class ExpresionBinariaSuma : public ExpresionBinaria
 public:
     ExpresionBinariaSuma(Expresion *izquierda, Expresion *derecha, int numeroDeLinea);
     virtual Tipo* validarSemantica();
+    virtual string generarCodigoJava();
+
 };
 
 #endif // EXPRESIONBINARIASUMA_H

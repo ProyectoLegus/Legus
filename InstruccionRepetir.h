@@ -7,8 +7,9 @@
 class InstruccionRepetir : public Instruccion
 {
 public:
-    InstruccionRepetir(Expresion *cantidad, Instruccion *instrucciones, Instruccion *siguiente);
+    InstruccionRepetir(Expresion *cantidad, Instruccion *instrucciones, Instruccion *siguiente, int idDeExpresion);
     virtual void validarSemantica();
+    virtual string generarCodigoJava();
 
 private:
     Expresion *cantidad;

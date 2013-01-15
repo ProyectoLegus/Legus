@@ -20,3 +20,12 @@ Tipo* ExpresionBinariaY::validarSemantica()
     /*Lanzar Error*/
     throw(ExcepcionLegus("Tipos incompatibles en operacion logica Y", numeroDeLinea));
 }
+
+string ExpresionBinariaY::generarCodigoJava()
+{
+    string codigoExpresionIzquierda = obtenerExpresionIzquierda()->generarCodigoJava();
+    string codigoExpresionDerecha   = obtenerExpresionDerecha()->generarCodigoJava();
+
+    /*Izqiuerda && Derecha*/
+    return "(" + codigoExpresionIzquierda + " && " + codigoExpresionDerecha + ")";
+}

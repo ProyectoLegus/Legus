@@ -1,9 +1,10 @@
 #include "Instruccion.h"
 
-Instruccion::Instruccion( Instruccion *siguiente, Instrucciones tipo)
+Instruccion::Instruccion( Instruccion *siguiente, Instrucciones tipo, int idDeExpresion)
 {
     this->siguiente = siguiente;
     this->tipo = tipo;
+    this->idDeExpresion = idDeExpresion;
 }
 
 void Instruccion::establecerSiguiente(Instruccion *siguiente)

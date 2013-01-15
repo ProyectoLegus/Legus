@@ -11,14 +11,17 @@ using namespace std;
 class VariableDeclarada
 {
 public:
-    VariableDeclarada(Variable *variable, Tipo *tipoInferido);
+    VariableDeclarada(Variable *variable, Tipo *tipoInferido, int idDeExpresion);
     Variable* obtenerVariable();
     Tipo*    obtenerTipo();
     virtual Tipo* validarSemantica();
+    int     obtenerIdDeExpresion();
+    virtual string generarCodigoJava();
 
 private:
     Variable *variable;
     Tipo *tipoInferido;
+    int idDeExpresion;
 };
 
 #endif // VARIABLEDECLARADA_H

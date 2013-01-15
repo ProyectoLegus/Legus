@@ -7,8 +7,9 @@
 class InstruccionParaCada : public Instruccion
 {
 public:
-    InstruccionParaCada(Expresion *variable, Expresion *coleccion_arreglo, Instruccion *instrucciones, Instruccion *siguiente);
+    InstruccionParaCada(Expresion *variable, Expresion *coleccion_arreglo, Instruccion *instrucciones, Instruccion *siguiente, int idDeExpresion);
     virtual void validarSemantica();
+    virtual string generarCodigoJava();
 
 private:
     Expresion *variable;

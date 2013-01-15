@@ -20,3 +20,11 @@ Tipo* ExpresionBinariaO::validarSemantica()
     /*Lanzar Error*/
     throw(ExcepcionLegus("Tipos incompatibles en operacion logica O", numeroDeLinea));
 }
+
+string ExpresionBinariaO::generarCodigoJava()
+{
+    string codigoExpresionIzquierda = obtenerExpresionIzquierda()->generarCodigoJava();
+    string codigoExpresionDerecha   = obtenerExpresionDerecha()->generarCodigoJava();
+
+    return "(" + codigoExpresionIzquierda + " || " + codigoExpresionDerecha + ")";
+}

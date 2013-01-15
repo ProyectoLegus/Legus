@@ -34,3 +34,8 @@ Tipo* ExpresionBinariaExponenciacion::validarSemantica()
 
     throw(ExcepcionLegus("Tipos incompatibles en operacion exponenciacion '^' ", numeroDeLinea));
 }
+
+string ExpresionBinariaExponenciacion::generarCodigoJava()
+{
+    return "";
+}

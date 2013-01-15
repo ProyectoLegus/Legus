@@ -51,3 +51,11 @@ Tipo* ExpresionBinariaMayorIgual::validarSemantica()
     /*Lanzar Error*/
     throw(ExcepcionLegus("Tipo incompatibles en operacion relacional mayor igual '>=' ", numeroDeLinea));
 }
+
+string ExpresionBinariaMayorIgual::generarCodigoJava()
+{
+    string codigoExpresionIzquierda = obtenerExpresionIzquierda()->generarCodigoJava();
+    string codigoExpresionDerecha   = obtenerExpresionDerecha()->generarCodigoJava();
+
+    return "(" + codigoExpresionIzquierda + " >= " + codigoExpresionDerecha + ")";
+}

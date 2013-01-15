@@ -13,8 +13,9 @@ using namespace std;
 class InstruccionPara : public Instruccion
 {
 public:
-    InstruccionPara(InstruccionAsignacion *instruccionAsignacion, Expresion *final, Instruccion *instrucciones ,Instruccion *siguiente);
+    InstruccionPara(InstruccionAsignacion *instruccionAsignacion, Expresion *final, Instruccion *instrucciones ,Instruccion *siguiente, int idDeExpresion);
     virtual void validarSemantica();
+    virtual string generarCodigoJava();
 
 private:
     InstruccionAsignacion *instruccionAsignacion;

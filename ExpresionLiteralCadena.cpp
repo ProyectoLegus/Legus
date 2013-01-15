@@ -12,3 +12,8 @@ Tipo* ExpresionLiteralCadena::validarSemantica()
     this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoCadena();
     return Programa::obtenerInstancia()->obtenerTipoCadena();
 }
+
+string ExpresionLiteralCadena::generarCodigoJava()
+{
+    return *valor;
+}

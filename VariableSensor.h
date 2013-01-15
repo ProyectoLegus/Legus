@@ -6,8 +6,10 @@
 class VariableSensor : public Variable
 {
 public:
-    VariableSensor(string *identificador, int numeroDeLinea);
+    VariableSensor(string *identificador, int numeroDeLinea, int idDeExpresion);
     virtual Tipo* validarSemantica();
+    virtual string generarCodigoJava();
+
 };
 
 #endif // VARIABLESENSOR_H

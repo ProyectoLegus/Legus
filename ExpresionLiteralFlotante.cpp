@@ -12,3 +12,10 @@ Tipo* ExpresionLiteralFlotante::validarSemantica()
     this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoFlotante();
     return Programa::obtenerInstancia()->obtenerTipoFlotante();
 }
+
+string ExpresionLiteralFlotante::generarCodigoJava()
+{
+    ostringstream ss;
+    ss << this->valor;
+    return ss.str();
+}

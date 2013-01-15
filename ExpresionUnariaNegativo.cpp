@@ -23,3 +23,8 @@ Tipo* ExpresionUnariaNegativo::validarSemantica()
 
     throw(ExcepcionLegus("Tipos incompatibles en operacion unaria negativo '-' "));
 }
+
+string ExpresionUnariaNegativo::generarCodigoJava()
+{
+    return "";
+}

@@ -11,9 +11,10 @@ using namespace std;
 class VariableArreglo : public Variable
 {
 public:
-    VariableArreglo(string *identificador, Lista *lista_indices, int numeroDeLinea);
+    VariableArreglo(string *identificador, Lista *lista_indices, int numeroDeLinea, int idDeExpresion);
     Lista *obtenerListaIndices();
     virtual Tipo* validarSemantica();
+    virtual string generarCodigoJava();
 
 private:
     Lista *lista_indices;

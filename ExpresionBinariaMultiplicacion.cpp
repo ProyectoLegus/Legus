@@ -34,3 +34,11 @@ Tipo* ExpresionBinariaMultiplicacion::validarSemantica()
 
     throw(ExcepcionLegus("Tipos incompatibles en operacion multiplicacion '*' ", numeroDeLinea));
 }
+
+string ExpresionBinariaMultiplicacion::generarCodigoJava()
+{
+    string codigoExpresionIzquierda = obtenerExpresionIzquierda()->generarCodigoJava();
+    string codigoExpresionDerecha   = obtenerExpresionDerecha()->generarCodigoJava();
+
+    return "(" + codigoExpresionIzquierda + " * " + codigoExpresionDerecha + ")";
+}

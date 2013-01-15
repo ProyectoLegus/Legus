@@ -12,3 +12,10 @@ Tipo* ExpresionLiteralCaracter::validarSemantica()
     this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoCaracter();
     return Programa::obtenerInstancia()->obtenerTipoCaracter();
 }
+
+string ExpresionLiteralCaracter::generarCodigoJava()
+{
+    stringstream ss;
+    ss << this->valor;
+    return ss.str();
+}

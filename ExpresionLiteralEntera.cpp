@@ -12,3 +12,10 @@ Tipo* ExpresionLiteralEntera::validarSemantica()
     this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoEntero();
     return Programa::obtenerInstancia()->obtenerTipoEntero();
 }
+
+string ExpresionLiteralEntera::generarCodigoJava()
+{
+    ostringstream ss;
+    ss << this->valor;
+    return ss.str();
+}

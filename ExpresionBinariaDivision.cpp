@@ -35,3 +35,12 @@ Tipo* ExpresionBinariaDivision::validarSemantica()
 
     throw(ExcepcionLegus("Tipos incompatibles en operacion division / ", numeroDeLinea));
 }
+
+string ExpresionBinariaDivision::generarCodigoJava()
+{
+    string codigoExpresionIzquierda = obtenerExpresionIzquierda()->generarCodigoJava();
+    string codigoExpresionDerecha   = obtenerExpresionDerecha()->generarCodigoJava();
+
+    /*Izqiuerda && Derecha*/
+    return "(" + codigoExpresionIzquierda + " / " + codigoExpresionDerecha + ")";
+}

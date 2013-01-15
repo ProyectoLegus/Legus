@@ -27,6 +27,7 @@ public:
     Tipo *tipoInferido;
     int numeroDeLinea;
     virtual Tipo* validarSemantica()=0;
+    virtual string generarCodigoJava()=0;
 };
 
 #endif // EXPRESION_H

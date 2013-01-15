@@ -1,7 +1,7 @@
 #include "InstruccionSi.h"
 
-InstruccionSi::InstruccionSi(Expresion *condicion, Instruccion *instruccionesSiVerdadero, Instruccion *instruccionesSiFalso, Instruccion *instruccionSiAnidado, Instruccion *siguiente)
-    :Instruccion(siguiente,SI)
+InstruccionSi::InstruccionSi(Expresion *condicion, Instruccion *instruccionesSiVerdadero, Instruccion *instruccionesSiFalso, Instruccion *instruccionSiAnidado, Instruccion *siguiente, int idDeExpresion)
+    :Instruccion(siguiente,SI,idDeExpresion)
 {
     this->condicion = condicion;
     this->instruccionesSiVerdadero = instruccionesSiVerdadero;
@@ -15,7 +15,6 @@ void InstruccionSi::validarSemantica()
 
     if( tipoCondicion != Programa::obtenerInstancia()->obtenerTipoBooleano() )
     {
-        /*Error*/
         throw( ExcepcionLegus( "La expresion de la instruccion 'si' debe evaluar a Booleano" ) );
     }
 
@@ -43,6 +42,7 @@ void InstruccionSi::validarSemantica()
     }*/
 }
 
-
-
-
+string InstruccionSi::generarCodigoJava()
+{
+    return "";
+}

@@ -34,3 +34,11 @@ Tipo* ExpresionBinariaResta::validarSemantica()
 
     throw(ExcepcionLegus("Tipos incompatibles en operacion resta '-' ", numeroDeLinea));
 }
+
+string ExpresionBinariaResta::generarCodigoJava()
+{
+    string codigoExpresionIzquierda = obtenerExpresionIzquierda()->generarCodigoJava();
+    string codigoExpresionDerecha   = obtenerExpresionDerecha()->generarCodigoJava();
+
+    return "(" + codigoExpresionIzquierda + " - " + codigoExpresionDerecha + ")";
+}

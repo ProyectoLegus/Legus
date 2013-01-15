@@ -34,3 +34,11 @@ Tipo* ExpresionBinariaModulo::validarSemantica()
 
     throw(ExcepcionLegus("Tipos incompatibles en operacion modulo '%' ", numeroDeLinea));
 }
+
+string ExpresionBinariaModulo::generarCodigoJava()
+{
+    string codigoExpresionIzquierda = obtenerExpresionIzquierda()->generarCodigoJava();
+    string codigoExpresionDerecha   = obtenerExpresionDerecha()->generarCodigoJava();
+
+    return "(" + codigoExpresionIzquierda + " % " + codigoExpresionDerecha + ")";
+}

@@ -68,3 +68,12 @@ Tipo* ExpresionBinariaSuma::validarSemantica()
     /*Lanzar Error*/
     throw(ExcepcionLegus("Tipos incompatibles en operacion suma '+' "));
 }
+
+string ExpresionBinariaSuma::generarCodigoJava()
+{
+    string codigoExpresionIzquierda = obtenerExpresionIzquierda()->generarCodigoJava();
+    string codigoExpresionDerecha   = obtenerExpresionDerecha()->generarCodigoJava();
+
+    /*Analizar los casos de cadena, caracter */
+    return "(" + codigoExpresionIzquierda + " + " + codigoExpresionDerecha + ")";
+}

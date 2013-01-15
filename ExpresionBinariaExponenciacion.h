@@ -9,6 +9,8 @@ class ExpresionBinariaExponenciacion : public ExpresionBinaria
 public:
     ExpresionBinariaExponenciacion(Expresion *izquierda, Expresion *derecha, int numeroDeLinea);
     virtual Tipo* validarSemantica();
+    virtual string generarCodigoJava();
+
 };
 
 #endif // EXPRESIONBINARIAEXPONENCIACION_H

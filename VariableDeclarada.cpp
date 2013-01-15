@@ -1,9 +1,10 @@
 #include "VariableDeclarada.h"
 
-VariableDeclarada::VariableDeclarada(Variable *variable, Tipo *tipoInferido)
+VariableDeclarada::VariableDeclarada(Variable *variable, Tipo *tipoInferido, int idDeExpresion)
 {
     this->variable = variable;
     this->tipoInferido = tipoInferido;
+    this->idDeExpresion = idDeExpresion;
 }
 
 Variable* VariableDeclarada::obtenerVariable()
@@ -19,4 +20,14 @@ Tipo*    VariableDeclarada::obtenerTipo()
 Tipo* VariableDeclarada::validarSemantica()
 {
     return tipoInferido;
+}
+
+int VariableDeclarada::obtenerIdDeExpresion()
+{
+    return this->idDeExpresion;
+}
+
+string VariableDeclarada::generarCodigoJava()
+{
+    return "";
 }

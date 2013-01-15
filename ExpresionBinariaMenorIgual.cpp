@@ -51,3 +51,11 @@ Tipo* ExpresionBinariaMenorIgual::validarSemantica()
     /*Lanzar Error*/
     throw(ExcepcionLegus("Tipo incompatibles en operacion relacional menor igual '<=' ", numeroDeLinea));
 }
+
+string ExpresionBinariaMenorIgual::generarCodigoJava()
+{
+    string codigoExpresionIzquierda = obtenerExpresionIzquierda()->generarCodigoJava();
+    string codigoExpresionDerecha   = obtenerExpresionDerecha()->generarCodigoJava();
+
+    return "(" + codigoExpresionIzquierda + " <= " + codigoExpresionDerecha + ")";
+}

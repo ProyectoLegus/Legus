@@ -13,16 +13,18 @@ enum Instrucciones
 class Instruccion
 {
 public:
-    Instruccion( Instruccion *siguiente, Instrucciones tipo);
+    Instruccion( Instruccion *siguiente, Instrucciones tipo, int idDeExpresion);
     void establecerSiguiente(Instruccion *siguiente);
     Instruccion* obtenerSiguiente();
 
     Instrucciones obtenerTipo();
     virtual void validarSemantica()=0;
+    virtual string generarCodigoJava()=0;
 
 private:
     Instruccion *siguiente;
     Instrucciones tipo;
+    int idDeExpresion;
 };
 
 #endif // INSTRUCCION_H

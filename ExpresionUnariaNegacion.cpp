@@ -18,3 +18,8 @@ Tipo* ExpresionUnariaNegacion::validarSemantica()
 
     throw(ExcepcionLegus("Tipos incompatibles en operacion unaria negacion 'no' "));
 }
+
+string ExpresionUnariaNegacion::generarCodigoJava()
+{
+    return "";
+}

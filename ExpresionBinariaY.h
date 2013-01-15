@@ -9,6 +9,7 @@ class ExpresionBinariaY : public ExpresionBinaria
 public:
     ExpresionBinariaY(Expresion *izquierda, Expresion *derecha, int numeroDeLinea);
     virtual Tipo* validarSemantica();
+    virtual string generarCodigoJava();
 };
 
 #endif // EXPRESIONBINARIAY_H

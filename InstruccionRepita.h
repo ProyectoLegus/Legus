@@ -8,10 +8,10 @@
 class InstruccionRepita : public Instruccion
 {
 public:
-    InstruccionRepita(Expresion *condicion, Instruccion *siguiente);
+    InstruccionRepita(Expresion *condicion, Instruccion *siguiente, int idDeExpresion);
     virtual void validarSemantica();
     Expresion* obtenerCondicion();
-
+    virtual string generarCodigoJava();
 
 private:
     Expresion *condicion;

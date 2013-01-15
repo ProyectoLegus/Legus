@@ -9,6 +9,8 @@ class ExpresionBinariaModulo : public ExpresionBinaria
 public:
     ExpresionBinariaModulo(Expresion *izquierda, Expresion *derecha, int numeroDeLinea);
     virtual Tipo* validarSemantica();
+    virtual string generarCodigoJava();
+
 };
 
 #endif // EXPRESIONBINARIAMODULO_H

@@ -1,7 +1,7 @@
 #include "VariableArreglo.h"
 
-VariableArreglo::VariableArreglo(string *identificador, Lista *lista_indices, int numeroDeLinea)
-    :Variable(identificador,numeroDeLinea, ARREGLO)
+VariableArreglo::VariableArreglo(string *identificador, Lista *lista_indices, int numeroDeLinea, int idDeExpresion)
+    :Variable(identificador,numeroDeLinea, idDeExpresion, ARREGLO)
 {
     this->lista_indices = lista_indices;
 }
@@ -15,4 +15,9 @@ Lista* VariableArreglo::obtenerListaIndices()
 Tipo* VariableArreglo::validarSemantica()
 {
     return 0;
+}
+
+string VariableArreglo::generarCodigoJava()
+{
+    return "";
 }

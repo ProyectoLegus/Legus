@@ -10,6 +10,7 @@ class ExpresionUnariaNegacion : public ExpresionUnaria
 public:
     ExpresionUnariaNegacion(Expresion *expresion, int numeroDeLinea);
     virtual Tipo* validarSemantica();
+    virtual string generarCodigoJava();
 };
 
 #endif // EXPRESIONUNARIANEGACION_H

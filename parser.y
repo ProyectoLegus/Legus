@@ -55,11 +55,13 @@
 %token <string> T_DESIGUALDAD T_LITERAL_CARACTER T_LITERAL_FLOTANTE T_LITERAL_CADENA T_COMA
 %token <string> T_ENTER T_EOF
 
+
 /* PALABRAS RESERVADAS */
 %token <string> T_MODULO T_DIVISION_ENTERA T_IGUAL T_A T_DISTINTO T_DE T_OPERADOR_Y T_OPERADOR_O
 %token <string> T_NO T_SI T_ENTONCES T_FIN T_SINO T_CASO T_MIENTRAS T_HAGA T_EJECUTE T_REPETIR
 %token <string> T_INFINITAS T_VECES T_PARA T_DESDE T_REPITA T_CADA T_EN T_FUNCION T_HASTA
 %token <string> T_RETORNA T_RETORNAR T_UTILIZAR T_COMO T_LITERAL_NUMERICA T_DEFINIR T_VERDADERO T_FALSO
+
 
 /* NO TERMINALES */
 %type <string>          declaracion_sensores_motores declaracion_funciones
@@ -72,6 +74,7 @@
 %type <lista>           lista_indices lista_parametros acumulador_parametros
 %type <lista_de_caso>   lista_casos
 %type <expresion>       literales literal_booleana relacionales expresiones factores terminales
+
 
 /* PUNTO DE ENTRADA */
 %start programa
@@ -98,7 +101,7 @@
                     instrucciones
                     T_FIN T_FUNCION declaracion_funciones
         {
-            DeclaracionDeFuncion *declrFuncion = new DeclaracionDeFuncion(new Variable($3, yylineno), $5, $7);
+            DeclaracionDeFuncion *declrFuncion = new DeclaracionDeFuncion(new Variable($3, yylineno, correlativo++), $5, $7);
             Programa::obtenerInstancia()->tablaDeFunciones->push_back(declrFuncion);
         }
         |/*Epsilon*/
@@ -110,7 +113,7 @@
     declaracion_sensores_motores :
         T_UTILIZAR T_IDENTIFICADOR T_COMO T_IDENTIFICADOR T_EN T_IDENTIFICADOR declaracion_sensores_motores
         {
-            DeclaracionUtilizar *declrUtilizar = new DeclaracionUtilizar(new VariablePuerto($2, yylineno), new VariableSensor($4, yylineno), new Variable($6, yylineno));
+            DeclaracionUtilizar *declrUtilizar = new DeclaracionUtilizar(new VariablePuerto($2, yylineno, correlativo++), new VariableSensor($4, yylineno, correlativo++), new Variable($6, yylineno, correlativo++));
             Programa::obtenerInstancia()->tablaDePuertosYSensores->push_back(declrUtilizar);
         }
         |/*Epsilon*/
@@ -182,84 +185,88 @@
         T_SI relacionales T_ENTONCES instrucciones T_FIN T_SI
         {
             /* Parametros: condicion, instruccionSiVerdadero, instruccionSiFalso,instruccionSiAnidado, Siguiente*/
-            $$ = new InstruccionSi($2, $4, 0, 0, 0);
+            $$ = new InstruccionSi($2, $4, 0, 0, 0, correlativo++);
         }
         |T_SI relacionales T_ENTONCES instrucciones T_SINO instrucciones T_FIN T_SI
         {
             /* Parametros: condicion, instruccionSiVerdadero, instruccionSiFalso,instruccionSiAnidado, Siguiente*/
-            $$ = new InstruccionSi($2, $4, $6, 0, 0);
+            $$ = new InstruccionSi($2, $4, $6, 0, 0, correlativo++);
         }
         ;
 
     instruccion_caso:
         T_CASO T_IDENTIFICADOR lista_casos sino_caso T_FIN T_CASO
         {
-            $$ = new InstruccionCaso( new Variable($2, yylineno), $3, $4, 0);
+            $$ = new InstruccionCaso( new Variable($2, yylineno, correlativo++), $3, $4, 0, correlativo++);
         }
         |T_CASO lista_casos sino_caso T_FIN T_CASO
         {
-            $$ = new InstruccionCaso(0, $2, $3, 0);
+            $$ = new InstruccionCaso(0, $2, $3, 0, correlativo++);
         };
 
     instruccion_mientras:
         T_MIENTRAS relacionales T_EJECUTE instrucciones T_FIN T_MIENTRAS
         {
             /* Parametros:   condicion, instrucciones, siguiente */
-            $$ = new InstruccionMientras($2, $4, 0);
+            $$ = new InstruccionMientras($2, $4, 0, correlativo++);
         };
 
     instruccion_para :
         T_PARA T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_PARA
         {
             /*identificador, inicio, final, instrucciones, siguiente*/
-            $$ = new InstruccionPara(new InstruccionAsignacion(new Variable($2, yylineno),$4,0), $6, $8, 0);
+            $$ = new InstruccionPara(new InstruccionAsignacion(new Variable($2, yylineno, correlativo++),$4,0, correlativo++), $6, $8, 0, correlativo++);
         };
 
     instruccion_repetir :
         T_REPETIR relacionales T_VECES instrucciones T_FIN T_REPETIR
         {
             /*Cantidad, instrucciones, siguiente*/
-            $$ = new InstruccionRepetir($2, $4, 0);
+            $$ = new InstruccionRepetir($2, $4, 0, correlativo++);
         };
 
     instruccion_asignacion :
         T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales
         {
             /*Variable, Expresion, siguiente*/
-            Variable *var = new Variable($1, yylineno);
-            Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var,$3->tipoInferido));
-            $$ = new InstruccionAsignacion(var, $3, 0 );
+            Variable *var = new Variable($1, yylineno, correlativo++);
+            Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var,$3->tipoInferido, correlativo++));
+            $$ = new InstruccionAsignacion(var, $3, 0, correlativo++);
         }
         |id_arreglo T_SIMBOLO_IGUAL relacionales
         {
             /*Variable, Expresion, siguiente*/
-            $$ = new InstruccionAsignacion($1, $3, 0);
+            $$ = new InstruccionAsignacion($1, $3, 0, correlativo++);
+        }
+        |T_IDENTIFICADOR T_SIMBOLO_IGUAL lista_indices
+        {
+            $$ = new InstruccionAsignacion($1);
         };
 
     instruccion_repita_desde :
         T_REPITA T_DESDE relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_REPITA
         {
             /* inicio , final , instrucciones , siguiente*/
-            $$ = new InstruccionRepitaDesde($3, $5, $7, 0);
+            $$ = new InstruccionRepitaDesde($3, $5, $7, 0, correlativo++);
         };
 
     instruccion_para_cada :
         T_PARA T_CADA relacionales T_EN relacionales T_EJECUTE instrucciones T_FIN T_PARA T_CADA
         {
             /* variable, coleccion, instrucciones, siguientes */
-            $$ = new InstruccionParaCada($3, $5, $7, 0);
+            $$ = new InstruccionParaCada($3, $5, $7, 0, correlativo++);
         };
 
     instruccion_llamada_a_funcion :
         T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO
         {
-            $$ = new InstruccionLlamadaAFuncion($1, $3, 0);
+            $$ = new InstruccionLlamadaAFuncion($1, $3, 0, correlativo++);
         };
 
     instruccion_retornar :
         T_RETORNAR relacionales
         {
-            $$ = new InstruccionRetornar($2, 0);
+            $$ = new InstruccionRetornar($2, 0, correlativo++);
         }
         ;
     /******************** Expresiones  ********************/
@@ -357,7 +364,7 @@
         }
         |T_IDENTIFICADOR
         {
-            $$ = new Variable($1, yylineno);
+            $$ = new Variable($1, yylineno, correlativo++);
         };
 
     id_variable :
@@ -373,13 +380,13 @@
     id_funcion:
         T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO
         {
-            $$ = new VariableFuncion($1, $3, yylineno);
+            $$ = new VariableFuncion($1, $3, yylineno, correlativo++);
         };
 
     id_arreglo :
         T_IDENTIFICADOR lista_indices
         {
-            $$ = new VariableArreglo($1, $2, yylineno);
+            $$ = new VariableArreglo($1, $2, yylineno, correlativo++);
         };
 
     /*Literales*/

@@ -7,14 +7,16 @@
 #include "Expresion.h"
 #include "Instruccion.h"
 #include "Lista.h"
+#include "Programa.h"
 
 using namespace std;
 
 class InstruccionLlamadaAFuncion : public Instruccion
 {
 public:
-    InstruccionLlamadaAFuncion(string *identificador, Lista *lista_parametros, Instruccion *siguiente);
+    InstruccionLlamadaAFuncion(string *identificador, Lista *lista_parametros, Instruccion *siguiente, int idDeExpresion);
     virtual void validarSemantica();
+    virtual string generarCodigoJava();
 
 private:
     string *identificador;

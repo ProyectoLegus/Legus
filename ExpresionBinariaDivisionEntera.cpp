@@ -34,3 +34,8 @@ Tipo* ExpresionBinariaDivisionEntera::validarSemantica()
 
     throw(ExcepcionLegus("Tipos incompatibles en operacion division entera 'div' ", numeroDeLinea));
 }
+
+string ExpresionBinariaDivisionEntera::generarCodigoJava()
+{
+    return "";
+}

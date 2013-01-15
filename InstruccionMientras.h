@@ -8,8 +8,9 @@
 class InstruccionMientras : public Instruccion
 {
 public:
-    InstruccionMientras(Expresion *condicion, Instruccion *instrucciones, Instruccion *siguiente);
+    InstruccionMientras(Expresion *condicion, Instruccion *instrucciones, Instruccion *siguiente, int idDeExpresion);
     virtual void validarSemantica();
+    virtual string generarCodigoJava();
 
 private:
     Expresion *condicion;

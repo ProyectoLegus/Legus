@@ -11,13 +11,16 @@ using namespace std;
 class Variable : public Expresion
 {
 public:
-    Variable(string *identificador, int numeroDeLinea, Expresiones tipo=VARIABLENORMAL);
+    Variable(string *identificador, int numeroDeLinea, int idDeExpresion, Expresiones tipo=VARIABLENORMAL);
     string* obtenerIdentificador();
     virtual Tipo* validarSemantica();
     Tipo*   obtenerTipoDeVariable();
+    int     obtenerIdDeExpresion();
+    virtual string generarCodigoJava();
 
 private:
     string *identificador;
+    int idDeExpresion;
 };
 
 #endif // VARIABLE_H

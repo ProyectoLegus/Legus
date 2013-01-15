@@ -9,6 +9,8 @@ class ExpresionBinariaMayor : public ExpresionBinaria
 public:
     ExpresionBinariaMayor(Expresion *izquierda, Expresion *derecha, int numeroDeLinea);
     virtual Tipo* validarSemantica();
+    virtual string generarCodigoJava();
+
 };
 
 #endif // EXPRESIONBINARIAMAYOR_H
