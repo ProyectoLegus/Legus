@@ -1,6 +1,8 @@
 #ifndef INSTRUCCIONMIENTRAS_H
 #define INSTRUCCIONMIENTRAS_H
 
+#include <sstream>
+
 #include "Instruccion.h"
 #include "Expresion.h"
 #include "Programa.h"

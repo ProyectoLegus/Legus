@@ -3,6 +3,7 @@
 
 #include "Instruccion.h"
 #include "Expresion.h"
+#include <sstream>
 
 class InstruccionRetornar : public Instruccion
 {

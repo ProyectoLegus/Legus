@@ -44,5 +44,33 @@ void InstruccionSi::validarSemantica()
 
 string InstruccionSi::generarCodigoJava()
 {
-    return "";
+    string codigoExpresion = this->condicion->generarCodigoJava();
+
+    stringstream codigoInstruccionSi;
+
+    /*SI...*/
+    codigoInstruccionSi << "if( " << codigoExpresion << " )";
+    codigoInstruccionSi << "\n{\n";
+
+    if( this->instruccionesSiVerdadero != 0)
+    {
+        codigoInstruccionSi << this->instruccionesSiVerdadero->generarCodigoJava();
+    }
+    codigoInstruccionSi << "\n}\n";
+
+    /*Sino...*/
+    if( this->instruccionesSiFalso != 0)
+    {
+        codigoInstruccionSi << "else" << "\n{\n";
+        codigoInstruccionSi << this->instruccionesSiFalso->generarCodigoJava();
+
+        if( this->instruccionSiAnidado != 0 )
+        {
+            /*si anidado pensarlo*/
+        }
+
+        codigoInstruccionSi << "\n}\n";
+    }
+
+    return codigoInstruccionSi.str();
 }

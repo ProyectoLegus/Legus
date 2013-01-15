@@ -4,6 +4,7 @@
 #include "Instruccion.h"
 #include "Expresion.h"
 #include "Programa.h"
+#include <sstream>
 
 class InstruccionSi : public Instruccion
 {

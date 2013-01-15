@@ -36,5 +36,24 @@ void InstruccionPara::validarSemantica()
 
 string InstruccionPara::generarCodigoJava()
 {
-    return "";
+    stringstream codigoInstruccionPara;
+
+    string codigoExpresionInicial = this->instruccionAsignacion->generarCodigoJava();
+    string codigoExpersionFinal = this->final->generarCodigoJava();
+
+    /*Falta variable++*/
+    codigoInstruccionPara << "for( ";
+    codigoInstruccionPara << codigoExpresionInicial;
+    codigoInstruccionPara << codigoExpersionFinal;
+    codigoInstruccionPara << "; CAMBIARESTO++ )";
+    codigoInstruccionPara << "\n{\n";
+
+    if( this->instrucciones != 0)
+    {
+        codigoInstruccionPara << instrucciones->generarCodigoJava();
+    }
+
+    codigoInstruccionPara << "\n}\n";
+
+    return codigoInstruccionPara.str();
 }

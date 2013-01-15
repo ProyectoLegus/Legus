@@ -29,5 +29,18 @@ void InstruccionMientras::validarSemantica()
 
 string InstruccionMientras::generarCodigoJava()
 {
-    return "";
+    string codigoExpresion = this->condicion->generarCodigoJava();
+    stringstream codigoInstruccionMientras;
+
+    codigoInstruccionMientras << "while( " << codigoExpresion << ")";
+    codigoInstruccionMientras << "\n{\n";
+
+    if( this->instrucciones != 0)
+    {
+        codigoInstruccionMientras << this->instrucciones->generarCodigoJava();
+    }
+
+    codigoInstruccionMientras << "\n}\n";
+
+    return codigoInstruccionMientras.str();
 }

@@ -1,6 +1,8 @@
 #ifndef INSTRUCCIONASIGNACION_H
 #define INSTRUCCIONASIGNACION_H
 
+#include <sstream>
+
 #include "Instruccion.h"
 #include "Expresion.h"
 #include "Variable.h"

@@ -15,5 +15,11 @@ void InstruccionRetornar::validarSemantica()
 
 string InstruccionRetornar::generarCodigoJava()
 {
-    return "";
+    stringstream codigoInstruccionRetornar;
+
+    codigoInstruccionRetornar << "return ";
+    codigoInstruccionRetornar << this->expresion_de_retorno->generarCodigoJava();
+    codigoInstruccionRetornar << ";\n";
+
+    return codigoInstruccionRetornar.str();
 }

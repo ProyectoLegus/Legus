@@ -53,29 +53,15 @@ void Editor::on_btnCompilar_clicked()
             actual->validarSemantica();
             actual = actual->obtenerSiguiente();
         }
-        vector<VariableDeclarada*> *vars = Programa::obtenerInstancia()->tablaDeVariables;
-        for(int i=0; i<vars->size() ;i++)
-        {
-            VariableDeclarada* vari = vars->at(i);
-            ui->listVariables->addItem(QString(vari->obtenerVariable()->obtenerIdentificador()->c_str()));
-        }
 
-        vector<DeclaracionUtilizar*> *tblUti = Programa::obtenerInstancia()->tablaDePuertosYSensores;
-        for(int i=0; i<tblUti->size(); i++)
+        string codigo="";
+        actual = instrucciones;
+        while(actual!=0)
         {
-            DeclaracionUtilizar* dclr = tblUti->at(i);
-            QString val = QString(dclr->obtenerVariable()->obtenerIdentificador()->c_str()) +
-                        " " + QString(dclr->obtenerPuerto()->obtenerIdentificador()->c_str());
-            ui->listUtilizar->addItem(val);
+            codigo += actual->generarCodigoJava();
+            actual = actual->obtenerSiguiente();
         }
-
-        vector<DeclaracionDeFuncion*> *tblFun = Programa::obtenerInstancia()->tablaDeFunciones;
-        for(int i=0; i<tblFun->size(); i++)
-        {
-            DeclaracionDeFuncion* dclr = tblFun->at(i);
-            QString val = QString(dclr->obtenerVariable()->obtenerIdentificador()->c_str());
-            ui->listFunciones->addItem(val);
-        }
+        QMessageBox::about(0,"Codigo Generado", QString(codigo.c_str()));
     }
     catch(ExcepcionLegus exa)
     {

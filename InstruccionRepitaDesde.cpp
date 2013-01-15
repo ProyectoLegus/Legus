@@ -26,5 +26,21 @@ void InstruccionRepitaDesde::validarSemantica()
 
 string InstruccionRepitaDesde::generarCodigoJava()
 {
-    return "";
+    stringstream codigoInstruccionRepetir;
+
+    codigoInstruccionRepetir << "for( int $$i = ";
+    codigoInstruccionRepetir << this->inicio->generarCodigoJava();
+    codigoInstruccionRepetir << "; $$i < ";
+    codigoInstruccionRepetir << this->final->generarCodigoJava();
+    codigoInstruccionRepetir << " ; $$i++)";
+    codigoInstruccionRepetir << "\n{\n";
+
+    if( this->instrucciones != 0)
+    {
+        codigoInstruccionRepetir << this->instrucciones->generarCodigoJava();
+    }
+
+    codigoInstruccionRepetir << "\n}\n";
+
+    return codigoInstruccionRepetir.str();
 }
