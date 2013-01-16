@@ -62,6 +62,7 @@ void Editor::on_btnCompilar_clicked()
             actual = actual->obtenerSiguiente();
         }
         QMessageBox::about(0,"Codigo Generado", QString(codigo.c_str()));
+
     }
     catch(ExcepcionLegus exa)
     {

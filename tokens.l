@@ -87,9 +87,7 @@ CARACTER            "'"."'"
     {ID}                { GUARDAR_TOKEN(T_IDENTIFICADOR);}
     {NUMERO}            { GUARDAR_TOKEN(T_LITERAL_NUMERICA);}
     {NUMERO_FLOTANTE}   { GUARDAR_TOKEN(T_LITERAL_FLOTANTE);}
-    {CARACTER}          { yylval.string = new std::string(yytext[1],yyleng);
-                          return T_LITERAL_CARACTER;
-                        }
+    {CARACTER}          { GUARDAR_TOKEN(T_LITERAL_CARACTER);}
     {CADENA}            {GUARDAR_TOKEN(T_LITERAL_CADENA);}
     {TDL}               {;}
     .                   {

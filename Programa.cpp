@@ -50,3 +50,21 @@ TipoFlotante* Programa::obtenerTipoFlotante()
     return this->tipoFlotante;
 }
 
+VariableDeclarada* Programa::existeVariable(string *identificador, int idDeExpresion)
+{
+    vector<VariableDeclarada*> *variables = Programa::obtenerInstancia()->tablaDeVariables;
+    VariableDeclarada* ultimaVariable = 0;
+
+    for(unsigned int i = 0 ; i< variables->size(); i++)
+    {
+        VariableDeclarada* variable = variables->at(i);
+        /*mismo identificador y que posea un idDeExpresion menor al mio*/
+        if( variable->obtenerVariable()->obtenerIdentificador()->compare( *identificador ) == 0 &&
+            variable->obtenerIdDeExpresion() < idDeExpresion)
+        {
+            ultimaVariable = variable;
+        }
+    }
+
+    return ultimaVariable;
+}

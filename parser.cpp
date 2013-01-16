@@ -84,7 +84,7 @@
         {
             QMessageBox::about(0,"","Esperando un T_IDENTIFICADOR linea: " + QString::number(yylineno));
         }
-        else if( token_esperado = 2 )
+        else if( token_esperado == 2 )
         {
             QMessageBox::about(0,"","Error Sintactico: " + QString(s) + "linea: " + QString::number(yylineno));
         }
@@ -466,16 +466,16 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  5
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   328
+#define YYLAST   290
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  66
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  31
+#define YYNNTS  32
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  77
+#define YYNRULES  79
 /* YYNRULES -- Number of states.  */
-#define YYNSTATES  180
+#define YYNSTATES  184
 
 /* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
 #define YYUNDEFTOK  2
@@ -534,27 +534,27 @@ static const yytype_uint16 yyprhs[] =
      175,   179,   181,   185,   189,   193,   197,   199,   203,   207,
      211,   215,   219,   221,   225,   227,   229,   231,   233,   235,
      240,   243,   245,   247,   249,   251,   253,   255,   257,   262,
-     266,   269,   270,   274,   275,   281,   286,   289
+     266,   269,   274,   277,   278,   282,   283,   289,   294,   297
 };
 
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
 static const yytype_int8 yyrhs[] =
 {
       67,     0,    -1,    70,    68,    71,    -1,    -1,    56,    69,
-       3,    21,    93,    22,    71,    42,    56,    68,    -1,    -1,
+       3,    21,    94,    22,    71,    42,    56,    68,    -1,    -1,
       60,     3,    61,     3,    55,     3,    70,    -1,    -1,    72,
       71,    -1,    -1,    73,    -1,    74,    -1,    75,    -1,    76,
       -1,    77,    -1,    78,    -1,    79,    -1,    80,    -1,    81,
       -1,    82,    -1,    53,    72,    45,    83,    42,    53,    -1,
       40,    83,    41,    71,    42,    40,    -1,    40,    83,    41,
-      71,    43,    71,    42,    40,    -1,    44,     3,    95,    96,
-      42,    44,    -1,    44,    95,    96,    42,    44,    -1,    45,
+      71,    43,    71,    42,    40,    -1,    44,     3,    96,    97,
+      42,    44,    -1,    44,    96,    97,    42,    44,    -1,    45,
       83,    47,    71,    42,    45,    -1,    51,     3,     4,    83,
       57,    83,    47,    71,    42,    51,    -1,    48,    83,    50,
       71,    42,    48,    -1,     3,     4,    83,    -1,    89,     4,
-      83,    -1,     3,     4,    92,    -1,    53,    52,    83,    57,
+      83,    -1,     3,     4,    93,    -1,    53,    52,    83,    57,
       83,    47,    71,    42,    53,    -1,    51,    54,    83,    55,
-      83,    47,    71,    42,    51,    54,    -1,     3,    21,    93,
+      83,    47,    71,    42,    51,    54,    -1,     3,    21,    94,
       22,    -1,    59,    83,    -1,    83,    13,    84,    -1,    83,
       14,    84,    -1,    83,    11,    84,    -1,    83,    12,    84,
       -1,    83,    15,    84,    -1,    83,    24,    84,    -1,    84,
@@ -563,25 +563,26 @@ static const yytype_int8 yyrhs[] =
        7,    86,    -1,    85,     8,    86,    -1,    85,    37,    86,
       -1,    85,    17,    86,    -1,    85,     9,    86,    -1,    86,
       -1,    21,    83,    22,    -1,    91,    -1,    87,    -1,     3,
-      -1,    88,    -1,    89,    -1,     3,    21,    93,    22,    -1,
+      -1,    88,    -1,    89,    -1,     3,    21,    94,    22,    -1,
        3,    92,    -1,    64,    -1,    65,    -1,    90,    -1,    62,
       -1,    25,    -1,    26,    -1,    27,    -1,    19,    83,    20,
-      92,    -1,    19,    83,    20,    -1,    83,    94,    -1,    -1,
-      28,    83,    94,    -1,    -1,    23,    83,    23,    71,    95,
-      -1,    23,    83,    23,    71,    -1,    43,    71,    -1,    -1
+      92,    -1,    19,    83,    20,    -1,    19,    20,    -1,    19,
+      20,    19,    20,    -1,    83,    95,    -1,    -1,    28,    83,
+      95,    -1,    -1,    23,    83,    23,    71,    96,    -1,    23,
+      83,    23,    71,    -1,    43,    71,    -1,    -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    86,    86,    96,    96,   108,   114,   120,   128,   134,
-     140,   144,   148,   152,   156,   160,   164,   168,   172,   176,
-     180,   185,   190,   198,   202,   208,   215,   222,   229,   236,
-     241,   247,   254,   261,   267,   275,   279,   283,   287,   291,
-     295,   299,   305,   309,   313,   317,   321,   327,   331,   335,
-     339,   343,   347,   353,   357,   361,   365,   371,   375,   381,
-     387,   395,   399,   405,   409,   413,   417,   421,   427,   432,
-     440,   446,   451,   457,   462,   467,   474,   479
+       0,    87,    87,    97,    97,   109,   115,   121,   129,   135,
+     141,   145,   149,   153,   157,   161,   165,   169,   173,   177,
+     181,   186,   191,   199,   203,   209,   216,   223,   230,   237,
+     242,   249,   256,   263,   269,   277,   281,   285,   289,   293,
+     297,   301,   307,   311,   315,   319,   323,   329,   333,   337,
+     341,   345,   349,   355,   359,   363,   367,   373,   377,   383,
+     389,   397,   401,   407,   411,   415,   419,   423,   429,   434,
+     442,   445,   452,   458,   463,   469,   474,   479,   486,   491
 };
 #endif
 
@@ -612,7 +613,8 @@ static const char *const yytname[] =
   "instruccion_llamada_a_funcion", "instruccion_retornar", "relacionales",
   "expresiones", "factores", "terminales", "id_variable", "id_funcion",
   "id_arreglo", "literal_booleana", "literales", "lista_indices",
-  "lista_parametros", "acumulador_parametros", "lista_casos", "sino_caso", 0
+  "lista_indices_declaracion", "lista_parametros", "acumulador_parametros",
+  "lista_casos", "sino_caso", 0
 };
 #endif
 
@@ -641,7 +643,7 @@ static const yytype_uint8 yyr1[] =
       83,    83,    84,    84,    84,    84,    84,    85,    85,    85,
       85,    85,    85,    86,    86,    86,    86,    87,    87,    88,
       89,    90,    90,    91,    91,    91,    91,    91,    92,    92,
-      93,    93,    94,    94,    95,    95,    96,    96
+      93,    93,    94,    94,    95,    95,    96,    96,    97,    97
 };
 
 /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
@@ -654,7 +656,7 @@ static const yytype_uint8 yyr2[] =
        3,     1,     3,     3,     3,     3,     1,     3,     3,     3,
        3,     3,     1,     3,     1,     1,     1,     1,     1,     4,
        2,     1,     1,     1,     1,     1,     1,     1,     4,     3,
-       2,     0,     3,     0,     5,     4,     2,     0
+       2,     4,     2,     0,     3,     0,     5,     4,     2,     0
 };
 
 /* YYDEFACT[STATE-NAME] -- Default reduction number in state STATE-NUM.
@@ -665,64 +667,66 @@ static const yytype_uint8 yydefact[] =
        7,     0,     0,     5,     0,     1,     3,     9,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     2,     9,
       10,    11,    12,    13,    14,    15,    16,    17,    18,    19,
-       0,     0,     0,     0,     0,    71,    60,    56,     0,    65,
+       0,     0,     0,     0,     0,    73,    60,    56,     0,    65,
       66,    67,    64,    61,    62,     0,    41,    46,    52,    55,
-      57,    58,    63,    54,     0,     0,    77,     0,     0,     0,
-       0,     0,     0,    34,     8,     0,     0,    71,    28,    30,
-       0,    73,     0,    71,     0,     0,     0,     0,     0,     0,
-       0,     9,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,    77,     0,     9,     0,     9,     9,     0,     0,     0,
-       0,    29,     7,     0,    69,     0,    70,    33,     0,    53,
-      37,    38,    35,    36,    39,    40,     0,    42,    43,    45,
-      44,    47,    48,    51,    50,    49,     0,     9,    76,     0,
-       0,     0,     0,     0,     0,     0,     6,     9,    68,    73,
-      59,     0,     9,     0,    75,    24,     0,     0,     0,     0,
-       0,     0,     0,    72,    21,     0,    23,    74,    25,    27,
-       0,     9,     9,    20,     0,     0,     9,     0,     0,     5,
-      22,     0,     0,     0,     4,     0,     0,    31,    26,    32
+      57,    58,    63,    54,     0,     0,    79,     0,     0,     0,
+       0,     0,     0,    34,     8,     0,     0,    73,     0,    28,
+      30,     0,    75,     0,    73,     0,     0,     0,     0,     0,
+       0,     0,     9,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,    79,     0,     9,     0,     9,     9,     0,     0,
+       0,     0,    29,     7,     0,    70,    69,     0,    72,    33,
+       0,    53,    37,    38,    35,    36,    39,    40,     0,    42,
+      43,    45,    44,    47,    48,    51,    50,    49,     0,     9,
+      78,     0,     0,     0,     0,     0,     0,     0,     6,     9,
+       0,    68,    75,    59,     0,     9,     0,    77,    24,     0,
+       0,     0,     0,     0,     0,     0,    71,    74,    21,     0,
+      23,    76,    25,    27,     0,     9,     9,    20,     0,     0,
+       9,     0,     0,     5,    22,     0,     0,     0,     4,     0,
+       0,    31,    26,    32
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
       -1,     2,     7,     9,     3,    18,    19,    20,    21,    22,
-      23,    24,    25,    26,    27,    28,    29,    71,    46,    47,
-      48,    49,    50,    51,    52,    53,    36,    72,   106,    56,
-      94
+      23,    24,    25,    26,    27,    28,    29,    72,    46,    47,
+      48,    49,    50,    51,    52,    53,    36,    70,    73,   108,
+      56,    95
 };
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-#define YYPACT_NINF -55
+#define YYPACT_NINF -62
 static const yytype_int16 yypact[] =
 {
-     -54,    19,    35,   -25,   -28,   -55,   -55,    63,    44,    45,
-      -1,    31,     1,    31,    31,    13,    20,    31,   -55,    63,
-     -55,   -55,   -55,   -55,   -55,   -55,   -55,   -55,   -55,   -55,
-      32,   -17,    30,    18,    31,    31,   -55,    -4,    31,   -55,
-     -55,   -55,   -55,   -55,   -55,   243,     8,    33,   -55,   -55,
-     -55,   -55,   -55,   -55,    38,    31,    10,   177,   172,    58,
-      31,    31,    24,   299,   -55,    31,    73,    31,   299,   -55,
-     266,   248,    62,    31,   280,    31,    31,    31,    31,    31,
-      31,    63,    31,    31,    31,    31,    31,    31,    31,    31,
-      31,    10,   285,    63,    43,    63,    63,    31,   154,   125,
-      31,   299,   -54,    65,    71,    31,   -55,   -55,    75,   -55,
-       8,     8,     8,     8,     8,     8,   -13,    33,    33,    33,
-      33,   -55,   -55,   -55,   -55,   -55,    56,    63,   -55,    57,
-      60,    64,   149,    31,    31,   224,   -55,    63,   -55,   248,
-     -55,    70,    63,    61,    38,   -55,    55,    67,    31,   199,
-     204,    51,    76,   -55,   -55,    79,   -55,   -55,   -55,   -55,
-     218,    63,    63,   -55,    69,    72,    63,    81,    84,   -25,
-     -55,    87,    66,    88,   -55,    94,    59,   -55,   -55,   -55
+     -56,    48,    31,   -20,   -14,   -62,   -62,    91,    54,    55,
+      44,    35,     7,    35,    35,    -1,    64,    35,   -62,    91,
+     -62,   -62,   -62,   -62,   -62,   -62,   -62,   -62,   -62,   -62,
+      73,    14,    60,    18,    35,    35,   -62,    65,    35,   -62,
+     -62,   -62,   -62,   -62,   -62,   214,    28,    33,   -62,   -62,
+     -62,   -62,   -62,   -62,    62,    35,    45,     5,   162,    87,
+      35,    35,    53,   266,   -62,    35,    90,    35,    82,   266,
+     -62,   233,   228,    81,    35,   247,    35,    35,    35,    35,
+      35,    35,    91,    35,    35,    35,    35,    35,    35,    35,
+      35,    35,    45,   252,    91,    63,    91,    91,    35,   156,
+      11,    35,   266,   -56,    84,    88,    94,    35,   -62,   -62,
+      92,   -62,    28,    28,    28,    28,    28,    28,   -28,    33,
+      33,    33,    33,   -62,   -62,   -62,   -62,   -62,    68,    91,
+     -62,    74,    77,    78,   142,    35,    35,   207,   -62,    91,
+     104,   -62,   228,   -62,    85,    91,    89,    62,   -62,    83,
+      86,    35,   170,   176,    93,    95,   -62,   -62,   -62,    98,
+     -62,   -62,   -62,   -62,   190,    91,    91,   -62,    70,   101,
+      91,   107,   109,   -20,   -62,   118,   110,   111,   -62,   114,
+     108,   -62,   -62,   -62
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
-     -55,   -55,   -22,   -55,    48,   -18,   130,   -55,   -55,   -55,
-     -55,   -55,   -55,   -55,   -55,   -55,   -55,    -6,   240,    49,
-     238,   -55,   -55,    -7,   -55,   -55,   -23,   -48,    12,   -52,
-      80
+     -62,   -62,   -30,   -62,    69,   -18,   163,   -62,   -62,   -62,
+     -62,   -62,   -62,   -62,   -62,   -62,   -62,    -6,   206,   -12,
+     119,   -62,   -62,    -7,   -62,   -62,    72,   -62,   -61,    50,
+     -51,   103
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -731,82 +735,76 @@ static const yytype_int16 yypgoto[] =
 #define YYTABLE_NINF -1
 static const yytype_uint8 yytable[] =
 {
-      30,    64,    91,    33,    54,    45,     1,    57,    58,    30,
-      69,    63,    30,    82,    83,    34,    59,    73,    34,   103,
-      35,    37,     4,    10,    55,   108,    84,    68,    70,   141,
-     142,     6,    74,     8,    37,     5,    65,    34,    66,    38,
-      86,    87,    88,    39,    40,    41,    85,    31,    32,    92,
-      89,    67,    38,    93,    98,    99,    39,    40,    41,   101,
-      11,    55,    97,   116,    12,    13,    10,    60,    14,   100,
-      90,    15,    61,    16,    30,   128,   102,   130,   131,    17,
-      42,   138,    43,    44,   107,   129,    30,   137,    30,    30,
-      34,   132,   157,    42,   135,    43,    44,   140,   143,   139,
-     158,   145,   146,    11,   163,   156,   147,    12,    13,   144,
-     154,    14,   170,   179,    15,   159,    16,   176,   164,   152,
-      30,   165,    17,   172,   155,   169,   173,   149,   150,   175,
-      30,   117,   118,   119,   120,    30,    75,    76,    77,    78,
-      79,   177,   160,   167,   168,   178,    62,   174,   171,    80,
-     136,   153,     0,     0,    30,    30,     0,     0,     0,    30,
-      75,    76,    77,    78,    79,    75,    76,    77,    78,    79,
-       0,   126,     0,    80,     0,     0,     0,     0,    80,     0,
-       0,     0,   134,    75,    76,    77,    78,    79,    75,    76,
-      77,    78,    79,     0,     0,     0,    80,     0,     0,     0,
-       0,    80,     0,     0,     0,     0,   148,     0,     0,   133,
-      75,    76,    77,    78,    79,    75,    76,    77,    78,    79,
-       0,     0,    96,    80,    95,     0,     0,     0,    80,    75,
-      76,    77,    78,    79,     0,    75,    76,    77,    78,    79,
-       0,     0,    80,     0,     0,     0,   161,     0,    80,     0,
-       0,   162,     0,     0,    75,    76,    77,    78,    79,    75,
-      76,    77,    78,    79,     0,   166,   151,    80,     0,     0,
-       0,     0,    80,     0,     0,     0,   105,    75,    76,    77,
-      78,    79,     0,     0,    81,     0,   104,     0,     0,     0,
-      80,    75,    76,    77,    78,    79,    75,    76,    77,    78,
-      79,     0,   109,     0,    80,     0,     0,     0,   127,    80,
-      75,    76,    77,    78,    79,   110,   111,   112,   113,   114,
-     115,     0,     0,    80,   121,   122,   123,   124,   125
+      30,    64,    59,    92,     1,    45,   104,    57,    58,    30,
+      54,    63,    30,   110,   144,   145,    76,    77,    78,    79,
+      80,    37,    76,    77,    78,    79,    80,    69,    71,    81,
+      55,     5,    75,    83,    84,    81,     6,    68,    37,    38,
+      87,    88,    89,    39,    40,    41,    85,     8,    33,    93,
+      90,     4,    96,    60,    99,   100,    38,    31,    32,   102,
+      39,    40,    41,    34,   118,    35,    86,    10,   136,    66,
+      91,   119,   120,   121,   122,    30,   130,    65,   132,   133,
+      42,    67,    43,    44,    34,    55,    74,    30,    94,    30,
+      30,    98,   134,   103,    10,   137,   161,    42,   101,    43,
+      44,   142,   105,   109,    11,   131,   139,   140,    12,    13,
+     146,   147,    14,    34,   143,    15,    61,    16,   148,   149,
+     150,   155,    30,    17,   156,   158,   173,   159,   162,   152,
+     153,    11,    30,   160,   163,    12,    13,   168,    30,    14,
+     169,   174,    15,   178,    16,   164,   167,   171,   172,   176,
+      17,   177,   175,    76,    77,    78,    79,    80,    30,    30,
+     179,   180,   183,    30,   181,   182,    81,    76,    77,    78,
+      79,    80,   138,    76,    77,    78,    79,    80,   141,    62,
+      81,    76,    77,    78,    79,    80,    81,    76,    77,    78,
+      79,    80,   157,     0,    81,   128,     0,     0,     0,   151,
+      81,    76,    77,    78,    79,    80,   123,   124,   125,   126,
+     127,   135,    97,     0,    81,     0,     0,   165,    76,    77,
+      78,    79,    80,   166,     0,    76,    77,    78,    79,    80,
+       0,    81,     0,     0,     0,     0,     0,   170,    81,    76,
+      77,    78,    79,    80,    76,    77,    78,    79,    80,   154,
+       0,     0,    81,   106,     0,    82,   107,    81,    76,    77,
+      78,    79,    80,    76,    77,    78,    79,    80,     0,   111,
+       0,    81,     0,     0,     0,   129,    81,    76,    77,    78,
+      79,    80,   112,   113,   114,   115,   116,   117,     0,     0,
+      81
 };
 
 #define yypact_value_is_default(yystate) \
-  ((yystate) == (-55))
+  ((yystate) == (-62))
 
 #define yytable_value_is_error(yytable_value) \
   YYID (0)
 
 static const yytype_int16 yycheck[] =
 {
-       7,    19,    54,     4,     3,    11,    60,    13,    14,    16,
-      33,    17,    19,     5,     6,    19,     3,    21,    19,    67,
-      21,     3,     3,     3,    23,    73,    18,    33,    34,    42,
-      43,    56,    38,    61,     3,     0,     4,    19,    55,    21,
-       7,     8,     9,    25,    26,    27,    38,     3,     3,    55,
-      17,    21,    21,    43,    60,    61,    25,    26,    27,    65,
-      40,    23,     4,    81,    44,    45,     3,    54,    48,    45,
-      37,    51,    52,    53,    81,    93,     3,    95,    96,    59,
-      62,   104,    64,    65,    22,    42,    93,    22,    95,    96,
-      19,    97,   144,    62,   100,    64,    65,    22,    42,   105,
-      45,    44,    42,    40,    53,    44,    42,    44,    45,   127,
-      40,    48,    40,    54,    51,    48,    53,    51,    42,   137,
-     127,    42,    59,    42,   142,    56,    42,   133,   134,    42,
-     137,    82,    83,    84,    85,   142,    11,    12,    13,    14,
-      15,    53,   148,   161,   162,    51,    16,   169,   166,    24,
-     102,   139,    -1,    -1,   161,   162,    -1,    -1,    -1,   166,
-      11,    12,    13,    14,    15,    11,    12,    13,    14,    15,
-      -1,    91,    -1,    24,    -1,    -1,    -1,    -1,    24,    -1,
-      -1,    -1,    57,    11,    12,    13,    14,    15,    11,    12,
-      13,    14,    15,    -1,    -1,    -1,    24,    -1,    -1,    -1,
-      -1,    24,    -1,    -1,    -1,    -1,    57,    -1,    -1,    55,
-      11,    12,    13,    14,    15,    11,    12,    13,    14,    15,
-      -1,    -1,    50,    24,    47,    -1,    -1,    -1,    24,    11,
-      12,    13,    14,    15,    -1,    11,    12,    13,    14,    15,
-      -1,    -1,    24,    -1,    -1,    -1,    47,    -1,    24,    -1,
-      -1,    47,    -1,    -1,    11,    12,    13,    14,    15,    11,
-      12,    13,    14,    15,    -1,    47,    42,    24,    -1,    -1,
-      -1,    -1,    24,    -1,    -1,    -1,    28,    11,    12,    13,
-      14,    15,    -1,    -1,    41,    -1,    20,    -1,    -1,    -1,
-      24,    11,    12,    13,    14,    15,    11,    12,    13,    14,
-      15,    -1,    22,    -1,    24,    -1,    -1,    -1,    23,    24,
-      11,    12,    13,    14,    15,    75,    76,    77,    78,    79,
-      80,    -1,    -1,    24,    86,    87,    88,    89,    90
+       7,    19,     3,    54,    60,    11,    67,    13,    14,    16,
+       3,    17,    19,    74,    42,    43,    11,    12,    13,    14,
+      15,     3,    11,    12,    13,    14,    15,    33,    34,    24,
+      23,     0,    38,     5,     6,    24,    56,    19,     3,    21,
+       7,     8,     9,    25,    26,    27,    18,    61,     4,    55,
+      17,     3,    47,    54,    60,    61,    21,     3,     3,    65,
+      25,    26,    27,    19,    82,    21,    38,     3,    57,    55,
+      37,    83,    84,    85,    86,    82,    94,     4,    96,    97,
+      62,    21,    64,    65,    19,    23,    21,    94,    43,    96,
+      97,     4,    98,     3,     3,   101,   147,    62,    45,    64,
+      65,   107,    20,    22,    40,    42,    22,    19,    44,    45,
+      42,   129,    48,    19,    22,    51,    52,    53,    44,    42,
+      42,   139,   129,    59,    20,    40,    56,   145,    45,   135,
+     136,    40,   139,    44,    48,    44,    45,    42,   145,    48,
+      42,    40,    51,   173,    53,   151,    53,   165,   166,    42,
+      59,    42,   170,    11,    12,    13,    14,    15,   165,   166,
+      42,    51,    54,   170,    53,    51,    24,    11,    12,    13,
+      14,    15,   103,    11,    12,    13,    14,    15,   106,    16,
+      24,    11,    12,    13,    14,    15,    24,    11,    12,    13,
+      14,    15,   142,    -1,    24,    92,    -1,    -1,    -1,    57,
+      24,    11,    12,    13,    14,    15,    87,    88,    89,    90,
+      91,    55,    50,    -1,    24,    -1,    -1,    47,    11,    12,
+      13,    14,    15,    47,    -1,    11,    12,    13,    14,    15,
+      -1,    24,    -1,    -1,    -1,    -1,    -1,    47,    24,    11,
+      12,    13,    14,    15,    11,    12,    13,    14,    15,    42,
+      -1,    -1,    24,    20,    -1,    41,    28,    24,    11,    12,
+      13,    14,    15,    11,    12,    13,    14,    15,    -1,    22,
+      -1,    24,    -1,    -1,    -1,    23,    24,    11,    12,    13,
+      14,    15,    76,    77,    78,    79,    80,    81,    -1,    -1,
+      24
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -818,19 +816,20 @@ static const yytype_uint8 yystos[] =
       73,    74,    75,    76,    77,    78,    79,    80,    81,    82,
       89,     3,     3,     4,    19,    21,    92,     3,    21,    25,
       26,    27,    62,    64,    65,    83,    84,    85,    86,    87,
-      88,    89,    90,    91,     3,    23,    95,    83,    83,     3,
-      54,    52,    72,    83,    71,     4,    55,    21,    83,    92,
-      83,    83,    93,    21,    83,    11,    12,    13,    14,    15,
-      24,    41,     5,     6,    18,    38,     7,     8,     9,    17,
-      37,    95,    83,    43,    96,    47,    50,     4,    83,    83,
-      45,    83,     3,    93,    20,    28,    94,    22,    93,    22,
-      84,    84,    84,    84,    84,    84,    71,    85,    85,    85,
-      85,    86,    86,    86,    86,    86,    96,    23,    71,    42,
-      71,    71,    83,    55,    57,    83,    70,    22,    92,    83,
-      22,    42,    43,    42,    71,    44,    42,    42,    57,    83,
-      83,    42,    71,    94,    40,    71,    44,    95,    45,    48,
-      83,    47,    47,    53,    42,    42,    47,    71,    71,    56,
-      40,    71,    42,    42,    68,    42,    51,    53,    51,    54
+      88,    89,    90,    91,     3,    23,    96,    83,    83,     3,
+      54,    52,    72,    83,    71,     4,    55,    21,    19,    83,
+      93,    83,    83,    94,    21,    83,    11,    12,    13,    14,
+      15,    24,    41,     5,     6,    18,    38,     7,     8,     9,
+      17,    37,    96,    83,    43,    97,    47,    50,     4,    83,
+      83,    45,    83,     3,    94,    20,    20,    28,    95,    22,
+      94,    22,    84,    84,    84,    84,    84,    84,    71,    85,
+      85,    85,    85,    86,    86,    86,    86,    86,    97,    23,
+      71,    42,    71,    71,    83,    55,    57,    83,    70,    22,
+      19,    92,    83,    22,    42,    43,    42,    71,    44,    42,
+      42,    57,    83,    83,    42,    71,    20,    95,    40,    71,
+      44,    96,    45,    48,    83,    47,    47,    53,    42,    42,
+      47,    71,    71,    56,    40,    71,    42,    42,    68,    42,
+      51,    53,    51,    54
 };
 
 #define yyerrok		(yyerrstatus = 0)
@@ -1711,7 +1710,7 @@ yyreduce:
         case 2:
 
 /* Line 1806 of yacc.c  */
-#line 87 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 88 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.instruccion) = (yyvsp[(3) - (3)].instruccion);
             Programa::obtenerInstancia()->instrucciones = (yyvsp[(3) - (3)].instruccion);
@@ -1721,14 +1720,14 @@ yyreduce:
   case 3:
 
 /* Line 1806 of yacc.c  */
-#line 96 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 97 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {}
     break;
 
   case 4:
 
 /* Line 1806 of yacc.c  */
-#line 103 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 104 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             DeclaracionDeFuncion *declrFuncion = new DeclaracionDeFuncion(new Variable((yyvsp[(3) - (10)].string), yylineno, correlativo++), (yyvsp[(5) - (10)].lista), (yyvsp[(7) - (10)].instruccion));
             Programa::obtenerInstancia()->tablaDeFunciones->push_back(declrFuncion);
@@ -1738,7 +1737,7 @@ yyreduce:
   case 5:
 
 /* Line 1806 of yacc.c  */
-#line 108 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 109 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.string)=0;
         }
@@ -1747,7 +1746,7 @@ yyreduce:
   case 6:
 
 /* Line 1806 of yacc.c  */
-#line 115 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 116 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             DeclaracionUtilizar *declrUtilizar = new DeclaracionUtilizar(new VariablePuerto((yyvsp[(2) - (7)].string), yylineno, correlativo++), new VariableSensor((yyvsp[(4) - (7)].string), yylineno, correlativo++), new Variable((yyvsp[(6) - (7)].string), yylineno, correlativo++));
             Programa::obtenerInstancia()->tablaDePuertosYSensores->push_back(declrUtilizar);
@@ -1757,7 +1756,7 @@ yyreduce:
   case 7:
 
 /* Line 1806 of yacc.c  */
-#line 120 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 121 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.string)=0;
         }
@@ -1766,7 +1765,7 @@ yyreduce:
   case 8:
 
 /* Line 1806 of yacc.c  */
-#line 129 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 130 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyvsp[(1) - (2)].instruccion)->establecerSiguiente((yyvsp[(2) - (2)].instruccion));
             (yyval.instruccion) = (yyvsp[(1) - (2)].instruccion);
@@ -1776,7 +1775,7 @@ yyreduce:
   case 9:
 
 /* Line 1806 of yacc.c  */
-#line 134 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 135 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.instruccion) = 0;
         }
@@ -1785,7 +1784,7 @@ yyreduce:
   case 10:
 
 /* Line 1806 of yacc.c  */
-#line 141 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 142 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.instruccion) = (yyvsp[(1) - (1)].instruccion);
         }
@@ -1794,7 +1793,7 @@ yyreduce:
   case 11:
 
 /* Line 1806 of yacc.c  */
-#line 145 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 146 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.instruccion) = (yyvsp[(1) - (1)].instruccion);
         }
@@ -1803,7 +1802,7 @@ yyreduce:
   case 12:
 
 /* Line 1806 of yacc.c  */
-#line 149 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 150 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.instruccion) = (yyvsp[(1) - (1)].instruccion);
         }
@@ -1812,7 +1811,7 @@ yyreduce:
   case 13:
 
 /* Line 1806 of yacc.c  */
-#line 153 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 154 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.instruccion) = (yyvsp[(1) - (1)].instruccion);
         }
@@ -1821,7 +1820,7 @@ yyreduce:
   case 14:
 
 /* Line 1806 of yacc.c  */
-#line 157 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 158 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.instruccion) = (yyvsp[(1) - (1)].instruccion);
         }
@@ -1830,7 +1829,7 @@ yyreduce:
   case 15:
 
 /* Line 1806 of yacc.c  */
-#line 161 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 162 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.instruccion) = (yyvsp[(1) - (1)].instruccion);
         }
@@ -1839,7 +1838,7 @@ yyreduce:
   case 16:
 
 /* Line 1806 of yacc.c  */
-#line 165 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 166 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.instruccion) = (yyvsp[(1) - (1)].instruccion);
         }
@@ -1848,7 +1847,7 @@ yyreduce:
   case 17:
 
 /* Line 1806 of yacc.c  */
-#line 169 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 170 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.instruccion) = (yyvsp[(1) - (1)].instruccion);
         }
@@ -1857,7 +1856,7 @@ yyreduce:
   case 18:
 
 /* Line 1806 of yacc.c  */
-#line 173 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 174 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.instruccion) = (yyvsp[(1) - (1)].instruccion);
         }
@@ -1866,7 +1865,7 @@ yyreduce:
   case 19:
 
 /* Line 1806 of yacc.c  */
-#line 177 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 178 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.instruccion) = (yyvsp[(1) - (1)].instruccion);
         }
@@ -1875,7 +1874,7 @@ yyreduce:
   case 20:
 
 /* Line 1806 of yacc.c  */
-#line 181 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 182 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
         }
     break;
@@ -1883,7 +1882,7 @@ yyreduce:
   case 21:
 
 /* Line 1806 of yacc.c  */
-#line 186 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 187 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             /* Parametros: condicion, instruccionSiVerdadero, instruccionSiFalso,instruccionSiAnidado, Siguiente*/
             (yyval.instruccion) = new InstruccionSi((yyvsp[(2) - (6)].expresion), (yyvsp[(4) - (6)].instruccion), 0, 0, 0, correlativo++);
@@ -1893,7 +1892,7 @@ yyreduce:
   case 22:
 
 /* Line 1806 of yacc.c  */
-#line 191 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 192 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             /* Parametros: condicion, instruccionSiVerdadero, instruccionSiFalso,instruccionSiAnidado, Siguiente*/
             (yyval.instruccion) = new InstruccionSi((yyvsp[(2) - (8)].expresion), (yyvsp[(4) - (8)].instruccion), (yyvsp[(6) - (8)].instruccion), 0, 0, correlativo++);
@@ -1903,7 +1902,7 @@ yyreduce:
   case 23:
 
 /* Line 1806 of yacc.c  */
-#line 199 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 200 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.instruccion) = new InstruccionCaso( new Variable((yyvsp[(2) - (6)].string), yylineno, correlativo++), (yyvsp[(3) - (6)].lista_de_caso), (yyvsp[(4) - (6)].instruccion), 0, correlativo++);
         }
@@ -1912,7 +1911,7 @@ yyreduce:
   case 24:
 
 /* Line 1806 of yacc.c  */
-#line 203 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 204 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.instruccion) = new InstruccionCaso(0, (yyvsp[(2) - (5)].lista_de_caso), (yyvsp[(3) - (5)].instruccion), 0, correlativo++);
         }
@@ -1921,7 +1920,7 @@ yyreduce:
   case 25:
 
 /* Line 1806 of yacc.c  */
-#line 209 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 210 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             /* Parametros:   condicion, instrucciones, siguiente */
             (yyval.instruccion) = new InstruccionMientras((yyvsp[(2) - (6)].expresion), (yyvsp[(4) - (6)].instruccion), 0, correlativo++);
@@ -1931,7 +1930,7 @@ yyreduce:
   case 26:
 
 /* Line 1806 of yacc.c  */
-#line 216 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 217 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             /*identificador, inicio, final, instrucciones, siguiente*/
             (yyval.instruccion) = new InstruccionPara(new InstruccionAsignacion(new Variable((yyvsp[(2) - (10)].string), yylineno, correlativo++),(yyvsp[(4) - (10)].expresion),0, correlativo++), (yyvsp[(6) - (10)].expresion), (yyvsp[(8) - (10)].instruccion), 0, correlativo++);
@@ -1941,7 +1940,7 @@ yyreduce:
   case 27:
 
 /* Line 1806 of yacc.c  */
-#line 223 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 224 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             /*Cantidad, instrucciones, siguiente*/
             (yyval.instruccion) = new InstruccionRepetir((yyvsp[(2) - (6)].expresion), (yyvsp[(4) - (6)].instruccion), 0, correlativo++);
@@ -1951,11 +1950,11 @@ yyreduce:
   case 28:
 
 /* Line 1806 of yacc.c  */
-#line 230 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 231 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             /*Variable, Expresion, siguiente*/
-            Variable *var = new Variable((yyvsp[(1) - (3)].string), yylineno, correlativo++);
-            Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var,(yyvsp[(3) - (3)].expresion)->tipoInferido, correlativo++));
+            Variable *var = new Variable((yyvsp[(1) - (3)].string), (yyvsp[(3) - (3)].expresion), yylineno, correlativo);
+            Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var,(yyvsp[(3) - (3)].expresion)->tipoInferido, correlativo));
             (yyval.instruccion) = new InstruccionAsignacion(var, (yyvsp[(3) - (3)].expresion), 0, correlativo++);
         }
     break;
@@ -1963,7 +1962,7 @@ yyreduce:
   case 29:
 
 /* Line 1806 of yacc.c  */
-#line 237 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 238 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             /*Variable, Expresion, siguiente*/
             (yyval.instruccion) = new InstruccionAsignacion((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), 0, correlativo++);
@@ -1973,16 +1972,17 @@ yyreduce:
   case 30:
 
 /* Line 1806 of yacc.c  */
-#line 242 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 243 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
-
+            VariableArreglo* variableArreglo = new VariableArreglo((yyvsp[(1) - (3)].string), 0, yylineno, correlativo++);
+            (yyval.instruccion) = new InstruccionAsignacion(variableArreglo, 0, 0, correlativo++);
         }
     break;
 
   case 31:
 
 /* Line 1806 of yacc.c  */
-#line 248 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 250 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             /* inicio , final , instrucciones , siguiente*/
             (yyval.instruccion) = new InstruccionRepitaDesde((yyvsp[(3) - (9)].expresion), (yyvsp[(5) - (9)].expresion), (yyvsp[(7) - (9)].instruccion), 0, correlativo++);
@@ -1992,7 +1992,7 @@ yyreduce:
   case 32:
 
 /* Line 1806 of yacc.c  */
-#line 255 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 257 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             /* variable, coleccion, instrucciones, siguientes */
             (yyval.instruccion) = new InstruccionParaCada((yyvsp[(3) - (10)].expresion), (yyvsp[(5) - (10)].expresion), (yyvsp[(7) - (10)].instruccion), 0, correlativo++);
@@ -2002,7 +2002,7 @@ yyreduce:
   case 33:
 
 /* Line 1806 of yacc.c  */
-#line 262 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 264 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.instruccion) = new InstruccionLlamadaAFuncion((yyvsp[(1) - (4)].string), (yyvsp[(3) - (4)].lista), 0, correlativo++);
         }
@@ -2011,7 +2011,7 @@ yyreduce:
   case 34:
 
 /* Line 1806 of yacc.c  */
-#line 268 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 270 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.instruccion) = new InstruccionRetornar((yyvsp[(2) - (2)].expresion), 0, correlativo++);
         }
@@ -2020,7 +2020,7 @@ yyreduce:
   case 35:
 
 /* Line 1806 of yacc.c  */
-#line 276 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 278 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaMenor((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2029,7 +2029,7 @@ yyreduce:
   case 36:
 
 /* Line 1806 of yacc.c  */
-#line 280 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 282 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaMayor((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2038,7 +2038,7 @@ yyreduce:
   case 37:
 
 /* Line 1806 of yacc.c  */
-#line 284 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 286 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaMayorIgual((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2047,7 +2047,7 @@ yyreduce:
   case 38:
 
 /* Line 1806 of yacc.c  */
-#line 288 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 290 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaMenorIgual((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2056,7 +2056,7 @@ yyreduce:
   case 39:
 
 /* Line 1806 of yacc.c  */
-#line 292 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 294 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaIgualdad((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2065,7 +2065,7 @@ yyreduce:
   case 40:
 
 /* Line 1806 of yacc.c  */
-#line 296 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 298 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaDistinto((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2074,7 +2074,7 @@ yyreduce:
   case 41:
 
 /* Line 1806 of yacc.c  */
-#line 300 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 302 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = (yyvsp[(1) - (1)].expresion);
         }
@@ -2083,7 +2083,7 @@ yyreduce:
   case 42:
 
 /* Line 1806 of yacc.c  */
-#line 306 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 308 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaSuma((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2092,7 +2092,7 @@ yyreduce:
   case 43:
 
 /* Line 1806 of yacc.c  */
-#line 310 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 312 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaResta((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2101,7 +2101,7 @@ yyreduce:
   case 44:
 
 /* Line 1806 of yacc.c  */
-#line 314 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 316 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaO((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2110,7 +2110,7 @@ yyreduce:
   case 45:
 
 /* Line 1806 of yacc.c  */
-#line 318 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 320 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaO((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2119,7 +2119,7 @@ yyreduce:
   case 46:
 
 /* Line 1806 of yacc.c  */
-#line 322 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 324 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = (yyvsp[(1) - (1)].expresion);
         }
@@ -2128,7 +2128,7 @@ yyreduce:
   case 47:
 
 /* Line 1806 of yacc.c  */
-#line 328 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 330 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaMultiplicacion((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2137,7 +2137,7 @@ yyreduce:
   case 48:
 
 /* Line 1806 of yacc.c  */
-#line 332 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 334 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaDivision((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2146,7 +2146,7 @@ yyreduce:
   case 49:
 
 /* Line 1806 of yacc.c  */
-#line 336 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 338 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaY((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2155,7 +2155,7 @@ yyreduce:
   case 50:
 
 /* Line 1806 of yacc.c  */
-#line 340 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 342 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaY((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2164,7 +2164,7 @@ yyreduce:
   case 51:
 
 /* Line 1806 of yacc.c  */
-#line 344 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 346 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaModulo((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2173,7 +2173,7 @@ yyreduce:
   case 52:
 
 /* Line 1806 of yacc.c  */
-#line 348 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 350 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = (yyvsp[(1) - (1)].expresion);
         }
@@ -2182,7 +2182,7 @@ yyreduce:
   case 53:
 
 /* Line 1806 of yacc.c  */
-#line 354 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 356 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = (yyvsp[(2) - (3)].expresion);
         }
@@ -2191,7 +2191,7 @@ yyreduce:
   case 54:
 
 /* Line 1806 of yacc.c  */
-#line 358 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 360 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = (yyvsp[(1) - (1)].expresion);
         }
@@ -2200,7 +2200,7 @@ yyreduce:
   case 55:
 
 /* Line 1806 of yacc.c  */
-#line 362 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 364 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = (yyvsp[(1) - (1)].expresion);
         }
@@ -2209,7 +2209,7 @@ yyreduce:
   case 56:
 
 /* Line 1806 of yacc.c  */
-#line 366 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 368 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = new Variable((yyvsp[(1) - (1)].string), yylineno, correlativo++);
         }
@@ -2218,7 +2218,7 @@ yyreduce:
   case 57:
 
 /* Line 1806 of yacc.c  */
-#line 372 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 374 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = (yyvsp[(1) - (1)].expresion);
         }
@@ -2227,7 +2227,7 @@ yyreduce:
   case 58:
 
 /* Line 1806 of yacc.c  */
-#line 376 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 378 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = (yyvsp[(1) - (1)].expresion);
         }
@@ -2236,7 +2236,7 @@ yyreduce:
   case 59:
 
 /* Line 1806 of yacc.c  */
-#line 382 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 384 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = new VariableFuncion((yyvsp[(1) - (4)].string), (yyvsp[(3) - (4)].lista), yylineno, correlativo++);
         }
@@ -2245,7 +2245,7 @@ yyreduce:
   case 60:
 
 /* Line 1806 of yacc.c  */
-#line 388 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 390 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = new VariableArreglo((yyvsp[(1) - (2)].string), (yyvsp[(2) - (2)].lista), yylineno, correlativo++);
         }
@@ -2254,7 +2254,7 @@ yyreduce:
   case 61:
 
 /* Line 1806 of yacc.c  */
-#line 396 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 398 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = new ExpresionLiteralBooleana(true, yylineno);
         }
@@ -2263,7 +2263,7 @@ yyreduce:
   case 62:
 
 /* Line 1806 of yacc.c  */
-#line 400 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 402 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = new ExpresionLiteralBooleana(false, yylineno);
         }
@@ -2272,7 +2272,7 @@ yyreduce:
   case 63:
 
 /* Line 1806 of yacc.c  */
-#line 406 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 408 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = (yyvsp[(1) - (1)].expresion);
         }
@@ -2281,7 +2281,7 @@ yyreduce:
   case 64:
 
 /* Line 1806 of yacc.c  */
-#line 410 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 412 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = new ExpresionLiteralEntera( atoi( (yyvsp[(1) - (1)].string)->c_str() ), yylineno);
        }
@@ -2290,16 +2290,16 @@ yyreduce:
   case 65:
 
 /* Line 1806 of yacc.c  */
-#line 414 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 416 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
-            (yyval.expresion) = new ExpresionLiteralCaracter( (char)(yyvsp[(1) - (1)].string)->c_str()[0], yylineno);
+            (yyval.expresion) = new ExpresionLiteralCaracter( (yyvsp[(1) - (1)].string)->at(1), yylineno);
        }
     break;
 
   case 66:
 
 /* Line 1806 of yacc.c  */
-#line 418 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 420 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = new ExpresionLiteralFlotante( atof( (yyvsp[(1) - (1)].string)->c_str() ), yylineno);
        }
@@ -2308,7 +2308,7 @@ yyreduce:
   case 67:
 
 /* Line 1806 of yacc.c  */
-#line 422 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 424 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.expresion) = new ExpresionLiteralCadena((yyvsp[(1) - (1)].string), yylineno);
        }
@@ -2317,7 +2317,7 @@ yyreduce:
   case 68:
 
 /* Line 1806 of yacc.c  */
-#line 428 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 430 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyvsp[(4) - (4)].lista)->lista->push_back((yyvsp[(2) - (4)].expresion));
             (yyval.lista) = (yyvsp[(4) - (4)].lista);
@@ -2327,7 +2327,7 @@ yyreduce:
   case 69:
 
 /* Line 1806 of yacc.c  */
-#line 433 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 435 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             Lista *lista = new Lista();
             lista->lista->push_back((yyvsp[(2) - (3)].expresion));
@@ -2338,10 +2338,8 @@ yyreduce:
   case 70:
 
 /* Line 1806 of yacc.c  */
-#line 441 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 443 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
-            (yyvsp[(2) - (2)].lista)->lista->push_back((yyvsp[(1) - (2)].expresion));
-            (yyval.lista) = (yyvsp[(2) - (2)].lista);
         }
     break;
 
@@ -2350,24 +2348,24 @@ yyreduce:
 /* Line 1806 of yacc.c  */
 #line 446 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
-            (yyval.lista) = new Lista();
+
         }
     break;
 
   case 72:
 
 /* Line 1806 of yacc.c  */
-#line 452 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 453 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
-            (yyvsp[(3) - (3)].lista)->lista->push_back((yyvsp[(2) - (3)].expresion));
-            (yyval.lista) = (yyvsp[(3) - (3)].lista);
+            (yyvsp[(2) - (2)].lista)->lista->push_back((yyvsp[(1) - (2)].expresion));
+            (yyval.lista) = (yyvsp[(2) - (2)].lista);
         }
     break;
 
   case 73:
 
 /* Line 1806 of yacc.c  */
-#line 457 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 458 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.lista) = new Lista();
         }
@@ -2376,20 +2374,19 @@ yyreduce:
   case 74:
 
 /* Line 1806 of yacc.c  */
-#line 463 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 464 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
-            (yyvsp[(5) - (5)].lista_de_caso)->establecerSiguiente(new ListaDeCaso((yyvsp[(2) - (5)].expresion), (yyvsp[(4) - (5)].instruccion), 0) );
-            (yyval.lista_de_caso) = (yyvsp[(5) - (5)].lista_de_caso);
-         }
+            (yyvsp[(3) - (3)].lista)->lista->push_back((yyvsp[(2) - (3)].expresion));
+            (yyval.lista) = (yyvsp[(3) - (3)].lista);
+        }
     break;
 
   case 75:
 
 /* Line 1806 of yacc.c  */
-#line 468 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 469 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
-            /*Parametros, Expresion, Instruccion, Siguiente*/
-            (yyval.lista_de_caso) = new ListaDeCaso((yyvsp[(2) - (4)].expresion), (yyvsp[(4) - (4)].instruccion), 0);
+            (yyval.lista) = new Lista();
         }
     break;
 
@@ -2398,14 +2395,34 @@ yyreduce:
 /* Line 1806 of yacc.c  */
 #line 475 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
-            (yyval.instruccion) = (yyvsp[(2) - (2)].instruccion);
-        }
+            (yyvsp[(5) - (5)].lista_de_caso)->establecerSiguiente(new ListaDeCaso((yyvsp[(2) - (5)].expresion), (yyvsp[(4) - (5)].instruccion), 0) );
+            (yyval.lista_de_caso) = (yyvsp[(5) - (5)].lista_de_caso);
+         }
     break;
 
   case 77:
 
 /* Line 1806 of yacc.c  */
-#line 479 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 480 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+    {
+            /*Parametros, Expresion, Instruccion, Siguiente*/
+            (yyval.lista_de_caso) = new ListaDeCaso((yyvsp[(2) - (4)].expresion), (yyvsp[(4) - (4)].instruccion), 0);
+        }
+    break;
+
+  case 78:
+
+/* Line 1806 of yacc.c  */
+#line 487 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+    {
+            (yyval.instruccion) = (yyvsp[(2) - (2)].instruccion);
+        }
+    break;
+
+  case 79:
+
+/* Line 1806 of yacc.c  */
+#line 491 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
     {
             (yyval.instruccion) = 0;
         }
@@ -2414,7 +2431,7 @@ yyreduce:
 
 
 /* Line 1806 of yacc.c  */
-#line 2418 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.cpp"
+#line 2435 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2652,6 +2669,6 @@ yyreturn:
 
 
 /* Line 2067 of yacc.c  */
-#line 482 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 494 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
 
 

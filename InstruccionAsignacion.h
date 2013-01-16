@@ -6,13 +6,14 @@
 #include "Instruccion.h"
 #include "Expresion.h"
 #include "Variable.h"
+#include "VariableArreglo.h"
 #include "Programa.h"
 
 class InstruccionAsignacion : public Instruccion
 {
 public:
     InstruccionAsignacion(Expresion *variable, Expresion *expresion, Instruccion *siguiente, int idDeExpresion);
-    InstruccionAsignacion(Expresion *variable, Lista *listaIndices, Instruccion *siguiente, int idDeExpresion);
+    InstruccionAsignacion(VariableArreglo *variable, Lista *listaIndices, Instruccion *siguiente, int idDeExpresion);
     virtual void validarSemantica();
     virtual string generarCodigoJava();
     Expresion*  obtenerVariable();

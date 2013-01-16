@@ -24,7 +24,7 @@
         {
             QMessageBox::about(0,"","Esperando un T_IDENTIFICADOR linea: " + QString::number(yylineno));
         }
-        else if( token_esperado = 2 )
+        else if( token_esperado == 2 )
         {
             QMessageBox::about(0,"","Error Sintactico: " + QString(s) + "linea: " + QString::number(yylineno));
         }
@@ -71,7 +71,8 @@
                         instruccion_retornar sino_caso programa
 
 %type <expresion>       id_variable id_funcion id_arreglo
-%type <lista>           lista_indices lista_parametros acumulador_parametros
+%type <lista>           lista_indices lista_indices_declaracion
+%type <lista>           lista_parametros acumulador_parametros
 %type <lista_de_caso>   lista_casos
 %type <expresion>       literales literal_booleana relacionales expresiones factores terminales
 
@@ -229,8 +230,8 @@
         T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales
         {
             /*Variable, Expresion, siguiente*/
-            Variable *var = new Variable($1, yylineno, correlativo++);
-            Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var,$3->tipoInferido, correlativo++));
+            Variable *var = new Variable($1, $3, yylineno, correlativo);
+            Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var,$3->tipoInferido, correlativo));
             $$ = new InstruccionAsignacion(var, $3, 0, correlativo++);
         }
         |id_arreglo T_SIMBOLO_IGUAL relacionales
@@ -238,9 +239,10 @@
             /*Variable, Expresion, siguiente*/
             $$ = new InstruccionAsignacion($1, $3, 0, correlativo++);
         }
-        |T_IDENTIFICADOR T_SIMBOLO_IGUAL lista_indices
+        |T_IDENTIFICADOR T_SIMBOLO_IGUAL lista_indices_declaracion
         {
-            $$ = new InstruccionAsignacion($1);
+            VariableArreglo* variableArreglo = new VariableArreglo($1, 0, yylineno, correlativo++);
+            $$ = new InstruccionAsignacion(variableArreglo, 0, 0, correlativo++);
         };
 
     instruccion_repita_desde :
@@ -412,7 +414,7 @@
        }
        |T_LITERAL_CARACTER
        {
-            $$ = new ExpresionLiteralCaracter( (char)$1->c_str()[0], yylineno);
+            $$ = new ExpresionLiteralCaracter( $1->at(1), yylineno);
        }
        |T_LITERAL_FLOTANTE
        {
@@ -435,6 +437,16 @@
             lista->lista->push_back($2);
             $$ = lista;
         };
+
+    lista_indices_declaracion :
+        T_CORCHETE_IZQUIERDO T_CORCHETE_DERECHO
+        {
+        }
+        |T_CORCHETE_IZQUIERDO T_CORCHETE_DERECHO T_CORCHETE_IZQUIERDO T_CORCHETE_DERECHO
+        {
+
+        }
+        ;
 
     lista_parametros :
         relacionales acumulador_parametros

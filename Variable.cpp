@@ -6,15 +6,36 @@ Variable::Variable(string *identificador, int numeroDeLinea, int idDeExpresion, 
 {
     this->identificador = identificador;
     this->idDeExpresion = idDeExpresion;
+    this->expresion = 0;
+}
+
+Variable::Variable(string *identificador,Expresion *expresion ,int numeroDeLinea, int idDeExpresion, Expresiones tipo)
+    :Expresion(tipo,numeroDeLinea)
+{
+    this->identificador = identificador;
+    this->idDeExpresion = idDeExpresion;
+    this->expresion = expresion;
 }
 
 string* Variable::obtenerIdentificador()
 {
     return this->identificador;
+
+}
+
+int Variable::obtenerIdDeExpresion()
+{
+    return this->idDeExpresion;
 }
 
 Tipo* Variable::validarSemantica()
 {
+    /*No se donde mas ponerla*/
+    if( expresion != 0)
+    {
+        expresion->validarSemantica();
+    }
+
     /*Que no sea una variable de Utilizar ni nombre de funcion*/
     vector<DeclaracionUtilizar*> *tablaDePuertosYSensores = Programa::obtenerInstancia()->tablaDePuertosYSensores;
     for(unsigned int i = 0; i< tablaDePuertosYSensores->size(); i++)
@@ -69,5 +90,47 @@ Tipo* Variable::obtenerTipoDeVariable()
 
 string Variable::generarCodigoJava()
 {
-    return "";
+    stringstream codigoVariable;
+
+    if( expresion != 0 )
+    {
+        Tipo* tipoVariable = expresion->tipoInferido;
+
+        if( tipoVariable->tipo == Entero )
+        {
+            codigoVariable << "int ";
+        }
+
+        if( tipoVariable->tipo == Flotante )
+        {
+            codigoVariable << "float ";
+        }
+
+        if( tipoVariable->tipo == Caracter)
+        {
+            codigoVariable << "char ";
+        }
+
+        if( tipoVariable->tipo == Cadena)
+        {
+            codigoVariable << "String ";
+        }
+
+        if( tipoVariable->tipo == Booleano )
+        {
+            codigoVariable << "boolean ";
+        }
+    }
+    else
+    {
+        /*Devolver solo el nombre??????*/
+        VariableDeclarada* variableDeclarada = Programa::obtenerInstancia()->existeVariable(obtenerIdentificador(), obtenerIdDeExpresion());
+        if( variableDeclarada != 0)
+        {
+            codigoVariable << "$";
+            codigoVariable << variableDeclarada->obtenerIdDeExpresion();
+            codigoVariable << variableDeclarada->obtenerVariable()->obtenerIdentificador()->c_str();
+        }
+    }
+    return codigoVariable.str();
 }

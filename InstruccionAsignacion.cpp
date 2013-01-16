@@ -8,7 +8,7 @@ InstruccionAsignacion::InstruccionAsignacion(Expresion *variable, Expresion *exp
     this->listaIndices = 0;
 }
 
-InstruccionAsignacion::InstruccionAsignacion(Expresion *variable, Lista *listaIndices, Instruccion *siguiente, int idDeExpresion)
+InstruccionAsignacion::InstruccionAsignacion(VariableArreglo *variable, Lista *listaIndices, Instruccion *siguiente, int idDeExpresion)
     :Instruccion(siguiente,ASIGNACION, idDeExpresion)
 {
     this->variable = variable;
@@ -44,7 +44,10 @@ void InstruccionAsignacion::validarSemantica()
         }
     }
 
-    this->expresion->validarSemantica();
+    if( expresion != 0)
+    {
+        this->expresion->validarSemantica();
+    }
 }
 
 Expresion* InstruccionAsignacion::obtenerExpresion()
@@ -59,5 +62,62 @@ Expresion* InstruccionAsignacion::obtenerVariable()
 
 string InstruccionAsignacion::generarCodigoJava()
 {
-    return "";
+    /*Caso, buscar nombre de variable
+        1. si ya existe verificar que la expresion reduzca al mismo tipo en que esta declarado
+        2. si no existe declarar la variable.
+    */
+    stringstream codigoAsignacion;
+
+    if( variable->tipo == VARIABLENORMAL )
+    {
+        string codigoVariable = this->variable->generarCodigoJava();
+        Variable *var = (Variable*)variable;
+
+        VariableDeclarada* variableDeclarada = Programa::obtenerInstancia()->existeVariable(var->obtenerIdentificador(), var->obtenerIdDeExpresion());
+        if( variableDeclarada == 0 )
+        {
+            codigoAsignacion << codigoVariable;
+            codigoAsignacion << "$";
+            codigoAsignacion << var->obtenerIdDeExpresion();
+            /*Falta el nombre de la variables*/
+            codigoAsignacion << var->obtenerIdentificador()->c_str();
+            codigoAsignacion << " = ";
+            codigoAsignacion << this->expresion->generarCodigoJava();
+            codigoAsignacion << "; \n";
+        }
+        else if( variableDeclarada != 0 && variableDeclarada->obtenerTipo()->tipo == this->expresion->tipoInferido->tipo)
+        {
+            /*Ya existe y es del mismo tipo*/
+            codigoAsignacion << "$";
+            codigoAsignacion << variableDeclarada->obtenerIdDeExpresion();
+            /*Falta el nombre de la variables*/
+            codigoAsignacion << variableDeclarada->obtenerVariable()->obtenerIdentificador()->c_str();
+            codigoAsignacion << " = ";
+            codigoAsignacion << this->expresion->generarCodigoJava();
+            codigoAsignacion << "; \n";
+        }
+        else
+        {
+            codigoAsignacion << codigoVariable;
+            codigoAsignacion << "$";
+            codigoAsignacion << var->obtenerIdDeExpresion();
+            /*Falta el nombre de la variables*/
+            codigoAsignacion << var->obtenerIdentificador()->c_str();
+            codigoAsignacion << " = ";
+            codigoAsignacion << this->expresion->generarCodigoJava();
+            codigoAsignacion << "; \n";
+        }
+    }
+    else if(variable->tipo == ARREGLO)
+    {
+        VariableArreglo *var = (VariableArreglo*)variable;
+
+        codigoAsignacion << "ArrayList<Object> ";
+        codigoAsignacion << "$";
+        codigoAsignacion << var->obtenerIdDeExpresion();
+        codigoAsignacion << var->obtenerIdentificador()->c_str();
+        codigoAsignacion << " = new ArrayList<Object>();\n";
+    }
+
+    return codigoAsignacion.str();
 }

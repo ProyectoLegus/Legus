@@ -15,7 +15,8 @@ Tipo* ExpresionLiteralCaracter::validarSemantica()
 
 string ExpresionLiteralCaracter::generarCodigoJava()
 {
-    stringstream ss;
-    ss << this->valor;
-    return ss.str();
+    string codigoLiteralCaracter = "'";
+    codigoLiteralCaracter += this->valor;
+    codigoLiteralCaracter += "'";
+    return codigoLiteralCaracter;
 }

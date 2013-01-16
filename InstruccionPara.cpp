@@ -44,6 +44,7 @@ string InstruccionPara::generarCodigoJava()
     /*Falta variable++*/
     codigoInstruccionPara << "for( ";
     codigoInstruccionPara << codigoExpresionInicial;
+    codigoInstruccionPara << "; ";
     codigoInstruccionPara << codigoExpersionFinal;
     codigoInstruccionPara << "; CAMBIARESTO++ )";
     codigoInstruccionPara << "\n{\n";

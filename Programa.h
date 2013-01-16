@@ -30,6 +30,8 @@ public:
     TipoEntero*   obtenerTipoEntero();
     TipoFlotante* obtenerTipoFlotante();
 
+    VariableDeclarada*         existeVariable(string *identificador, int idDeExpresion);
+
 private:
     Programa();
     static Programa* instancia;

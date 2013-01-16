@@ -1213,25 +1213,23 @@ YY_RULE_SETUP
 case 61:
 YY_RULE_SETUP
 #line 90 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
-{ yylval.string = new std::string(yytext[1],yyleng);
-                          return T_LITERAL_CARACTER;
-                        }
+{ GUARDAR_TOKEN(T_LITERAL_CARACTER);}
 	YY_BREAK
 case 62:
 /* rule 62 can match eol */
 YY_RULE_SETUP
-#line 93 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+#line 91 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
 {GUARDAR_TOKEN(T_LITERAL_CADENA);}
 	YY_BREAK
 case 63:
 /* rule 63 can match eol */
 YY_RULE_SETUP
-#line 94 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+#line 92 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
 {;}
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 95 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+#line 93 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
 {
                             yyterminate();
                         }
@@ -1240,32 +1238,32 @@ YY_RULE_SETUP
 
 case 65:
 YY_RULE_SETUP
-#line 101 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+#line 99 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
 {BEGIN(INITIAL);}
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 102 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+#line 100 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
 {}
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 103 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+#line 101 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
 {}
 	YY_BREAK
 case 68:
 /* rule 68 can match eol */
 YY_RULE_SETUP
-#line 104 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+#line 102 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
 {};
 	YY_BREAK
 
 case 69:
 YY_RULE_SETUP
-#line 106 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+#line 104 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
 ECHO;
 	YY_BREAK
-#line 1269 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.cpp"
+#line 1267 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.cpp"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(MULTI_COMMENT):
 	yyterminate();
@@ -2276,7 +2274,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 106 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+#line 104 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
 
 
 

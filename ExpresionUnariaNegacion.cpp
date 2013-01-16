@@ -21,5 +21,7 @@ Tipo* ExpresionUnariaNegacion::validarSemantica()
 
 string ExpresionUnariaNegacion::generarCodigoJava()
 {
-    return "";
+    string codidoExpresion = this->obtenerExpresion()->generarCodigoJava();
+
+    return "!"+codidoExpresion;
 }
