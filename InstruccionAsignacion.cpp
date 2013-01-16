@@ -22,32 +22,42 @@ void InstruccionAsignacion::validarSemantica()
     if( variable->tipo == VARIABLENORMAL )
     {
         Variable *var = (Variable*)variable;
+
         /*Que no sea una variable de Utilizar ni nombre de funcion*/
-        vector<DeclaracionUtilizar*> *tablaDePuertosYSensores = Programa::obtenerInstancia()->tablaDePuertosYSensores;
-        for(unsigned int i = 0; i< tablaDePuertosYSensores->size(); i++)
+        if( Programa::obtenerInstancia()->existeEnTablaDePuertosYSensores(var->obtenerIdentificador(), var->obtenerIdDeExpresion()))
         {
-            DeclaracionUtilizar *declaracion = tablaDePuertosYSensores->at(i);
-            if(var->obtenerIdentificador()->compare(*declaracion->obtenerVariable()->obtenerIdentificador())==0)
-            {
-                throw(ExcepcionLegus("Variable 'ReemplazarPorVariable' esta siendo utilizada en Puerto 'PUERTO' como 'SENSOR'"));
-            }
+            throw(ExcepcionLegus("Variable 'ReemplazarPorVariable' esta siendo utilizada en Puerto 'PUERTO' como 'SENSOR'"));
         }
 
-        vector<DeclaracionDeFuncion*> *tablaDeFunciones = Programa::obtenerInstancia()->tablaDeFunciones;
-        for(unsigned int i = 0; i< tablaDeFunciones->size(); i++)
+        if( Programa::obtenerInstancia()->existeEnTablaDeFunciones(var->obtenerIdentificador(), var->obtenerIdDeExpresion()) )
         {
-            DeclaracionDeFuncion *declaracion = tablaDeFunciones->at(i);
-            if( var->obtenerIdentificador()->compare(*declaracion->obtenerVariable()->obtenerIdentificador())==0)
-            {
-                throw(ExcepcionLegus("Variable 'ReemplazarPorVariable' esta siendo utilizada en funcion 'FUNCION'"));
-            }
+            throw(ExcepcionLegus("Variable 'ReemplazarPorVariable' esta siendo utilizada en funcion 'FUNCION'"));
+        }
+
+        if( expresion != 0)
+        {
+            var->tipoInferido = this->expresion->validarSemantica();
         }
     }
-
-    if( expresion != 0)
+    else if( variable->tipo == ARREGLO)
     {
-        this->expresion->validarSemantica();
+        VariableArreglo* var = (VariableArreglo*)variable;
+        if( Programa::obtenerInstancia()->existeEnTablaDePuertosYSensores(var->obtenerIdentificador(), var->obtenerIdDeExpresion()))
+        {
+            throw(ExcepcionLegus("Variable 'ReemplazarPorVariable' esta siendo utilizada en Puerto 'PUERTO' como 'SENSOR'"));
+        }
+
+        if( Programa::obtenerInstancia()->existeEnTablaDeFunciones(var->obtenerIdentificador(), var->obtenerIdDeExpresion()) )
+        {
+            throw(ExcepcionLegus("Variable 'ReemplazarPorVariable' esta siendo utilizada en funcion 'FUNCION'"));
+        }
+
+        if( expresion != 0)
+        {
+            this->expresion->validarSemantica();
+        }
     }
+
 }
 
 Expresion* InstruccionAsignacion::obtenerExpresion()
@@ -72,7 +82,7 @@ string InstruccionAsignacion::generarCodigoJava()
     {
         string codigoVariable = this->variable->generarCodigoJava();
         Variable *var = (Variable*)variable;
-
+        this->expresion->validarSemantica();
         VariableDeclarada* variableDeclarada = Programa::obtenerInstancia()->existeVariable(var->obtenerIdentificador(), var->obtenerIdDeExpresion());
         if( variableDeclarada == 0 )
         {
@@ -88,6 +98,8 @@ string InstruccionAsignacion::generarCodigoJava()
         else if( variableDeclarada != 0 && variableDeclarada->obtenerTipo()->tipo == this->expresion->tipoInferido->tipo)
         {
             /*Ya existe y es del mismo tipo*/
+            /*Selectivo que sea igual que el de var*/
+            Programa::obtenerInstancia()->establecerIdDeExpresionAVariable(var->obtenerIdDeExpresion(), variableDeclarada->obtenerIdDeExpresion());
             codigoAsignacion << "$";
             codigoAsignacion << variableDeclarada->obtenerIdDeExpresion();
             /*Falta el nombre de la variables*/
@@ -110,8 +122,8 @@ string InstruccionAsignacion::generarCodigoJava()
     }
     else if(variable->tipo == ARREGLO)
     {
+        /*Verificar si ya existe el arreglo*/
         VariableArreglo *var = (VariableArreglo*)variable;
-
         codigoAsignacion << "ArrayList<Object> ";
         codigoAsignacion << "$";
         codigoAsignacion << var->obtenerIdDeExpresion();

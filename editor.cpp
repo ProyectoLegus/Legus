@@ -16,36 +16,35 @@ Editor::~Editor()
 
 void Editor::on_btnCompilar_clicked()
 {
-    QFile archivo("prueba.txt");
-    if (!archivo.open(QIODevice::WriteOnly | QIODevice::Text))
-             return;
-    QTextStream flujo(&archivo);
-    flujo << ui->textEdit->toPlainText() << "\n";
-    flujo.flush();
-    archivo.close();
-
-    yyin = fopen("prueba.txt","rt");
-    //YY_BUFFER_STATE bs = yy_create_buffer(yyin,YY_BUF_SIZE);
-
-    if( yyin )
-    {
-        if( yyparse() )
-            QMessageBox::about(this,"Parsing","Error?");
-        else
-            QMessageBox::about(this,"Parsing","Completado...");        
-    }
-    fclose(yyin);
-    //yy_flush_buffer(bs);
-
-    /*Limpiar UI*/
-
-    ui->listUtilizar->clear();
-    ui->listVariables->clear();
-    ui->listFunciones->clear();
-    ui->listInstrucciones->clear();
-
     try
     {
+        QFile archivo("prueba.txt");
+        if (!archivo.open(QIODevice::WriteOnly | QIODevice::Text))
+                 return;
+        QTextStream flujo(&archivo);
+        flujo << ui->textEdit->toPlainText() << "\n";
+        flujo.flush();
+        archivo.close();
+
+        yyin = fopen("prueba.txt","rt");
+        //YY_BUFFER_STATE bs = yy_create_buffer(yyin,YY_BUF_SIZE);
+
+        if( yyin )
+        {
+            if( yyparse() )
+                QMessageBox::about(this,"Parsing","Error?");
+            else
+                QMessageBox::about(this,"Parsing","Completado...");
+        }
+        fclose(yyin);
+        //yy_flush_buffer(bs);
+
+        /*Limpiar UI*/
+
+        ui->listUtilizar->clear();
+        ui->listVariables->clear();
+        ui->listFunciones->clear();
+
         Instruccion *instrucciones = Programa::obtenerInstancia()->instrucciones;
         Instruccion *actual = instrucciones;
         while(actual!=0)
@@ -62,7 +61,22 @@ void Editor::on_btnCompilar_clicked()
             actual = actual->obtenerSiguiente();
         }
         QMessageBox::about(0,"Codigo Generado", QString(codigo.c_str()));
+        correlativo = 0;
 
+        vector<VariableDeclarada*> *variables = Programa::obtenerInstancia()->tablaDeVariables;
+        for(unsigned int i =0; i<variables->size();i++)
+        {
+            VariableDeclarada* declarada = variables->at(i);
+            QString res = "";
+            res += QString(declarada->obtenerVariable()->obtenerIdentificador()->c_str());
+            res += ": ID= ";
+            res += QString::number(declarada->obtenerIdDeExpresion());
+            ui->listVariables->addItem(res);
+        }
+
+
+
+        Programa::obtenerInstancia()->limpiarInstancia();
     }
     catch(ExcepcionLegus exa)
     {

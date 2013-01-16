@@ -63,19 +63,6 @@
      <string>FUNCIONES</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>610</x>
-      <y>10</y>
-      <width>91</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>INSTRUCCIONES</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
@@ -109,22 +96,12 @@
      </rect>
     </property>
    </widget>
-   <widget class="QListWidget" name="listInstrucciones">
-    <property name="geometry">
-     <rect>
-      <x>590</x>
-      <y>30</y>
-      <width>121</width>
-      <height>281</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QListWidget" name="listVariables">
     <property name="geometry">
      <rect>
-      <x>720</x>
+      <x>570</x>
       <y>30</y>
-      <width>121</width>
+      <width>271</width>
       <height>281</height>
      </rect>
     </property>
@@ -132,10 +109,10 @@
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>740</x>
+      <x>600</x>
       <y>10</y>
-      <width>91</width>
-      <height>16</height>
+      <width>231</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">

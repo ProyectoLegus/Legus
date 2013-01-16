@@ -20,6 +20,7 @@
 
 extern int yyparse();
 extern FILE *yyin;
+extern int correlativo;
 
 namespace Ui {
     class Editor;

@@ -31,3 +31,8 @@ string VariableDeclarada::generarCodigoJava()
 {
     return "";
 }
+
+void VariableDeclarada::establecerIdDeExpresion(int idDeExpresion)
+{
+    this->idDeExpresion = idDeExpresion;
+}

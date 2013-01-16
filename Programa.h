@@ -30,7 +30,16 @@ public:
     TipoEntero*   obtenerTipoEntero();
     TipoFlotante* obtenerTipoFlotante();
 
-    VariableDeclarada*         existeVariable(string *identificador, int idDeExpresion);
+    VariableDeclarada*    existeVariable(string *identificador, int idDeExpresion);
+    DeclaracionUtilizar*  existeEnTablaDePuertosYSensores(string *identificador, int idDeExpresion);
+    DeclaracionDeFuncion* existeEnTablaDeFunciones(string *identificador, int idDeExpresion);
+
+    void limpiarInstancia();
+
+        /*El primero es el id de expresion de la variable que quiero cambiar
+            el segundo es el valor que le pondre
+        */
+    void establecerIdDeExpresionAVariable(int idExpresion, int idExpresionACambiar);
 
 private:
     Programa();

@@ -68,3 +68,47 @@ VariableDeclarada* Programa::existeVariable(string *identificador, int idDeExpre
 
     return ultimaVariable;
 }
+
+DeclaracionDeFuncion* Programa::existeEnTablaDeFunciones(string *identificador, int idDeExpresion)
+{
+    for(unsigned int i = 0; i< tablaDeFunciones->size(); i++)
+    {
+        DeclaracionDeFuncion *declaracion = tablaDeFunciones->at(i);
+        if( identificador->compare(*declaracion->obtenerVariable()->obtenerIdentificador())==0)
+        {
+            return declaracion;
+        }
+    }
+    return 0;
+}
+
+DeclaracionUtilizar* Programa::existeEnTablaDePuertosYSensores(string *identificador, int idDeExpresion)
+{
+    for(unsigned int i = 0; i< tablaDePuertosYSensores->size(); i++)
+    {
+        DeclaracionUtilizar *declaracion = tablaDePuertosYSensores->at(i);
+        if(identificador->compare(*declaracion->obtenerVariable()->obtenerIdentificador())==0)
+        {
+            return declaracion;
+        }
+    }
+    return 0;
+}
+
+void  Programa::establecerIdDeExpresionAVariable(int idExpresion, int idExpresionACambiar)
+{
+    for(unsigned int i = 0 ; i< this->tablaDeVariables->size(); i++)
+    {
+        VariableDeclarada* variable = this->tablaDeVariables->at(i);
+        /*mismo identificador y que posea un idDeExpresion menor al mio*/
+        if( variable->obtenerIdDeExpresion() == idExpresion)
+        {
+            variable->establecerIdDeExpresion(idExpresionACambiar);
+        }
+    }
+}
+
+void Programa::limpiarInstancia()
+{
+    this->instancia = 0;
+}

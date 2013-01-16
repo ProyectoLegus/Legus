@@ -19,7 +19,7 @@ public:
     Tipo*   obtenerTipoDeVariable();
     int     obtenerIdDeExpresion();
     virtual string generarCodigoJava();
-
+    void establecerIdDeExpresion(int idDeExpresion);
 
 private:
     string *identificador;

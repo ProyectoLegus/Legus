@@ -64,7 +64,11 @@ Tipo* Variable::validarSemantica()
         return tipoDeVariable;
     }
 
-    throw(ExcepcionLegus("¡Variable no existe!",numeroDeLinea));
+
+    string mensajeDeError = "¡Variable '";
+    mensajeDeError += *this->identificador;
+    mensajeDeError += "' no esta definida!";
+    throw(ExcepcionLegus(mensajeDeError,numeroDeLinea));
 }
 
 Tipo* Variable::obtenerTipoDeVariable()
@@ -94,7 +98,7 @@ string Variable::generarCodigoJava()
 
     if( expresion != 0 )
     {
-        Tipo* tipoVariable = expresion->tipoInferido;
+        Tipo* tipoVariable = expresion->validarSemantica();
 
         if( tipoVariable->tipo == Entero )
         {
@@ -133,4 +137,9 @@ string Variable::generarCodigoJava()
         }
     }
     return codigoVariable.str();
+}
+
+void Variable::establecerIdDeExpresion(int idDeExpresion)
+{
+    this->idDeExpresion = idDeExpresion;
 }

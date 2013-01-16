@@ -16,7 +16,8 @@ public:
     Tipo*    obtenerTipo();
     virtual Tipo* validarSemantica();
     int     obtenerIdDeExpresion();
-    virtual string generarCodigoJava();
+    void    establecerIdDeExpresion(int idDeExpresion);
+    virtual string generarCodigoJava(); 
 
 private:
     Variable *variable;

@@ -231,7 +231,7 @@
         {
             /*Variable, Expresion, siguiente*/
             Variable *var = new Variable($1, $3, yylineno, correlativo);
-            Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var,$3->tipoInferido, correlativo));
+            Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var,$3->validarSemantica(), correlativo));
             $$ = new InstruccionAsignacion(var, $3, 0, correlativo++);
         }
         |id_arreglo T_SIMBOLO_IGUAL relacionales
