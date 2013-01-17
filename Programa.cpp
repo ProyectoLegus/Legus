@@ -14,6 +14,7 @@ Programa::Programa()
     this->tipoCaracter = new TipoCaracter();
     this->tipoEntero = new TipoEntero();
     this->tipoFlotante = new TipoFlotante();
+    this->tipoArreglo = new TipoArreglo();
 }
 
 Programa* Programa::obtenerInstancia()
@@ -48,6 +49,11 @@ TipoEntero* Programa::obtenerTipoEntero()
 TipoFlotante* Programa::obtenerTipoFlotante()
 {
     return this->tipoFlotante;
+}
+
+TipoArreglo*  Programa::obtenerTipoArreglo()
+{
+    return this->tipoArreglo;
 }
 
 VariableDeclarada* Programa::existeVariable(string *identificador, int idDeExpresion)

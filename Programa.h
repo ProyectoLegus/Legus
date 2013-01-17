@@ -12,6 +12,7 @@
 #include "TipoCaracter.h"
 #include "TipoEntero.h"
 #include "TipoFlotante.h"
+#include "TipoArreglo.h"
 
 using namespace std;
 
@@ -29,6 +30,7 @@ public:
     TipoCaracter* obtenerTipoCaracter();
     TipoEntero*   obtenerTipoEntero();
     TipoFlotante* obtenerTipoFlotante();
+    TipoArreglo*  obtenerTipoArreglo();
 
     VariableDeclarada*    existeVariable(string *identificador, int idDeExpresion);
     DeclaracionUtilizar*  existeEnTablaDePuertosYSensores(string *identificador, int idDeExpresion);
@@ -51,6 +53,7 @@ private:
     TipoCaracter *tipoCaracter;
     TipoEntero   *tipoEntero;
     TipoFlotante *tipoFlotante;
+    TipoArreglo  *tipoArreglo;
 };
 
 #endif // PROGRAMA_H

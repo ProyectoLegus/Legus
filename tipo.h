@@ -5,7 +5,7 @@ enum Tipos
 {
     Booleano,Cadena,
     Caracter,Entero,
-    Flotante
+    Flotante,Arreglo
 };
 
 class Tipo

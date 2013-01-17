@@ -20,14 +20,6 @@
     int correlativo = 0;
 
     void yyerror(const char *s) {        
-        if( token_esperado == 1 )
-        {
-            QMessageBox::about(0,"","Esperando un T_IDENTIFICADOR linea: " + QString::number(yylineno));
-        }
-        else if( token_esperado == 2 )
-        {
-            QMessageBox::about(0,"","Error Sintactico: " + QString(s) + "linea: " + QString::number(yylineno));
-        }
 //        QMessageBox::about(0,"","Error Sintactico: " + QString(s) + "linea: " + QString::number(yylineno));
     }
 %}
@@ -68,7 +60,7 @@
 %type <instruccion>     instrucciones instruccion instruccion_si instruccion_caso instruccion_mientras
                         instruccion_para instruccion_repetir instruccion_asignacion
                         instruccion_repita_desde instruccion_para_cada instruccion_llamada_a_funcion
-                        instruccion_retornar sino_caso programa
+                        instruccion_retornar sino_caso programa instruccion_auto_asignacion
 
 %type <expresion>       id_variable id_funcion id_arreglo
 %type <lista>           lista_indices lista_indices_declaracion
@@ -132,6 +124,7 @@
             $$ = $1;
         }
         |/*Epsilon*/
+
         {
             $$ = 0;
         }
@@ -159,6 +152,10 @@
             $$ = $1;
         }
         |instruccion_asignacion
+        {
+            $$ = $1;
+        }
+        |instruccion_auto_asignacion
         {
             $$ = $1;
         }
@@ -241,9 +238,69 @@
         }
         |T_IDENTIFICADOR T_SIMBOLO_IGUAL lista_indices_declaracion
         {
-            VariableArreglo* variableArreglo = new VariableArreglo($1, 0, yylineno, correlativo++);
+            VariableArreglo* variableArreglo = new VariableArreglo($1, 0, yylineno, correlativo);
+            TipoArreglo *tipoArreglo = Programa::obtenerInstancia()->obtenerTipoArreglo();
+            Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(variableArreglo, tipoArreglo, correlativo));
             $$ = new InstruccionAsignacion(variableArreglo, 0, 0, correlativo++);
         };
+
+    instruccion_auto_asignacion:
+        T_IDENTIFICADOR T_SUMA T_SIMBOLO_IGUAL relacionales
+        {
+            Variable *vari = new Variable($1, yylineno, correlativo++);
+            ExpresionBinariaSuma *suma = new ExpresionBinariaSuma(vari, $4, yylineno);
+
+            Variable *var = new Variable($1, suma, yylineno, correlativo);
+            Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var, suma->validarSemantica(), correlativo));
+            $$ = new InstruccionAsignacion(var, suma, 0, correlativo++);
+        }
+        |T_IDENTIFICADOR T_DIVISION T_SIMBOLO_IGUAL relacionales
+        {
+            Variable *vari = new Variable($1, yylineno, correlativo++);
+            ExpresionBinariaDivision *division = new ExpresionBinariaDivision(vari, $4, yylineno);
+
+            Variable *var = new Variable($1, division, yylineno, correlativo);
+            Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var, division->validarSemantica(), correlativo));
+            $$ = new InstruccionAsignacion(var, division, 0, correlativo++);
+        }
+        |T_IDENTIFICADOR T_SIMBOLO_MODULO T_SIMBOLO_IGUAL relacionales
+        {
+            Variable *vari = new Variable($1, yylineno, correlativo++);
+            ExpresionBinariaModulo *modulo = new ExpresionBinariaModulo(vari, $4, yylineno);
+
+            Variable *var = new Variable($1, modulo, yylineno, correlativo);
+            Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var, modulo->validarSemantica(), correlativo));
+            $$ = new InstruccionAsignacion(var, modulo, 0, correlativo++);
+        }
+        |T_IDENTIFICADOR T_MULTIPLICACION T_SIMBOLO_IGUAL relacionales
+        {
+            Variable *vari = new Variable($1, yylineno, correlativo++);
+            ExpresionBinariaMultiplicacion *multiplicacion= new ExpresionBinariaMultiplicacion(vari, $4, yylineno);
+
+            Variable *var = new Variable($1, multiplicacion, yylineno, correlativo);
+            Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var, multiplicacion->validarSemantica(), correlativo));
+            $$ = new InstruccionAsignacion(var, multiplicacion, 0, correlativo++);
+        }
+        |T_IDENTIFICADOR T_RESTA T_SIMBOLO_IGUAL relacionales
+        {
+            Variable *vari = new Variable($1, yylineno, correlativo++);
+            ExpresionBinariaResta *resta= new ExpresionBinariaResta(vari, $4, yylineno);
+
+            Variable *var = new Variable($1, resta, yylineno, correlativo);
+            Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var, resta->validarSemantica(), correlativo));
+            $$ = new InstruccionAsignacion(var, resta, 0, correlativo++);
+        }
+        |T_IDENTIFICADOR T_EXPONENCIACION T_SIMBOLO_IGUAL relacionales
+        {
+            Variable *vari = new Variable($1, yylineno, correlativo++);
+            ExpresionBinariaExponenciacion *exponenciacion= new ExpresionBinariaExponenciacion(vari, $4, yylineno);
+
+            Variable *var = new Variable($1, exponenciacion, yylineno, correlativo);
+            Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var, exponenciacion->validarSemantica(), correlativo));
+            $$ = new InstruccionAsignacion(var, exponenciacion, 0, correlativo++);
+        }
+        ;
+
 
     instruccion_repita_desde :
         T_REPITA T_DESDE relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_REPITA

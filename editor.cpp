@@ -71,6 +71,10 @@ void Editor::on_btnCompilar_clicked()
             res += QString(declarada->obtenerVariable()->obtenerIdentificador()->c_str());
             res += ": ID= ";
             res += QString::number(declarada->obtenerIdDeExpresion());
+            if( declarada->obtenerTipo()->tipo == Arreglo )
+            {
+                res += "   [ARREGLO]";
+            }
             ui->listVariables->addItem(res);
         }
 

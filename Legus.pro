@@ -70,7 +70,8 @@ SOURCES += main.cpp\
     EntradaSimbolo.cpp \
     VariableDeclarada.cpp \
     GeneradorDeErrores.cpp \
-    ExcepcionLegus.cpp
+    ExcepcionLegus.cpp \
+    TipoArreglo.cpp
 
 HEADERS  += editor.h \
     tokens.h \
@@ -133,7 +134,8 @@ HEADERS  += editor.h \
     EntradaSimbolo.h \
     VariableDeclarada.h \
     GeneradorDeErrores.h \
-    ExcepcionLegus.h
+    ExcepcionLegus.h \
+    TipoArreglo.h
 
 FORMS    += editor.ui
 

@@ -1,6 +1,5 @@
 Terminals unused in grammar
 
-   T_EXPONENCIACION
    T_NEGACION
    T_ENTER
    T_EOF
@@ -40,127 +39,135 @@ Grammar
    12            | instruccion_para
    13            | instruccion_repetir
    14            | instruccion_asignacion
-   15            | instruccion_repita_desde
-   16            | instruccion_para_cada
-   17            | instruccion_llamada_a_funcion
-   18            | instruccion_retornar
-   19            | T_REPITA instruccion T_MIENTRAS relacionales T_FIN T_REPITA
+   15            | instruccion_auto_asignacion
+   16            | instruccion_repita_desde
+   17            | instruccion_para_cada
+   18            | instruccion_llamada_a_funcion
+   19            | instruccion_retornar
+   20            | T_REPITA instruccion T_MIENTRAS relacionales T_FIN T_REPITA
 
-   20 instruccion_si: T_SI relacionales T_ENTONCES instrucciones T_FIN T_SI
-   21               | T_SI relacionales T_ENTONCES instrucciones T_SINO instrucciones T_FIN T_SI
+   21 instruccion_si: T_SI relacionales T_ENTONCES instrucciones T_FIN T_SI
+   22               | T_SI relacionales T_ENTONCES instrucciones T_SINO instrucciones T_FIN T_SI
 
-   22 instruccion_caso: T_CASO T_IDENTIFICADOR lista_casos sino_caso T_FIN T_CASO
-   23                 | T_CASO lista_casos sino_caso T_FIN T_CASO
+   23 instruccion_caso: T_CASO T_IDENTIFICADOR lista_casos sino_caso T_FIN T_CASO
+   24                 | T_CASO lista_casos sino_caso T_FIN T_CASO
 
-   24 instruccion_mientras: T_MIENTRAS relacionales T_EJECUTE instrucciones T_FIN T_MIENTRAS
+   25 instruccion_mientras: T_MIENTRAS relacionales T_EJECUTE instrucciones T_FIN T_MIENTRAS
 
-   25 instruccion_para: T_PARA T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_PARA
+   26 instruccion_para: T_PARA T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_PARA
 
-   26 instruccion_repetir: T_REPETIR relacionales T_VECES instrucciones T_FIN T_REPETIR
+   27 instruccion_repetir: T_REPETIR relacionales T_VECES instrucciones T_FIN T_REPETIR
 
-   27 instruccion_asignacion: T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales
-   28                       | id_arreglo T_SIMBOLO_IGUAL relacionales
-   29                       | T_IDENTIFICADOR T_SIMBOLO_IGUAL lista_indices_declaracion
+   28 instruccion_asignacion: T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales
+   29                       | id_arreglo T_SIMBOLO_IGUAL relacionales
+   30                       | T_IDENTIFICADOR T_SIMBOLO_IGUAL lista_indices_declaracion
 
-   30 instruccion_repita_desde: T_REPITA T_DESDE relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_REPITA
+   31 instruccion_auto_asignacion: T_IDENTIFICADOR T_SUMA T_SIMBOLO_IGUAL relacionales
+   32                            | T_IDENTIFICADOR T_DIVISION T_SIMBOLO_IGUAL relacionales
+   33                            | T_IDENTIFICADOR T_SIMBOLO_MODULO T_SIMBOLO_IGUAL relacionales
+   34                            | T_IDENTIFICADOR T_MULTIPLICACION T_SIMBOLO_IGUAL relacionales
+   35                            | T_IDENTIFICADOR T_RESTA T_SIMBOLO_IGUAL relacionales
+   36                            | T_IDENTIFICADOR T_EXPONENCIACION T_SIMBOLO_IGUAL relacionales
 
-   31 instruccion_para_cada: T_PARA T_CADA relacionales T_EN relacionales T_EJECUTE instrucciones T_FIN T_PARA T_CADA
+   37 instruccion_repita_desde: T_REPITA T_DESDE relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_REPITA
 
-   32 instruccion_llamada_a_funcion: T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO
+   38 instruccion_para_cada: T_PARA T_CADA relacionales T_EN relacionales T_EJECUTE instrucciones T_FIN T_PARA T_CADA
 
-   33 instruccion_retornar: T_RETORNAR relacionales
+   39 instruccion_llamada_a_funcion: T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO
 
-   34 relacionales: relacionales T_MENOR expresiones
-   35             | relacionales T_MAYOR expresiones
-   36             | relacionales T_MAYOR_IGUAL expresiones
-   37             | relacionales T_MENOR_IGUAL expresiones
-   38             | relacionales T_IGUALDAD expresiones
-   39             | relacionales T_DESIGUALDAD expresiones
-   40             | expresiones
+   40 instruccion_retornar: T_RETORNAR relacionales
 
-   41 expresiones: expresiones T_SUMA factores
-   42            | expresiones T_RESTA factores
-   43            | expresiones T_OPERADOR_O factores
-   44            | expresiones T_SIMBOLO_OPERADOR_O factores
-   45            | factores
+   41 relacionales: relacionales T_MENOR expresiones
+   42             | relacionales T_MAYOR expresiones
+   43             | relacionales T_MAYOR_IGUAL expresiones
+   44             | relacionales T_MENOR_IGUAL expresiones
+   45             | relacionales T_IGUALDAD expresiones
+   46             | relacionales T_DESIGUALDAD expresiones
+   47             | expresiones
 
-   46 factores: factores T_MULTIPLICACION terminales
-   47         | factores T_DIVISION terminales
-   48         | factores T_OPERADOR_Y terminales
-   49         | factores T_SIMBOLO_OPERADOR_Y terminales
-   50         | factores T_SIMBOLO_MODULO terminales
-   51         | terminales
+   48 expresiones: expresiones T_SUMA factores
+   49            | expresiones T_RESTA factores
+   50            | expresiones T_OPERADOR_O factores
+   51            | expresiones T_SIMBOLO_OPERADOR_O factores
+   52            | factores
 
-   52 terminales: T_PARENTESIS_IZQUIERDO relacionales T_PARENTESIS_DERECHO
-   53           | literales
-   54           | id_variable
-   55           | T_IDENTIFICADOR
+   53 factores: factores T_MULTIPLICACION terminales
+   54         | factores T_DIVISION terminales
+   55         | factores T_OPERADOR_Y terminales
+   56         | factores T_SIMBOLO_OPERADOR_Y terminales
+   57         | factores T_SIMBOLO_MODULO terminales
+   58         | terminales
 
-   56 id_variable: id_funcion
-   57            | id_arreglo
+   59 terminales: T_PARENTESIS_IZQUIERDO relacionales T_PARENTESIS_DERECHO
+   60           | literales
+   61           | id_variable
+   62           | T_IDENTIFICADOR
 
-   58 id_funcion: T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO
+   63 id_variable: id_funcion
+   64            | id_arreglo
 
-   59 id_arreglo: T_IDENTIFICADOR lista_indices
+   65 id_funcion: T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO
 
-   60 literal_booleana: T_VERDADERO
-   61                 | T_FALSO
+   66 id_arreglo: T_IDENTIFICADOR lista_indices
 
-   62 literales: literal_booleana
-   63          | T_LITERAL_NUMERICA
-   64          | T_LITERAL_CARACTER
-   65          | T_LITERAL_FLOTANTE
-   66          | T_LITERAL_CADENA
+   67 literal_booleana: T_VERDADERO
+   68                 | T_FALSO
 
-   67 lista_indices: T_CORCHETE_IZQUIERDO relacionales T_CORCHETE_DERECHO lista_indices
-   68              | T_CORCHETE_IZQUIERDO relacionales T_CORCHETE_DERECHO
+   69 literales: literal_booleana
+   70          | T_LITERAL_NUMERICA
+   71          | T_LITERAL_CARACTER
+   72          | T_LITERAL_FLOTANTE
+   73          | T_LITERAL_CADENA
 
-   69 lista_indices_declaracion: T_CORCHETE_IZQUIERDO T_CORCHETE_DERECHO
-   70                          | T_CORCHETE_IZQUIERDO T_CORCHETE_DERECHO T_CORCHETE_IZQUIERDO T_CORCHETE_DERECHO
+   74 lista_indices: T_CORCHETE_IZQUIERDO relacionales T_CORCHETE_DERECHO lista_indices
+   75              | T_CORCHETE_IZQUIERDO relacionales T_CORCHETE_DERECHO
 
-   71 lista_parametros: relacionales acumulador_parametros
-   72                 | /* empty */
+   76 lista_indices_declaracion: T_CORCHETE_IZQUIERDO T_CORCHETE_DERECHO
+   77                          | T_CORCHETE_IZQUIERDO T_CORCHETE_DERECHO T_CORCHETE_IZQUIERDO T_CORCHETE_DERECHO
 
-   73 acumulador_parametros: T_COMA relacionales acumulador_parametros
-   74                      | /* empty */
+   78 lista_parametros: relacionales acumulador_parametros
+   79                 | /* empty */
 
-   75 lista_casos: T_DOS_PUNTOS relacionales T_DOS_PUNTOS instrucciones lista_casos
-   76            | T_DOS_PUNTOS relacionales T_DOS_PUNTOS instrucciones
+   80 acumulador_parametros: T_COMA relacionales acumulador_parametros
+   81                      | /* empty */
 
-   77 sino_caso: T_SINO instrucciones
-   78          | /* empty */
+   82 lista_casos: T_DOS_PUNTOS relacionales T_DOS_PUNTOS instrucciones lista_casos
+   83            | T_DOS_PUNTOS relacionales T_DOS_PUNTOS instrucciones
+
+   84 sino_caso: T_SINO instrucciones
+   85          | /* empty */
 
 
 Terminals, with rules where they appear
 
 $end (0) 0
 error (256)
-T_IDENTIFICADOR (258) 3 5 22 25 27 29 32 55 58 59
-T_SIMBOLO_IGUAL (259) 25 27 28 29
-T_SUMA (260) 41
-T_RESTA (261) 42
-T_MULTIPLICACION (262) 46
-T_DIVISION (263) 47
-T_SIMBOLO_MODULO (264) 50
-T_EXPONENCIACION (265)
-T_MAYOR_IGUAL (266) 36
-T_MENOR_IGUAL (267) 37
-T_MENOR (268) 34
-T_MAYOR (269) 35
-T_IGUALDAD (270) 38
+T_IDENTIFICADOR (258) 3 5 23 26 28 30 31 32 33 34 35 36 39 62 65 66
+T_SIMBOLO_IGUAL (259) 26 28 29 30 31 32 33 34 35 36
+T_SUMA (260) 31 48
+T_RESTA (261) 35 49
+T_MULTIPLICACION (262) 34 53
+T_DIVISION (263) 32 54
+T_SIMBOLO_MODULO (264) 33 57
+T_EXPONENCIACION (265) 36
+T_MAYOR_IGUAL (266) 43
+T_MENOR_IGUAL (267) 44
+T_MENOR (268) 41
+T_MAYOR (269) 42
+T_IGUALDAD (270) 45
 T_NEGACION (271)
-T_SIMBOLO_OPERADOR_Y (272) 49
-T_SIMBOLO_OPERADOR_O (273) 44
-T_CORCHETE_IZQUIERDO (274) 67 68 69 70
-T_CORCHETE_DERECHO (275) 67 68 69 70
-T_PARENTESIS_IZQUIERDO (276) 3 32 52 58
-T_PARENTESIS_DERECHO (277) 3 32 52 58
-T_DOS_PUNTOS (278) 75 76
-T_DESIGUALDAD (279) 39
-T_LITERAL_CARACTER (280) 64
-T_LITERAL_FLOTANTE (281) 65
-T_LITERAL_CADENA (282) 66
-T_COMA (283) 73
+T_SIMBOLO_OPERADOR_Y (272) 56
+T_SIMBOLO_OPERADOR_O (273) 51
+T_CORCHETE_IZQUIERDO (274) 74 75 76 77
+T_CORCHETE_DERECHO (275) 74 75 76 77
+T_PARENTESIS_IZQUIERDO (276) 3 39 59 65
+T_PARENTESIS_DERECHO (277) 3 39 59 65
+T_DOS_PUNTOS (278) 82 83
+T_DESIGUALDAD (279) 46
+T_LITERAL_CARACTER (280) 71
+T_LITERAL_FLOTANTE (281) 72
+T_LITERAL_CADENA (282) 73
+T_COMA (283) 80
 T_ENTER (284)
 T_EOF (285)
 T_MODULO (286)
@@ -169,35 +176,35 @@ T_IGUAL (288)
 T_A (289)
 T_DISTINTO (290)
 T_DE (291)
-T_OPERADOR_Y (292) 48
-T_OPERADOR_O (293) 43
+T_OPERADOR_Y (292) 55
+T_OPERADOR_O (293) 50
 T_NO (294)
-T_SI (295) 20 21
-T_ENTONCES (296) 20 21
-T_FIN (297) 3 19 20 21 22 23 24 25 26 30 31
-T_SINO (298) 21 77
-T_CASO (299) 22 23
-T_MIENTRAS (300) 19 24
+T_SI (295) 21 22
+T_ENTONCES (296) 21 22
+T_FIN (297) 3 20 21 22 23 24 25 26 27 37 38
+T_SINO (298) 22 84
+T_CASO (299) 23 24
+T_MIENTRAS (300) 20 25
 T_HAGA (301)
-T_EJECUTE (302) 24 25 30 31
-T_REPETIR (303) 26
+T_EJECUTE (302) 25 26 37 38
+T_REPETIR (303) 27
 T_INFINITAS (304)
-T_VECES (305) 26
-T_PARA (306) 25 31
-T_DESDE (307) 30
-T_REPITA (308) 19 30
-T_CADA (309) 31
-T_EN (310) 5 31
+T_VECES (305) 27
+T_PARA (306) 26 38
+T_DESDE (307) 37
+T_REPITA (308) 20 37
+T_CADA (309) 38
+T_EN (310) 5 38
 T_FUNCION (311) 3
-T_HASTA (312) 25 30
+T_HASTA (312) 26 37
 T_RETORNA (313)
-T_RETORNAR (314) 33
+T_RETORNAR (314) 40
 T_UTILIZAR (315) 5
 T_COMO (316) 5
-T_LITERAL_NUMERICA (317) 63
+T_LITERAL_NUMERICA (317) 70
 T_DEFINIR (318)
-T_VERDADERO (319) 60
-T_FALSO (320) 61
+T_VERDADERO (319) 67
+T_FALSO (320) 68
 
 
 Nonterminals, with rules where they appear
@@ -213,62 +220,65 @@ $@1 (69)
 declaracion_sensores_motores (70)
     on left: 5 6, on right: 1 5
 instrucciones (71)
-    on left: 7 8, on right: 1 3 7 20 21 24 25 26 30 31 75 76 77
+    on left: 7 8, on right: 1 3 7 21 22 25 26 27 37 38 82 83 84
 instruccion (72)
-    on left: 9 10 11 12 13 14 15 16 17 18 19, on right: 7 19
+    on left: 9 10 11 12 13 14 15 16 17 18 19 20, on right: 7 20
 instruccion_si (73)
-    on left: 20 21, on right: 9
+    on left: 21 22, on right: 9
 instruccion_caso (74)
-    on left: 22 23, on right: 10
+    on left: 23 24, on right: 10
 instruccion_mientras (75)
-    on left: 24, on right: 11
+    on left: 25, on right: 11
 instruccion_para (76)
-    on left: 25, on right: 12
+    on left: 26, on right: 12
 instruccion_repetir (77)
-    on left: 26, on right: 13
+    on left: 27, on right: 13
 instruccion_asignacion (78)
-    on left: 27 28 29, on right: 14
-instruccion_repita_desde (79)
-    on left: 30, on right: 15
-instruccion_para_cada (80)
-    on left: 31, on right: 16
-instruccion_llamada_a_funcion (81)
-    on left: 32, on right: 17
-instruccion_retornar (82)
-    on left: 33, on right: 18
-relacionales (83)
-    on left: 34 35 36 37 38 39 40, on right: 19 20 21 24 25 26 27 28
-    30 31 33 34 35 36 37 38 39 52 67 68 71 73 75 76
-expresiones (84)
-    on left: 41 42 43 44 45, on right: 34 35 36 37 38 39 40 41 42 43
-    44
-factores (85)
-    on left: 46 47 48 49 50 51, on right: 41 42 43 44 45 46 47 48 49
-    50
-terminales (86)
-    on left: 52 53 54 55, on right: 46 47 48 49 50 51
-id_variable (87)
-    on left: 56 57, on right: 54
-id_funcion (88)
-    on left: 58, on right: 56
-id_arreglo (89)
-    on left: 59, on right: 28 57
-literal_booleana (90)
-    on left: 60 61, on right: 62
-literales (91)
-    on left: 62 63 64 65 66, on right: 53
-lista_indices (92)
-    on left: 67 68, on right: 59 67
-lista_indices_declaracion (93)
-    on left: 69 70, on right: 29
-lista_parametros (94)
-    on left: 71 72, on right: 3 32 58
-acumulador_parametros (95)
-    on left: 73 74, on right: 71 73
-lista_casos (96)
-    on left: 75 76, on right: 22 23 75
-sino_caso (97)
-    on left: 77 78, on right: 22 23
+    on left: 28 29 30, on right: 14
+instruccion_auto_asignacion (79)
+    on left: 31 32 33 34 35 36, on right: 15
+instruccion_repita_desde (80)
+    on left: 37, on right: 16
+instruccion_para_cada (81)
+    on left: 38, on right: 17
+instruccion_llamada_a_funcion (82)
+    on left: 39, on right: 18
+instruccion_retornar (83)
+    on left: 40, on right: 19
+relacionales (84)
+    on left: 41 42 43 44 45 46 47, on right: 20 21 22 25 26 27 28 29
+    31 32 33 34 35 36 37 38 40 41 42 43 44 45 46 59 74 75 78 80 82
+    83
+expresiones (85)
+    on left: 48 49 50 51 52, on right: 41 42 43 44 45 46 47 48 49 50
+    51
+factores (86)
+    on left: 53 54 55 56 57 58, on right: 48 49 50 51 52 53 54 55 56
+    57
+terminales (87)
+    on left: 59 60 61 62, on right: 53 54 55 56 57 58
+id_variable (88)
+    on left: 63 64, on right: 61
+id_funcion (89)
+    on left: 65, on right: 63
+id_arreglo (90)
+    on left: 66, on right: 29 64
+literal_booleana (91)
+    on left: 67 68, on right: 69
+literales (92)
+    on left: 69 70 71 72 73, on right: 60
+lista_indices (93)
+    on left: 74 75, on right: 66 74
+lista_indices_declaracion (94)
+    on left: 76 77, on right: 30
+lista_parametros (95)
+    on left: 78 79, on right: 3 39 65
+acumulador_parametros (96)
+    on left: 80 81, on right: 78 80
+lista_casos (97)
+    on left: 82 83, on right: 23 24 82
+sino_caso (98)
+    on left: 84 85, on right: 23 24
 
 
 state 0
@@ -354,138 +364,151 @@ state 7
     instruccion_para               go to state 23
     instruccion_repetir            go to state 24
     instruccion_asignacion         go to state 25
-    instruccion_repita_desde       go to state 26
-    instruccion_para_cada          go to state 27
-    instruccion_llamada_a_funcion  go to state 28
-    instruccion_retornar           go to state 29
-    id_arreglo                     go to state 30
+    instruccion_auto_asignacion    go to state 26
+    instruccion_repita_desde       go to state 27
+    instruccion_para_cada          go to state 28
+    instruccion_llamada_a_funcion  go to state 29
+    instruccion_retornar           go to state 30
+    id_arreglo                     go to state 31
 
 
 state 8
 
     5 declaracion_sensores_motores: T_UTILIZAR T_IDENTIFICADOR T_COMO . T_IDENTIFICADOR T_EN T_IDENTIFICADOR declaracion_sensores_motores
 
-    T_IDENTIFICADOR  shift, and go to state 31
+    T_IDENTIFICADOR  shift, and go to state 32
 
 
 state 9
 
     3 declaracion_funciones: T_FUNCION $@1 . T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO instrucciones T_FIN T_FUNCION declaracion_funciones
 
-    T_IDENTIFICADOR  shift, and go to state 32
+    T_IDENTIFICADOR  shift, and go to state 33
 
 
 state 10
 
-   27 instruccion_asignacion: T_IDENTIFICADOR . T_SIMBOLO_IGUAL relacionales
-   29                       | T_IDENTIFICADOR . T_SIMBOLO_IGUAL lista_indices_declaracion
-   32 instruccion_llamada_a_funcion: T_IDENTIFICADOR . T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO
-   59 id_arreglo: T_IDENTIFICADOR . lista_indices
+   28 instruccion_asignacion: T_IDENTIFICADOR . T_SIMBOLO_IGUAL relacionales
+   30                       | T_IDENTIFICADOR . T_SIMBOLO_IGUAL lista_indices_declaracion
+   31 instruccion_auto_asignacion: T_IDENTIFICADOR . T_SUMA T_SIMBOLO_IGUAL relacionales
+   32                            | T_IDENTIFICADOR . T_DIVISION T_SIMBOLO_IGUAL relacionales
+   33                            | T_IDENTIFICADOR . T_SIMBOLO_MODULO T_SIMBOLO_IGUAL relacionales
+   34                            | T_IDENTIFICADOR . T_MULTIPLICACION T_SIMBOLO_IGUAL relacionales
+   35                            | T_IDENTIFICADOR . T_RESTA T_SIMBOLO_IGUAL relacionales
+   36                            | T_IDENTIFICADOR . T_EXPONENCIACION T_SIMBOLO_IGUAL relacionales
+   39 instruccion_llamada_a_funcion: T_IDENTIFICADOR . T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO
+   66 id_arreglo: T_IDENTIFICADOR . lista_indices
 
-    T_SIMBOLO_IGUAL         shift, and go to state 33
-    T_CORCHETE_IZQUIERDO    shift, and go to state 34
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 35
+    T_SIMBOLO_IGUAL         shift, and go to state 34
+    T_SUMA                  shift, and go to state 35
+    T_RESTA                 shift, and go to state 36
+    T_MULTIPLICACION        shift, and go to state 37
+    T_DIVISION              shift, and go to state 38
+    T_SIMBOLO_MODULO        shift, and go to state 39
+    T_EXPONENCIACION        shift, and go to state 40
+    T_CORCHETE_IZQUIERDO    shift, and go to state 41
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 42
 
-    lista_indices  go to state 36
+    lista_indices  go to state 43
 
 
 state 11
 
-   20 instruccion_si: T_SI . relacionales T_ENTONCES instrucciones T_FIN T_SI
-   21               | T_SI . relacionales T_ENTONCES instrucciones T_SINO instrucciones T_FIN T_SI
+   21 instruccion_si: T_SI . relacionales T_ENTONCES instrucciones T_FIN T_SI
+   22               | T_SI . relacionales T_ENTONCES instrucciones T_SINO instrucciones T_FIN T_SI
 
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
 
-    relacionales      go to state 45
-    expresiones       go to state 46
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
+    relacionales      go to state 52
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
 
 
 state 12
 
-   22 instruccion_caso: T_CASO . T_IDENTIFICADOR lista_casos sino_caso T_FIN T_CASO
-   23                 | T_CASO . lista_casos sino_caso T_FIN T_CASO
+   23 instruccion_caso: T_CASO . T_IDENTIFICADOR lista_casos sino_caso T_FIN T_CASO
+   24                 | T_CASO . lista_casos sino_caso T_FIN T_CASO
 
-    T_IDENTIFICADOR  shift, and go to state 54
-    T_DOS_PUNTOS     shift, and go to state 55
+    T_IDENTIFICADOR  shift, and go to state 61
+    T_DOS_PUNTOS     shift, and go to state 62
 
-    lista_casos  go to state 56
+    lista_casos  go to state 63
 
 
 state 13
 
-   24 instruccion_mientras: T_MIENTRAS . relacionales T_EJECUTE instrucciones T_FIN T_MIENTRAS
+   25 instruccion_mientras: T_MIENTRAS . relacionales T_EJECUTE instrucciones T_FIN T_MIENTRAS
 
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
 
-    relacionales      go to state 57
-    expresiones       go to state 46
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
+    relacionales      go to state 64
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
 
 
 state 14
 
-   26 instruccion_repetir: T_REPETIR . relacionales T_VECES instrucciones T_FIN T_REPETIR
+   27 instruccion_repetir: T_REPETIR . relacionales T_VECES instrucciones T_FIN T_REPETIR
 
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
 
-    relacionales      go to state 58
-    expresiones       go to state 46
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
+    relacionales      go to state 65
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
 
 
 state 15
 
-   25 instruccion_para: T_PARA . T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_PARA
-   31 instruccion_para_cada: T_PARA . T_CADA relacionales T_EN relacionales T_EJECUTE instrucciones T_FIN T_PARA T_CADA
+   26 instruccion_para: T_PARA . T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_PARA
+   38 instruccion_para_cada: T_PARA . T_CADA relacionales T_EN relacionales T_EJECUTE instrucciones T_FIN T_PARA T_CADA
 
-    T_IDENTIFICADOR  shift, and go to state 59
-    T_CADA           shift, and go to state 60
+    T_IDENTIFICADOR  shift, and go to state 66
+    T_CADA           shift, and go to state 67
 
 
 state 16
 
-   19 instruccion: T_REPITA . instruccion T_MIENTRAS relacionales T_FIN T_REPITA
-   30 instruccion_repita_desde: T_REPITA . T_DESDE relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_REPITA
+   20 instruccion: T_REPITA . instruccion T_MIENTRAS relacionales T_FIN T_REPITA
+   37 instruccion_repita_desde: T_REPITA . T_DESDE relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_REPITA
 
     T_IDENTIFICADOR  shift, and go to state 10
     T_SI             shift, and go to state 11
@@ -493,46 +516,47 @@ state 16
     T_MIENTRAS       shift, and go to state 13
     T_REPETIR        shift, and go to state 14
     T_PARA           shift, and go to state 15
-    T_DESDE          shift, and go to state 61
+    T_DESDE          shift, and go to state 68
     T_REPITA         shift, and go to state 16
     T_RETORNAR       shift, and go to state 17
 
-    instruccion                    go to state 62
+    instruccion                    go to state 69
     instruccion_si                 go to state 20
     instruccion_caso               go to state 21
     instruccion_mientras           go to state 22
     instruccion_para               go to state 23
     instruccion_repetir            go to state 24
     instruccion_asignacion         go to state 25
-    instruccion_repita_desde       go to state 26
-    instruccion_para_cada          go to state 27
-    instruccion_llamada_a_funcion  go to state 28
-    instruccion_retornar           go to state 29
-    id_arreglo                     go to state 30
+    instruccion_auto_asignacion    go to state 26
+    instruccion_repita_desde       go to state 27
+    instruccion_para_cada          go to state 28
+    instruccion_llamada_a_funcion  go to state 29
+    instruccion_retornar           go to state 30
+    id_arreglo                     go to state 31
 
 
 state 17
 
-   33 instruccion_retornar: T_RETORNAR . relacionales
+   40 instruccion_retornar: T_RETORNAR . relacionales
 
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
 
-    relacionales      go to state 63
-    expresiones       go to state 46
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
+    relacionales      go to state 70
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
 
 
 state 18
@@ -557,7 +581,7 @@ state 19
 
     $default  reduce using rule 8 (instrucciones)
 
-    instrucciones                  go to state 64
+    instrucciones                  go to state 71
     instruccion                    go to state 19
     instruccion_si                 go to state 20
     instruccion_caso               go to state 21
@@ -565,11 +589,12 @@ state 19
     instruccion_para               go to state 23
     instruccion_repetir            go to state 24
     instruccion_asignacion         go to state 25
-    instruccion_repita_desde       go to state 26
-    instruccion_para_cada          go to state 27
-    instruccion_llamada_a_funcion  go to state 28
-    instruccion_retornar           go to state 29
-    id_arreglo                     go to state 30
+    instruccion_auto_asignacion    go to state 26
+    instruccion_repita_desde       go to state 27
+    instruccion_para_cada          go to state 28
+    instruccion_llamada_a_funcion  go to state 29
+    instruccion_retornar           go to state 30
+    id_arreglo                     go to state 31
 
 
 state 20
@@ -616,1273 +641,1470 @@ state 25
 
 state 26
 
-   15 instruccion: instruccion_repita_desde .
+   15 instruccion: instruccion_auto_asignacion .
 
     $default  reduce using rule 15 (instruccion)
 
 
 state 27
 
-   16 instruccion: instruccion_para_cada .
+   16 instruccion: instruccion_repita_desde .
 
     $default  reduce using rule 16 (instruccion)
 
 
 state 28
 
-   17 instruccion: instruccion_llamada_a_funcion .
+   17 instruccion: instruccion_para_cada .
 
     $default  reduce using rule 17 (instruccion)
 
 
 state 29
 
-   18 instruccion: instruccion_retornar .
+   18 instruccion: instruccion_llamada_a_funcion .
 
     $default  reduce using rule 18 (instruccion)
 
 
 state 30
 
-   28 instruccion_asignacion: id_arreglo . T_SIMBOLO_IGUAL relacionales
+   19 instruccion: instruccion_retornar .
 
-    T_SIMBOLO_IGUAL  shift, and go to state 65
+    $default  reduce using rule 19 (instruccion)
 
 
 state 31
 
-    5 declaracion_sensores_motores: T_UTILIZAR T_IDENTIFICADOR T_COMO T_IDENTIFICADOR . T_EN T_IDENTIFICADOR declaracion_sensores_motores
+   29 instruccion_asignacion: id_arreglo . T_SIMBOLO_IGUAL relacionales
 
-    T_EN  shift, and go to state 66
+    T_SIMBOLO_IGUAL  shift, and go to state 72
 
 
 state 32
 
-    3 declaracion_funciones: T_FUNCION $@1 T_IDENTIFICADOR . T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO instrucciones T_FIN T_FUNCION declaracion_funciones
+    5 declaracion_sensores_motores: T_UTILIZAR T_IDENTIFICADOR T_COMO T_IDENTIFICADOR . T_EN T_IDENTIFICADOR declaracion_sensores_motores
 
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 67
+    T_EN  shift, and go to state 73
 
 
 state 33
 
-   27 instruccion_asignacion: T_IDENTIFICADOR T_SIMBOLO_IGUAL . relacionales
-   29                       | T_IDENTIFICADOR T_SIMBOLO_IGUAL . lista_indices_declaracion
+    3 declaracion_funciones: T_FUNCION $@1 T_IDENTIFICADOR . T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO instrucciones T_FIN T_FUNCION declaracion_funciones
 
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_CORCHETE_IZQUIERDO    shift, and go to state 68
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    relacionales               go to state 69
-    expresiones                go to state 46
-    factores                   go to state 47
-    terminales                 go to state 48
-    id_variable                go to state 49
-    id_funcion                 go to state 50
-    id_arreglo                 go to state 51
-    literal_booleana           go to state 52
-    literales                  go to state 53
-    lista_indices_declaracion  go to state 70
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 74
 
 
 state 34
 
-   67 lista_indices: T_CORCHETE_IZQUIERDO . relacionales T_CORCHETE_DERECHO lista_indices
-   68              | T_CORCHETE_IZQUIERDO . relacionales T_CORCHETE_DERECHO
+   28 instruccion_asignacion: T_IDENTIFICADOR T_SIMBOLO_IGUAL . relacionales
+   30                       | T_IDENTIFICADOR T_SIMBOLO_IGUAL . lista_indices_declaracion
 
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_CORCHETE_IZQUIERDO    shift, and go to state 75
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
 
-    relacionales      go to state 71
-    expresiones       go to state 46
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
+    relacionales               go to state 76
+    expresiones                go to state 53
+    factores                   go to state 54
+    terminales                 go to state 55
+    id_variable                go to state 56
+    id_funcion                 go to state 57
+    id_arreglo                 go to state 58
+    literal_booleana           go to state 59
+    literales                  go to state 60
+    lista_indices_declaracion  go to state 77
 
 
 state 35
 
-   32 instruccion_llamada_a_funcion: T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO . lista_parametros T_PARENTESIS_DERECHO
+   31 instruccion_auto_asignacion: T_IDENTIFICADOR T_SUMA . T_SIMBOLO_IGUAL relacionales
 
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    $default  reduce using rule 72 (lista_parametros)
-
-    relacionales      go to state 72
-    expresiones       go to state 46
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
-    lista_parametros  go to state 73
+    T_SIMBOLO_IGUAL  shift, and go to state 78
 
 
 state 36
 
-   59 id_arreglo: T_IDENTIFICADOR lista_indices .
+   35 instruccion_auto_asignacion: T_IDENTIFICADOR T_RESTA . T_SIMBOLO_IGUAL relacionales
 
-    $default  reduce using rule 59 (id_arreglo)
+    T_SIMBOLO_IGUAL  shift, and go to state 79
 
 
 state 37
 
-   55 terminales: T_IDENTIFICADOR .
-   58 id_funcion: T_IDENTIFICADOR . T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO
-   59 id_arreglo: T_IDENTIFICADOR . lista_indices
+   34 instruccion_auto_asignacion: T_IDENTIFICADOR T_MULTIPLICACION . T_SIMBOLO_IGUAL relacionales
 
-    T_CORCHETE_IZQUIERDO    shift, and go to state 34
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 74
-
-    $default  reduce using rule 55 (terminales)
-
-    lista_indices  go to state 36
+    T_SIMBOLO_IGUAL  shift, and go to state 80
 
 
 state 38
 
-   52 terminales: T_PARENTESIS_IZQUIERDO . relacionales T_PARENTESIS_DERECHO
+   32 instruccion_auto_asignacion: T_IDENTIFICADOR T_DIVISION . T_SIMBOLO_IGUAL relacionales
 
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    relacionales      go to state 75
-    expresiones       go to state 46
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
+    T_SIMBOLO_IGUAL  shift, and go to state 81
 
 
 state 39
 
-   64 literales: T_LITERAL_CARACTER .
+   33 instruccion_auto_asignacion: T_IDENTIFICADOR T_SIMBOLO_MODULO . T_SIMBOLO_IGUAL relacionales
 
-    $default  reduce using rule 64 (literales)
+    T_SIMBOLO_IGUAL  shift, and go to state 82
 
 
 state 40
 
-   65 literales: T_LITERAL_FLOTANTE .
+   36 instruccion_auto_asignacion: T_IDENTIFICADOR T_EXPONENCIACION . T_SIMBOLO_IGUAL relacionales
 
-    $default  reduce using rule 65 (literales)
+    T_SIMBOLO_IGUAL  shift, and go to state 83
 
 
 state 41
 
-   66 literales: T_LITERAL_CADENA .
+   74 lista_indices: T_CORCHETE_IZQUIERDO . relacionales T_CORCHETE_DERECHO lista_indices
+   75              | T_CORCHETE_IZQUIERDO . relacionales T_CORCHETE_DERECHO
 
-    $default  reduce using rule 66 (literales)
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    relacionales      go to state 84
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
 
 
 state 42
 
-   63 literales: T_LITERAL_NUMERICA .
+   39 instruccion_llamada_a_funcion: T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO . lista_parametros T_PARENTESIS_DERECHO
 
-    $default  reduce using rule 63 (literales)
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    $default  reduce using rule 79 (lista_parametros)
+
+    relacionales      go to state 85
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+    lista_parametros  go to state 86
 
 
 state 43
 
-   60 literal_booleana: T_VERDADERO .
+   66 id_arreglo: T_IDENTIFICADOR lista_indices .
 
-    $default  reduce using rule 60 (literal_booleana)
+    $default  reduce using rule 66 (id_arreglo)
 
 
 state 44
 
-   61 literal_booleana: T_FALSO .
+   62 terminales: T_IDENTIFICADOR .
+   65 id_funcion: T_IDENTIFICADOR . T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO
+   66 id_arreglo: T_IDENTIFICADOR . lista_indices
 
-    $default  reduce using rule 61 (literal_booleana)
+    T_CORCHETE_IZQUIERDO    shift, and go to state 41
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 87
+
+    $default  reduce using rule 62 (terminales)
+
+    lista_indices  go to state 43
 
 
 state 45
 
-   20 instruccion_si: T_SI relacionales . T_ENTONCES instrucciones T_FIN T_SI
-   21               | T_SI relacionales . T_ENTONCES instrucciones T_SINO instrucciones T_FIN T_SI
-   34 relacionales: relacionales . T_MENOR expresiones
-   35             | relacionales . T_MAYOR expresiones
-   36             | relacionales . T_MAYOR_IGUAL expresiones
-   37             | relacionales . T_MENOR_IGUAL expresiones
-   38             | relacionales . T_IGUALDAD expresiones
-   39             | relacionales . T_DESIGUALDAD expresiones
+   59 terminales: T_PARENTESIS_IZQUIERDO . relacionales T_PARENTESIS_DERECHO
 
-    T_MAYOR_IGUAL  shift, and go to state 76
-    T_MENOR_IGUAL  shift, and go to state 77
-    T_MENOR        shift, and go to state 78
-    T_MAYOR        shift, and go to state 79
-    T_IGUALDAD     shift, and go to state 80
-    T_DESIGUALDAD  shift, and go to state 81
-    T_ENTONCES     shift, and go to state 82
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    relacionales      go to state 88
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
 
 
 state 46
 
-   40 relacionales: expresiones .
-   41 expresiones: expresiones . T_SUMA factores
-   42            | expresiones . T_RESTA factores
-   43            | expresiones . T_OPERADOR_O factores
-   44            | expresiones . T_SIMBOLO_OPERADOR_O factores
+   71 literales: T_LITERAL_CARACTER .
 
-    T_SUMA                shift, and go to state 83
-    T_RESTA               shift, and go to state 84
-    T_SIMBOLO_OPERADOR_O  shift, and go to state 85
-    T_OPERADOR_O          shift, and go to state 86
-
-    $default  reduce using rule 40 (relacionales)
+    $default  reduce using rule 71 (literales)
 
 
 state 47
 
-   45 expresiones: factores .
-   46 factores: factores . T_MULTIPLICACION terminales
-   47         | factores . T_DIVISION terminales
-   48         | factores . T_OPERADOR_Y terminales
-   49         | factores . T_SIMBOLO_OPERADOR_Y terminales
-   50         | factores . T_SIMBOLO_MODULO terminales
+   72 literales: T_LITERAL_FLOTANTE .
 
-    T_MULTIPLICACION      shift, and go to state 87
-    T_DIVISION            shift, and go to state 88
-    T_SIMBOLO_MODULO      shift, and go to state 89
-    T_SIMBOLO_OPERADOR_Y  shift, and go to state 90
-    T_OPERADOR_Y          shift, and go to state 91
-
-    $default  reduce using rule 45 (expresiones)
+    $default  reduce using rule 72 (literales)
 
 
 state 48
 
-   51 factores: terminales .
+   73 literales: T_LITERAL_CADENA .
 
-    $default  reduce using rule 51 (factores)
+    $default  reduce using rule 73 (literales)
 
 
 state 49
 
-   54 terminales: id_variable .
+   70 literales: T_LITERAL_NUMERICA .
 
-    $default  reduce using rule 54 (terminales)
+    $default  reduce using rule 70 (literales)
 
 
 state 50
 
-   56 id_variable: id_funcion .
+   67 literal_booleana: T_VERDADERO .
 
-    $default  reduce using rule 56 (id_variable)
+    $default  reduce using rule 67 (literal_booleana)
 
 
 state 51
 
-   57 id_variable: id_arreglo .
+   68 literal_booleana: T_FALSO .
 
-    $default  reduce using rule 57 (id_variable)
+    $default  reduce using rule 68 (literal_booleana)
 
 
 state 52
 
-   62 literales: literal_booleana .
+   21 instruccion_si: T_SI relacionales . T_ENTONCES instrucciones T_FIN T_SI
+   22               | T_SI relacionales . T_ENTONCES instrucciones T_SINO instrucciones T_FIN T_SI
+   41 relacionales: relacionales . T_MENOR expresiones
+   42             | relacionales . T_MAYOR expresiones
+   43             | relacionales . T_MAYOR_IGUAL expresiones
+   44             | relacionales . T_MENOR_IGUAL expresiones
+   45             | relacionales . T_IGUALDAD expresiones
+   46             | relacionales . T_DESIGUALDAD expresiones
 
-    $default  reduce using rule 62 (literales)
+    T_MAYOR_IGUAL  shift, and go to state 89
+    T_MENOR_IGUAL  shift, and go to state 90
+    T_MENOR        shift, and go to state 91
+    T_MAYOR        shift, and go to state 92
+    T_IGUALDAD     shift, and go to state 93
+    T_DESIGUALDAD  shift, and go to state 94
+    T_ENTONCES     shift, and go to state 95
 
 
 state 53
 
-   53 terminales: literales .
+   47 relacionales: expresiones .
+   48 expresiones: expresiones . T_SUMA factores
+   49            | expresiones . T_RESTA factores
+   50            | expresiones . T_OPERADOR_O factores
+   51            | expresiones . T_SIMBOLO_OPERADOR_O factores
 
-    $default  reduce using rule 53 (terminales)
+    T_SUMA                shift, and go to state 96
+    T_RESTA               shift, and go to state 97
+    T_SIMBOLO_OPERADOR_O  shift, and go to state 98
+    T_OPERADOR_O          shift, and go to state 99
+
+    $default  reduce using rule 47 (relacionales)
 
 
 state 54
 
-   22 instruccion_caso: T_CASO T_IDENTIFICADOR . lista_casos sino_caso T_FIN T_CASO
+   52 expresiones: factores .
+   53 factores: factores . T_MULTIPLICACION terminales
+   54         | factores . T_DIVISION terminales
+   55         | factores . T_OPERADOR_Y terminales
+   56         | factores . T_SIMBOLO_OPERADOR_Y terminales
+   57         | factores . T_SIMBOLO_MODULO terminales
 
-    T_DOS_PUNTOS  shift, and go to state 55
+    T_MULTIPLICACION      shift, and go to state 100
+    T_DIVISION            shift, and go to state 101
+    T_SIMBOLO_MODULO      shift, and go to state 102
+    T_SIMBOLO_OPERADOR_Y  shift, and go to state 103
+    T_OPERADOR_Y          shift, and go to state 104
 
-    lista_casos  go to state 92
+    $default  reduce using rule 52 (expresiones)
 
 
 state 55
 
-   75 lista_casos: T_DOS_PUNTOS . relacionales T_DOS_PUNTOS instrucciones lista_casos
-   76            | T_DOS_PUNTOS . relacionales T_DOS_PUNTOS instrucciones
+   58 factores: terminales .
 
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    relacionales      go to state 93
-    expresiones       go to state 46
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
+    $default  reduce using rule 58 (factores)
 
 
 state 56
 
-   23 instruccion_caso: T_CASO lista_casos . sino_caso T_FIN T_CASO
+   61 terminales: id_variable .
 
-    T_SINO  shift, and go to state 94
-
-    $default  reduce using rule 78 (sino_caso)
-
-    sino_caso  go to state 95
+    $default  reduce using rule 61 (terminales)
 
 
 state 57
 
-   24 instruccion_mientras: T_MIENTRAS relacionales . T_EJECUTE instrucciones T_FIN T_MIENTRAS
-   34 relacionales: relacionales . T_MENOR expresiones
-   35             | relacionales . T_MAYOR expresiones
-   36             | relacionales . T_MAYOR_IGUAL expresiones
-   37             | relacionales . T_MENOR_IGUAL expresiones
-   38             | relacionales . T_IGUALDAD expresiones
-   39             | relacionales . T_DESIGUALDAD expresiones
+   63 id_variable: id_funcion .
 
-    T_MAYOR_IGUAL  shift, and go to state 76
-    T_MENOR_IGUAL  shift, and go to state 77
-    T_MENOR        shift, and go to state 78
-    T_MAYOR        shift, and go to state 79
-    T_IGUALDAD     shift, and go to state 80
-    T_DESIGUALDAD  shift, and go to state 81
-    T_EJECUTE      shift, and go to state 96
+    $default  reduce using rule 63 (id_variable)
 
 
 state 58
 
-   26 instruccion_repetir: T_REPETIR relacionales . T_VECES instrucciones T_FIN T_REPETIR
-   34 relacionales: relacionales . T_MENOR expresiones
-   35             | relacionales . T_MAYOR expresiones
-   36             | relacionales . T_MAYOR_IGUAL expresiones
-   37             | relacionales . T_MENOR_IGUAL expresiones
-   38             | relacionales . T_IGUALDAD expresiones
-   39             | relacionales . T_DESIGUALDAD expresiones
+   64 id_variable: id_arreglo .
 
-    T_MAYOR_IGUAL  shift, and go to state 76
-    T_MENOR_IGUAL  shift, and go to state 77
-    T_MENOR        shift, and go to state 78
-    T_MAYOR        shift, and go to state 79
-    T_IGUALDAD     shift, and go to state 80
-    T_DESIGUALDAD  shift, and go to state 81
-    T_VECES        shift, and go to state 97
+    $default  reduce using rule 64 (id_variable)
 
 
 state 59
 
-   25 instruccion_para: T_PARA T_IDENTIFICADOR . T_SIMBOLO_IGUAL relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_PARA
+   69 literales: literal_booleana .
 
-    T_SIMBOLO_IGUAL  shift, and go to state 98
+    $default  reduce using rule 69 (literales)
 
 
 state 60
 
-   31 instruccion_para_cada: T_PARA T_CADA . relacionales T_EN relacionales T_EJECUTE instrucciones T_FIN T_PARA T_CADA
+   60 terminales: literales .
 
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    relacionales      go to state 99
-    expresiones       go to state 46
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
+    $default  reduce using rule 60 (terminales)
 
 
 state 61
 
-   30 instruccion_repita_desde: T_REPITA T_DESDE . relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_REPITA
+   23 instruccion_caso: T_CASO T_IDENTIFICADOR . lista_casos sino_caso T_FIN T_CASO
 
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
+    T_DOS_PUNTOS  shift, and go to state 62
 
-    relacionales      go to state 100
-    expresiones       go to state 46
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
+    lista_casos  go to state 105
 
 
 state 62
 
-   19 instruccion: T_REPITA instruccion . T_MIENTRAS relacionales T_FIN T_REPITA
+   82 lista_casos: T_DOS_PUNTOS . relacionales T_DOS_PUNTOS instrucciones lista_casos
+   83            | T_DOS_PUNTOS . relacionales T_DOS_PUNTOS instrucciones
 
-    T_MIENTRAS  shift, and go to state 101
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    relacionales      go to state 106
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
 
 
 state 63
 
-   33 instruccion_retornar: T_RETORNAR relacionales .
-   34 relacionales: relacionales . T_MENOR expresiones
-   35             | relacionales . T_MAYOR expresiones
-   36             | relacionales . T_MAYOR_IGUAL expresiones
-   37             | relacionales . T_MENOR_IGUAL expresiones
-   38             | relacionales . T_IGUALDAD expresiones
-   39             | relacionales . T_DESIGUALDAD expresiones
+   24 instruccion_caso: T_CASO lista_casos . sino_caso T_FIN T_CASO
 
-    T_MAYOR_IGUAL  shift, and go to state 76
-    T_MENOR_IGUAL  shift, and go to state 77
-    T_MENOR        shift, and go to state 78
-    T_MAYOR        shift, and go to state 79
-    T_IGUALDAD     shift, and go to state 80
-    T_DESIGUALDAD  shift, and go to state 81
+    T_SINO  shift, and go to state 107
 
-    $default  reduce using rule 33 (instruccion_retornar)
+    $default  reduce using rule 85 (sino_caso)
+
+    sino_caso  go to state 108
 
 
 state 64
+
+   25 instruccion_mientras: T_MIENTRAS relacionales . T_EJECUTE instrucciones T_FIN T_MIENTRAS
+   41 relacionales: relacionales . T_MENOR expresiones
+   42             | relacionales . T_MAYOR expresiones
+   43             | relacionales . T_MAYOR_IGUAL expresiones
+   44             | relacionales . T_MENOR_IGUAL expresiones
+   45             | relacionales . T_IGUALDAD expresiones
+   46             | relacionales . T_DESIGUALDAD expresiones
+
+    T_MAYOR_IGUAL  shift, and go to state 89
+    T_MENOR_IGUAL  shift, and go to state 90
+    T_MENOR        shift, and go to state 91
+    T_MAYOR        shift, and go to state 92
+    T_IGUALDAD     shift, and go to state 93
+    T_DESIGUALDAD  shift, and go to state 94
+    T_EJECUTE      shift, and go to state 109
+
+
+state 65
+
+   27 instruccion_repetir: T_REPETIR relacionales . T_VECES instrucciones T_FIN T_REPETIR
+   41 relacionales: relacionales . T_MENOR expresiones
+   42             | relacionales . T_MAYOR expresiones
+   43             | relacionales . T_MAYOR_IGUAL expresiones
+   44             | relacionales . T_MENOR_IGUAL expresiones
+   45             | relacionales . T_IGUALDAD expresiones
+   46             | relacionales . T_DESIGUALDAD expresiones
+
+    T_MAYOR_IGUAL  shift, and go to state 89
+    T_MENOR_IGUAL  shift, and go to state 90
+    T_MENOR        shift, and go to state 91
+    T_MAYOR        shift, and go to state 92
+    T_IGUALDAD     shift, and go to state 93
+    T_DESIGUALDAD  shift, and go to state 94
+    T_VECES        shift, and go to state 110
+
+
+state 66
+
+   26 instruccion_para: T_PARA T_IDENTIFICADOR . T_SIMBOLO_IGUAL relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_PARA
+
+    T_SIMBOLO_IGUAL  shift, and go to state 111
+
+
+state 67
+
+   38 instruccion_para_cada: T_PARA T_CADA . relacionales T_EN relacionales T_EJECUTE instrucciones T_FIN T_PARA T_CADA
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    relacionales      go to state 112
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 68
+
+   37 instruccion_repita_desde: T_REPITA T_DESDE . relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_REPITA
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    relacionales      go to state 113
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 69
+
+   20 instruccion: T_REPITA instruccion . T_MIENTRAS relacionales T_FIN T_REPITA
+
+    T_MIENTRAS  shift, and go to state 114
+
+
+state 70
+
+   40 instruccion_retornar: T_RETORNAR relacionales .
+   41 relacionales: relacionales . T_MENOR expresiones
+   42             | relacionales . T_MAYOR expresiones
+   43             | relacionales . T_MAYOR_IGUAL expresiones
+   44             | relacionales . T_MENOR_IGUAL expresiones
+   45             | relacionales . T_IGUALDAD expresiones
+   46             | relacionales . T_DESIGUALDAD expresiones
+
+    T_MAYOR_IGUAL  shift, and go to state 89
+    T_MENOR_IGUAL  shift, and go to state 90
+    T_MENOR        shift, and go to state 91
+    T_MAYOR        shift, and go to state 92
+    T_IGUALDAD     shift, and go to state 93
+    T_DESIGUALDAD  shift, and go to state 94
+
+    $default  reduce using rule 40 (instruccion_retornar)
+
+
+state 71
 
     7 instrucciones: instruccion instrucciones .
 
     $default  reduce using rule 7 (instrucciones)
 
 
-state 65
-
-   28 instruccion_asignacion: id_arreglo T_SIMBOLO_IGUAL . relacionales
-
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    relacionales      go to state 102
-    expresiones       go to state 46
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
-
-
-state 66
-
-    5 declaracion_sensores_motores: T_UTILIZAR T_IDENTIFICADOR T_COMO T_IDENTIFICADOR T_EN . T_IDENTIFICADOR declaracion_sensores_motores
-
-    T_IDENTIFICADOR  shift, and go to state 103
-
-
-state 67
-
-    3 declaracion_funciones: T_FUNCION $@1 T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO . lista_parametros T_PARENTESIS_DERECHO instrucciones T_FIN T_FUNCION declaracion_funciones
-
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    $default  reduce using rule 72 (lista_parametros)
-
-    relacionales      go to state 72
-    expresiones       go to state 46
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
-    lista_parametros  go to state 104
-
-
-state 68
-
-   69 lista_indices_declaracion: T_CORCHETE_IZQUIERDO . T_CORCHETE_DERECHO
-   70                          | T_CORCHETE_IZQUIERDO . T_CORCHETE_DERECHO T_CORCHETE_IZQUIERDO T_CORCHETE_DERECHO
-
-    T_CORCHETE_DERECHO  shift, and go to state 105
-
-
-state 69
-
-   27 instruccion_asignacion: T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales .
-   34 relacionales: relacionales . T_MENOR expresiones
-   35             | relacionales . T_MAYOR expresiones
-   36             | relacionales . T_MAYOR_IGUAL expresiones
-   37             | relacionales . T_MENOR_IGUAL expresiones
-   38             | relacionales . T_IGUALDAD expresiones
-   39             | relacionales . T_DESIGUALDAD expresiones
-
-    T_MAYOR_IGUAL  shift, and go to state 76
-    T_MENOR_IGUAL  shift, and go to state 77
-    T_MENOR        shift, and go to state 78
-    T_MAYOR        shift, and go to state 79
-    T_IGUALDAD     shift, and go to state 80
-    T_DESIGUALDAD  shift, and go to state 81
-
-    $default  reduce using rule 27 (instruccion_asignacion)
-
-
-state 70
-
-   29 instruccion_asignacion: T_IDENTIFICADOR T_SIMBOLO_IGUAL lista_indices_declaracion .
-
-    $default  reduce using rule 29 (instruccion_asignacion)
-
-
-state 71
-
-   34 relacionales: relacionales . T_MENOR expresiones
-   35             | relacionales . T_MAYOR expresiones
-   36             | relacionales . T_MAYOR_IGUAL expresiones
-   37             | relacionales . T_MENOR_IGUAL expresiones
-   38             | relacionales . T_IGUALDAD expresiones
-   39             | relacionales . T_DESIGUALDAD expresiones
-   67 lista_indices: T_CORCHETE_IZQUIERDO relacionales . T_CORCHETE_DERECHO lista_indices
-   68              | T_CORCHETE_IZQUIERDO relacionales . T_CORCHETE_DERECHO
-
-    T_MAYOR_IGUAL       shift, and go to state 76
-    T_MENOR_IGUAL       shift, and go to state 77
-    T_MENOR             shift, and go to state 78
-    T_MAYOR             shift, and go to state 79
-    T_IGUALDAD          shift, and go to state 80
-    T_CORCHETE_DERECHO  shift, and go to state 106
-    T_DESIGUALDAD       shift, and go to state 81
-
-
 state 72
 
-   34 relacionales: relacionales . T_MENOR expresiones
-   35             | relacionales . T_MAYOR expresiones
-   36             | relacionales . T_MAYOR_IGUAL expresiones
-   37             | relacionales . T_MENOR_IGUAL expresiones
-   38             | relacionales . T_IGUALDAD expresiones
-   39             | relacionales . T_DESIGUALDAD expresiones
-   71 lista_parametros: relacionales . acumulador_parametros
+   29 instruccion_asignacion: id_arreglo T_SIMBOLO_IGUAL . relacionales
 
-    T_MAYOR_IGUAL  shift, and go to state 76
-    T_MENOR_IGUAL  shift, and go to state 77
-    T_MENOR        shift, and go to state 78
-    T_MAYOR        shift, and go to state 79
-    T_IGUALDAD     shift, and go to state 80
-    T_DESIGUALDAD  shift, and go to state 81
-    T_COMA         shift, and go to state 107
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
 
-    $default  reduce using rule 74 (acumulador_parametros)
-
-    acumulador_parametros  go to state 108
+    relacionales      go to state 115
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
 
 
 state 73
 
-   32 instruccion_llamada_a_funcion: T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros . T_PARENTESIS_DERECHO
+    5 declaracion_sensores_motores: T_UTILIZAR T_IDENTIFICADOR T_COMO T_IDENTIFICADOR T_EN . T_IDENTIFICADOR declaracion_sensores_motores
 
-    T_PARENTESIS_DERECHO  shift, and go to state 109
+    T_IDENTIFICADOR  shift, and go to state 116
 
 
 state 74
 
-   58 id_funcion: T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO . lista_parametros T_PARENTESIS_DERECHO
+    3 declaracion_funciones: T_FUNCION $@1 T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO . lista_parametros T_PARENTESIS_DERECHO instrucciones T_FIN T_FUNCION declaracion_funciones
 
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
 
-    $default  reduce using rule 72 (lista_parametros)
+    $default  reduce using rule 79 (lista_parametros)
 
-    relacionales      go to state 72
-    expresiones       go to state 46
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
-    lista_parametros  go to state 110
+    relacionales      go to state 85
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+    lista_parametros  go to state 117
 
 
 state 75
 
-   34 relacionales: relacionales . T_MENOR expresiones
-   35             | relacionales . T_MAYOR expresiones
-   36             | relacionales . T_MAYOR_IGUAL expresiones
-   37             | relacionales . T_MENOR_IGUAL expresiones
-   38             | relacionales . T_IGUALDAD expresiones
-   39             | relacionales . T_DESIGUALDAD expresiones
-   52 terminales: T_PARENTESIS_IZQUIERDO relacionales . T_PARENTESIS_DERECHO
+   76 lista_indices_declaracion: T_CORCHETE_IZQUIERDO . T_CORCHETE_DERECHO
+   77                          | T_CORCHETE_IZQUIERDO . T_CORCHETE_DERECHO T_CORCHETE_IZQUIERDO T_CORCHETE_DERECHO
 
-    T_MAYOR_IGUAL         shift, and go to state 76
-    T_MENOR_IGUAL         shift, and go to state 77
-    T_MENOR               shift, and go to state 78
-    T_MAYOR               shift, and go to state 79
-    T_IGUALDAD            shift, and go to state 80
-    T_PARENTESIS_DERECHO  shift, and go to state 111
-    T_DESIGUALDAD         shift, and go to state 81
+    T_CORCHETE_DERECHO  shift, and go to state 118
 
 
 state 76
 
-   36 relacionales: relacionales T_MAYOR_IGUAL . expresiones
-
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    expresiones       go to state 112
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
-
-
-state 77
-
-   37 relacionales: relacionales T_MENOR_IGUAL . expresiones
-
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    expresiones       go to state 113
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
-
-
-state 78
-
-   34 relacionales: relacionales T_MENOR . expresiones
-
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    expresiones       go to state 114
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
-
-
-state 79
-
-   35 relacionales: relacionales T_MAYOR . expresiones
-
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    expresiones       go to state 115
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
-
-
-state 80
-
-   38 relacionales: relacionales T_IGUALDAD . expresiones
-
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    expresiones       go to state 116
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
-
-
-state 81
-
-   39 relacionales: relacionales T_DESIGUALDAD . expresiones
-
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    expresiones       go to state 117
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
-
-
-state 82
-
-   20 instruccion_si: T_SI relacionales T_ENTONCES . instrucciones T_FIN T_SI
-   21               | T_SI relacionales T_ENTONCES . instrucciones T_SINO instrucciones T_FIN T_SI
-
-    T_IDENTIFICADOR  shift, and go to state 10
-    T_SI             shift, and go to state 11
-    T_CASO           shift, and go to state 12
-    T_MIENTRAS       shift, and go to state 13
-    T_REPETIR        shift, and go to state 14
-    T_PARA           shift, and go to state 15
-    T_REPITA         shift, and go to state 16
-    T_RETORNAR       shift, and go to state 17
-
-    $default  reduce using rule 8 (instrucciones)
-
-    instrucciones                  go to state 118
-    instruccion                    go to state 19
-    instruccion_si                 go to state 20
-    instruccion_caso               go to state 21
-    instruccion_mientras           go to state 22
-    instruccion_para               go to state 23
-    instruccion_repetir            go to state 24
-    instruccion_asignacion         go to state 25
-    instruccion_repita_desde       go to state 26
-    instruccion_para_cada          go to state 27
-    instruccion_llamada_a_funcion  go to state 28
-    instruccion_retornar           go to state 29
-    id_arreglo                     go to state 30
-
-
-state 83
-
-   41 expresiones: expresiones T_SUMA . factores
-
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    factores          go to state 119
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
-
-
-state 84
-
-   42 expresiones: expresiones T_RESTA . factores
-
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    factores          go to state 120
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
-
-
-state 85
-
-   44 expresiones: expresiones T_SIMBOLO_OPERADOR_O . factores
-
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    factores          go to state 121
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
-
-
-state 86
-
-   43 expresiones: expresiones T_OPERADOR_O . factores
-
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    factores          go to state 122
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
-
-
-state 87
-
-   46 factores: factores T_MULTIPLICACION . terminales
-
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    terminales        go to state 123
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
-
-
-state 88
-
-   47 factores: factores T_DIVISION . terminales
-
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    terminales        go to state 124
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
-
-
-state 89
-
-   50 factores: factores T_SIMBOLO_MODULO . terminales
-
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    terminales        go to state 125
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
-
-
-state 90
-
-   49 factores: factores T_SIMBOLO_OPERADOR_Y . terminales
-
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    terminales        go to state 126
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
-
-
-state 91
-
-   48 factores: factores T_OPERADOR_Y . terminales
-
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    terminales        go to state 127
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
-
-
-state 92
-
-   22 instruccion_caso: T_CASO T_IDENTIFICADOR lista_casos . sino_caso T_FIN T_CASO
-
-    T_SINO  shift, and go to state 94
-
-    $default  reduce using rule 78 (sino_caso)
-
-    sino_caso  go to state 128
-
-
-state 93
-
-   34 relacionales: relacionales . T_MENOR expresiones
-   35             | relacionales . T_MAYOR expresiones
-   36             | relacionales . T_MAYOR_IGUAL expresiones
-   37             | relacionales . T_MENOR_IGUAL expresiones
-   38             | relacionales . T_IGUALDAD expresiones
-   39             | relacionales . T_DESIGUALDAD expresiones
-   75 lista_casos: T_DOS_PUNTOS relacionales . T_DOS_PUNTOS instrucciones lista_casos
-   76            | T_DOS_PUNTOS relacionales . T_DOS_PUNTOS instrucciones
-
-    T_MAYOR_IGUAL  shift, and go to state 76
-    T_MENOR_IGUAL  shift, and go to state 77
-    T_MENOR        shift, and go to state 78
-    T_MAYOR        shift, and go to state 79
-    T_IGUALDAD     shift, and go to state 80
-    T_DOS_PUNTOS   shift, and go to state 129
-    T_DESIGUALDAD  shift, and go to state 81
-
-
-state 94
-
-   77 sino_caso: T_SINO . instrucciones
-
-    T_IDENTIFICADOR  shift, and go to state 10
-    T_SI             shift, and go to state 11
-    T_CASO           shift, and go to state 12
-    T_MIENTRAS       shift, and go to state 13
-    T_REPETIR        shift, and go to state 14
-    T_PARA           shift, and go to state 15
-    T_REPITA         shift, and go to state 16
-    T_RETORNAR       shift, and go to state 17
-
-    $default  reduce using rule 8 (instrucciones)
-
-    instrucciones                  go to state 130
-    instruccion                    go to state 19
-    instruccion_si                 go to state 20
-    instruccion_caso               go to state 21
-    instruccion_mientras           go to state 22
-    instruccion_para               go to state 23
-    instruccion_repetir            go to state 24
-    instruccion_asignacion         go to state 25
-    instruccion_repita_desde       go to state 26
-    instruccion_para_cada          go to state 27
-    instruccion_llamada_a_funcion  go to state 28
-    instruccion_retornar           go to state 29
-    id_arreglo                     go to state 30
-
-
-state 95
-
-   23 instruccion_caso: T_CASO lista_casos sino_caso . T_FIN T_CASO
-
-    T_FIN  shift, and go to state 131
-
-
-state 96
-
-   24 instruccion_mientras: T_MIENTRAS relacionales T_EJECUTE . instrucciones T_FIN T_MIENTRAS
-
-    T_IDENTIFICADOR  shift, and go to state 10
-    T_SI             shift, and go to state 11
-    T_CASO           shift, and go to state 12
-    T_MIENTRAS       shift, and go to state 13
-    T_REPETIR        shift, and go to state 14
-    T_PARA           shift, and go to state 15
-    T_REPITA         shift, and go to state 16
-    T_RETORNAR       shift, and go to state 17
-
-    $default  reduce using rule 8 (instrucciones)
-
-    instrucciones                  go to state 132
-    instruccion                    go to state 19
-    instruccion_si                 go to state 20
-    instruccion_caso               go to state 21
-    instruccion_mientras           go to state 22
-    instruccion_para               go to state 23
-    instruccion_repetir            go to state 24
-    instruccion_asignacion         go to state 25
-    instruccion_repita_desde       go to state 26
-    instruccion_para_cada          go to state 27
-    instruccion_llamada_a_funcion  go to state 28
-    instruccion_retornar           go to state 29
-    id_arreglo                     go to state 30
-
-
-state 97
-
-   26 instruccion_repetir: T_REPETIR relacionales T_VECES . instrucciones T_FIN T_REPETIR
-
-    T_IDENTIFICADOR  shift, and go to state 10
-    T_SI             shift, and go to state 11
-    T_CASO           shift, and go to state 12
-    T_MIENTRAS       shift, and go to state 13
-    T_REPETIR        shift, and go to state 14
-    T_PARA           shift, and go to state 15
-    T_REPITA         shift, and go to state 16
-    T_RETORNAR       shift, and go to state 17
-
-    $default  reduce using rule 8 (instrucciones)
-
-    instrucciones                  go to state 133
-    instruccion                    go to state 19
-    instruccion_si                 go to state 20
-    instruccion_caso               go to state 21
-    instruccion_mientras           go to state 22
-    instruccion_para               go to state 23
-    instruccion_repetir            go to state 24
-    instruccion_asignacion         go to state 25
-    instruccion_repita_desde       go to state 26
-    instruccion_para_cada          go to state 27
-    instruccion_llamada_a_funcion  go to state 28
-    instruccion_retornar           go to state 29
-    id_arreglo                     go to state 30
-
-
-state 98
-
-   25 instruccion_para: T_PARA T_IDENTIFICADOR T_SIMBOLO_IGUAL . relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_PARA
-
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    relacionales      go to state 134
-    expresiones       go to state 46
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
-
-
-state 99
-
-   31 instruccion_para_cada: T_PARA T_CADA relacionales . T_EN relacionales T_EJECUTE instrucciones T_FIN T_PARA T_CADA
-   34 relacionales: relacionales . T_MENOR expresiones
-   35             | relacionales . T_MAYOR expresiones
-   36             | relacionales . T_MAYOR_IGUAL expresiones
-   37             | relacionales . T_MENOR_IGUAL expresiones
-   38             | relacionales . T_IGUALDAD expresiones
-   39             | relacionales . T_DESIGUALDAD expresiones
-
-    T_MAYOR_IGUAL  shift, and go to state 76
-    T_MENOR_IGUAL  shift, and go to state 77
-    T_MENOR        shift, and go to state 78
-    T_MAYOR        shift, and go to state 79
-    T_IGUALDAD     shift, and go to state 80
-    T_DESIGUALDAD  shift, and go to state 81
-    T_EN           shift, and go to state 135
-
-
-state 100
-
-   30 instruccion_repita_desde: T_REPITA T_DESDE relacionales . T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_REPITA
-   34 relacionales: relacionales . T_MENOR expresiones
-   35             | relacionales . T_MAYOR expresiones
-   36             | relacionales . T_MAYOR_IGUAL expresiones
-   37             | relacionales . T_MENOR_IGUAL expresiones
-   38             | relacionales . T_IGUALDAD expresiones
-   39             | relacionales . T_DESIGUALDAD expresiones
-
-    T_MAYOR_IGUAL  shift, and go to state 76
-    T_MENOR_IGUAL  shift, and go to state 77
-    T_MENOR        shift, and go to state 78
-    T_MAYOR        shift, and go to state 79
-    T_IGUALDAD     shift, and go to state 80
-    T_DESIGUALDAD  shift, and go to state 81
-    T_HASTA        shift, and go to state 136
-
-
-state 101
-
-   19 instruccion: T_REPITA instruccion T_MIENTRAS . relacionales T_FIN T_REPITA
-
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    relacionales      go to state 137
-    expresiones       go to state 46
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
-
-
-state 102
-
-   28 instruccion_asignacion: id_arreglo T_SIMBOLO_IGUAL relacionales .
-   34 relacionales: relacionales . T_MENOR expresiones
-   35             | relacionales . T_MAYOR expresiones
-   36             | relacionales . T_MAYOR_IGUAL expresiones
-   37             | relacionales . T_MENOR_IGUAL expresiones
-   38             | relacionales . T_IGUALDAD expresiones
-   39             | relacionales . T_DESIGUALDAD expresiones
-
-    T_MAYOR_IGUAL  shift, and go to state 76
-    T_MENOR_IGUAL  shift, and go to state 77
-    T_MENOR        shift, and go to state 78
-    T_MAYOR        shift, and go to state 79
-    T_IGUALDAD     shift, and go to state 80
-    T_DESIGUALDAD  shift, and go to state 81
+   28 instruccion_asignacion: T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales .
+   41 relacionales: relacionales . T_MENOR expresiones
+   42             | relacionales . T_MAYOR expresiones
+   43             | relacionales . T_MAYOR_IGUAL expresiones
+   44             | relacionales . T_MENOR_IGUAL expresiones
+   45             | relacionales . T_IGUALDAD expresiones
+   46             | relacionales . T_DESIGUALDAD expresiones
+
+    T_MAYOR_IGUAL  shift, and go to state 89
+    T_MENOR_IGUAL  shift, and go to state 90
+    T_MENOR        shift, and go to state 91
+    T_MAYOR        shift, and go to state 92
+    T_IGUALDAD     shift, and go to state 93
+    T_DESIGUALDAD  shift, and go to state 94
 
     $default  reduce using rule 28 (instruccion_asignacion)
 
 
+state 77
+
+   30 instruccion_asignacion: T_IDENTIFICADOR T_SIMBOLO_IGUAL lista_indices_declaracion .
+
+    $default  reduce using rule 30 (instruccion_asignacion)
+
+
+state 78
+
+   31 instruccion_auto_asignacion: T_IDENTIFICADOR T_SUMA T_SIMBOLO_IGUAL . relacionales
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    relacionales      go to state 119
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 79
+
+   35 instruccion_auto_asignacion: T_IDENTIFICADOR T_RESTA T_SIMBOLO_IGUAL . relacionales
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    relacionales      go to state 120
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 80
+
+   34 instruccion_auto_asignacion: T_IDENTIFICADOR T_MULTIPLICACION T_SIMBOLO_IGUAL . relacionales
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    relacionales      go to state 121
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 81
+
+   32 instruccion_auto_asignacion: T_IDENTIFICADOR T_DIVISION T_SIMBOLO_IGUAL . relacionales
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    relacionales      go to state 122
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 82
+
+   33 instruccion_auto_asignacion: T_IDENTIFICADOR T_SIMBOLO_MODULO T_SIMBOLO_IGUAL . relacionales
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    relacionales      go to state 123
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 83
+
+   36 instruccion_auto_asignacion: T_IDENTIFICADOR T_EXPONENCIACION T_SIMBOLO_IGUAL . relacionales
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    relacionales      go to state 124
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 84
+
+   41 relacionales: relacionales . T_MENOR expresiones
+   42             | relacionales . T_MAYOR expresiones
+   43             | relacionales . T_MAYOR_IGUAL expresiones
+   44             | relacionales . T_MENOR_IGUAL expresiones
+   45             | relacionales . T_IGUALDAD expresiones
+   46             | relacionales . T_DESIGUALDAD expresiones
+   74 lista_indices: T_CORCHETE_IZQUIERDO relacionales . T_CORCHETE_DERECHO lista_indices
+   75              | T_CORCHETE_IZQUIERDO relacionales . T_CORCHETE_DERECHO
+
+    T_MAYOR_IGUAL       shift, and go to state 89
+    T_MENOR_IGUAL       shift, and go to state 90
+    T_MENOR             shift, and go to state 91
+    T_MAYOR             shift, and go to state 92
+    T_IGUALDAD          shift, and go to state 93
+    T_CORCHETE_DERECHO  shift, and go to state 125
+    T_DESIGUALDAD       shift, and go to state 94
+
+
+state 85
+
+   41 relacionales: relacionales . T_MENOR expresiones
+   42             | relacionales . T_MAYOR expresiones
+   43             | relacionales . T_MAYOR_IGUAL expresiones
+   44             | relacionales . T_MENOR_IGUAL expresiones
+   45             | relacionales . T_IGUALDAD expresiones
+   46             | relacionales . T_DESIGUALDAD expresiones
+   78 lista_parametros: relacionales . acumulador_parametros
+
+    T_MAYOR_IGUAL  shift, and go to state 89
+    T_MENOR_IGUAL  shift, and go to state 90
+    T_MENOR        shift, and go to state 91
+    T_MAYOR        shift, and go to state 92
+    T_IGUALDAD     shift, and go to state 93
+    T_DESIGUALDAD  shift, and go to state 94
+    T_COMA         shift, and go to state 126
+
+    $default  reduce using rule 81 (acumulador_parametros)
+
+    acumulador_parametros  go to state 127
+
+
+state 86
+
+   39 instruccion_llamada_a_funcion: T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros . T_PARENTESIS_DERECHO
+
+    T_PARENTESIS_DERECHO  shift, and go to state 128
+
+
+state 87
+
+   65 id_funcion: T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO . lista_parametros T_PARENTESIS_DERECHO
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    $default  reduce using rule 79 (lista_parametros)
+
+    relacionales      go to state 85
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+    lista_parametros  go to state 129
+
+
+state 88
+
+   41 relacionales: relacionales . T_MENOR expresiones
+   42             | relacionales . T_MAYOR expresiones
+   43             | relacionales . T_MAYOR_IGUAL expresiones
+   44             | relacionales . T_MENOR_IGUAL expresiones
+   45             | relacionales . T_IGUALDAD expresiones
+   46             | relacionales . T_DESIGUALDAD expresiones
+   59 terminales: T_PARENTESIS_IZQUIERDO relacionales . T_PARENTESIS_DERECHO
+
+    T_MAYOR_IGUAL         shift, and go to state 89
+    T_MENOR_IGUAL         shift, and go to state 90
+    T_MENOR               shift, and go to state 91
+    T_MAYOR               shift, and go to state 92
+    T_IGUALDAD            shift, and go to state 93
+    T_PARENTESIS_DERECHO  shift, and go to state 130
+    T_DESIGUALDAD         shift, and go to state 94
+
+
+state 89
+
+   43 relacionales: relacionales T_MAYOR_IGUAL . expresiones
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    expresiones       go to state 131
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 90
+
+   44 relacionales: relacionales T_MENOR_IGUAL . expresiones
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    expresiones       go to state 132
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 91
+
+   41 relacionales: relacionales T_MENOR . expresiones
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    expresiones       go to state 133
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 92
+
+   42 relacionales: relacionales T_MAYOR . expresiones
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    expresiones       go to state 134
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 93
+
+   45 relacionales: relacionales T_IGUALDAD . expresiones
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    expresiones       go to state 135
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 94
+
+   46 relacionales: relacionales T_DESIGUALDAD . expresiones
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    expresiones       go to state 136
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 95
+
+   21 instruccion_si: T_SI relacionales T_ENTONCES . instrucciones T_FIN T_SI
+   22               | T_SI relacionales T_ENTONCES . instrucciones T_SINO instrucciones T_FIN T_SI
+
+    T_IDENTIFICADOR  shift, and go to state 10
+    T_SI             shift, and go to state 11
+    T_CASO           shift, and go to state 12
+    T_MIENTRAS       shift, and go to state 13
+    T_REPETIR        shift, and go to state 14
+    T_PARA           shift, and go to state 15
+    T_REPITA         shift, and go to state 16
+    T_RETORNAR       shift, and go to state 17
+
+    $default  reduce using rule 8 (instrucciones)
+
+    instrucciones                  go to state 137
+    instruccion                    go to state 19
+    instruccion_si                 go to state 20
+    instruccion_caso               go to state 21
+    instruccion_mientras           go to state 22
+    instruccion_para               go to state 23
+    instruccion_repetir            go to state 24
+    instruccion_asignacion         go to state 25
+    instruccion_auto_asignacion    go to state 26
+    instruccion_repita_desde       go to state 27
+    instruccion_para_cada          go to state 28
+    instruccion_llamada_a_funcion  go to state 29
+    instruccion_retornar           go to state 30
+    id_arreglo                     go to state 31
+
+
+state 96
+
+   48 expresiones: expresiones T_SUMA . factores
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    factores          go to state 138
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 97
+
+   49 expresiones: expresiones T_RESTA . factores
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    factores          go to state 139
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 98
+
+   51 expresiones: expresiones T_SIMBOLO_OPERADOR_O . factores
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    factores          go to state 140
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 99
+
+   50 expresiones: expresiones T_OPERADOR_O . factores
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    factores          go to state 141
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 100
+
+   53 factores: factores T_MULTIPLICACION . terminales
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    terminales        go to state 142
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 101
+
+   54 factores: factores T_DIVISION . terminales
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    terminales        go to state 143
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 102
+
+   57 factores: factores T_SIMBOLO_MODULO . terminales
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    terminales        go to state 144
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
 state 103
+
+   56 factores: factores T_SIMBOLO_OPERADOR_Y . terminales
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    terminales        go to state 145
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 104
+
+   55 factores: factores T_OPERADOR_Y . terminales
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    terminales        go to state 146
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 105
+
+   23 instruccion_caso: T_CASO T_IDENTIFICADOR lista_casos . sino_caso T_FIN T_CASO
+
+    T_SINO  shift, and go to state 107
+
+    $default  reduce using rule 85 (sino_caso)
+
+    sino_caso  go to state 147
+
+
+state 106
+
+   41 relacionales: relacionales . T_MENOR expresiones
+   42             | relacionales . T_MAYOR expresiones
+   43             | relacionales . T_MAYOR_IGUAL expresiones
+   44             | relacionales . T_MENOR_IGUAL expresiones
+   45             | relacionales . T_IGUALDAD expresiones
+   46             | relacionales . T_DESIGUALDAD expresiones
+   82 lista_casos: T_DOS_PUNTOS relacionales . T_DOS_PUNTOS instrucciones lista_casos
+   83            | T_DOS_PUNTOS relacionales . T_DOS_PUNTOS instrucciones
+
+    T_MAYOR_IGUAL  shift, and go to state 89
+    T_MENOR_IGUAL  shift, and go to state 90
+    T_MENOR        shift, and go to state 91
+    T_MAYOR        shift, and go to state 92
+    T_IGUALDAD     shift, and go to state 93
+    T_DOS_PUNTOS   shift, and go to state 148
+    T_DESIGUALDAD  shift, and go to state 94
+
+
+state 107
+
+   84 sino_caso: T_SINO . instrucciones
+
+    T_IDENTIFICADOR  shift, and go to state 10
+    T_SI             shift, and go to state 11
+    T_CASO           shift, and go to state 12
+    T_MIENTRAS       shift, and go to state 13
+    T_REPETIR        shift, and go to state 14
+    T_PARA           shift, and go to state 15
+    T_REPITA         shift, and go to state 16
+    T_RETORNAR       shift, and go to state 17
+
+    $default  reduce using rule 8 (instrucciones)
+
+    instrucciones                  go to state 149
+    instruccion                    go to state 19
+    instruccion_si                 go to state 20
+    instruccion_caso               go to state 21
+    instruccion_mientras           go to state 22
+    instruccion_para               go to state 23
+    instruccion_repetir            go to state 24
+    instruccion_asignacion         go to state 25
+    instruccion_auto_asignacion    go to state 26
+    instruccion_repita_desde       go to state 27
+    instruccion_para_cada          go to state 28
+    instruccion_llamada_a_funcion  go to state 29
+    instruccion_retornar           go to state 30
+    id_arreglo                     go to state 31
+
+
+state 108
+
+   24 instruccion_caso: T_CASO lista_casos sino_caso . T_FIN T_CASO
+
+    T_FIN  shift, and go to state 150
+
+
+state 109
+
+   25 instruccion_mientras: T_MIENTRAS relacionales T_EJECUTE . instrucciones T_FIN T_MIENTRAS
+
+    T_IDENTIFICADOR  shift, and go to state 10
+    T_SI             shift, and go to state 11
+    T_CASO           shift, and go to state 12
+    T_MIENTRAS       shift, and go to state 13
+    T_REPETIR        shift, and go to state 14
+    T_PARA           shift, and go to state 15
+    T_REPITA         shift, and go to state 16
+    T_RETORNAR       shift, and go to state 17
+
+    $default  reduce using rule 8 (instrucciones)
+
+    instrucciones                  go to state 151
+    instruccion                    go to state 19
+    instruccion_si                 go to state 20
+    instruccion_caso               go to state 21
+    instruccion_mientras           go to state 22
+    instruccion_para               go to state 23
+    instruccion_repetir            go to state 24
+    instruccion_asignacion         go to state 25
+    instruccion_auto_asignacion    go to state 26
+    instruccion_repita_desde       go to state 27
+    instruccion_para_cada          go to state 28
+    instruccion_llamada_a_funcion  go to state 29
+    instruccion_retornar           go to state 30
+    id_arreglo                     go to state 31
+
+
+state 110
+
+   27 instruccion_repetir: T_REPETIR relacionales T_VECES . instrucciones T_FIN T_REPETIR
+
+    T_IDENTIFICADOR  shift, and go to state 10
+    T_SI             shift, and go to state 11
+    T_CASO           shift, and go to state 12
+    T_MIENTRAS       shift, and go to state 13
+    T_REPETIR        shift, and go to state 14
+    T_PARA           shift, and go to state 15
+    T_REPITA         shift, and go to state 16
+    T_RETORNAR       shift, and go to state 17
+
+    $default  reduce using rule 8 (instrucciones)
+
+    instrucciones                  go to state 152
+    instruccion                    go to state 19
+    instruccion_si                 go to state 20
+    instruccion_caso               go to state 21
+    instruccion_mientras           go to state 22
+    instruccion_para               go to state 23
+    instruccion_repetir            go to state 24
+    instruccion_asignacion         go to state 25
+    instruccion_auto_asignacion    go to state 26
+    instruccion_repita_desde       go to state 27
+    instruccion_para_cada          go to state 28
+    instruccion_llamada_a_funcion  go to state 29
+    instruccion_retornar           go to state 30
+    id_arreglo                     go to state 31
+
+
+state 111
+
+   26 instruccion_para: T_PARA T_IDENTIFICADOR T_SIMBOLO_IGUAL . relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_PARA
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    relacionales      go to state 153
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 112
+
+   38 instruccion_para_cada: T_PARA T_CADA relacionales . T_EN relacionales T_EJECUTE instrucciones T_FIN T_PARA T_CADA
+   41 relacionales: relacionales . T_MENOR expresiones
+   42             | relacionales . T_MAYOR expresiones
+   43             | relacionales . T_MAYOR_IGUAL expresiones
+   44             | relacionales . T_MENOR_IGUAL expresiones
+   45             | relacionales . T_IGUALDAD expresiones
+   46             | relacionales . T_DESIGUALDAD expresiones
+
+    T_MAYOR_IGUAL  shift, and go to state 89
+    T_MENOR_IGUAL  shift, and go to state 90
+    T_MENOR        shift, and go to state 91
+    T_MAYOR        shift, and go to state 92
+    T_IGUALDAD     shift, and go to state 93
+    T_DESIGUALDAD  shift, and go to state 94
+    T_EN           shift, and go to state 154
+
+
+state 113
+
+   37 instruccion_repita_desde: T_REPITA T_DESDE relacionales . T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_REPITA
+   41 relacionales: relacionales . T_MENOR expresiones
+   42             | relacionales . T_MAYOR expresiones
+   43             | relacionales . T_MAYOR_IGUAL expresiones
+   44             | relacionales . T_MENOR_IGUAL expresiones
+   45             | relacionales . T_IGUALDAD expresiones
+   46             | relacionales . T_DESIGUALDAD expresiones
+
+    T_MAYOR_IGUAL  shift, and go to state 89
+    T_MENOR_IGUAL  shift, and go to state 90
+    T_MENOR        shift, and go to state 91
+    T_MAYOR        shift, and go to state 92
+    T_IGUALDAD     shift, and go to state 93
+    T_DESIGUALDAD  shift, and go to state 94
+    T_HASTA        shift, and go to state 155
+
+
+state 114
+
+   20 instruccion: T_REPITA instruccion T_MIENTRAS . relacionales T_FIN T_REPITA
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    relacionales      go to state 156
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 115
+
+   29 instruccion_asignacion: id_arreglo T_SIMBOLO_IGUAL relacionales .
+   41 relacionales: relacionales . T_MENOR expresiones
+   42             | relacionales . T_MAYOR expresiones
+   43             | relacionales . T_MAYOR_IGUAL expresiones
+   44             | relacionales . T_MENOR_IGUAL expresiones
+   45             | relacionales . T_IGUALDAD expresiones
+   46             | relacionales . T_DESIGUALDAD expresiones
+
+    T_MAYOR_IGUAL  shift, and go to state 89
+    T_MENOR_IGUAL  shift, and go to state 90
+    T_MENOR        shift, and go to state 91
+    T_MAYOR        shift, and go to state 92
+    T_IGUALDAD     shift, and go to state 93
+    T_DESIGUALDAD  shift, and go to state 94
+
+    $default  reduce using rule 29 (instruccion_asignacion)
+
+
+state 116
 
     5 declaracion_sensores_motores: T_UTILIZAR T_IDENTIFICADOR T_COMO T_IDENTIFICADOR T_EN T_IDENTIFICADOR . declaracion_sensores_motores
 
@@ -1890,313 +2112,433 @@ state 103
 
     $default  reduce using rule 6 (declaracion_sensores_motores)
 
-    declaracion_sensores_motores  go to state 138
-
-
-state 104
-
-    3 declaracion_funciones: T_FUNCION $@1 T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros . T_PARENTESIS_DERECHO instrucciones T_FIN T_FUNCION declaracion_funciones
-
-    T_PARENTESIS_DERECHO  shift, and go to state 139
-
-
-state 105
-
-   69 lista_indices_declaracion: T_CORCHETE_IZQUIERDO T_CORCHETE_DERECHO .
-   70                          | T_CORCHETE_IZQUIERDO T_CORCHETE_DERECHO . T_CORCHETE_IZQUIERDO T_CORCHETE_DERECHO
-
-    T_CORCHETE_IZQUIERDO  shift, and go to state 140
-
-    $default  reduce using rule 69 (lista_indices_declaracion)
-
-
-state 106
-
-   67 lista_indices: T_CORCHETE_IZQUIERDO relacionales T_CORCHETE_DERECHO . lista_indices
-   68              | T_CORCHETE_IZQUIERDO relacionales T_CORCHETE_DERECHO .
-
-    T_CORCHETE_IZQUIERDO  shift, and go to state 34
-
-    $default  reduce using rule 68 (lista_indices)
-
-    lista_indices  go to state 141
-
-
-state 107
-
-   73 acumulador_parametros: T_COMA . relacionales acumulador_parametros
-
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    relacionales      go to state 142
-    expresiones       go to state 46
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
-
-
-state 108
-
-   71 lista_parametros: relacionales acumulador_parametros .
-
-    $default  reduce using rule 71 (lista_parametros)
-
-
-state 109
-
-   32 instruccion_llamada_a_funcion: T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO .
-
-    $default  reduce using rule 32 (instruccion_llamada_a_funcion)
-
-
-state 110
-
-   58 id_funcion: T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros . T_PARENTESIS_DERECHO
-
-    T_PARENTESIS_DERECHO  shift, and go to state 143
-
-
-state 111
-
-   52 terminales: T_PARENTESIS_IZQUIERDO relacionales T_PARENTESIS_DERECHO .
-
-    $default  reduce using rule 52 (terminales)
-
-
-state 112
-
-   36 relacionales: relacionales T_MAYOR_IGUAL expresiones .
-   41 expresiones: expresiones . T_SUMA factores
-   42            | expresiones . T_RESTA factores
-   43            | expresiones . T_OPERADOR_O factores
-   44            | expresiones . T_SIMBOLO_OPERADOR_O factores
-
-    T_SUMA                shift, and go to state 83
-    T_RESTA               shift, and go to state 84
-    T_SIMBOLO_OPERADOR_O  shift, and go to state 85
-    T_OPERADOR_O          shift, and go to state 86
-
-    $default  reduce using rule 36 (relacionales)
-
-
-state 113
-
-   37 relacionales: relacionales T_MENOR_IGUAL expresiones .
-   41 expresiones: expresiones . T_SUMA factores
-   42            | expresiones . T_RESTA factores
-   43            | expresiones . T_OPERADOR_O factores
-   44            | expresiones . T_SIMBOLO_OPERADOR_O factores
-
-    T_SUMA                shift, and go to state 83
-    T_RESTA               shift, and go to state 84
-    T_SIMBOLO_OPERADOR_O  shift, and go to state 85
-    T_OPERADOR_O          shift, and go to state 86
-
-    $default  reduce using rule 37 (relacionales)
-
-
-state 114
-
-   34 relacionales: relacionales T_MENOR expresiones .
-   41 expresiones: expresiones . T_SUMA factores
-   42            | expresiones . T_RESTA factores
-   43            | expresiones . T_OPERADOR_O factores
-   44            | expresiones . T_SIMBOLO_OPERADOR_O factores
-
-    T_SUMA                shift, and go to state 83
-    T_RESTA               shift, and go to state 84
-    T_SIMBOLO_OPERADOR_O  shift, and go to state 85
-    T_OPERADOR_O          shift, and go to state 86
-
-    $default  reduce using rule 34 (relacionales)
-
-
-state 115
-
-   35 relacionales: relacionales T_MAYOR expresiones .
-   41 expresiones: expresiones . T_SUMA factores
-   42            | expresiones . T_RESTA factores
-   43            | expresiones . T_OPERADOR_O factores
-   44            | expresiones . T_SIMBOLO_OPERADOR_O factores
-
-    T_SUMA                shift, and go to state 83
-    T_RESTA               shift, and go to state 84
-    T_SIMBOLO_OPERADOR_O  shift, and go to state 85
-    T_OPERADOR_O          shift, and go to state 86
-
-    $default  reduce using rule 35 (relacionales)
-
-
-state 116
-
-   38 relacionales: relacionales T_IGUALDAD expresiones .
-   41 expresiones: expresiones . T_SUMA factores
-   42            | expresiones . T_RESTA factores
-   43            | expresiones . T_OPERADOR_O factores
-   44            | expresiones . T_SIMBOLO_OPERADOR_O factores
-
-    T_SUMA                shift, and go to state 83
-    T_RESTA               shift, and go to state 84
-    T_SIMBOLO_OPERADOR_O  shift, and go to state 85
-    T_OPERADOR_O          shift, and go to state 86
-
-    $default  reduce using rule 38 (relacionales)
+    declaracion_sensores_motores  go to state 157
 
 
 state 117
 
-   39 relacionales: relacionales T_DESIGUALDAD expresiones .
-   41 expresiones: expresiones . T_SUMA factores
-   42            | expresiones . T_RESTA factores
-   43            | expresiones . T_OPERADOR_O factores
-   44            | expresiones . T_SIMBOLO_OPERADOR_O factores
+    3 declaracion_funciones: T_FUNCION $@1 T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros . T_PARENTESIS_DERECHO instrucciones T_FIN T_FUNCION declaracion_funciones
 
-    T_SUMA                shift, and go to state 83
-    T_RESTA               shift, and go to state 84
-    T_SIMBOLO_OPERADOR_O  shift, and go to state 85
-    T_OPERADOR_O          shift, and go to state 86
-
-    $default  reduce using rule 39 (relacionales)
+    T_PARENTESIS_DERECHO  shift, and go to state 158
 
 
 state 118
 
-   20 instruccion_si: T_SI relacionales T_ENTONCES instrucciones . T_FIN T_SI
-   21               | T_SI relacionales T_ENTONCES instrucciones . T_SINO instrucciones T_FIN T_SI
+   76 lista_indices_declaracion: T_CORCHETE_IZQUIERDO T_CORCHETE_DERECHO .
+   77                          | T_CORCHETE_IZQUIERDO T_CORCHETE_DERECHO . T_CORCHETE_IZQUIERDO T_CORCHETE_DERECHO
 
-    T_FIN   shift, and go to state 144
-    T_SINO  shift, and go to state 145
+    T_CORCHETE_IZQUIERDO  shift, and go to state 159
+
+    $default  reduce using rule 76 (lista_indices_declaracion)
 
 
 state 119
 
-   41 expresiones: expresiones T_SUMA factores .
-   46 factores: factores . T_MULTIPLICACION terminales
-   47         | factores . T_DIVISION terminales
-   48         | factores . T_OPERADOR_Y terminales
-   49         | factores . T_SIMBOLO_OPERADOR_Y terminales
-   50         | factores . T_SIMBOLO_MODULO terminales
+   31 instruccion_auto_asignacion: T_IDENTIFICADOR T_SUMA T_SIMBOLO_IGUAL relacionales .
+   41 relacionales: relacionales . T_MENOR expresiones
+   42             | relacionales . T_MAYOR expresiones
+   43             | relacionales . T_MAYOR_IGUAL expresiones
+   44             | relacionales . T_MENOR_IGUAL expresiones
+   45             | relacionales . T_IGUALDAD expresiones
+   46             | relacionales . T_DESIGUALDAD expresiones
 
-    T_MULTIPLICACION      shift, and go to state 87
-    T_DIVISION            shift, and go to state 88
-    T_SIMBOLO_MODULO      shift, and go to state 89
-    T_SIMBOLO_OPERADOR_Y  shift, and go to state 90
-    T_OPERADOR_Y          shift, and go to state 91
+    T_MAYOR_IGUAL  shift, and go to state 89
+    T_MENOR_IGUAL  shift, and go to state 90
+    T_MENOR        shift, and go to state 91
+    T_MAYOR        shift, and go to state 92
+    T_IGUALDAD     shift, and go to state 93
+    T_DESIGUALDAD  shift, and go to state 94
 
-    $default  reduce using rule 41 (expresiones)
+    $default  reduce using rule 31 (instruccion_auto_asignacion)
 
 
 state 120
 
-   42 expresiones: expresiones T_RESTA factores .
-   46 factores: factores . T_MULTIPLICACION terminales
-   47         | factores . T_DIVISION terminales
-   48         | factores . T_OPERADOR_Y terminales
-   49         | factores . T_SIMBOLO_OPERADOR_Y terminales
-   50         | factores . T_SIMBOLO_MODULO terminales
+   35 instruccion_auto_asignacion: T_IDENTIFICADOR T_RESTA T_SIMBOLO_IGUAL relacionales .
+   41 relacionales: relacionales . T_MENOR expresiones
+   42             | relacionales . T_MAYOR expresiones
+   43             | relacionales . T_MAYOR_IGUAL expresiones
+   44             | relacionales . T_MENOR_IGUAL expresiones
+   45             | relacionales . T_IGUALDAD expresiones
+   46             | relacionales . T_DESIGUALDAD expresiones
 
-    T_MULTIPLICACION      shift, and go to state 87
-    T_DIVISION            shift, and go to state 88
-    T_SIMBOLO_MODULO      shift, and go to state 89
-    T_SIMBOLO_OPERADOR_Y  shift, and go to state 90
-    T_OPERADOR_Y          shift, and go to state 91
+    T_MAYOR_IGUAL  shift, and go to state 89
+    T_MENOR_IGUAL  shift, and go to state 90
+    T_MENOR        shift, and go to state 91
+    T_MAYOR        shift, and go to state 92
+    T_IGUALDAD     shift, and go to state 93
+    T_DESIGUALDAD  shift, and go to state 94
 
-    $default  reduce using rule 42 (expresiones)
+    $default  reduce using rule 35 (instruccion_auto_asignacion)
 
 
 state 121
 
-   44 expresiones: expresiones T_SIMBOLO_OPERADOR_O factores .
-   46 factores: factores . T_MULTIPLICACION terminales
-   47         | factores . T_DIVISION terminales
-   48         | factores . T_OPERADOR_Y terminales
-   49         | factores . T_SIMBOLO_OPERADOR_Y terminales
-   50         | factores . T_SIMBOLO_MODULO terminales
+   34 instruccion_auto_asignacion: T_IDENTIFICADOR T_MULTIPLICACION T_SIMBOLO_IGUAL relacionales .
+   41 relacionales: relacionales . T_MENOR expresiones
+   42             | relacionales . T_MAYOR expresiones
+   43             | relacionales . T_MAYOR_IGUAL expresiones
+   44             | relacionales . T_MENOR_IGUAL expresiones
+   45             | relacionales . T_IGUALDAD expresiones
+   46             | relacionales . T_DESIGUALDAD expresiones
 
-    T_MULTIPLICACION      shift, and go to state 87
-    T_DIVISION            shift, and go to state 88
-    T_SIMBOLO_MODULO      shift, and go to state 89
-    T_SIMBOLO_OPERADOR_Y  shift, and go to state 90
-    T_OPERADOR_Y          shift, and go to state 91
+    T_MAYOR_IGUAL  shift, and go to state 89
+    T_MENOR_IGUAL  shift, and go to state 90
+    T_MENOR        shift, and go to state 91
+    T_MAYOR        shift, and go to state 92
+    T_IGUALDAD     shift, and go to state 93
+    T_DESIGUALDAD  shift, and go to state 94
 
-    $default  reduce using rule 44 (expresiones)
+    $default  reduce using rule 34 (instruccion_auto_asignacion)
 
 
 state 122
 
-   43 expresiones: expresiones T_OPERADOR_O factores .
-   46 factores: factores . T_MULTIPLICACION terminales
-   47         | factores . T_DIVISION terminales
-   48         | factores . T_OPERADOR_Y terminales
-   49         | factores . T_SIMBOLO_OPERADOR_Y terminales
-   50         | factores . T_SIMBOLO_MODULO terminales
+   32 instruccion_auto_asignacion: T_IDENTIFICADOR T_DIVISION T_SIMBOLO_IGUAL relacionales .
+   41 relacionales: relacionales . T_MENOR expresiones
+   42             | relacionales . T_MAYOR expresiones
+   43             | relacionales . T_MAYOR_IGUAL expresiones
+   44             | relacionales . T_MENOR_IGUAL expresiones
+   45             | relacionales . T_IGUALDAD expresiones
+   46             | relacionales . T_DESIGUALDAD expresiones
 
-    T_MULTIPLICACION      shift, and go to state 87
-    T_DIVISION            shift, and go to state 88
-    T_SIMBOLO_MODULO      shift, and go to state 89
-    T_SIMBOLO_OPERADOR_Y  shift, and go to state 90
-    T_OPERADOR_Y          shift, and go to state 91
+    T_MAYOR_IGUAL  shift, and go to state 89
+    T_MENOR_IGUAL  shift, and go to state 90
+    T_MENOR        shift, and go to state 91
+    T_MAYOR        shift, and go to state 92
+    T_IGUALDAD     shift, and go to state 93
+    T_DESIGUALDAD  shift, and go to state 94
 
-    $default  reduce using rule 43 (expresiones)
+    $default  reduce using rule 32 (instruccion_auto_asignacion)
 
 
 state 123
 
-   46 factores: factores T_MULTIPLICACION terminales .
+   33 instruccion_auto_asignacion: T_IDENTIFICADOR T_SIMBOLO_MODULO T_SIMBOLO_IGUAL relacionales .
+   41 relacionales: relacionales . T_MENOR expresiones
+   42             | relacionales . T_MAYOR expresiones
+   43             | relacionales . T_MAYOR_IGUAL expresiones
+   44             | relacionales . T_MENOR_IGUAL expresiones
+   45             | relacionales . T_IGUALDAD expresiones
+   46             | relacionales . T_DESIGUALDAD expresiones
 
-    $default  reduce using rule 46 (factores)
+    T_MAYOR_IGUAL  shift, and go to state 89
+    T_MENOR_IGUAL  shift, and go to state 90
+    T_MENOR        shift, and go to state 91
+    T_MAYOR        shift, and go to state 92
+    T_IGUALDAD     shift, and go to state 93
+    T_DESIGUALDAD  shift, and go to state 94
+
+    $default  reduce using rule 33 (instruccion_auto_asignacion)
 
 
 state 124
 
-   47 factores: factores T_DIVISION terminales .
+   36 instruccion_auto_asignacion: T_IDENTIFICADOR T_EXPONENCIACION T_SIMBOLO_IGUAL relacionales .
+   41 relacionales: relacionales . T_MENOR expresiones
+   42             | relacionales . T_MAYOR expresiones
+   43             | relacionales . T_MAYOR_IGUAL expresiones
+   44             | relacionales . T_MENOR_IGUAL expresiones
+   45             | relacionales . T_IGUALDAD expresiones
+   46             | relacionales . T_DESIGUALDAD expresiones
 
-    $default  reduce using rule 47 (factores)
+    T_MAYOR_IGUAL  shift, and go to state 89
+    T_MENOR_IGUAL  shift, and go to state 90
+    T_MENOR        shift, and go to state 91
+    T_MAYOR        shift, and go to state 92
+    T_IGUALDAD     shift, and go to state 93
+    T_DESIGUALDAD  shift, and go to state 94
+
+    $default  reduce using rule 36 (instruccion_auto_asignacion)
 
 
 state 125
 
-   50 factores: factores T_SIMBOLO_MODULO terminales .
+   74 lista_indices: T_CORCHETE_IZQUIERDO relacionales T_CORCHETE_DERECHO . lista_indices
+   75              | T_CORCHETE_IZQUIERDO relacionales T_CORCHETE_DERECHO .
 
-    $default  reduce using rule 50 (factores)
+    T_CORCHETE_IZQUIERDO  shift, and go to state 41
+
+    $default  reduce using rule 75 (lista_indices)
+
+    lista_indices  go to state 160
 
 
 state 126
 
-   49 factores: factores T_SIMBOLO_OPERADOR_Y terminales .
+   80 acumulador_parametros: T_COMA . relacionales acumulador_parametros
 
-    $default  reduce using rule 49 (factores)
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    relacionales      go to state 161
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
 
 
 state 127
 
-   48 factores: factores T_OPERADOR_Y terminales .
+   78 lista_parametros: relacionales acumulador_parametros .
 
-    $default  reduce using rule 48 (factores)
+    $default  reduce using rule 78 (lista_parametros)
 
 
 state 128
 
-   22 instruccion_caso: T_CASO T_IDENTIFICADOR lista_casos sino_caso . T_FIN T_CASO
+   39 instruccion_llamada_a_funcion: T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO .
 
-    T_FIN  shift, and go to state 146
+    $default  reduce using rule 39 (instruccion_llamada_a_funcion)
 
 
 state 129
 
-   75 lista_casos: T_DOS_PUNTOS relacionales T_DOS_PUNTOS . instrucciones lista_casos
-   76            | T_DOS_PUNTOS relacionales T_DOS_PUNTOS . instrucciones
+   65 id_funcion: T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros . T_PARENTESIS_DERECHO
+
+    T_PARENTESIS_DERECHO  shift, and go to state 162
+
+
+state 130
+
+   59 terminales: T_PARENTESIS_IZQUIERDO relacionales T_PARENTESIS_DERECHO .
+
+    $default  reduce using rule 59 (terminales)
+
+
+state 131
+
+   43 relacionales: relacionales T_MAYOR_IGUAL expresiones .
+   48 expresiones: expresiones . T_SUMA factores
+   49            | expresiones . T_RESTA factores
+   50            | expresiones . T_OPERADOR_O factores
+   51            | expresiones . T_SIMBOLO_OPERADOR_O factores
+
+    T_SUMA                shift, and go to state 96
+    T_RESTA               shift, and go to state 97
+    T_SIMBOLO_OPERADOR_O  shift, and go to state 98
+    T_OPERADOR_O          shift, and go to state 99
+
+    $default  reduce using rule 43 (relacionales)
+
+
+state 132
+
+   44 relacionales: relacionales T_MENOR_IGUAL expresiones .
+   48 expresiones: expresiones . T_SUMA factores
+   49            | expresiones . T_RESTA factores
+   50            | expresiones . T_OPERADOR_O factores
+   51            | expresiones . T_SIMBOLO_OPERADOR_O factores
+
+    T_SUMA                shift, and go to state 96
+    T_RESTA               shift, and go to state 97
+    T_SIMBOLO_OPERADOR_O  shift, and go to state 98
+    T_OPERADOR_O          shift, and go to state 99
+
+    $default  reduce using rule 44 (relacionales)
+
+
+state 133
+
+   41 relacionales: relacionales T_MENOR expresiones .
+   48 expresiones: expresiones . T_SUMA factores
+   49            | expresiones . T_RESTA factores
+   50            | expresiones . T_OPERADOR_O factores
+   51            | expresiones . T_SIMBOLO_OPERADOR_O factores
+
+    T_SUMA                shift, and go to state 96
+    T_RESTA               shift, and go to state 97
+    T_SIMBOLO_OPERADOR_O  shift, and go to state 98
+    T_OPERADOR_O          shift, and go to state 99
+
+    $default  reduce using rule 41 (relacionales)
+
+
+state 134
+
+   42 relacionales: relacionales T_MAYOR expresiones .
+   48 expresiones: expresiones . T_SUMA factores
+   49            | expresiones . T_RESTA factores
+   50            | expresiones . T_OPERADOR_O factores
+   51            | expresiones . T_SIMBOLO_OPERADOR_O factores
+
+    T_SUMA                shift, and go to state 96
+    T_RESTA               shift, and go to state 97
+    T_SIMBOLO_OPERADOR_O  shift, and go to state 98
+    T_OPERADOR_O          shift, and go to state 99
+
+    $default  reduce using rule 42 (relacionales)
+
+
+state 135
+
+   45 relacionales: relacionales T_IGUALDAD expresiones .
+   48 expresiones: expresiones . T_SUMA factores
+   49            | expresiones . T_RESTA factores
+   50            | expresiones . T_OPERADOR_O factores
+   51            | expresiones . T_SIMBOLO_OPERADOR_O factores
+
+    T_SUMA                shift, and go to state 96
+    T_RESTA               shift, and go to state 97
+    T_SIMBOLO_OPERADOR_O  shift, and go to state 98
+    T_OPERADOR_O          shift, and go to state 99
+
+    $default  reduce using rule 45 (relacionales)
+
+
+state 136
+
+   46 relacionales: relacionales T_DESIGUALDAD expresiones .
+   48 expresiones: expresiones . T_SUMA factores
+   49            | expresiones . T_RESTA factores
+   50            | expresiones . T_OPERADOR_O factores
+   51            | expresiones . T_SIMBOLO_OPERADOR_O factores
+
+    T_SUMA                shift, and go to state 96
+    T_RESTA               shift, and go to state 97
+    T_SIMBOLO_OPERADOR_O  shift, and go to state 98
+    T_OPERADOR_O          shift, and go to state 99
+
+    $default  reduce using rule 46 (relacionales)
+
+
+state 137
+
+   21 instruccion_si: T_SI relacionales T_ENTONCES instrucciones . T_FIN T_SI
+   22               | T_SI relacionales T_ENTONCES instrucciones . T_SINO instrucciones T_FIN T_SI
+
+    T_FIN   shift, and go to state 163
+    T_SINO  shift, and go to state 164
+
+
+state 138
+
+   48 expresiones: expresiones T_SUMA factores .
+   53 factores: factores . T_MULTIPLICACION terminales
+   54         | factores . T_DIVISION terminales
+   55         | factores . T_OPERADOR_Y terminales
+   56         | factores . T_SIMBOLO_OPERADOR_Y terminales
+   57         | factores . T_SIMBOLO_MODULO terminales
+
+    T_MULTIPLICACION      shift, and go to state 100
+    T_DIVISION            shift, and go to state 101
+    T_SIMBOLO_MODULO      shift, and go to state 102
+    T_SIMBOLO_OPERADOR_Y  shift, and go to state 103
+    T_OPERADOR_Y          shift, and go to state 104
+
+    $default  reduce using rule 48 (expresiones)
+
+
+state 139
+
+   49 expresiones: expresiones T_RESTA factores .
+   53 factores: factores . T_MULTIPLICACION terminales
+   54         | factores . T_DIVISION terminales
+   55         | factores . T_OPERADOR_Y terminales
+   56         | factores . T_SIMBOLO_OPERADOR_Y terminales
+   57         | factores . T_SIMBOLO_MODULO terminales
+
+    T_MULTIPLICACION      shift, and go to state 100
+    T_DIVISION            shift, and go to state 101
+    T_SIMBOLO_MODULO      shift, and go to state 102
+    T_SIMBOLO_OPERADOR_Y  shift, and go to state 103
+    T_OPERADOR_Y          shift, and go to state 104
+
+    $default  reduce using rule 49 (expresiones)
+
+
+state 140
+
+   51 expresiones: expresiones T_SIMBOLO_OPERADOR_O factores .
+   53 factores: factores . T_MULTIPLICACION terminales
+   54         | factores . T_DIVISION terminales
+   55         | factores . T_OPERADOR_Y terminales
+   56         | factores . T_SIMBOLO_OPERADOR_Y terminales
+   57         | factores . T_SIMBOLO_MODULO terminales
+
+    T_MULTIPLICACION      shift, and go to state 100
+    T_DIVISION            shift, and go to state 101
+    T_SIMBOLO_MODULO      shift, and go to state 102
+    T_SIMBOLO_OPERADOR_Y  shift, and go to state 103
+    T_OPERADOR_Y          shift, and go to state 104
+
+    $default  reduce using rule 51 (expresiones)
+
+
+state 141
+
+   50 expresiones: expresiones T_OPERADOR_O factores .
+   53 factores: factores . T_MULTIPLICACION terminales
+   54         | factores . T_DIVISION terminales
+   55         | factores . T_OPERADOR_Y terminales
+   56         | factores . T_SIMBOLO_OPERADOR_Y terminales
+   57         | factores . T_SIMBOLO_MODULO terminales
+
+    T_MULTIPLICACION      shift, and go to state 100
+    T_DIVISION            shift, and go to state 101
+    T_SIMBOLO_MODULO      shift, and go to state 102
+    T_SIMBOLO_OPERADOR_Y  shift, and go to state 103
+    T_OPERADOR_Y          shift, and go to state 104
+
+    $default  reduce using rule 50 (expresiones)
+
+
+state 142
+
+   53 factores: factores T_MULTIPLICACION terminales .
+
+    $default  reduce using rule 53 (factores)
+
+
+state 143
+
+   54 factores: factores T_DIVISION terminales .
+
+    $default  reduce using rule 54 (factores)
+
+
+state 144
+
+   57 factores: factores T_SIMBOLO_MODULO terminales .
+
+    $default  reduce using rule 57 (factores)
+
+
+state 145
+
+   56 factores: factores T_SIMBOLO_OPERADOR_Y terminales .
+
+    $default  reduce using rule 56 (factores)
+
+
+state 146
+
+   55 factores: factores T_OPERADOR_Y terminales .
+
+    $default  reduce using rule 55 (factores)
+
+
+state 147
+
+   23 instruccion_caso: T_CASO T_IDENTIFICADOR lista_casos sino_caso . T_FIN T_CASO
+
+    T_FIN  shift, and go to state 165
+
+
+state 148
+
+   82 lista_casos: T_DOS_PUNTOS relacionales T_DOS_PUNTOS . instrucciones lista_casos
+   83            | T_DOS_PUNTOS relacionales T_DOS_PUNTOS . instrucciones
 
     T_IDENTIFICADOR  shift, and go to state 10
     T_SI             shift, and go to state 11
@@ -2209,7 +2551,7 @@ state 129
 
     $default  reduce using rule 8 (instrucciones)
 
-    instrucciones                  go to state 147
+    instrucciones                  go to state 166
     instruccion                    go to state 19
     instruccion_si                 go to state 20
     instruccion_caso               go to state 21
@@ -2217,135 +2559,136 @@ state 129
     instruccion_para               go to state 23
     instruccion_repetir            go to state 24
     instruccion_asignacion         go to state 25
-    instruccion_repita_desde       go to state 26
-    instruccion_para_cada          go to state 27
-    instruccion_llamada_a_funcion  go to state 28
-    instruccion_retornar           go to state 29
-    id_arreglo                     go to state 30
+    instruccion_auto_asignacion    go to state 26
+    instruccion_repita_desde       go to state 27
+    instruccion_para_cada          go to state 28
+    instruccion_llamada_a_funcion  go to state 29
+    instruccion_retornar           go to state 30
+    id_arreglo                     go to state 31
 
 
-state 130
+state 149
 
-   77 sino_caso: T_SINO instrucciones .
+   84 sino_caso: T_SINO instrucciones .
 
-    $default  reduce using rule 77 (sino_caso)
-
-
-state 131
-
-   23 instruccion_caso: T_CASO lista_casos sino_caso T_FIN . T_CASO
-
-    T_CASO  shift, and go to state 148
+    $default  reduce using rule 84 (sino_caso)
 
 
-state 132
+state 150
 
-   24 instruccion_mientras: T_MIENTRAS relacionales T_EJECUTE instrucciones . T_FIN T_MIENTRAS
+   24 instruccion_caso: T_CASO lista_casos sino_caso T_FIN . T_CASO
 
-    T_FIN  shift, and go to state 149
-
-
-state 133
-
-   26 instruccion_repetir: T_REPETIR relacionales T_VECES instrucciones . T_FIN T_REPETIR
-
-    T_FIN  shift, and go to state 150
+    T_CASO  shift, and go to state 167
 
 
-state 134
+state 151
 
-   25 instruccion_para: T_PARA T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales . T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_PARA
-   34 relacionales: relacionales . T_MENOR expresiones
-   35             | relacionales . T_MAYOR expresiones
-   36             | relacionales . T_MAYOR_IGUAL expresiones
-   37             | relacionales . T_MENOR_IGUAL expresiones
-   38             | relacionales . T_IGUALDAD expresiones
-   39             | relacionales . T_DESIGUALDAD expresiones
+   25 instruccion_mientras: T_MIENTRAS relacionales T_EJECUTE instrucciones . T_FIN T_MIENTRAS
 
-    T_MAYOR_IGUAL  shift, and go to state 76
-    T_MENOR_IGUAL  shift, and go to state 77
-    T_MENOR        shift, and go to state 78
-    T_MAYOR        shift, and go to state 79
-    T_IGUALDAD     shift, and go to state 80
-    T_DESIGUALDAD  shift, and go to state 81
-    T_HASTA        shift, and go to state 151
+    T_FIN  shift, and go to state 168
 
 
-state 135
+state 152
 
-   31 instruccion_para_cada: T_PARA T_CADA relacionales T_EN . relacionales T_EJECUTE instrucciones T_FIN T_PARA T_CADA
+   27 instruccion_repetir: T_REPETIR relacionales T_VECES instrucciones . T_FIN T_REPETIR
 
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    relacionales      go to state 152
-    expresiones       go to state 46
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
+    T_FIN  shift, and go to state 169
 
 
-state 136
+state 153
 
-   30 instruccion_repita_desde: T_REPITA T_DESDE relacionales T_HASTA . relacionales T_EJECUTE instrucciones T_FIN T_REPITA
+   26 instruccion_para: T_PARA T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales . T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_PARA
+   41 relacionales: relacionales . T_MENOR expresiones
+   42             | relacionales . T_MAYOR expresiones
+   43             | relacionales . T_MAYOR_IGUAL expresiones
+   44             | relacionales . T_MENOR_IGUAL expresiones
+   45             | relacionales . T_IGUALDAD expresiones
+   46             | relacionales . T_DESIGUALDAD expresiones
 
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    relacionales      go to state 153
-    expresiones       go to state 46
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
+    T_MAYOR_IGUAL  shift, and go to state 89
+    T_MENOR_IGUAL  shift, and go to state 90
+    T_MENOR        shift, and go to state 91
+    T_MAYOR        shift, and go to state 92
+    T_IGUALDAD     shift, and go to state 93
+    T_DESIGUALDAD  shift, and go to state 94
+    T_HASTA        shift, and go to state 170
 
 
-state 137
+state 154
 
-   19 instruccion: T_REPITA instruccion T_MIENTRAS relacionales . T_FIN T_REPITA
-   34 relacionales: relacionales . T_MENOR expresiones
-   35             | relacionales . T_MAYOR expresiones
-   36             | relacionales . T_MAYOR_IGUAL expresiones
-   37             | relacionales . T_MENOR_IGUAL expresiones
-   38             | relacionales . T_IGUALDAD expresiones
-   39             | relacionales . T_DESIGUALDAD expresiones
+   38 instruccion_para_cada: T_PARA T_CADA relacionales T_EN . relacionales T_EJECUTE instrucciones T_FIN T_PARA T_CADA
 
-    T_MAYOR_IGUAL  shift, and go to state 76
-    T_MENOR_IGUAL  shift, and go to state 77
-    T_MENOR        shift, and go to state 78
-    T_MAYOR        shift, and go to state 79
-    T_IGUALDAD     shift, and go to state 80
-    T_DESIGUALDAD  shift, and go to state 81
-    T_FIN          shift, and go to state 154
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    relacionales      go to state 171
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
 
 
-state 138
+state 155
+
+   37 instruccion_repita_desde: T_REPITA T_DESDE relacionales T_HASTA . relacionales T_EJECUTE instrucciones T_FIN T_REPITA
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    relacionales      go to state 172
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 156
+
+   20 instruccion: T_REPITA instruccion T_MIENTRAS relacionales . T_FIN T_REPITA
+   41 relacionales: relacionales . T_MENOR expresiones
+   42             | relacionales . T_MAYOR expresiones
+   43             | relacionales . T_MAYOR_IGUAL expresiones
+   44             | relacionales . T_MENOR_IGUAL expresiones
+   45             | relacionales . T_IGUALDAD expresiones
+   46             | relacionales . T_DESIGUALDAD expresiones
+
+    T_MAYOR_IGUAL  shift, and go to state 89
+    T_MENOR_IGUAL  shift, and go to state 90
+    T_MENOR        shift, and go to state 91
+    T_MAYOR        shift, and go to state 92
+    T_IGUALDAD     shift, and go to state 93
+    T_DESIGUALDAD  shift, and go to state 94
+    T_FIN          shift, and go to state 173
+
+
+state 157
 
     5 declaracion_sensores_motores: T_UTILIZAR T_IDENTIFICADOR T_COMO T_IDENTIFICADOR T_EN T_IDENTIFICADOR declaracion_sensores_motores .
 
     $default  reduce using rule 5 (declaracion_sensores_motores)
 
 
-state 139
+state 158
 
     3 declaracion_funciones: T_FUNCION $@1 T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO . instrucciones T_FIN T_FUNCION declaracion_funciones
 
@@ -2360,7 +2703,7 @@ state 139
 
     $default  reduce using rule 8 (instrucciones)
 
-    instrucciones                  go to state 155
+    instrucciones                  go to state 174
     instruccion                    go to state 19
     instruccion_si                 go to state 20
     instruccion_caso               go to state 21
@@ -2368,369 +2711,290 @@ state 139
     instruccion_para               go to state 23
     instruccion_repetir            go to state 24
     instruccion_asignacion         go to state 25
-    instruccion_repita_desde       go to state 26
-    instruccion_para_cada          go to state 27
-    instruccion_llamada_a_funcion  go to state 28
-    instruccion_retornar           go to state 29
-    id_arreglo                     go to state 30
-
-
-state 140
-
-   70 lista_indices_declaracion: T_CORCHETE_IZQUIERDO T_CORCHETE_DERECHO T_CORCHETE_IZQUIERDO . T_CORCHETE_DERECHO
-
-    T_CORCHETE_DERECHO  shift, and go to state 156
-
-
-state 141
-
-   67 lista_indices: T_CORCHETE_IZQUIERDO relacionales T_CORCHETE_DERECHO lista_indices .
-
-    $default  reduce using rule 67 (lista_indices)
-
-
-state 142
-
-   34 relacionales: relacionales . T_MENOR expresiones
-   35             | relacionales . T_MAYOR expresiones
-   36             | relacionales . T_MAYOR_IGUAL expresiones
-   37             | relacionales . T_MENOR_IGUAL expresiones
-   38             | relacionales . T_IGUALDAD expresiones
-   39             | relacionales . T_DESIGUALDAD expresiones
-   73 acumulador_parametros: T_COMA relacionales . acumulador_parametros
-
-    T_MAYOR_IGUAL  shift, and go to state 76
-    T_MENOR_IGUAL  shift, and go to state 77
-    T_MENOR        shift, and go to state 78
-    T_MAYOR        shift, and go to state 79
-    T_IGUALDAD     shift, and go to state 80
-    T_DESIGUALDAD  shift, and go to state 81
-    T_COMA         shift, and go to state 107
-
-    $default  reduce using rule 74 (acumulador_parametros)
-
-    acumulador_parametros  go to state 157
-
-
-state 143
-
-   58 id_funcion: T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO .
-
-    $default  reduce using rule 58 (id_funcion)
-
-
-state 144
-
-   20 instruccion_si: T_SI relacionales T_ENTONCES instrucciones T_FIN . T_SI
-
-    T_SI  shift, and go to state 158
-
-
-state 145
-
-   21 instruccion_si: T_SI relacionales T_ENTONCES instrucciones T_SINO . instrucciones T_FIN T_SI
-
-    T_IDENTIFICADOR  shift, and go to state 10
-    T_SI             shift, and go to state 11
-    T_CASO           shift, and go to state 12
-    T_MIENTRAS       shift, and go to state 13
-    T_REPETIR        shift, and go to state 14
-    T_PARA           shift, and go to state 15
-    T_REPITA         shift, and go to state 16
-    T_RETORNAR       shift, and go to state 17
-
-    $default  reduce using rule 8 (instrucciones)
-
-    instrucciones                  go to state 159
-    instruccion                    go to state 19
-    instruccion_si                 go to state 20
-    instruccion_caso               go to state 21
-    instruccion_mientras           go to state 22
-    instruccion_para               go to state 23
-    instruccion_repetir            go to state 24
-    instruccion_asignacion         go to state 25
-    instruccion_repita_desde       go to state 26
-    instruccion_para_cada          go to state 27
-    instruccion_llamada_a_funcion  go to state 28
-    instruccion_retornar           go to state 29
-    id_arreglo                     go to state 30
-
-
-state 146
-
-   22 instruccion_caso: T_CASO T_IDENTIFICADOR lista_casos sino_caso T_FIN . T_CASO
-
-    T_CASO  shift, and go to state 160
-
-
-state 147
-
-   75 lista_casos: T_DOS_PUNTOS relacionales T_DOS_PUNTOS instrucciones . lista_casos
-   76            | T_DOS_PUNTOS relacionales T_DOS_PUNTOS instrucciones .
-
-    T_DOS_PUNTOS  shift, and go to state 55
-
-    $default  reduce using rule 76 (lista_casos)
-
-    lista_casos  go to state 161
-
-
-state 148
-
-   23 instruccion_caso: T_CASO lista_casos sino_caso T_FIN T_CASO .
-
-    $default  reduce using rule 23 (instruccion_caso)
-
-
-state 149
-
-   24 instruccion_mientras: T_MIENTRAS relacionales T_EJECUTE instrucciones T_FIN . T_MIENTRAS
-
-    T_MIENTRAS  shift, and go to state 162
-
-
-state 150
-
-   26 instruccion_repetir: T_REPETIR relacionales T_VECES instrucciones T_FIN . T_REPETIR
-
-    T_REPETIR  shift, and go to state 163
-
-
-state 151
-
-   25 instruccion_para: T_PARA T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales T_HASTA . relacionales T_EJECUTE instrucciones T_FIN T_PARA
-
-    T_IDENTIFICADOR         shift, and go to state 37
-    T_PARENTESIS_IZQUIERDO  shift, and go to state 38
-    T_LITERAL_CARACTER      shift, and go to state 39
-    T_LITERAL_FLOTANTE      shift, and go to state 40
-    T_LITERAL_CADENA        shift, and go to state 41
-    T_LITERAL_NUMERICA      shift, and go to state 42
-    T_VERDADERO             shift, and go to state 43
-    T_FALSO                 shift, and go to state 44
-
-    relacionales      go to state 164
-    expresiones       go to state 46
-    factores          go to state 47
-    terminales        go to state 48
-    id_variable       go to state 49
-    id_funcion        go to state 50
-    id_arreglo        go to state 51
-    literal_booleana  go to state 52
-    literales         go to state 53
-
-
-state 152
-
-   31 instruccion_para_cada: T_PARA T_CADA relacionales T_EN relacionales . T_EJECUTE instrucciones T_FIN T_PARA T_CADA
-   34 relacionales: relacionales . T_MENOR expresiones
-   35             | relacionales . T_MAYOR expresiones
-   36             | relacionales . T_MAYOR_IGUAL expresiones
-   37             | relacionales . T_MENOR_IGUAL expresiones
-   38             | relacionales . T_IGUALDAD expresiones
-   39             | relacionales . T_DESIGUALDAD expresiones
-
-    T_MAYOR_IGUAL  shift, and go to state 76
-    T_MENOR_IGUAL  shift, and go to state 77
-    T_MENOR        shift, and go to state 78
-    T_MAYOR        shift, and go to state 79
-    T_IGUALDAD     shift, and go to state 80
-    T_DESIGUALDAD  shift, and go to state 81
-    T_EJECUTE      shift, and go to state 165
-
-
-state 153
-
-   30 instruccion_repita_desde: T_REPITA T_DESDE relacionales T_HASTA relacionales . T_EJECUTE instrucciones T_FIN T_REPITA
-   34 relacionales: relacionales . T_MENOR expresiones
-   35             | relacionales . T_MAYOR expresiones
-   36             | relacionales . T_MAYOR_IGUAL expresiones
-   37             | relacionales . T_MENOR_IGUAL expresiones
-   38             | relacionales . T_IGUALDAD expresiones
-   39             | relacionales . T_DESIGUALDAD expresiones
-
-    T_MAYOR_IGUAL  shift, and go to state 76
-    T_MENOR_IGUAL  shift, and go to state 77
-    T_MENOR        shift, and go to state 78
-    T_MAYOR        shift, and go to state 79
-    T_IGUALDAD     shift, and go to state 80
-    T_DESIGUALDAD  shift, and go to state 81
-    T_EJECUTE      shift, and go to state 166
-
-
-state 154
-
-   19 instruccion: T_REPITA instruccion T_MIENTRAS relacionales T_FIN . T_REPITA
-
-    T_REPITA  shift, and go to state 167
-
-
-state 155
-
-    3 declaracion_funciones: T_FUNCION $@1 T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO instrucciones . T_FIN T_FUNCION declaracion_funciones
-
-    T_FIN  shift, and go to state 168
-
-
-state 156
-
-   70 lista_indices_declaracion: T_CORCHETE_IZQUIERDO T_CORCHETE_DERECHO T_CORCHETE_IZQUIERDO T_CORCHETE_DERECHO .
-
-    $default  reduce using rule 70 (lista_indices_declaracion)
-
-
-state 157
-
-   73 acumulador_parametros: T_COMA relacionales acumulador_parametros .
-
-    $default  reduce using rule 73 (acumulador_parametros)
-
-
-state 158
-
-   20 instruccion_si: T_SI relacionales T_ENTONCES instrucciones T_FIN T_SI .
-
-    $default  reduce using rule 20 (instruccion_si)
+    instruccion_auto_asignacion    go to state 26
+    instruccion_repita_desde       go to state 27
+    instruccion_para_cada          go to state 28
+    instruccion_llamada_a_funcion  go to state 29
+    instruccion_retornar           go to state 30
+    id_arreglo                     go to state 31
 
 
 state 159
 
-   21 instruccion_si: T_SI relacionales T_ENTONCES instrucciones T_SINO instrucciones . T_FIN T_SI
+   77 lista_indices_declaracion: T_CORCHETE_IZQUIERDO T_CORCHETE_DERECHO T_CORCHETE_IZQUIERDO . T_CORCHETE_DERECHO
 
-    T_FIN  shift, and go to state 169
+    T_CORCHETE_DERECHO  shift, and go to state 175
 
 
 state 160
 
-   22 instruccion_caso: T_CASO T_IDENTIFICADOR lista_casos sino_caso T_FIN T_CASO .
+   74 lista_indices: T_CORCHETE_IZQUIERDO relacionales T_CORCHETE_DERECHO lista_indices .
 
-    $default  reduce using rule 22 (instruccion_caso)
+    $default  reduce using rule 74 (lista_indices)
 
 
 state 161
 
-   75 lista_casos: T_DOS_PUNTOS relacionales T_DOS_PUNTOS instrucciones lista_casos .
+   41 relacionales: relacionales . T_MENOR expresiones
+   42             | relacionales . T_MAYOR expresiones
+   43             | relacionales . T_MAYOR_IGUAL expresiones
+   44             | relacionales . T_MENOR_IGUAL expresiones
+   45             | relacionales . T_IGUALDAD expresiones
+   46             | relacionales . T_DESIGUALDAD expresiones
+   80 acumulador_parametros: T_COMA relacionales . acumulador_parametros
 
-    $default  reduce using rule 75 (lista_casos)
+    T_MAYOR_IGUAL  shift, and go to state 89
+    T_MENOR_IGUAL  shift, and go to state 90
+    T_MENOR        shift, and go to state 91
+    T_MAYOR        shift, and go to state 92
+    T_IGUALDAD     shift, and go to state 93
+    T_DESIGUALDAD  shift, and go to state 94
+    T_COMA         shift, and go to state 126
+
+    $default  reduce using rule 81 (acumulador_parametros)
+
+    acumulador_parametros  go to state 176
 
 
 state 162
 
-   24 instruccion_mientras: T_MIENTRAS relacionales T_EJECUTE instrucciones T_FIN T_MIENTRAS .
+   65 id_funcion: T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO .
 
-    $default  reduce using rule 24 (instruccion_mientras)
+    $default  reduce using rule 65 (id_funcion)
 
 
 state 163
 
-   26 instruccion_repetir: T_REPETIR relacionales T_VECES instrucciones T_FIN T_REPETIR .
+   21 instruccion_si: T_SI relacionales T_ENTONCES instrucciones T_FIN . T_SI
 
-    $default  reduce using rule 26 (instruccion_repetir)
+    T_SI  shift, and go to state 177
 
 
 state 164
 
-   25 instruccion_para: T_PARA T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales T_HASTA relacionales . T_EJECUTE instrucciones T_FIN T_PARA
-   34 relacionales: relacionales . T_MENOR expresiones
-   35             | relacionales . T_MAYOR expresiones
-   36             | relacionales . T_MAYOR_IGUAL expresiones
-   37             | relacionales . T_MENOR_IGUAL expresiones
-   38             | relacionales . T_IGUALDAD expresiones
-   39             | relacionales . T_DESIGUALDAD expresiones
+   22 instruccion_si: T_SI relacionales T_ENTONCES instrucciones T_SINO . instrucciones T_FIN T_SI
 
-    T_MAYOR_IGUAL  shift, and go to state 76
-    T_MENOR_IGUAL  shift, and go to state 77
-    T_MENOR        shift, and go to state 78
-    T_MAYOR        shift, and go to state 79
-    T_IGUALDAD     shift, and go to state 80
-    T_DESIGUALDAD  shift, and go to state 81
-    T_EJECUTE      shift, and go to state 170
+    T_IDENTIFICADOR  shift, and go to state 10
+    T_SI             shift, and go to state 11
+    T_CASO           shift, and go to state 12
+    T_MIENTRAS       shift, and go to state 13
+    T_REPETIR        shift, and go to state 14
+    T_PARA           shift, and go to state 15
+    T_REPITA         shift, and go to state 16
+    T_RETORNAR       shift, and go to state 17
+
+    $default  reduce using rule 8 (instrucciones)
+
+    instrucciones                  go to state 178
+    instruccion                    go to state 19
+    instruccion_si                 go to state 20
+    instruccion_caso               go to state 21
+    instruccion_mientras           go to state 22
+    instruccion_para               go to state 23
+    instruccion_repetir            go to state 24
+    instruccion_asignacion         go to state 25
+    instruccion_auto_asignacion    go to state 26
+    instruccion_repita_desde       go to state 27
+    instruccion_para_cada          go to state 28
+    instruccion_llamada_a_funcion  go to state 29
+    instruccion_retornar           go to state 30
+    id_arreglo                     go to state 31
 
 
 state 165
 
-   31 instruccion_para_cada: T_PARA T_CADA relacionales T_EN relacionales T_EJECUTE . instrucciones T_FIN T_PARA T_CADA
+   23 instruccion_caso: T_CASO T_IDENTIFICADOR lista_casos sino_caso T_FIN . T_CASO
 
-    T_IDENTIFICADOR  shift, and go to state 10
-    T_SI             shift, and go to state 11
-    T_CASO           shift, and go to state 12
-    T_MIENTRAS       shift, and go to state 13
-    T_REPETIR        shift, and go to state 14
-    T_PARA           shift, and go to state 15
-    T_REPITA         shift, and go to state 16
-    T_RETORNAR       shift, and go to state 17
-
-    $default  reduce using rule 8 (instrucciones)
-
-    instrucciones                  go to state 171
-    instruccion                    go to state 19
-    instruccion_si                 go to state 20
-    instruccion_caso               go to state 21
-    instruccion_mientras           go to state 22
-    instruccion_para               go to state 23
-    instruccion_repetir            go to state 24
-    instruccion_asignacion         go to state 25
-    instruccion_repita_desde       go to state 26
-    instruccion_para_cada          go to state 27
-    instruccion_llamada_a_funcion  go to state 28
-    instruccion_retornar           go to state 29
-    id_arreglo                     go to state 30
+    T_CASO  shift, and go to state 179
 
 
 state 166
 
-   30 instruccion_repita_desde: T_REPITA T_DESDE relacionales T_HASTA relacionales T_EJECUTE . instrucciones T_FIN T_REPITA
+   82 lista_casos: T_DOS_PUNTOS relacionales T_DOS_PUNTOS instrucciones . lista_casos
+   83            | T_DOS_PUNTOS relacionales T_DOS_PUNTOS instrucciones .
 
-    T_IDENTIFICADOR  shift, and go to state 10
-    T_SI             shift, and go to state 11
-    T_CASO           shift, and go to state 12
-    T_MIENTRAS       shift, and go to state 13
-    T_REPETIR        shift, and go to state 14
-    T_PARA           shift, and go to state 15
-    T_REPITA         shift, and go to state 16
-    T_RETORNAR       shift, and go to state 17
+    T_DOS_PUNTOS  shift, and go to state 62
 
-    $default  reduce using rule 8 (instrucciones)
+    $default  reduce using rule 83 (lista_casos)
 
-    instrucciones                  go to state 172
-    instruccion                    go to state 19
-    instruccion_si                 go to state 20
-    instruccion_caso               go to state 21
-    instruccion_mientras           go to state 22
-    instruccion_para               go to state 23
-    instruccion_repetir            go to state 24
-    instruccion_asignacion         go to state 25
-    instruccion_repita_desde       go to state 26
-    instruccion_para_cada          go to state 27
-    instruccion_llamada_a_funcion  go to state 28
-    instruccion_retornar           go to state 29
-    id_arreglo                     go to state 30
+    lista_casos  go to state 180
 
 
 state 167
 
-   19 instruccion: T_REPITA instruccion T_MIENTRAS relacionales T_FIN T_REPITA .
+   24 instruccion_caso: T_CASO lista_casos sino_caso T_FIN T_CASO .
 
-    $default  reduce using rule 19 (instruccion)
+    $default  reduce using rule 24 (instruccion_caso)
 
 
 state 168
 
-    3 declaracion_funciones: T_FUNCION $@1 T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO instrucciones T_FIN . T_FUNCION declaracion_funciones
+   25 instruccion_mientras: T_MIENTRAS relacionales T_EJECUTE instrucciones T_FIN . T_MIENTRAS
 
-    T_FUNCION  shift, and go to state 173
+    T_MIENTRAS  shift, and go to state 181
 
 
 state 169
 
-   21 instruccion_si: T_SI relacionales T_ENTONCES instrucciones T_SINO instrucciones T_FIN . T_SI
+   27 instruccion_repetir: T_REPETIR relacionales T_VECES instrucciones T_FIN . T_REPETIR
 
-    T_SI  shift, and go to state 174
+    T_REPETIR  shift, and go to state 182
 
 
 state 170
 
-   25 instruccion_para: T_PARA T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales T_HASTA relacionales T_EJECUTE . instrucciones T_FIN T_PARA
+   26 instruccion_para: T_PARA T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales T_HASTA . relacionales T_EJECUTE instrucciones T_FIN T_PARA
+
+    T_IDENTIFICADOR         shift, and go to state 44
+    T_PARENTESIS_IZQUIERDO  shift, and go to state 45
+    T_LITERAL_CARACTER      shift, and go to state 46
+    T_LITERAL_FLOTANTE      shift, and go to state 47
+    T_LITERAL_CADENA        shift, and go to state 48
+    T_LITERAL_NUMERICA      shift, and go to state 49
+    T_VERDADERO             shift, and go to state 50
+    T_FALSO                 shift, and go to state 51
+
+    relacionales      go to state 183
+    expresiones       go to state 53
+    factores          go to state 54
+    terminales        go to state 55
+    id_variable       go to state 56
+    id_funcion        go to state 57
+    id_arreglo        go to state 58
+    literal_booleana  go to state 59
+    literales         go to state 60
+
+
+state 171
+
+   38 instruccion_para_cada: T_PARA T_CADA relacionales T_EN relacionales . T_EJECUTE instrucciones T_FIN T_PARA T_CADA
+   41 relacionales: relacionales . T_MENOR expresiones
+   42             | relacionales . T_MAYOR expresiones
+   43             | relacionales . T_MAYOR_IGUAL expresiones
+   44             | relacionales . T_MENOR_IGUAL expresiones
+   45             | relacionales . T_IGUALDAD expresiones
+   46             | relacionales . T_DESIGUALDAD expresiones
+
+    T_MAYOR_IGUAL  shift, and go to state 89
+    T_MENOR_IGUAL  shift, and go to state 90
+    T_MENOR        shift, and go to state 91
+    T_MAYOR        shift, and go to state 92
+    T_IGUALDAD     shift, and go to state 93
+    T_DESIGUALDAD  shift, and go to state 94
+    T_EJECUTE      shift, and go to state 184
+
+
+state 172
+
+   37 instruccion_repita_desde: T_REPITA T_DESDE relacionales T_HASTA relacionales . T_EJECUTE instrucciones T_FIN T_REPITA
+   41 relacionales: relacionales . T_MENOR expresiones
+   42             | relacionales . T_MAYOR expresiones
+   43             | relacionales . T_MAYOR_IGUAL expresiones
+   44             | relacionales . T_MENOR_IGUAL expresiones
+   45             | relacionales . T_IGUALDAD expresiones
+   46             | relacionales . T_DESIGUALDAD expresiones
+
+    T_MAYOR_IGUAL  shift, and go to state 89
+    T_MENOR_IGUAL  shift, and go to state 90
+    T_MENOR        shift, and go to state 91
+    T_MAYOR        shift, and go to state 92
+    T_IGUALDAD     shift, and go to state 93
+    T_DESIGUALDAD  shift, and go to state 94
+    T_EJECUTE      shift, and go to state 185
+
+
+state 173
+
+   20 instruccion: T_REPITA instruccion T_MIENTRAS relacionales T_FIN . T_REPITA
+
+    T_REPITA  shift, and go to state 186
+
+
+state 174
+
+    3 declaracion_funciones: T_FUNCION $@1 T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO instrucciones . T_FIN T_FUNCION declaracion_funciones
+
+    T_FIN  shift, and go to state 187
+
+
+state 175
+
+   77 lista_indices_declaracion: T_CORCHETE_IZQUIERDO T_CORCHETE_DERECHO T_CORCHETE_IZQUIERDO T_CORCHETE_DERECHO .
+
+    $default  reduce using rule 77 (lista_indices_declaracion)
+
+
+state 176
+
+   80 acumulador_parametros: T_COMA relacionales acumulador_parametros .
+
+    $default  reduce using rule 80 (acumulador_parametros)
+
+
+state 177
+
+   21 instruccion_si: T_SI relacionales T_ENTONCES instrucciones T_FIN T_SI .
+
+    $default  reduce using rule 21 (instruccion_si)
+
+
+state 178
+
+   22 instruccion_si: T_SI relacionales T_ENTONCES instrucciones T_SINO instrucciones . T_FIN T_SI
+
+    T_FIN  shift, and go to state 188
+
+
+state 179
+
+   23 instruccion_caso: T_CASO T_IDENTIFICADOR lista_casos sino_caso T_FIN T_CASO .
+
+    $default  reduce using rule 23 (instruccion_caso)
+
+
+state 180
+
+   82 lista_casos: T_DOS_PUNTOS relacionales T_DOS_PUNTOS instrucciones lista_casos .
+
+    $default  reduce using rule 82 (lista_casos)
+
+
+state 181
+
+   25 instruccion_mientras: T_MIENTRAS relacionales T_EJECUTE instrucciones T_FIN T_MIENTRAS .
+
+    $default  reduce using rule 25 (instruccion_mientras)
+
+
+state 182
+
+   27 instruccion_repetir: T_REPETIR relacionales T_VECES instrucciones T_FIN T_REPETIR .
+
+    $default  reduce using rule 27 (instruccion_repetir)
+
+
+state 183
+
+   26 instruccion_para: T_PARA T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales T_HASTA relacionales . T_EJECUTE instrucciones T_FIN T_PARA
+   41 relacionales: relacionales . T_MENOR expresiones
+   42             | relacionales . T_MAYOR expresiones
+   43             | relacionales . T_MAYOR_IGUAL expresiones
+   44             | relacionales . T_MENOR_IGUAL expresiones
+   45             | relacionales . T_IGUALDAD expresiones
+   46             | relacionales . T_DESIGUALDAD expresiones
+
+    T_MAYOR_IGUAL  shift, and go to state 89
+    T_MENOR_IGUAL  shift, and go to state 90
+    T_MENOR        shift, and go to state 91
+    T_MAYOR        shift, and go to state 92
+    T_IGUALDAD     shift, and go to state 93
+    T_DESIGUALDAD  shift, and go to state 94
+    T_EJECUTE      shift, and go to state 189
+
+
+state 184
+
+   38 instruccion_para_cada: T_PARA T_CADA relacionales T_EN relacionales T_EJECUTE . instrucciones T_FIN T_PARA T_CADA
 
     T_IDENTIFICADOR  shift, and go to state 10
     T_SI             shift, and go to state 11
@@ -2743,7 +3007,7 @@ state 170
 
     $default  reduce using rule 8 (instrucciones)
 
-    instrucciones                  go to state 175
+    instrucciones                  go to state 190
     instruccion                    go to state 19
     instruccion_si                 go to state 20
     instruccion_caso               go to state 21
@@ -2751,28 +3015,112 @@ state 170
     instruccion_para               go to state 23
     instruccion_repetir            go to state 24
     instruccion_asignacion         go to state 25
-    instruccion_repita_desde       go to state 26
-    instruccion_para_cada          go to state 27
-    instruccion_llamada_a_funcion  go to state 28
-    instruccion_retornar           go to state 29
-    id_arreglo                     go to state 30
+    instruccion_auto_asignacion    go to state 26
+    instruccion_repita_desde       go to state 27
+    instruccion_para_cada          go to state 28
+    instruccion_llamada_a_funcion  go to state 29
+    instruccion_retornar           go to state 30
+    id_arreglo                     go to state 31
 
 
-state 171
+state 185
 
-   31 instruccion_para_cada: T_PARA T_CADA relacionales T_EN relacionales T_EJECUTE instrucciones . T_FIN T_PARA T_CADA
+   37 instruccion_repita_desde: T_REPITA T_DESDE relacionales T_HASTA relacionales T_EJECUTE . instrucciones T_FIN T_REPITA
 
-    T_FIN  shift, and go to state 176
+    T_IDENTIFICADOR  shift, and go to state 10
+    T_SI             shift, and go to state 11
+    T_CASO           shift, and go to state 12
+    T_MIENTRAS       shift, and go to state 13
+    T_REPETIR        shift, and go to state 14
+    T_PARA           shift, and go to state 15
+    T_REPITA         shift, and go to state 16
+    T_RETORNAR       shift, and go to state 17
+
+    $default  reduce using rule 8 (instrucciones)
+
+    instrucciones                  go to state 191
+    instruccion                    go to state 19
+    instruccion_si                 go to state 20
+    instruccion_caso               go to state 21
+    instruccion_mientras           go to state 22
+    instruccion_para               go to state 23
+    instruccion_repetir            go to state 24
+    instruccion_asignacion         go to state 25
+    instruccion_auto_asignacion    go to state 26
+    instruccion_repita_desde       go to state 27
+    instruccion_para_cada          go to state 28
+    instruccion_llamada_a_funcion  go to state 29
+    instruccion_retornar           go to state 30
+    id_arreglo                     go to state 31
 
 
-state 172
+state 186
 
-   30 instruccion_repita_desde: T_REPITA T_DESDE relacionales T_HASTA relacionales T_EJECUTE instrucciones . T_FIN T_REPITA
+   20 instruccion: T_REPITA instruccion T_MIENTRAS relacionales T_FIN T_REPITA .
 
-    T_FIN  shift, and go to state 177
+    $default  reduce using rule 20 (instruccion)
 
 
-state 173
+state 187
+
+    3 declaracion_funciones: T_FUNCION $@1 T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO instrucciones T_FIN . T_FUNCION declaracion_funciones
+
+    T_FUNCION  shift, and go to state 192
+
+
+state 188
+
+   22 instruccion_si: T_SI relacionales T_ENTONCES instrucciones T_SINO instrucciones T_FIN . T_SI
+
+    T_SI  shift, and go to state 193
+
+
+state 189
+
+   26 instruccion_para: T_PARA T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales T_HASTA relacionales T_EJECUTE . instrucciones T_FIN T_PARA
+
+    T_IDENTIFICADOR  shift, and go to state 10
+    T_SI             shift, and go to state 11
+    T_CASO           shift, and go to state 12
+    T_MIENTRAS       shift, and go to state 13
+    T_REPETIR        shift, and go to state 14
+    T_PARA           shift, and go to state 15
+    T_REPITA         shift, and go to state 16
+    T_RETORNAR       shift, and go to state 17
+
+    $default  reduce using rule 8 (instrucciones)
+
+    instrucciones                  go to state 194
+    instruccion                    go to state 19
+    instruccion_si                 go to state 20
+    instruccion_caso               go to state 21
+    instruccion_mientras           go to state 22
+    instruccion_para               go to state 23
+    instruccion_repetir            go to state 24
+    instruccion_asignacion         go to state 25
+    instruccion_auto_asignacion    go to state 26
+    instruccion_repita_desde       go to state 27
+    instruccion_para_cada          go to state 28
+    instruccion_llamada_a_funcion  go to state 29
+    instruccion_retornar           go to state 30
+    id_arreglo                     go to state 31
+
+
+state 190
+
+   38 instruccion_para_cada: T_PARA T_CADA relacionales T_EN relacionales T_EJECUTE instrucciones . T_FIN T_PARA T_CADA
+
+    T_FIN  shift, and go to state 195
+
+
+state 191
+
+   37 instruccion_repita_desde: T_REPITA T_DESDE relacionales T_HASTA relacionales T_EJECUTE instrucciones . T_FIN T_REPITA
+
+    T_FIN  shift, and go to state 196
+
+
+state 192
 
     3 declaracion_funciones: T_FUNCION $@1 T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO instrucciones T_FIN T_FUNCION . declaracion_funciones
 
@@ -2780,74 +3128,74 @@ state 173
 
     $default  reduce using rule 4 (declaracion_funciones)
 
-    declaracion_funciones  go to state 178
+    declaracion_funciones  go to state 197
 
 
-state 174
+state 193
 
-   21 instruccion_si: T_SI relacionales T_ENTONCES instrucciones T_SINO instrucciones T_FIN T_SI .
+   22 instruccion_si: T_SI relacionales T_ENTONCES instrucciones T_SINO instrucciones T_FIN T_SI .
 
-    $default  reduce using rule 21 (instruccion_si)
-
-
-state 175
-
-   25 instruccion_para: T_PARA T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales T_HASTA relacionales T_EJECUTE instrucciones . T_FIN T_PARA
-
-    T_FIN  shift, and go to state 179
+    $default  reduce using rule 22 (instruccion_si)
 
 
-state 176
+state 194
 
-   31 instruccion_para_cada: T_PARA T_CADA relacionales T_EN relacionales T_EJECUTE instrucciones T_FIN . T_PARA T_CADA
+   26 instruccion_para: T_PARA T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales T_HASTA relacionales T_EJECUTE instrucciones . T_FIN T_PARA
 
-    T_PARA  shift, and go to state 180
-
-
-state 177
-
-   30 instruccion_repita_desde: T_REPITA T_DESDE relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN . T_REPITA
-
-    T_REPITA  shift, and go to state 181
+    T_FIN  shift, and go to state 198
 
 
-state 178
+state 195
+
+   38 instruccion_para_cada: T_PARA T_CADA relacionales T_EN relacionales T_EJECUTE instrucciones T_FIN . T_PARA T_CADA
+
+    T_PARA  shift, and go to state 199
+
+
+state 196
+
+   37 instruccion_repita_desde: T_REPITA T_DESDE relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN . T_REPITA
+
+    T_REPITA  shift, and go to state 200
+
+
+state 197
 
     3 declaracion_funciones: T_FUNCION $@1 T_IDENTIFICADOR T_PARENTESIS_IZQUIERDO lista_parametros T_PARENTESIS_DERECHO instrucciones T_FIN T_FUNCION declaracion_funciones .
 
     $default  reduce using rule 3 (declaracion_funciones)
 
 
-state 179
+state 198
 
-   25 instruccion_para: T_PARA T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN . T_PARA
+   26 instruccion_para: T_PARA T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN . T_PARA
 
-    T_PARA  shift, and go to state 182
-
-
-state 180
-
-   31 instruccion_para_cada: T_PARA T_CADA relacionales T_EN relacionales T_EJECUTE instrucciones T_FIN T_PARA . T_CADA
-
-    T_CADA  shift, and go to state 183
+    T_PARA  shift, and go to state 201
 
 
-state 181
+state 199
 
-   30 instruccion_repita_desde: T_REPITA T_DESDE relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_REPITA .
+   38 instruccion_para_cada: T_PARA T_CADA relacionales T_EN relacionales T_EJECUTE instrucciones T_FIN T_PARA . T_CADA
 
-    $default  reduce using rule 30 (instruccion_repita_desde)
-
-
-state 182
-
-   25 instruccion_para: T_PARA T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_PARA .
-
-    $default  reduce using rule 25 (instruccion_para)
+    T_CADA  shift, and go to state 202
 
 
-state 183
+state 200
 
-   31 instruccion_para_cada: T_PARA T_CADA relacionales T_EN relacionales T_EJECUTE instrucciones T_FIN T_PARA T_CADA .
+   37 instruccion_repita_desde: T_REPITA T_DESDE relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_REPITA .
 
-    $default  reduce using rule 31 (instruccion_para_cada)
+    $default  reduce using rule 37 (instruccion_repita_desde)
+
+
+state 201
+
+   26 instruccion_para: T_PARA T_IDENTIFICADOR T_SIMBOLO_IGUAL relacionales T_HASTA relacionales T_EJECUTE instrucciones T_FIN T_PARA .
+
+    $default  reduce using rule 26 (instruccion_para)
+
+
+state 202
+
+   38 instruccion_para_cada: T_PARA T_CADA relacionales T_EN relacionales T_EJECUTE instrucciones T_FIN T_PARA T_CADA .
+
+    $default  reduce using rule 38 (instruccion_para_cada)

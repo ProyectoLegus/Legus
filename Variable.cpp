@@ -64,7 +64,6 @@ Tipo* Variable::validarSemantica()
         return tipoDeVariable;
     }
 
-
     string mensajeDeError = "¡Variable '";
     mensajeDeError += *this->identificador;
     mensajeDeError += "' no esta definida!";
