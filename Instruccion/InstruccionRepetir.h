@@ -1,8 +1,8 @@
 #ifndef INSTRUCCIONREPETIR_H
 #define INSTRUCCIONREPETIR_H
 
-#include "Instruccion.h"
-#include "Expresion.h"
+#include "Instruccion/Instruccion.h"
+#include "Expresion/Expresion.h"
 #include <sstream>
 
 class InstruccionRepetir : public Instruccion

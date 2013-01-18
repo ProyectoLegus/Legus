@@ -1,4 +1,4 @@
-#include "TipoCadena.h"
+#include "Programa/Tipos/TipoCadena.h"
 
 TipoCadena::TipoCadena()
     :Tipo()

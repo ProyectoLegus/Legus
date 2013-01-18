@@ -1,4 +1,4 @@
-#include "InstruccionMientras.h"
+#include "Instruccion/InstruccionMientras.h"
 
 InstruccionMientras::InstruccionMientras(Expresion *condicion, Instruccion *instrucciones, Instruccion *siguiente, int idDeExpresion)
     :Instruccion(siguiente, MIENTRAS, idDeExpresion)

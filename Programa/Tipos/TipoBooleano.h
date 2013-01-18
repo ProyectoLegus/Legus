@@ -1,7 +1,7 @@
 #ifndef TIPOBOOLEANO_H
 #define TIPOBOOLEANO_H
 
-#include "Tipo.h"
+#include "Programa/Tipos/Tipo.h"
 
 class TipoBooleano : public Tipo
 {

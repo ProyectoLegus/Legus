@@ -1,4 +1,4 @@
-#include "Lista.h"
+#include "Bison_Flex/Lista.h"
 
 Lista::Lista()
 {

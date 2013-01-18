@@ -1,4 +1,4 @@
-#include "InstruccionParaCada.h"
+#include "Instruccion/InstruccionParaCada.h"
 
 InstruccionParaCada::InstruccionParaCada(Expresion *variable, Expresion *coleccion_arreglo, Instruccion *instrucciones, Instruccion *siguiente, int idDeExpresion)
     :Instruccion(siguiente, PARACADA, idDeExpresion)

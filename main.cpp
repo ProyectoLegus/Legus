@@ -1,6 +1,5 @@
 #include <QtGui/QApplication>
-#include "editor.h"
-#include "tokens.h"
+#include "Editor/editor.h"
 
 int main(int argc, char *argv[])
 {

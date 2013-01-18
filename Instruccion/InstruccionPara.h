@@ -5,9 +5,9 @@
 #include <string>
 #include <sstream>
 
-#include "Instruccion.h"
-#include "InstruccionAsignacion.h"
-#include "Expresion.h"
+#include "Instruccion/Instruccion.h"
+#include "Instruccion/InstruccionAsignacion.h"
+#include "Expresion/Expresion.h"
 
 using namespace std;
 

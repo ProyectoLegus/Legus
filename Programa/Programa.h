@@ -3,16 +3,16 @@
 
 #include <iostream>
 #include <vector>
-#include "Instruccion.h"
-#include "DeclaracionDeFuncion.h"
-#include "DeclaracionUtilizar.h"
-#include "VariableDeclarada.h"
-#include "TipoBooleano.h"
-#include "TipoCadena.h"
-#include "TipoCaracter.h"
-#include "TipoEntero.h"
-#include "TipoFlotante.h"
-#include "TipoArreglo.h"
+#include "Instruccion/Instruccion.h"
+#include "Programa/DeclaracionDeFuncion.h"
+#include "Programa/DeclaracionUtilizar.h"
+#include "Expresion/Variables/VariableDeclarada.h"
+#include "Programa/Tipos/TipoBooleano.h"
+#include "Programa/Tipos/TipoCadena.h"
+#include "Programa/Tipos/TipoCaracter.h"
+#include "Programa/Tipos/TipoEntero.h"
+#include "Programa/Tipos/TipoFlotante.h"
+#include "Programa/Tipos/TipoArreglo.h"
 
 using namespace std;
 

@@ -1,4 +1,4 @@
-#include "GeneradorDeErrores.h"
+#include "Programa/GeneradorDeErrores.h"
 
 GeneradorDeErrores::GeneradorDeErrores()
 {

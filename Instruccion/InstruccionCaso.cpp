@@ -1,4 +1,4 @@
-#include "InstruccionCaso.h"
+#include "Instruccion/InstruccionCaso.h"
 
 InstruccionCaso::InstruccionCaso(Expresion *expresion, ListaDeCaso *listaDeCaso, Instruccion *instrucciones_sino, Instruccion *siguiente, int idDeExpresion)
     :Instruccion(siguiente, CASO, idDeExpresion)

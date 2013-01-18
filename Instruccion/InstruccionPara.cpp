@@ -1,4 +1,4 @@
-#include "InstruccionPara.h"
+#include "Instruccion/InstruccionPara.h"
 
 InstruccionPara::InstruccionPara(InstruccionAsignacion *instruccionAsignacion, Expresion *final, Instruccion *instrucciones, Instruccion *siguiente, int idDeExpresion)
     :Instruccion(siguiente, PARA, idDeExpresion)

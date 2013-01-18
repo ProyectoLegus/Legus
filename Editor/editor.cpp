@@ -1,6 +1,6 @@
 #include "editor.h"
 #include "ui_editor.h"
-#include "tokens.h"
+#include "Bison_Flex/tokens.h"
 
 Editor::Editor(QWidget *parent) :
     QMainWindow(parent),

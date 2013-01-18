@@ -1,4 +1,4 @@
-#include "ExpresionBinariaDivision.h"
+#include "Expresion/ExpresionBinaria/ExpresionBinariaDivision.h"
 
 ExpresionBinariaDivision::ExpresionBinariaDivision(Expresion *izquierda, Expresion *derecha, int numeroDeLinea)
     :ExpresionBinaria(izquierda, derecha, DIVISION, numeroDeLinea)

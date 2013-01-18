@@ -1,4 +1,4 @@
-#include "ExpresionBinariaDistinto.h"
+#include "Expresion/ExpresionBinaria/ExpresionBinariaDistinto.h"
 
 ExpresionBinariaDistinto::ExpresionBinariaDistinto(Expresion *izquierda, Expresion *derecha, int numeroDeLinea)
     : ExpresionBinaria(izquierda, derecha, DISTINTO, numeroDeLinea)

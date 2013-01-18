@@ -5,10 +5,10 @@
 #include <string>
 #include <sstream>
 
-#include "Expresion.h"
-#include "Instruccion.h"
-#include "Lista.h"
-#include "Programa.h"
+#include "Expresion/Expresion.h"
+#include "Instruccion/Instruccion.h"
+#include "Bison_Flex/Lista.h"
+#include "Programa/Programa.h"
 
 using namespace std;
 

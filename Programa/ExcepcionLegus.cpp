@@ -1,4 +1,4 @@
-#include "ExcepcionLegus.h"
+#include "Programa/ExcepcionLegus.h"
 
 ExcepcionLegus::ExcepcionLegus(const string &mensaje)
 {

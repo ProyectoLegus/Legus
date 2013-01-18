@@ -1,8 +1,8 @@
 #ifndef EXPRESIONLITERALBOOLEANA_H
 #define EXPRESIONLITERALBOOLEANA_H
 
-#include "Expresion.h"
-#include "Programa.h"
+#include "Expresion/Expresion.h"
+#include "Programa/Programa.h"
 
 class ExpresionLiteralBooleana : public Expresion
 {

@@ -8,7 +8,7 @@ enum Instrucciones
     REPITA, REPITADESDE, RETORNAR
 };
 
-#include "ExcepcionLegus.h"
+#include "Programa/ExcepcionLegus.h"
 
 class Instruccion
 {

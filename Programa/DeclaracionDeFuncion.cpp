@@ -1,4 +1,4 @@
-#include "DeclaracionDeFuncion.h"
+#include "Programa/DeclaracionDeFuncion.h"
 
 DeclaracionDeFuncion::DeclaracionDeFuncion(Variable *variable, Lista *lista_parametros, Instruccion *instrucciones)
 {

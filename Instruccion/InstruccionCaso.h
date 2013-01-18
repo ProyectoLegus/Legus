@@ -3,9 +3,9 @@
 
 #include <sstream>
 
-#include "Instruccion.h"
-#include "Expresion.h"
-#include "ListaDeCaso.h"
+#include "Instruccion/Instruccion.h"
+#include "Expresion/Expresion.h"
+#include "Instruccion/ListaDeCaso.h"
 
 class InstruccionCaso : public Instruccion
 {

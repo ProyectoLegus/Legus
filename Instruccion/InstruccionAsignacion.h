@@ -3,11 +3,11 @@
 
 #include <sstream>
 
-#include "Instruccion.h"
-#include "Expresion.h"
-#include "Variable.h"
-#include "VariableArreglo.h"
-#include "Programa.h"
+#include "Instruccion/Instruccion.h"
+#include "Expresion/Expresion.h"
+#include "Expresion/Variables/Variable.h"
+#include "Expresion/Variables/VariableArreglo.h"
+#include "Programa/Programa.h"
 
 class InstruccionAsignacion : public Instruccion
 {

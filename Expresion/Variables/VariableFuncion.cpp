@@ -1,4 +1,4 @@
-#include "VariableFuncion.h"
+#include "Expresion/Variables/VariableFuncion.h"
 
 VariableFuncion::VariableFuncion(string *identificador, Lista *lista_parametros, int numeroDeLinea, int idDeExpresion)
     :Variable(identificador, numeroDeLinea, idDeExpresion, FUNCION)

@@ -1,4 +1,4 @@
-#include "ListaDeCaso.h"
+#include "Instruccion/ListaDeCaso.h"
 
 ListaDeCaso::ListaDeCaso(Expresion *expresion_caso, Instruccion *instrucciones, ListaDeCaso *siguiente)
 {

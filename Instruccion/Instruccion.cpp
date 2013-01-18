@@ -1,4 +1,4 @@
-#include "Instruccion.h"
+#include "Instruccion/Instruccion.h"
 
 Instruccion::Instruccion( Instruccion *siguiente, Instrucciones tipo, int idDeExpresion)
 {

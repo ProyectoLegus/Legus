@@ -1,4 +1,4 @@
-#include "ExpresionBinariaIgualdad.h"
+#include "Expresion/ExpresionBinaria/ExpresionBinariaIgualdad.h"
 
 ExpresionBinariaIgualdad::ExpresionBinariaIgualdad(Expresion *izquierda, Expresion *derecha, int numeroDeLinea)
     :ExpresionBinaria(izquierda, derecha, IGUALDAD, numeroDeLinea)

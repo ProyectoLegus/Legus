@@ -1,4 +1,4 @@
-#include "InstruccionAsignacion.h"
+#include "Instruccion/InstruccionAsignacion.h"
 
 InstruccionAsignacion::InstruccionAsignacion(Expresion *variable, Expresion *expresion, Instruccion *siguiente, int idDeExpresion)
     :Instruccion(siguiente, ASIGNACION, idDeExpresion)

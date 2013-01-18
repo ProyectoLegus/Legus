@@ -1,8 +1,8 @@
 #ifndef EXPRESIONBINARIAMULTIPLICACION_H
 #define EXPRESIONBINARIAMULTIPLICACION_H
 
-#include "ExpresionBinaria.h"
-#include "Programa.h"
+#include "Expresion/ExpresionBinaria/ExpresionBinaria.h"
+#include "Programa/Programa.h"
 
 class ExpresionBinariaMultiplicacion : public ExpresionBinaria
 {

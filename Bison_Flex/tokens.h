@@ -2,9 +2,9 @@
 #define yyHEADER_H 1
 #define yyIN_HEADER 1
 
-#line 6 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.h"
+#line 6 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.h"
 
-#line 8 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.h"
+#line 8 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.h"
 
 #define  YY_INT_ALIGNED short int
 
@@ -311,9 +311,9 @@ extern int yylex (void);
 #undef YY_DECL
 #endif
 
-#line 104 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.l"
+#line 104 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 
 
-#line 318 "D:\\DropBox\\ProyectoCodigo\\Legus\\tokens.h"
+#line 318 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.h"
 #undef yyIN_HEADER
 #endif /* yyHEADER_H */

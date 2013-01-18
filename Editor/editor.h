@@ -11,12 +11,12 @@
 #include <stdio.h>
 #include <vector>
 
-#include "tokens.h"
-#include "parser.h"
-#include "Programa.h"
-#include "Instruccion.h"
-#include "DeclaracionDeFuncion.h"
-#include "ExcepcionLegus.h"
+#include "Bison_Flex/tokens.h"
+#include "Bison_Flex/parser.h"
+#include "Programa/Programa.h"
+#include "Instruccion/Instruccion.h"
+#include "Programa/DeclaracionDeFuncion.h"
+#include "Programa/ExcepcionLegus.h"
 
 extern int yyparse();
 extern FILE *yyin;

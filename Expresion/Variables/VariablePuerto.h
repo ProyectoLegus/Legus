@@ -1,7 +1,7 @@
 #ifndef VARIABLEPUERTO_H
 #define VARIABLEPUERTO_H
 
-#include "Variable.h"
+#include "Expresion/Variables/Variable.h"
 
 class VariablePuerto : public Variable
 {

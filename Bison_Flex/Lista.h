@@ -1,7 +1,7 @@
 #ifndef LISTA_H
 #define LISTA_H
 
-#include "Expresion.h"
+#include "Expresion/Expresion.h"
 #include <iostream>
 #include <vector>
 

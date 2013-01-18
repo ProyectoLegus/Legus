@@ -1,4 +1,4 @@
-#include "ExpresionBinariaSuma.h"
+#include "Expresion/ExpresionBinaria/ExpresionBinariaSuma.h"
 
 ExpresionBinariaSuma::ExpresionBinariaSuma(Expresion *izquierda, Expresion *derecha, int numeroDeLinea)
     :ExpresionBinaria(izquierda, derecha, SUMA,numeroDeLinea)

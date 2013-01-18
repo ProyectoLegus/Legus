@@ -1,7 +1,7 @@
 #ifndef TABLADEFUNCIONES_H
 #define TABLADEFUNCIONES_H
 
-#include "DeclaracionDeFuncion.h"
+#include "Programa/DeclaracionDeFuncion.h"
 
 #include <iostream>
 #include <vector>

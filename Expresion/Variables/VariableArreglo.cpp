@@ -1,4 +1,4 @@
-#include "VariableArreglo.h"
+#include "Expresion/Variables/VariableArreglo.h"
 
 VariableArreglo::VariableArreglo(string *identificador, Lista *lista_indices, int numeroDeLinea, int idDeExpresion)
     :Variable(identificador,numeroDeLinea, idDeExpresion, ARREGLO)

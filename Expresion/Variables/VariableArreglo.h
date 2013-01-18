@@ -3,8 +3,8 @@
 
 #include <iostream>
 #include <string>
-#include "Variable.h"
-#include "Lista.h"
+#include "Expresion/Variables/Variable.h"
+#include "Bison_Flex/Lista.h"
 
 using namespace std;
 

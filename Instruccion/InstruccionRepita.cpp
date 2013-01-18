@@ -1,4 +1,4 @@
-#include "InstruccionRepita.h"
+#include "Instruccion/InstruccionRepita.h"
 
 InstruccionRepita::InstruccionRepita(Expresion *condicion, Instruccion *siguiente, int idDeExpresion)
     :Instruccion(siguiente, REPITA, idDeExpresion)

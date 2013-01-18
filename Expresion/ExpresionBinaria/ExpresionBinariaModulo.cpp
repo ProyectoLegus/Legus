@@ -1,4 +1,4 @@
-#include "expresionBinariaModulo.h"
+#include "Expresion/ExpresionBinaria/expresionBinariaModulo.h"
 
 ExpresionBinariaModulo::ExpresionBinariaModulo(Expresion *izquierda, Expresion *derecha, int numeroDeLinea)
     :ExpresionBinaria(izquierda, derecha, MODULO,numeroDeLinea)

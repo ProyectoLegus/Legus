@@ -1,4 +1,4 @@
-#include "ExpresionBinariaMultiplicacion.h"
+#include "Expresion/ExpresionBinaria/ExpresionBinariaMultiplicacion.h"
 
 ExpresionBinariaMultiplicacion::ExpresionBinariaMultiplicacion(Expresion *izquierda, Expresion *derecha, int numeroDeLinea)
     :ExpresionBinaria(izquierda, derecha, MULTIPLICACION,numeroDeLinea)

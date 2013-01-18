@@ -1,4 +1,4 @@
-#include "VariableSensor.h"
+#include "Expresion/Variables/VariableSensor.h"
 
 VariableSensor::VariableSensor(string *identificador, int numeroDeLinea, int idDeExpresion)
     :Variable(identificador, numeroDeLinea,idDeExpresion, SENSOR)

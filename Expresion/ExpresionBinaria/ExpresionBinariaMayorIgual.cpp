@@ -1,4 +1,4 @@
-#include "ExpresionBinariaMayorIgual.h"
+#include "Expresion/ExpresionBinaria/ExpresionBinariaMayorIgual.h"
 
 ExpresionBinariaMayorIgual::ExpresionBinariaMayorIgual(Expresion *izquierda, Expresion *derecha, int numeroDeLinea)
     :ExpresionBinaria(izquierda, derecha, MAYOR,numeroDeLinea)

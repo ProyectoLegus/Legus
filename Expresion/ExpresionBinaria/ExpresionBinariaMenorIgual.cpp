@@ -1,4 +1,4 @@
-#include "ExpresionBinariaMenorIgual.h"
+#include "Expresion/ExpresionBinaria/ExpresionBinariaMenorIgual.h"
 
 ExpresionBinariaMenorIgual::ExpresionBinariaMenorIgual(Expresion *izquierda, Expresion *derecha, int numeroDeLinea)
     :ExpresionBinaria(izquierda, derecha, MENORIGUAL,numeroDeLinea)

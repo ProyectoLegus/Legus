@@ -1,9 +1,9 @@
 #ifndef EXPRESIONUNARIANEGACION_H
 #define EXPRESIONUNARIANEGACION_H
 
-#include "Expresion.h"
-#include "ExpresionUnaria.h"
-#include "Programa.h"
+#include "Expresion/Expresion.h"
+#include "Expresion/ExpresionUnaria/ExpresionUnaria.h"
+#include "Programa/Programa.h"
 
 class ExpresionUnariaNegacion : public ExpresionUnaria
 {

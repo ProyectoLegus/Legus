@@ -66,10 +66,10 @@
 /* Copy the first part of user declarations.  */
 
 /* Line 268 of yacc.c  */
-#line 10 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 10 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
 
     /* Imports Tree */
-    #include "ParserImports.h"
+    #include "Bison_Flex/ParserImports.h"
 
     extern int yylex();
     extern char *yytext;
@@ -85,7 +85,7 @@
 
 
 /* Line 268 of yacc.c  */
-#line 89 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.cpp"
+#line 89 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.cpp"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -108,18 +108,18 @@
 /* "%code requires" blocks.  */
 
 /* Line 288 of yacc.c  */
-#line 3 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 3 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
 
     #include <string>
-    #include "Expresion.h"
-    #include "Instruccion.h"
-    #include "Lista.h"
-    #include "ListaDeCaso.h"
+    #include "Expresion/Expresion.h"
+    #include "Instruccion/Instruccion.h"
+    #include "Bison_Flex/Lista.h"
+    #include "Instruccion/ListaDeCaso.h"
 
 
 
 /* Line 288 of yacc.c  */
-#line 123 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.cpp"
+#line 123 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.cpp"
 
 /* Tokens.  */
 #ifndef YYTOKENTYPE
@@ -200,7 +200,7 @@ typedef union YYSTYPE
 {
 
 /* Line 293 of yacc.c  */
-#line 27 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 27 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
 
     std::string              *string;
     Expresion                *expresion;
@@ -212,7 +212,7 @@ typedef union YYSTYPE
 
 
 /* Line 293 of yacc.c  */
-#line 216 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.cpp"
+#line 216 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.cpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -237,7 +237,7 @@ typedef struct YYLTYPE
 
 
 /* Line 343 of yacc.c  */
-#line 241 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.cpp"
+#line 241 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.cpp"
 
 #ifdef short
 # undef short
@@ -571,15 +571,15 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    79,    79,    89,    89,   101,   107,   113,   121,   127,
-     133,   137,   141,   145,   149,   153,   157,   161,   165,   169,
-     173,   177,   182,   187,   195,   199,   205,   212,   219,   226,
-     233,   238,   247,   256,   265,   274,   283,   292,   305,   312,
-     319,   325,   333,   337,   341,   345,   349,   353,   357,   363,
-     367,   371,   375,   379,   385,   389,   393,   397,   401,   405,
-     411,   415,   419,   423,   429,   433,   439,   445,   453,   457,
-     463,   467,   471,   475,   479,   485,   490,   498,   501,   508,
-     514,   519,   525,   530,   535,   542,   547
+       0,    79,    79,    89,    89,   101,   107,   113,   121,   128,
+     134,   138,   142,   146,   150,   154,   158,   162,   166,   170,
+     174,   178,   183,   188,   196,   200,   206,   213,   220,   227,
+     234,   239,   248,   257,   266,   275,   284,   293,   306,   313,
+     320,   326,   334,   338,   342,   346,   350,   354,   358,   364,
+     368,   372,   376,   380,   386,   390,   394,   398,   402,   406,
+     412,   416,   420,   424,   430,   434,   440,   446,   454,   458,
+     464,   468,   472,   476,   480,   486,   491,   499,   502,   509,
+     515,   520,   526,   531,   536,   543,   548
 };
 #endif
 
@@ -1722,7 +1722,7 @@ yyreduce:
         case 2:
 
 /* Line 1806 of yacc.c  */
-#line 80 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 80 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.instruccion) = (yyvsp[(3) - (3)].instruccion);
             Programa::obtenerInstancia()->instrucciones = (yyvsp[(3) - (3)].instruccion);
@@ -1732,14 +1732,14 @@ yyreduce:
   case 3:
 
 /* Line 1806 of yacc.c  */
-#line 89 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 89 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {}
     break;
 
   case 4:
 
 /* Line 1806 of yacc.c  */
-#line 96 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 96 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             DeclaracionDeFuncion *declrFuncion = new DeclaracionDeFuncion(new Variable((yyvsp[(3) - (10)].string), yylineno, correlativo++), (yyvsp[(5) - (10)].lista), (yyvsp[(7) - (10)].instruccion));
             Programa::obtenerInstancia()->tablaDeFunciones->push_back(declrFuncion);
@@ -1749,7 +1749,7 @@ yyreduce:
   case 5:
 
 /* Line 1806 of yacc.c  */
-#line 101 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 101 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.string)=0;
         }
@@ -1758,7 +1758,7 @@ yyreduce:
   case 6:
 
 /* Line 1806 of yacc.c  */
-#line 108 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 108 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             DeclaracionUtilizar *declrUtilizar = new DeclaracionUtilizar(new VariablePuerto((yyvsp[(2) - (7)].string), yylineno, correlativo++), new VariableSensor((yyvsp[(4) - (7)].string), yylineno, correlativo++), new Variable((yyvsp[(6) - (7)].string), yylineno, correlativo++));
             Programa::obtenerInstancia()->tablaDePuertosYSensores->push_back(declrUtilizar);
@@ -1768,7 +1768,7 @@ yyreduce:
   case 7:
 
 /* Line 1806 of yacc.c  */
-#line 113 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 113 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.string)=0;
         }
@@ -1777,7 +1777,7 @@ yyreduce:
   case 8:
 
 /* Line 1806 of yacc.c  */
-#line 122 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 122 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyvsp[(1) - (2)].instruccion)->establecerSiguiente((yyvsp[(2) - (2)].instruccion));
             (yyval.instruccion) = (yyvsp[(1) - (2)].instruccion);
@@ -1787,7 +1787,7 @@ yyreduce:
   case 9:
 
 /* Line 1806 of yacc.c  */
-#line 127 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 128 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.instruccion) = 0;
         }
@@ -1796,7 +1796,7 @@ yyreduce:
   case 10:
 
 /* Line 1806 of yacc.c  */
-#line 134 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 135 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.instruccion) = (yyvsp[(1) - (1)].instruccion);
         }
@@ -1805,7 +1805,7 @@ yyreduce:
   case 11:
 
 /* Line 1806 of yacc.c  */
-#line 138 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 139 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.instruccion) = (yyvsp[(1) - (1)].instruccion);
         }
@@ -1814,7 +1814,7 @@ yyreduce:
   case 12:
 
 /* Line 1806 of yacc.c  */
-#line 142 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 143 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.instruccion) = (yyvsp[(1) - (1)].instruccion);
         }
@@ -1823,7 +1823,7 @@ yyreduce:
   case 13:
 
 /* Line 1806 of yacc.c  */
-#line 146 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 147 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.instruccion) = (yyvsp[(1) - (1)].instruccion);
         }
@@ -1832,7 +1832,7 @@ yyreduce:
   case 14:
 
 /* Line 1806 of yacc.c  */
-#line 150 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 151 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.instruccion) = (yyvsp[(1) - (1)].instruccion);
         }
@@ -1841,7 +1841,7 @@ yyreduce:
   case 15:
 
 /* Line 1806 of yacc.c  */
-#line 154 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 155 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.instruccion) = (yyvsp[(1) - (1)].instruccion);
         }
@@ -1850,7 +1850,7 @@ yyreduce:
   case 16:
 
 /* Line 1806 of yacc.c  */
-#line 158 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 159 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.instruccion) = (yyvsp[(1) - (1)].instruccion);
         }
@@ -1859,7 +1859,7 @@ yyreduce:
   case 17:
 
 /* Line 1806 of yacc.c  */
-#line 162 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 163 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.instruccion) = (yyvsp[(1) - (1)].instruccion);
         }
@@ -1868,7 +1868,7 @@ yyreduce:
   case 18:
 
 /* Line 1806 of yacc.c  */
-#line 166 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 167 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.instruccion) = (yyvsp[(1) - (1)].instruccion);
         }
@@ -1877,7 +1877,7 @@ yyreduce:
   case 19:
 
 /* Line 1806 of yacc.c  */
-#line 170 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 171 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.instruccion) = (yyvsp[(1) - (1)].instruccion);
         }
@@ -1886,7 +1886,7 @@ yyreduce:
   case 20:
 
 /* Line 1806 of yacc.c  */
-#line 174 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 175 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.instruccion) = (yyvsp[(1) - (1)].instruccion);
         }
@@ -1895,7 +1895,7 @@ yyreduce:
   case 21:
 
 /* Line 1806 of yacc.c  */
-#line 178 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 179 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
         }
     break;
@@ -1903,7 +1903,7 @@ yyreduce:
   case 22:
 
 /* Line 1806 of yacc.c  */
-#line 183 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 184 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             /* Parametros: condicion, instruccionSiVerdadero, instruccionSiFalso,instruccionSiAnidado, Siguiente*/
             (yyval.instruccion) = new InstruccionSi((yyvsp[(2) - (6)].expresion), (yyvsp[(4) - (6)].instruccion), 0, 0, 0, correlativo++);
@@ -1913,7 +1913,7 @@ yyreduce:
   case 23:
 
 /* Line 1806 of yacc.c  */
-#line 188 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 189 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             /* Parametros: condicion, instruccionSiVerdadero, instruccionSiFalso,instruccionSiAnidado, Siguiente*/
             (yyval.instruccion) = new InstruccionSi((yyvsp[(2) - (8)].expresion), (yyvsp[(4) - (8)].instruccion), (yyvsp[(6) - (8)].instruccion), 0, 0, correlativo++);
@@ -1923,7 +1923,7 @@ yyreduce:
   case 24:
 
 /* Line 1806 of yacc.c  */
-#line 196 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 197 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.instruccion) = new InstruccionCaso( new Variable((yyvsp[(2) - (6)].string), yylineno, correlativo++), (yyvsp[(3) - (6)].lista_de_caso), (yyvsp[(4) - (6)].instruccion), 0, correlativo++);
         }
@@ -1932,7 +1932,7 @@ yyreduce:
   case 25:
 
 /* Line 1806 of yacc.c  */
-#line 200 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 201 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.instruccion) = new InstruccionCaso(0, (yyvsp[(2) - (5)].lista_de_caso), (yyvsp[(3) - (5)].instruccion), 0, correlativo++);
         }
@@ -1941,7 +1941,7 @@ yyreduce:
   case 26:
 
 /* Line 1806 of yacc.c  */
-#line 206 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 207 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             /* Parametros:   condicion, instrucciones, siguiente */
             (yyval.instruccion) = new InstruccionMientras((yyvsp[(2) - (6)].expresion), (yyvsp[(4) - (6)].instruccion), 0, correlativo++);
@@ -1951,7 +1951,7 @@ yyreduce:
   case 27:
 
 /* Line 1806 of yacc.c  */
-#line 213 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 214 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             /*identificador, inicio, final, instrucciones, siguiente*/
             (yyval.instruccion) = new InstruccionPara(new InstruccionAsignacion(new Variable((yyvsp[(2) - (10)].string), yylineno, correlativo++),(yyvsp[(4) - (10)].expresion),0, correlativo++), (yyvsp[(6) - (10)].expresion), (yyvsp[(8) - (10)].instruccion), 0, correlativo++);
@@ -1961,7 +1961,7 @@ yyreduce:
   case 28:
 
 /* Line 1806 of yacc.c  */
-#line 220 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 221 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             /*Cantidad, instrucciones, siguiente*/
             (yyval.instruccion) = new InstruccionRepetir((yyvsp[(2) - (6)].expresion), (yyvsp[(4) - (6)].instruccion), 0, correlativo++);
@@ -1971,7 +1971,7 @@ yyreduce:
   case 29:
 
 /* Line 1806 of yacc.c  */
-#line 227 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 228 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             /*Variable, Expresion, siguiente*/
             Variable *var = new Variable((yyvsp[(1) - (3)].string), (yyvsp[(3) - (3)].expresion), yylineno, correlativo);
@@ -1983,7 +1983,7 @@ yyreduce:
   case 30:
 
 /* Line 1806 of yacc.c  */
-#line 234 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 235 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             /*Variable, Expresion, siguiente*/
             (yyval.instruccion) = new InstruccionAsignacion((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), 0, correlativo++);
@@ -1993,7 +1993,7 @@ yyreduce:
   case 31:
 
 /* Line 1806 of yacc.c  */
-#line 239 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 240 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             VariableArreglo* variableArreglo = new VariableArreglo((yyvsp[(1) - (3)].string), 0, yylineno, correlativo);
             TipoArreglo *tipoArreglo = Programa::obtenerInstancia()->obtenerTipoArreglo();
@@ -2005,7 +2005,7 @@ yyreduce:
   case 32:
 
 /* Line 1806 of yacc.c  */
-#line 248 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 249 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             Variable *vari = new Variable((yyvsp[(1) - (4)].string), yylineno, correlativo++);
             ExpresionBinariaSuma *suma = new ExpresionBinariaSuma(vari, (yyvsp[(4) - (4)].expresion), yylineno);
@@ -2019,7 +2019,7 @@ yyreduce:
   case 33:
 
 /* Line 1806 of yacc.c  */
-#line 257 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 258 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             Variable *vari = new Variable((yyvsp[(1) - (4)].string), yylineno, correlativo++);
             ExpresionBinariaDivision *division = new ExpresionBinariaDivision(vari, (yyvsp[(4) - (4)].expresion), yylineno);
@@ -2033,7 +2033,7 @@ yyreduce:
   case 34:
 
 /* Line 1806 of yacc.c  */
-#line 266 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 267 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             Variable *vari = new Variable((yyvsp[(1) - (4)].string), yylineno, correlativo++);
             ExpresionBinariaModulo *modulo = new ExpresionBinariaModulo(vari, (yyvsp[(4) - (4)].expresion), yylineno);
@@ -2047,7 +2047,7 @@ yyreduce:
   case 35:
 
 /* Line 1806 of yacc.c  */
-#line 275 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 276 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             Variable *vari = new Variable((yyvsp[(1) - (4)].string), yylineno, correlativo++);
             ExpresionBinariaMultiplicacion *multiplicacion= new ExpresionBinariaMultiplicacion(vari, (yyvsp[(4) - (4)].expresion), yylineno);
@@ -2061,7 +2061,7 @@ yyreduce:
   case 36:
 
 /* Line 1806 of yacc.c  */
-#line 284 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 285 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             Variable *vari = new Variable((yyvsp[(1) - (4)].string), yylineno, correlativo++);
             ExpresionBinariaResta *resta= new ExpresionBinariaResta(vari, (yyvsp[(4) - (4)].expresion), yylineno);
@@ -2075,7 +2075,7 @@ yyreduce:
   case 37:
 
 /* Line 1806 of yacc.c  */
-#line 293 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 294 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             Variable *vari = new Variable((yyvsp[(1) - (4)].string), yylineno, correlativo++);
             ExpresionBinariaExponenciacion *exponenciacion= new ExpresionBinariaExponenciacion(vari, (yyvsp[(4) - (4)].expresion), yylineno);
@@ -2089,7 +2089,7 @@ yyreduce:
   case 38:
 
 /* Line 1806 of yacc.c  */
-#line 306 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 307 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             /* inicio , final , instrucciones , siguiente*/
             (yyval.instruccion) = new InstruccionRepitaDesde((yyvsp[(3) - (9)].expresion), (yyvsp[(5) - (9)].expresion), (yyvsp[(7) - (9)].instruccion), 0, correlativo++);
@@ -2099,7 +2099,7 @@ yyreduce:
   case 39:
 
 /* Line 1806 of yacc.c  */
-#line 313 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 314 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             /* variable, coleccion, instrucciones, siguientes */
             (yyval.instruccion) = new InstruccionParaCada((yyvsp[(3) - (10)].expresion), (yyvsp[(5) - (10)].expresion), (yyvsp[(7) - (10)].instruccion), 0, correlativo++);
@@ -2109,7 +2109,7 @@ yyreduce:
   case 40:
 
 /* Line 1806 of yacc.c  */
-#line 320 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 321 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.instruccion) = new InstruccionLlamadaAFuncion((yyvsp[(1) - (4)].string), (yyvsp[(3) - (4)].lista), 0, correlativo++);
         }
@@ -2118,7 +2118,7 @@ yyreduce:
   case 41:
 
 /* Line 1806 of yacc.c  */
-#line 326 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 327 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.instruccion) = new InstruccionRetornar((yyvsp[(2) - (2)].expresion), 0, correlativo++);
         }
@@ -2127,7 +2127,7 @@ yyreduce:
   case 42:
 
 /* Line 1806 of yacc.c  */
-#line 334 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 335 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaMenor((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2136,7 +2136,7 @@ yyreduce:
   case 43:
 
 /* Line 1806 of yacc.c  */
-#line 338 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 339 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaMayor((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2145,7 +2145,7 @@ yyreduce:
   case 44:
 
 /* Line 1806 of yacc.c  */
-#line 342 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 343 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaMayorIgual((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2154,7 +2154,7 @@ yyreduce:
   case 45:
 
 /* Line 1806 of yacc.c  */
-#line 346 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 347 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaMenorIgual((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2163,7 +2163,7 @@ yyreduce:
   case 46:
 
 /* Line 1806 of yacc.c  */
-#line 350 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 351 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaIgualdad((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2172,7 +2172,7 @@ yyreduce:
   case 47:
 
 /* Line 1806 of yacc.c  */
-#line 354 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 355 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaDistinto((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2181,7 +2181,7 @@ yyreduce:
   case 48:
 
 /* Line 1806 of yacc.c  */
-#line 358 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 359 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = (yyvsp[(1) - (1)].expresion);
         }
@@ -2190,7 +2190,7 @@ yyreduce:
   case 49:
 
 /* Line 1806 of yacc.c  */
-#line 364 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 365 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaSuma((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2199,7 +2199,7 @@ yyreduce:
   case 50:
 
 /* Line 1806 of yacc.c  */
-#line 368 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 369 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaResta((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2208,7 +2208,7 @@ yyreduce:
   case 51:
 
 /* Line 1806 of yacc.c  */
-#line 372 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 373 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaO((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2217,7 +2217,7 @@ yyreduce:
   case 52:
 
 /* Line 1806 of yacc.c  */
-#line 376 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 377 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaO((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2226,7 +2226,7 @@ yyreduce:
   case 53:
 
 /* Line 1806 of yacc.c  */
-#line 380 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 381 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = (yyvsp[(1) - (1)].expresion);
         }
@@ -2235,7 +2235,7 @@ yyreduce:
   case 54:
 
 /* Line 1806 of yacc.c  */
-#line 386 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 387 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaMultiplicacion((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2244,7 +2244,7 @@ yyreduce:
   case 55:
 
 /* Line 1806 of yacc.c  */
-#line 390 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 391 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaDivision((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2253,7 +2253,7 @@ yyreduce:
   case 56:
 
 /* Line 1806 of yacc.c  */
-#line 394 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 395 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaY((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2262,7 +2262,7 @@ yyreduce:
   case 57:
 
 /* Line 1806 of yacc.c  */
-#line 398 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 399 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaY((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2271,7 +2271,7 @@ yyreduce:
   case 58:
 
 /* Line 1806 of yacc.c  */
-#line 402 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 403 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = new ExpresionBinariaModulo((yyvsp[(1) - (3)].expresion), (yyvsp[(3) - (3)].expresion), yylineno);
         }
@@ -2280,7 +2280,7 @@ yyreduce:
   case 59:
 
 /* Line 1806 of yacc.c  */
-#line 406 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 407 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = (yyvsp[(1) - (1)].expresion);
         }
@@ -2289,7 +2289,7 @@ yyreduce:
   case 60:
 
 /* Line 1806 of yacc.c  */
-#line 412 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 413 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = (yyvsp[(2) - (3)].expresion);
         }
@@ -2298,7 +2298,7 @@ yyreduce:
   case 61:
 
 /* Line 1806 of yacc.c  */
-#line 416 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 417 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = (yyvsp[(1) - (1)].expresion);
         }
@@ -2307,7 +2307,7 @@ yyreduce:
   case 62:
 
 /* Line 1806 of yacc.c  */
-#line 420 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 421 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = (yyvsp[(1) - (1)].expresion);
         }
@@ -2316,7 +2316,7 @@ yyreduce:
   case 63:
 
 /* Line 1806 of yacc.c  */
-#line 424 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 425 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = new Variable((yyvsp[(1) - (1)].string), yylineno, correlativo++);
         }
@@ -2325,7 +2325,7 @@ yyreduce:
   case 64:
 
 /* Line 1806 of yacc.c  */
-#line 430 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 431 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = (yyvsp[(1) - (1)].expresion);
         }
@@ -2334,7 +2334,7 @@ yyreduce:
   case 65:
 
 /* Line 1806 of yacc.c  */
-#line 434 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 435 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = (yyvsp[(1) - (1)].expresion);
         }
@@ -2343,7 +2343,7 @@ yyreduce:
   case 66:
 
 /* Line 1806 of yacc.c  */
-#line 440 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 441 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = new VariableFuncion((yyvsp[(1) - (4)].string), (yyvsp[(3) - (4)].lista), yylineno, correlativo++);
         }
@@ -2352,7 +2352,7 @@ yyreduce:
   case 67:
 
 /* Line 1806 of yacc.c  */
-#line 446 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 447 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = new VariableArreglo((yyvsp[(1) - (2)].string), (yyvsp[(2) - (2)].lista), yylineno, correlativo++);
         }
@@ -2361,7 +2361,7 @@ yyreduce:
   case 68:
 
 /* Line 1806 of yacc.c  */
-#line 454 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 455 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = new ExpresionLiteralBooleana(true, yylineno);
         }
@@ -2370,7 +2370,7 @@ yyreduce:
   case 69:
 
 /* Line 1806 of yacc.c  */
-#line 458 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 459 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = new ExpresionLiteralBooleana(false, yylineno);
         }
@@ -2379,7 +2379,7 @@ yyreduce:
   case 70:
 
 /* Line 1806 of yacc.c  */
-#line 464 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 465 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = (yyvsp[(1) - (1)].expresion);
         }
@@ -2388,7 +2388,7 @@ yyreduce:
   case 71:
 
 /* Line 1806 of yacc.c  */
-#line 468 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 469 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = new ExpresionLiteralEntera( atoi( (yyvsp[(1) - (1)].string)->c_str() ), yylineno);
        }
@@ -2397,7 +2397,7 @@ yyreduce:
   case 72:
 
 /* Line 1806 of yacc.c  */
-#line 472 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 473 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = new ExpresionLiteralCaracter( (yyvsp[(1) - (1)].string)->at(1), yylineno);
        }
@@ -2406,7 +2406,7 @@ yyreduce:
   case 73:
 
 /* Line 1806 of yacc.c  */
-#line 476 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 477 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = new ExpresionLiteralFlotante( atof( (yyvsp[(1) - (1)].string)->c_str() ), yylineno);
        }
@@ -2415,7 +2415,7 @@ yyreduce:
   case 74:
 
 /* Line 1806 of yacc.c  */
-#line 480 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 481 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.expresion) = new ExpresionLiteralCadena((yyvsp[(1) - (1)].string), yylineno);
        }
@@ -2424,7 +2424,7 @@ yyreduce:
   case 75:
 
 /* Line 1806 of yacc.c  */
-#line 486 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 487 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyvsp[(4) - (4)].lista)->lista->push_back((yyvsp[(2) - (4)].expresion));
             (yyval.lista) = (yyvsp[(4) - (4)].lista);
@@ -2434,7 +2434,7 @@ yyreduce:
   case 76:
 
 /* Line 1806 of yacc.c  */
-#line 491 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 492 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             Lista *lista = new Lista();
             lista->lista->push_back((yyvsp[(2) - (3)].expresion));
@@ -2445,7 +2445,7 @@ yyreduce:
   case 77:
 
 /* Line 1806 of yacc.c  */
-#line 499 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 500 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
         }
     break;
@@ -2453,7 +2453,7 @@ yyreduce:
   case 78:
 
 /* Line 1806 of yacc.c  */
-#line 502 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 503 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
 
         }
@@ -2462,7 +2462,7 @@ yyreduce:
   case 79:
 
 /* Line 1806 of yacc.c  */
-#line 509 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 510 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyvsp[(2) - (2)].lista)->lista->push_back((yyvsp[(1) - (2)].expresion));
             (yyval.lista) = (yyvsp[(2) - (2)].lista);
@@ -2472,7 +2472,7 @@ yyreduce:
   case 80:
 
 /* Line 1806 of yacc.c  */
-#line 514 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 515 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.lista) = new Lista();
         }
@@ -2481,7 +2481,7 @@ yyreduce:
   case 81:
 
 /* Line 1806 of yacc.c  */
-#line 520 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 521 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyvsp[(3) - (3)].lista)->lista->push_back((yyvsp[(2) - (3)].expresion));
             (yyval.lista) = (yyvsp[(3) - (3)].lista);
@@ -2491,7 +2491,7 @@ yyreduce:
   case 82:
 
 /* Line 1806 of yacc.c  */
-#line 525 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 526 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.lista) = new Lista();
         }
@@ -2500,7 +2500,7 @@ yyreduce:
   case 83:
 
 /* Line 1806 of yacc.c  */
-#line 531 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 532 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyvsp[(5) - (5)].lista_de_caso)->establecerSiguiente(new ListaDeCaso((yyvsp[(2) - (5)].expresion), (yyvsp[(4) - (5)].instruccion), 0) );
             (yyval.lista_de_caso) = (yyvsp[(5) - (5)].lista_de_caso);
@@ -2510,7 +2510,7 @@ yyreduce:
   case 84:
 
 /* Line 1806 of yacc.c  */
-#line 536 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 537 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             /*Parametros, Expresion, Instruccion, Siguiente*/
             (yyval.lista_de_caso) = new ListaDeCaso((yyvsp[(2) - (4)].expresion), (yyvsp[(4) - (4)].instruccion), 0);
@@ -2520,7 +2520,7 @@ yyreduce:
   case 85:
 
 /* Line 1806 of yacc.c  */
-#line 543 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 544 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.instruccion) = (yyvsp[(2) - (2)].instruccion);
         }
@@ -2529,7 +2529,7 @@ yyreduce:
   case 86:
 
 /* Line 1806 of yacc.c  */
-#line 547 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 548 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
     {
             (yyval.instruccion) = 0;
         }
@@ -2538,7 +2538,7 @@ yyreduce:
 
 
 /* Line 1806 of yacc.c  */
-#line 2542 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.cpp"
+#line 2542 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2776,6 +2776,6 @@ yyreturn:
 
 
 /* Line 2067 of yacc.c  */
-#line 550 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 551 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
 
 

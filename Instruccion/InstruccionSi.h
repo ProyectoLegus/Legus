@@ -1,9 +1,9 @@
 #ifndef INSTRUCCIONSI_H
 #define INSTRUCCIONSI_H
 
-#include "Instruccion.h"
-#include "Expresion.h"
-#include "Programa.h"
+#include "Instruccion/Instruccion.h"
+#include "Expresion/Expresion.h"
+#include "Programa/Programa.h"
 #include <sstream>
 
 class InstruccionSi : public Instruccion

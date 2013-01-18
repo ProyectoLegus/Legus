@@ -1,5 +1,5 @@
-#include "Variable.h"
-#include "Programa.h"
+#include "Expresion/Variables/Variable.h"
+#include "Programa/Programa.h"
 
 Variable::Variable(string *identificador, int numeroDeLinea, int idDeExpresion, Expresiones tipo)
     :Expresion(tipo,numeroDeLinea)

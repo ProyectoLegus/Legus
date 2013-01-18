@@ -1,4 +1,4 @@
-#include "TipoArreglo.h"
+#include "Programa/Tipos/TipoArreglo.h"
 
 TipoArreglo::TipoArreglo()
     :Tipo()

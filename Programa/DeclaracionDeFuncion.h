@@ -1,9 +1,9 @@
 #ifndef DECLARACIONDEFUNCION_H
 #define DECLARACIONDEFUNCION_H
 
-#include "Instruccion.h"
-#include "Variable.h"
-#include "Lista.h"
+#include "Instruccion/Instruccion.h"
+#include "Expresion/Variables/Variable.h"
+#include "Bison_Flex/Lista.h"
 
 class DeclaracionDeFuncion
 {

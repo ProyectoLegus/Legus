@@ -1,4 +1,4 @@
-#include "TipoEntero.h"
+#include "Programa/Tipos/TipoEntero.h"
 
 TipoEntero::TipoEntero()
     :Tipo()

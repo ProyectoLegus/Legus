@@ -1,4 +1,4 @@
-#include "InstruccionRepitaDesde.h"
+#include "Instruccion/InstruccionRepitaDesde.h"
 
 InstruccionRepitaDesde::InstruccionRepitaDesde(Expresion *inicio, Expresion *final, Instruccion *instrucciones, Instruccion *siguiente, int idDeExpresion)
     :Instruccion(siguiente,REPITADESDE, idDeExpresion)

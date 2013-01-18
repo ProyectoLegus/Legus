@@ -1,4 +1,4 @@
-#include "ExpresionLiteralBooleana.h"
+#include "Expresion/ExpresionLiteral/ExpresionLiteralBooleana.h"
 
 ExpresionLiteralBooleana::ExpresionLiteralBooleana(bool valor, int numeroDeLinea)
     :Expresion(LITERALBOOLEANA,numeroDeLinea)

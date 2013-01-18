@@ -1,10 +1,10 @@
 #ifndef VARIABLEDECLARADA_H
 #define VARIABLEDECLARADA_H
 
-#include "tipo.h"
+#include "Programa/Tipos/Tipo.h"
 #include <iostream>
 #include <string>
-#include "Variable.h"
+#include "Expresion/Variables/Variable.h"
 
 using namespace std;
 

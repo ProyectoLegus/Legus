@@ -1,4 +1,4 @@
-    #include "InstruccionRepetir.h"
+#include "Instruccion/InstruccionRepetir.h"
 
 InstruccionRepetir::InstruccionRepetir(Expresion *cantidad, Instruccion *instrucciones, Instruccion *siguiente, int idDeExpresion)
     :Instruccion(siguiente, REPETIR, idDeExpresion)

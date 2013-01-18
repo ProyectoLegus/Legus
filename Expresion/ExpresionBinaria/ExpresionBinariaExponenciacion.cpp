@@ -1,4 +1,4 @@
-#include "ExpresionBinariaExponenciacion.h"
+#include "Expresion/ExpresionBinaria/ExpresionBinariaExponenciacion.h"
 
 ExpresionBinariaExponenciacion::ExpresionBinariaExponenciacion(Expresion *izquierda, Expresion *derecha, int numeroDeLinea)
     :ExpresionBinaria(izquierda, derecha, EXPONENCIACION,numeroDeLinea)

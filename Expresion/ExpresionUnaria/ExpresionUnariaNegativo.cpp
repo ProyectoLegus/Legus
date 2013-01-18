@@ -1,4 +1,4 @@
-#include "ExpresionUnariaNegativo.h"
+#include "Expresion/ExpresionUnaria/ExpresionUnariaNegativo.h"
 
 ExpresionUnariaNegativo::ExpresionUnariaNegativo(Expresion *expresion, int numeroDeLinea)
     :ExpresionUnaria(expresion,NEGATIVO, numeroDeLinea)

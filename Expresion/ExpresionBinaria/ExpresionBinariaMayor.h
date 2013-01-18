@@ -1,8 +1,8 @@
 #ifndef EXPRESIONBINARIAMAYOR_H
 #define EXPRESIONBINARIAMAYOR_H
 
-#include "ExpresionBinaria.h"
-#include "Programa.h"
+#include "Expresion/ExpresionBinaria/ExpresionBinaria.h"
+#include "Programa/Programa.h"
 
 class ExpresionBinariaMayor : public ExpresionBinaria
 {

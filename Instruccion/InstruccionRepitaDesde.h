@@ -1,8 +1,8 @@
 #ifndef INSTRUCCIONREPITADESDE_H
 #define INSTRUCCIONREPITADESDE_H
 
-#include "Instruccion.h"
-#include "Expresion.h"
+#include "Instruccion/Instruccion.h"
+#include "Expresion/Expresion.h"
 #include <sstream>
 
 class InstruccionRepitaDesde : public Instruccion

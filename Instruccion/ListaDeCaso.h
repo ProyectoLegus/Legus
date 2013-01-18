@@ -1,8 +1,8 @@
 #ifndef LISTADECASO_H
 #define LISTADECASO_H
 
-#include "Expresion.h"
-#include "Instruccion.h"
+#include "Expresion/Expresion.h"
+#include "Instruccion/Instruccion.h"
 
 class ListaDeCaso
 {

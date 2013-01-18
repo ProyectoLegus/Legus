@@ -1,4 +1,4 @@
-#include "ExpresionLiteralEntera.h"
+#include "Expresion/ExpresionLiteral/ExpresionLiteralEntera.h"
 
 ExpresionLiteralEntera::ExpresionLiteralEntera(int valor, int numeroDeLinea)
     :Expresion(LITERALENTERA,numeroDeLinea)

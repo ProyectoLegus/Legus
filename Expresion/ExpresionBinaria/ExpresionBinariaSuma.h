@@ -1,8 +1,8 @@
 #ifndef EXPRESIONBINARIASUMA_H
 #define EXPRESIONBINARIASUMA_H
 
-#include "ExpresionBinaria.h"
-#include "Programa.h"
+#include "Expresion/ExpresionBinaria/ExpresionBinaria.h"
+#include "Programa/Programa.h"
 
 class ExpresionBinariaSuma : public ExpresionBinaria
 {

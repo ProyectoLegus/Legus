@@ -1,4 +1,4 @@
-#include "ExpresionBinariaY.h"
+#include "Expresion/ExpresionBinaria/ExpresionBinariaY.h"
 
 ExpresionBinariaY::ExpresionBinariaY(Expresion *izquierda, Expresion *derecha, int numeroDeLinea)
     :ExpresionBinaria(izquierda, derecha, OPERADORY,numeroDeLinea)

@@ -2,14 +2,14 @@
 %error-verbose
 %code requires{
     #include <string>
-    #include "Expresion.h"
-    #include "Instruccion.h"
-    #include "Lista.h"
-    #include "ListaDeCaso.h"
+    #include "Expresion/Expresion.h"
+    #include "Instruccion/Instruccion.h"
+    #include "Bison_Flex/Lista.h"
+    #include "Instruccion/ListaDeCaso.h"
 }
 %{
     /* Imports Tree */
-    #include "ParserImports.h"
+    #include "Bison_Flex/ParserImports.h"
 
     extern int yylex();
     extern char *yytext;

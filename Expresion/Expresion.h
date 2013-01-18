@@ -12,8 +12,8 @@ enum Expresiones
     VARIABLENORMAL, ARREGLO, FUNCION,
     PUERTO, SENSOR
 };
-#include "Tipo.h"
-#include "ExcepcionLegus.h"
+#include "Programa/Tipos/Tipo.h"
+#include "Programa/ExcepcionLegus.h"
 
 
 /*Para no incluirlo en los demas*/

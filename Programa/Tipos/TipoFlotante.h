@@ -1,7 +1,7 @@
 #ifndef TIPOFLOTANTE_H
 #define TIPOFLOTANTE_H
 
-#include "Tipo.h"
+#include "Programa/Tipos/Tipo.h"
 
 class TipoFlotante : public Tipo
 {

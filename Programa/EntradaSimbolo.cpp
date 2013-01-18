@@ -1,4 +1,4 @@
-#include "EntradaSimbolo.h"
+#include "Programa/EntradaSimbolo.h"
 
 EntradaSimbolo::EntradaSimbolo()
 {

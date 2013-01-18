@@ -1,4 +1,4 @@
-#include "DeclaracionUtilizar.h"
+#include "Programa/DeclaracionUtilizar.h"
 
 DeclaracionUtilizar::DeclaracionUtilizar(VariablePuerto *puerto, VariableSensor *sensor, Variable *variable)
 {

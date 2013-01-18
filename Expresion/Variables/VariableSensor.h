@@ -1,7 +1,7 @@
 #ifndef VARIABLESENSOR_H
 #define VARIABLESENSOR_H
 
-#include "Variable.h"
+#include "Expresion/Variables/Variable.h"
 
 class VariableSensor : public Variable
 {

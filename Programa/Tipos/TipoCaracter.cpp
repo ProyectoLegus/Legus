@@ -1,4 +1,4 @@
-#include "TipoCaracter.h"
+#include "Programa/Tipos/TipoCaracter.h"
 
 TipoCaracter::TipoCaracter()
     :Tipo()

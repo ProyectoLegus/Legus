@@ -33,18 +33,18 @@
 /* "%code requires" blocks.  */
 
 /* Line 2068 of yacc.c  */
-#line 3 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 3 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
 
     #include <string>
-    #include "Expresion.h"
-    #include "Instruccion.h"
-    #include "Lista.h"
-    #include "ListaDeCaso.h"
+    #include "Expresion/Expresion.h"
+    #include "Instruccion/Instruccion.h"
+    #include "Bison_Flex/Lista.h"
+    #include "Instruccion/ListaDeCaso.h"
 
 
 
 /* Line 2068 of yacc.c  */
-#line 48 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.h"
+#line 48 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.h"
 
 /* Tokens.  */
 #ifndef YYTOKENTYPE
@@ -125,7 +125,7 @@ typedef union YYSTYPE
 {
 
 /* Line 2068 of yacc.c  */
-#line 27 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.y"
+#line 27 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
 
     std::string              *string;
     Expresion                *expresion;
@@ -137,7 +137,7 @@ typedef union YYSTYPE
 
 
 /* Line 2068 of yacc.c  */
-#line 141 "D:\\DropBox\\ProyectoCodigo\\Legus\\parser.h"
+#line 141 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

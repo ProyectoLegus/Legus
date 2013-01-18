@@ -1,4 +1,4 @@
-#include "VariableDeclarada.h"
+#include "Expresion/Variables/VariableDeclarada.h"
 
 VariableDeclarada::VariableDeclarada(Variable *variable, Tipo *tipoInferido, int idDeExpresion)
 {

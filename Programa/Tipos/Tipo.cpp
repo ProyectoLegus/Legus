@@ -1,4 +1,4 @@
-#include "Tipo.h"
+#include "Programa/Tipos/Tipo.h"
 
 Tipo::Tipo()
 {

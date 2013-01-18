@@ -1,8 +1,8 @@
 #ifndef EXPRESIONLITERALENTERA_H
 #define EXPRESIONLITERALENTERA_H
 
-#include "Expresion.h"
-#include "Programa.h"
+#include "Expresion/Expresion.h"
+#include "Programa/Programa.h"
 #include <sstream>
 
 class ExpresionLiteralEntera : public Expresion

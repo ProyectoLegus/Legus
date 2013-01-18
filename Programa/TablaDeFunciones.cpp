@@ -1,4 +1,4 @@
-#include "TablaDeFunciones.h"
+#include "Programa/TablaDeFunciones.h"
 
 TablaDeFunciones::TablaDeFunciones()
 {

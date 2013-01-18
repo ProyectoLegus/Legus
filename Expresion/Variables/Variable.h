@@ -1,7 +1,7 @@
 #ifndef VARIABLE_H
 #define VARIABLE_H
 
-#include "Expresion.h"
+#include "Expresion/Expresion.h"
 
 #include <iostream>
 #include <string>

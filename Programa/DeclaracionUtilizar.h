@@ -1,9 +1,9 @@
 #ifndef DECLARACIONUTILIZAR_H
 #define DECLARACIONUTILIZAR_H
 
-#include "Variable.h"
-#include "VariablePuerto.h"
-#include "VariableSensor.h"
+#include "Expresion/Variables/Variable.h"
+#include "Expresion/Variables/VariablePuerto.h"
+#include "Expresion/Variables/VariableSensor.h"
 
 class DeclaracionUtilizar
 {

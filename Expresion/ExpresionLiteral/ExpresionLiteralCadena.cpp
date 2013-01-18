@@ -1,4 +1,4 @@
-#include "ExpresionLiteralCadena.h"
+#include "Expresion/ExpresionLiteral/ExpresionLiteralCadena.h"
 
 ExpresionLiteralCadena::ExpresionLiteralCadena(string *valor, int numeroDeLinea)
     :Expresion(LITERALCADENA,numeroDeLinea)

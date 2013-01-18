@@ -1,9 +1,9 @@
 #ifndef INSTRUCCIONREPITA_H
 #define INSTRUCCIONREPITA_H
 
-#include "Instruccion.h"
-#include "Expresion.h"
-#include "Programa.h"
+#include "Instruccion/Instruccion.h"
+#include "Expresion/Expresion.h"
+#include "Programa/Programa.h"
 #include <sstream>
 
 class InstruccionRepita : public Instruccion
