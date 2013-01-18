@@ -10,9 +10,9 @@ TARGET = Legus
 TEMPLATE = app
 
 SOURCES += main.cpp\
-        editor.cpp \
-        tokens.cpp \
-        parser.cpp \
+        Editor/editor.cpp \
+        Bison_Flex/tokens.cpp \
+        Bison_Flex/parser.cpp \
         Expresion/Expresion.cpp \
         Expresion/ExpresionBinaria/ExpresionBinaria.cpp \
         Expresion/ExpresionBinaria/ExpresionBinariaModulo.cpp \
@@ -57,6 +57,7 @@ SOURCES += main.cpp\
         Instruccion/InstruccionRepita.cpp \
         Instruccion/InstruccionLlamadaAFuncion.cpp \
         Instruccion/InstruccionRetornar.cpp \
+        Instruccion/ListaDeCaso.cpp \
         Expresion/Variables/Variable.cpp \
         Expresion/Variables/VariableArreglo.cpp \
         Expresion/Variables/VariableFuncion.cpp \
@@ -70,12 +71,11 @@ SOURCES += main.cpp\
         Programa/EntradaSimbolo.cpp \
         Programa/GeneradorDeErrores.cpp \
         Programa/ExcepcionLegus.cpp \
-        Lista.cpp \
-        ListaDeCaso.cpp
+        Bison_Flex/Lista.cpp
 
-HEADERS  += editor.h \
-        tokens.h \
-        parser.h \
+HEADERS  += Editor/editor.h \
+        Bison_Flex/tokens.h \
+        Bison_Flex/parser.h \
         Expresion/Expresion.h \
         Expresion/ExpresionBinaria/ExpresionBinaria.h \
         Expresion/ExpresionBinaria/ExpresionBinariaModulo.h \
@@ -120,6 +120,7 @@ HEADERS  += editor.h \
         Instruccion/InstruccionRepita.h \
         Instruccion/InstruccionLlamadaAFuncion.h \
         Instruccion/InstruccionRetornar.h \
+        Instruccion/ListaDeCaso.h \
         Expresion/Variables/Variable.h \
         Expresion/Variables/VariableArreglo.h \
         Expresion/Variables/VariableFuncion.h \
@@ -133,12 +134,10 @@ HEADERS  += editor.h \
         Programa/EntradaSimbolo.h \
         Programa/GeneradorDeErrores.h \
         Programa/ExcepcionLegus.h \
-        Lista.h \
-        ListaDeCaso.h \
-        ParserImports.h
+        Bison_Flex/Lista.h \
+        Bison_Flex/ParserImports.h
 
-FORMS    += editor.ui
+FORMS    += Editor/editor.ui
 
-OTHER_FILES += \
-    parser.y \
-    tokens.l
+OTHER_FILES += Bison_Flex/parser.y \
+               Bison_Flex/tokens.l
