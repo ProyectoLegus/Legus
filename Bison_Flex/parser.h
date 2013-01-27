@@ -125,7 +125,7 @@ typedef union YYSTYPE
 {
 
 /* Line 2068 of yacc.c  */
-#line 27 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
+#line 38 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
 
     std::string              *string;
     Expresion                *expresion;

@@ -11,6 +11,8 @@ public:
     virtual Tipo* validarSemantica();
     virtual string generarCodigoJava();
 
+private:
+    string codigoExpresion(Expresion *expresion);
 };
 
 #endif // EXPRESIONBINARIASUMA_H

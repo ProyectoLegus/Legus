@@ -71,7 +71,8 @@ SOURCES += main.cpp\
         Programa/EntradaSimbolo.cpp \
         Programa/GeneradorDeErrores.cpp \
         Programa/ExcepcionLegus.cpp \
-        Bison_Flex/Lista.cpp
+        Bison_Flex/Lista.cpp \
+        Programa/VariableADeclarar.cpp
 
 HEADERS  += Editor/editor.h \
         Bison_Flex/tokens.h \
@@ -135,7 +136,8 @@ HEADERS  += Editor/editor.h \
         Programa/GeneradorDeErrores.h \
         Programa/ExcepcionLegus.h \
         Bison_Flex/Lista.h \
-        Bison_Flex/ParserImports.h
+        Bison_Flex/ParserImports.h \
+        Programa/VariableADeclarar.h
 
 FORMS    += Editor/editor.ui
 

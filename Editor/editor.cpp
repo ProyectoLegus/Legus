@@ -32,9 +32,14 @@ void Editor::on_btnCompilar_clicked()
         if( yyin )
         {
             if( yyparse() )
+            {
                 QMessageBox::about(this,"Parsing","Error?");
+                return;
+            }
             else
+            {
                 QMessageBox::about(this,"Parsing","Completado...");
+            }
         }
         fclose(yyin);
         //yy_flush_buffer(bs);
@@ -60,7 +65,9 @@ void Editor::on_btnCompilar_clicked()
             codigo += actual->generarCodigoJava();
             actual = actual->obtenerSiguiente();
         }
-        QMessageBox::about(0,"Codigo Generado", QString(codigo.c_str()));
+
+        QMessageBox::about(0,"Codigo Generado",QString(Programa::obtenerInstancia()->obtenerCodigoVariablesADeclarar().c_str()) +
+                           QString(codigo.c_str()) );
         correlativo = 0;
 
         vector<VariableDeclarada*> *variables = Programa::obtenerInstancia()->tablaDeVariables;

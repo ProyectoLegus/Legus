@@ -9,6 +9,10 @@ class ListaDeCaso
 public:
     ListaDeCaso(Expresion *expresion_caso, Instruccion *instrucciones, ListaDeCaso *siguiente);
     void establecerSiguiente(ListaDeCaso *siguiente);
+    ListaDeCaso* obtenerSiguiente();
+
+    Expresion*   obtenerExpresion();
+    Instruccion* obtenerInstruccion();
 
 private:
     Expresion   *expresion_caso;

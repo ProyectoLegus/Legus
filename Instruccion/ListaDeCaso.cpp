@@ -11,3 +11,18 @@ void ListaDeCaso::establecerSiguiente(ListaDeCaso *siguiente)
 {
     this->siguiente = siguiente;
 }
+
+ListaDeCaso* ListaDeCaso::obtenerSiguiente()
+{
+    return this->siguiente;
+}
+
+Expresion* ListaDeCaso::obtenerExpresion()
+{
+    return this->expresion_caso;
+}
+
+Instruccion* ListaDeCaso::obtenerInstruccion()
+{
+    return this->instrucciones;
+}

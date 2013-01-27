@@ -7,6 +7,7 @@ Programa::Programa()
     this->tablaDeFunciones = new vector<DeclaracionDeFuncion*>();
     this->tablaDeVariables = new vector<VariableDeclarada*>();
     this->tablaDePuertosYSensores = new vector<DeclaracionUtilizar*>();
+    this->tablaDeVariablesADeclarar = new vector<VariableADeclarar*>();
 
     /*Instancia de los tipos*/
     this->tipoBooleano = new TipoBooleano();
@@ -117,4 +118,62 @@ void  Programa::establecerIdDeExpresionAVariable(int idExpresion, int idExpresio
 void Programa::limpiarInstancia()
 {
     this->instancia = 0;
+}
+
+string Programa::obtenerCodigoVariablesADeclarar()
+{
+    stringstream resultado;
+    for(unsigned int i = 0; i<this->tablaDeVariablesADeclarar->size(); i++)
+    {
+        VariableADeclarar *variable = this->tablaDeVariablesADeclarar->at(i);
+        Tipo *tipoVariable = variable->tipo;
+
+        if( tipoVariable->tipo == Entero )
+        {
+            resultado << "int ";
+            resultado << "$";
+            resultado << variable->id;
+            resultado << *variable->variable;
+            resultado << "=0;";
+        }
+
+        if( tipoVariable->tipo == Flotante )
+        {
+            resultado << "float ";
+            resultado << "$";
+            resultado << variable->id;
+            resultado << *variable->variable;
+            resultado << "=0.0;";
+        }
+
+        if( tipoVariable->tipo == Caracter)
+        {
+            resultado << "char ";
+            resultado << "$";
+            resultado << variable->id;
+            resultado << *variable->variable;
+            resultado << "=' ';";
+        }
+
+        if( tipoVariable->tipo == Cadena)
+        {
+            resultado << "String ";
+            resultado << "$";
+            resultado << variable->id;
+            resultado << *variable->variable;
+            resultado << "=\"\";";
+        }
+
+        if( tipoVariable->tipo == Booleano )
+        {
+            resultado << "boolean ";
+            resultado << "$";
+            resultado << variable->id;
+            resultado << *variable->variable;
+            resultado << "=false;";
+        }
+
+        resultado << "\n";
+    }
+    return resultado.str();
 }

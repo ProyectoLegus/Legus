@@ -12,6 +12,7 @@ void InstruccionLlamadaAFuncion::validarSemantica()
     /*Implementar lo de XML y Jar
         Hacer testing del jar en Lejos
      */
+
     /*Ver si existe la funcion*/
     vector<DeclaracionDeFuncion*> *tablaDeFunciones = Programa::obtenerInstancia()->tablaDeFunciones;
     for(unsigned int i = 0; i< tablaDeFunciones->size(); i++)
@@ -31,5 +32,9 @@ void InstruccionLlamadaAFuncion::validarSemantica()
 
 string InstruccionLlamadaAFuncion::generarCodigoJava()
 {
+    /*
+        En la generacion Tener otra tabla extra de las funciones que
+        si estan siendo utilizadas y con que paremtros se llaman.
+    */
     return "";
 }

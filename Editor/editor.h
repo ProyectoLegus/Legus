@@ -18,6 +18,8 @@
 #include "Programa/DeclaracionDeFuncion.h"
 #include "Programa/ExcepcionLegus.h"
 
+#include "Programa/GeneradorDeErrores.h"
+
 extern int yyparse();
 extern FILE *yyin;
 extern int correlativo;

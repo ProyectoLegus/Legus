@@ -8,6 +8,7 @@
 #include "Expresion/Variables/Variable.h"
 #include "Expresion/Variables/VariableArreglo.h"
 #include "Programa/Programa.h"
+#include "Programa/VariableADeclarar.h"
 
 class InstruccionAsignacion : public Instruccion
 {

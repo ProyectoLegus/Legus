@@ -86,7 +86,9 @@ string InstruccionAsignacion::generarCodigoJava()
         VariableDeclarada* variableDeclarada = Programa::obtenerInstancia()->existeVariable(var->obtenerIdentificador(), var->obtenerIdDeExpresion());
         if( variableDeclarada == 0 )
         {
-            codigoAsignacion << codigoVariable;
+            Programa::obtenerInstancia()->tablaDeVariablesADeclarar->push_back(new VariableADeclarar(var->obtenerIdentificador(),var->validarSemantica(), var->obtenerIdDeExpresion()));
+            /*No hay variable*/
+            //codigoAsignacion << codigoVariable;
             codigoAsignacion << "$";
             codigoAsignacion << var->obtenerIdDeExpresion();
             /*Falta el nombre de la variables*/
@@ -97,20 +99,32 @@ string InstruccionAsignacion::generarCodigoJava()
         }
         else if( variableDeclarada != 0 && variableDeclarada->obtenerTipo()->tipo == this->expresion->tipoInferido->tipo)
         {
-            /*Ya existe y es del mismo tipo*/
+            /*
+                Ya existe y es del mismo tipo
+                    Verificar si es arreglo!
+            */
             /*Selectivo que sea igual que el de var*/
             Programa::obtenerInstancia()->establecerIdDeExpresionAVariable(var->obtenerIdDeExpresion(), variableDeclarada->obtenerIdDeExpresion());
             codigoAsignacion << "$";
             codigoAsignacion << variableDeclarada->obtenerIdDeExpresion();
             /*Falta el nombre de la variables*/
             codigoAsignacion << variableDeclarada->obtenerVariable()->obtenerIdentificador()->c_str();
-            codigoAsignacion << " = ";
+            if( this->expresion->tipoInferido->tipo == Arreglo )
+            {
+            }
+            else
+            {
+                codigoAsignacion << " = ";
+            }
+
             codigoAsignacion << this->expresion->generarCodigoJava();
             codigoAsignacion << "; \n";
         }
         else
         {
-            codigoAsignacion << codigoVariable;
+            Programa::obtenerInstancia()->tablaDeVariablesADeclarar->push_back(new VariableADeclarar(var->obtenerIdentificador(),var->validarSemantica(), var->obtenerIdDeExpresion()));
+            /*Ya existe y el tipo no es igual*/
+            //codigoAsignacion << codigoVariable;
             codigoAsignacion << "$";
             codigoAsignacion << var->obtenerIdDeExpresion();
             /*Falta el nombre de la variables*/

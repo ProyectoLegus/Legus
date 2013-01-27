@@ -61,6 +61,7 @@ Tipo* Variable::validarSemantica()
 
     if( tipoDeVariable != 0)
     {
+        this->tipoInferido = tipoDeVariable;
         return tipoDeVariable;
     }
 
@@ -98,7 +99,7 @@ string Variable::generarCodigoJava()
     if( expresion != 0 )
     {
         Tipo* tipoVariable = expresion->validarSemantica();
-
+/*
         if( tipoVariable->tipo == Entero )
         {
             codigoVariable << "int ";
@@ -123,6 +124,7 @@ string Variable::generarCodigoJava()
         {
             codigoVariable << "boolean ";
         }
+        */
     }
     else
     {

@@ -13,6 +13,7 @@
 #include "Programa/Tipos/TipoEntero.h"
 #include "Programa/Tipos/TipoFlotante.h"
 #include "Programa/Tipos/TipoArreglo.h"
+#include "Programa/VariableADeclarar.h"
 
 using namespace std;
 
@@ -24,6 +25,9 @@ public:
     vector<DeclaracionDeFuncion*> *tablaDeFunciones;
     vector<DeclaracionUtilizar*>  *tablaDePuertosYSensores;
     vector<VariableDeclarada*>    *tablaDeVariables;
+
+    vector<VariableADeclarar*>    *tablaDeVariablesADeclarar;
+    string        obtenerCodigoVariablesADeclarar();
 
     TipoBooleano* obtenerTipoBooleano();
     TipoCadena*   obtenerTipoCadena();
