@@ -21,3 +21,18 @@ Instruccion* DeclaracionDeFuncion::obtenerInstruccion()
 {
     return this->instrucciones;
 }
+
+string DeclaracionDeFuncion::obtenerCodigoDeFuncion(Lista *lista_de_parametros)
+{
+    stringstream codigoFuncion;
+    codigoFuncion << "public static ";
+    /*Averiguar cual es el tipo de retorno de la funcion*/
+
+    codigoFuncion << *this->variable->obtenerIdentificador();
+    codigoFuncion << "(";
+    /*PONER LO PARAMETROS*/
+    codigoFuncion << ")\n";
+    codigoFuncion << "{\n";
+    codigoFuncion << "}\n";
+    return codigoFuncion.str();
+}

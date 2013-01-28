@@ -56,7 +56,7 @@
 %token <string> T_NEGACION T_SIMBOLO_OPERADOR_Y T_SIMBOLO_OPERADOR_O T_CORCHETE_IZQUIERDO
 %token <string> T_CORCHETE_DERECHO T_PARENTESIS_IZQUIERDO T_PARENTESIS_DERECHO T_DOS_PUNTOS
 %token <string> T_DESIGUALDAD T_LITERAL_CARACTER T_LITERAL_FLOTANTE T_LITERAL_CADENA T_COMA
-%token <string> T_ENTER T_EOF
+%token <string> T_ENTER T_EOF T_ENTERO T_FLOTANTE T_BOOLEANO T_CARACTER T_CADENA T_ES
 
 
 /* PALABRAS RESERVADAS */
@@ -67,7 +67,7 @@
 
 
 /* NO TERMINALES */
-%type <string>          declaracion_sensores_motores declaracion_funciones
+%type <string>          declaracion_sensores_motores declaracion_funciones tipo_de_dato
 %type <instruccion>     instrucciones instruccion instruccion_si instruccion_caso instruccion_mientras
                         instruccion_para instruccion_repetir instruccion_asignacion
                         instruccion_repita_desde instruccion_para_cada instruccion_llamada_a_funcion
@@ -92,6 +92,7 @@
             $$ = $3;
             Programa::obtenerInstancia()->instrucciones = $3;
         }
+
         ;
 
     /******************** Declaraciones *******************/
@@ -532,7 +533,19 @@
         |T_IDENTIFICADOR
         {
             $$ = new Variable($1, yylineno, correlativo++);
+        }
+        |T_PARENTESIS_IZQUIERDO relacionales T_PARENTESIS_DERECHO T_ES tipo_de_dato
+        {
+
         };
+
+    tipo_de_dato:
+        T_ENTERO        { $$=$1; }
+        |T_FLOTANTE     { $$=$1; }
+        |T_CADENA       { $$=$1; }
+        |T_BOOLEANO     { $$=$1; }
+        |T_CARACTER     { $$=$1; }
+        ;
 
     id_variable :
         id_funcion

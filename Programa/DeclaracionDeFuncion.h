@@ -13,6 +13,8 @@ public:
     Lista       *obtenerListaParametros();
     Instruccion *obtenerInstruccion();
 
+    string      obtenerCodigoDeFuncion(Lista *lista_de_parametros);
+
 private:
     Variable    *variable;
     Lista       *lista_parametros;
