@@ -35,7 +35,6 @@ void InstruccionSi::validarSemantica()
             instruccionesSiFalso->obtenerSiguiente()->validarSemantica();
         }
     }
-
     /*if(instruccionSiAnidado!=0)
     {
         instruccionSiAnidado->validarSemantica();

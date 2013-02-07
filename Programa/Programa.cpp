@@ -16,6 +16,8 @@ Programa::Programa()
     this->tipoEntero = new TipoEntero();
     this->tipoFlotante = new TipoFlotante();
     this->tipoArreglo = new TipoArreglo();
+
+    cargarFuncionesIncorporadas();
 }
 
 Programa* Programa::obtenerInstancia()
@@ -102,6 +104,9 @@ DeclaracionUtilizar* Programa::existeEnTablaDePuertosYSensores(string *identific
     return 0;
 }
 
+/*El primero es el id de expresion de la variable que quiero cambiar
+    el segundo es el valor que le pondre
+*/
 void  Programa::establecerIdDeExpresionAVariable(int idExpresion, int idExpresionACambiar)
 {
     for(unsigned int i = 0 ; i< this->tablaDeVariables->size(); i++)
@@ -176,4 +181,93 @@ string Programa::obtenerCodigoVariablesADeclarar()
         resultado << "\n";
     }
     return resultado.str();
+}
+
+/*Cargas las funciones incorporadas en Legus*/
+void Programa::cargarFuncionesIncorporadas()
+{
+    FuncionesIncorporadas fi;
+
+    this->funcionesIncorporadas = fi.obtenerFuncionesIncorporadas();
+}
+
+string Programa::obtenerCodigoFuente(string nombreArchivo,
+                                     string inclusiones,
+                                     string declaracionFunciones,
+                                     string bloqueCodigo)
+{
+    stringstream codigoFuente;
+    codigoFuente << inclusiones;
+    codigoFuente << "public class ";
+    codigoFuente << nombreArchivo;
+    codigoFuente << "{\n";
+
+        codigoFuente << declaracionFunciones;
+        codigoFuente << "\n";
+
+        codigoFuente << "public static void main(String args[])";
+        codigoFuente << "{\n";
+            codigoFuente << bloqueCodigo;
+            codigoFuente << "\n";
+        codigoFuente << "}\n";
+    codigoFuente << "}\n";
+
+    return codigoFuente.str();
+}
+
+bool Programa::existeFuncionIncorporada(string nombreFuncion, Lista *parametros)
+{
+    bool encontrado = false;
+    if( funcionesIncorporadas.find(nombreFuncion) != funcionesIncorporadas.end())
+    {
+        /*Existe!*/
+        vector<vector<TipoParametro>*>* posiblesParametros =funcionesIncorporadas[nombreFuncion];
+        for(unsigned int i=0; i<posiblesParametros->size(); i++)
+        {
+            vector<TipoParametro>* posibleFuncion = posiblesParametros->at(i);
+            if( posibleFuncion->size() == parametros->lista->size())
+            {
+                bool encaja = true;
+                for(unsigned int j = 0; j<posibleFuncion->size(); j++)
+                {
+                    TipoParametro tp = posibleFuncion->at(j);
+                    Expresion *expresion = parametros->lista->at(j);
+                    if( obtenerTipoEnBaseATipoParametro(tp) != expresion->validarSemantica() )
+                    {
+                        encaja = false;
+                    }
+                }
+                if( encaja )
+                {
+                    encontrado = true;
+                    break;
+                }
+            }
+        }
+    }
+    return encontrado;
+}
+
+Tipo* Programa::obtenerTipoEnBaseATipoParametro(TipoParametro tipoParam)
+{
+    if(tipoParam == TEntero)
+    {
+        return tipoEntero;
+    }
+    else if( tipoParam == TFlotante)
+    {
+        return tipoFlotante;
+    }
+    else if( tipoParam == TCadena)
+    {
+        return tipoCadena;
+    }
+    else if(tipoParam == TCaracter)
+    {
+        return tipoCaracter;
+    }
+    else if(tipoParam == TBooleano)
+    {
+        return tipoBooleano;
+    }
 }

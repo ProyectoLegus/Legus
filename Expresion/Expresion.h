@@ -10,11 +10,17 @@ enum Expresiones
     OPERADORY, LITERALBOOLEANA, LITERALCADENA, LITERALCARACTER,
     LITERALENTERA, LITERALFLOTANTE, NEGACION, NEGATIVO,
     VARIABLENORMAL, ARREGLO, FUNCION,
-    PUERTO, SENSOR
+    PUERTO, SENSOR, INSTANCIADE
 };
+
+enum TipoDato
+{
+    ENTERO, FLOTANTE, CADENA,
+    CARACTER, BOOLEANO
+};
+
 #include "Programa/Tipos/Tipo.h"
 #include "Programa/ExcepcionLegus.h"
-
 
 /*Para no incluirlo en los demas*/
 using namespace std;

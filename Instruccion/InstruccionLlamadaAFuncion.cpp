@@ -14,6 +14,7 @@ void InstruccionLlamadaAFuncion::validarSemantica()
         Hacer testing del jar en Lejos
      */
 
+    /*DENTRO DE FUNCIONES DECLARADAS*/
     /*Ver si existe la funcion*/
     vector<DeclaracionDeFuncion*> *tablaDeFunciones = Programa::obtenerInstancia()->tablaDeFunciones;
     DeclaracionDeFuncion* funcionDeclarada = 0;
@@ -41,6 +42,10 @@ void InstruccionLlamadaAFuncion::validarSemantica()
         }
     }
 
+    /*DE LAS FUNCIONES BUILT-IN*/
+
+    encontrado = Programa::obtenerInstancia()->existeFuncionIncorporada(*this->identificador, this->lista_parametros);
+
     if( !encontrado )
     {
         stringstream error;
@@ -50,7 +55,7 @@ void InstruccionLlamadaAFuncion::validarSemantica()
         throw(ExcepcionLegus(error.str()));
     }
 
-    /*Siempre revisar que sea distnto de nulo*/
+    /*Siempre revisar que sea distnto de nulo por si es incorporada*/
     if( funcionDeclarada != 0)
     {
         /*Primero ver si los parametros estan correctos! SHIET*/

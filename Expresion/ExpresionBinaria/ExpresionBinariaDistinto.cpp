@@ -76,5 +76,5 @@ string ExpresionBinariaDistinto::generarCodigoJava()
     }
 
     /*Izqiuerda && Derecha*/
-    return "(" + codigoExpresionIzquierda + " && " + codigoExpresionDerecha + ")";
+    return "(" + codigoExpresionIzquierda + " != " + codigoExpresionDerecha + ")";
 }

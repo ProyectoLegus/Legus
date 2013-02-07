@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <vector>
+#include <map>
+
 #include "Instruccion/Instruccion.h"
 #include "Programa/DeclaracionDeFuncion.h"
 #include "Programa/DeclaracionUtilizar.h"
@@ -14,6 +16,7 @@
 #include "Programa/Tipos/TipoFlotante.h"
 #include "Programa/Tipos/TipoArreglo.h"
 #include "Programa/VariableADeclarar.h"
+#include "Programa/FuncionesIncorporadas.h"
 
 using namespace std;
 
@@ -41,11 +44,15 @@ public:
     DeclaracionDeFuncion* existeEnTablaDeFunciones(string *identificador, int idDeExpresion);
 
     void limpiarInstancia();
-
-        /*El primero es el id de expresion de la variable que quiero cambiar
-            el segundo es el valor que le pondre
-        */
     void establecerIdDeExpresionAVariable(int idExpresion, int idExpresionACambiar);
+    void cargarFuncionesIncorporadas();
+
+    bool existeFuncionIncorporada(string nombreFuncion, Lista *parametros);
+
+    string obtenerCodigoFuente( string nombreArchivo,
+                                string inclusiones,
+                                string declaracionFunciones,
+                                string bloqueCodigo);
 
 private:
     Programa();
@@ -58,6 +65,11 @@ private:
     TipoEntero   *tipoEntero;
     TipoFlotante *tipoFlotante;
     TipoArreglo  *tipoArreglo;
+
+    /*Solo aqui la puedo*/
+    Tipo* obtenerTipoEnBaseATipoParametro(TipoParametro tipoParam);
+
+    map<string, vector<vector<TipoParametro>*>* > funcionesIncorporadas;
 };
 
 #endif // PROGRAMA_H
