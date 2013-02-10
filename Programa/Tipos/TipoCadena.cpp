@@ -1,7 +1,6 @@
 #include "Programa/Tipos/TipoCadena.h"
 
 TipoCadena::TipoCadena()
-    :Tipo()
+    :Tipo(Cadena)
 {
-    this->tipo = Cadena;
 }

@@ -15,8 +15,21 @@
 #include "Programa/Tipos/TipoEntero.h"
 #include "Programa/Tipos/TipoFlotante.h"
 #include "Programa/Tipos/TipoArreglo.h"
+#include "Programa/Tipos/TipoMotor.h"
+#include "Programa/Tipos/TipoSensorDeBrujula.h"
+#include "Programa/Tipos/TipoSensorDeColor.h"
+#include "Programa/Tipos/TipoSensorDeInclinacion.h"
+#include "Programa/Tipos/TipoSensorDeLuz.h"
+#include "Programa/Tipos/TipoSensorDeSonido.h"
+#include "Programa/Tipos/TipoSensorDeTacto.h"
+#include "Programa/Tipos/TipoSensorGiroscopico.h"
+#include "Programa/Tipos/TipoSensorUltrasonico.h"
+
 #include "Programa/VariableADeclarar.h"
 #include "Programa/FuncionesIncorporadas.h"
+#include "Funcion.h"
+
+class Funcion;
 
 using namespace std;
 
@@ -32,12 +45,21 @@ public:
     vector<VariableADeclarar*>    *tablaDeVariablesADeclarar;
     string        obtenerCodigoVariablesADeclarar();
 
-    TipoBooleano* obtenerTipoBooleano();
-    TipoCadena*   obtenerTipoCadena();
-    TipoCaracter* obtenerTipoCaracter();
-    TipoEntero*   obtenerTipoEntero();
-    TipoFlotante* obtenerTipoFlotante();
-    TipoArreglo*  obtenerTipoArreglo();
+    TipoBooleano*           obtenerTipoBooleano();
+    TipoCadena*             obtenerTipoCadena();
+    TipoCaracter*           obtenerTipoCaracter();
+    TipoEntero*             obtenerTipoEntero();
+    TipoFlotante*           obtenerTipoFlotante();
+    TipoArreglo*            obtenerTipoArreglo();
+    TipoMotor*              obtenerTipoMotor();
+    TipoSensorDeBrujula*    obtenerSensorDeBrujula();
+    TipoSensorDeColor*      obtenerSensorDeColor();
+    TipoSensorDeInclinacion*obtenerSensorDeInclinacion();
+    TipoSensorDeLuz*        obtenerSensorDeLuz();
+    TipoSensorDeSonido*     obtenerSensorDeSonido();
+    TipoSensorDeTacto*      obtenerSensorDeTacto();
+    TipoSensorGiroscopico*  obtenerSensorGiroscopico();
+    TipoSensorUltrasonico*  obtenerSensorUltrasonico();
 
     VariableDeclarada*    existeVariable(string *identificador, int idDeExpresion);
     DeclaracionUtilizar*  existeEnTablaDePuertosYSensores(string *identificador, int idDeExpresion);
@@ -59,17 +81,25 @@ private:
     static Programa* instancia;
 
     /*Una sola instancia para los Tipos*/
-    TipoBooleano *tipoBooleano;
-    TipoCadena   *tipoCadena;
-    TipoCaracter *tipoCaracter;
-    TipoEntero   *tipoEntero;
-    TipoFlotante *tipoFlotante;
-    TipoArreglo  *tipoArreglo;
+    TipoBooleano            *tipoBooleano;
+    TipoCadena              *tipoCadena;
+    TipoCaracter            *tipoCaracter;
+    TipoEntero              *tipoEntero;
+    TipoFlotante            *tipoFlotante;
+    TipoArreglo             *tipoArreglo;
+    TipoMotor               *tipoMotor;
+    TipoSensorDeBrujula     *tipoSensorDeBrujula;
+    TipoSensorDeColor       *tipoSensorDeColor;
+    TipoSensorDeInclinacion *tipoSensorDeInclinacion;
+    TipoSensorDeLuz         *tipoSensorDeLuz;
+    TipoSensorDeSonido      *tipoSensorDeSonido;
+    TipoSensorDeTacto       *tipoSensorDeTacto;
+    TipoSensorGiroscopico   *tipoSensorGiroscopico;
+    TipoSensorUltrasonico   *tipoSensorUltrasonico;
 
     /*Solo aqui la puedo*/
     Tipo* obtenerTipoEnBaseATipoParametro(TipoParametro tipoParam);
-
-    map<string, vector<vector<TipoParametro>*>* > funcionesIncorporadas;
+    map<string, vector<Funcion*>*>* funcionesIncorporadas;
 };
 
 #endif // PROGRAMA_H

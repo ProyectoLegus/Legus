@@ -1,7 +1,6 @@
 #include "Programa/Tipos/TipoCaracter.h"
 
 TipoCaracter::TipoCaracter()
-    :Tipo()
+    :Tipo(Caracter)
 {
-    this->tipo = Caracter;
 }

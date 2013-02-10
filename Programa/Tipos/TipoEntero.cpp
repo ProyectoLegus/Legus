@@ -1,7 +1,6 @@
 #include "Programa/Tipos/TipoEntero.h"
 
 TipoEntero::TipoEntero()
-    :Tipo()
+    :Tipo(Entero)
 {
-    this->tipo = Entero;
 }

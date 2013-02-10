@@ -16,8 +16,15 @@ Programa::Programa()
     this->tipoEntero = new TipoEntero();
     this->tipoFlotante = new TipoFlotante();
     this->tipoArreglo = new TipoArreglo();
-
-    cargarFuncionesIncorporadas();
+    this->tipoMotor = new TipoMotor();
+    this->tipoSensorDeBrujula = new TipoSensorDeBrujula();
+    this->tipoSensorDeColor = new TipoSensorDeColor();
+    this->tipoSensorDeInclinacion = new TipoSensorDeInclinacion();
+    this->tipoSensorDeLuz = new TipoSensorDeLuz();
+    this->tipoSensorDeSonido = new TipoSensorDeSonido();
+    this->tipoSensorDeTacto = new TipoSensorDeTacto();
+    this->tipoSensorGiroscopico = new TipoSensorGiroscopico();
+    this->tipoSensorUltrasonico = new TipoSensorUltrasonico();
 }
 
 Programa* Programa::obtenerInstancia()
@@ -25,6 +32,7 @@ Programa* Programa::obtenerInstancia()
     if(!instancia)
     {
         instancia = new Programa();
+        instancia->cargarFuncionesIncorporadas();
     }
     return instancia;
 }
@@ -57,6 +65,51 @@ TipoFlotante* Programa::obtenerTipoFlotante()
 TipoArreglo*  Programa::obtenerTipoArreglo()
 {
     return this->tipoArreglo;
+}
+
+TipoMotor* Programa::obtenerTipoMotor()
+{
+    return this->tipoMotor;
+}
+
+TipoSensorDeBrujula* Programa::obtenerSensorDeBrujula()
+{
+    return this->tipoSensorDeBrujula;
+}
+
+TipoSensorDeColor* Programa::obtenerSensorDeColor()
+{
+    return this->tipoSensorDeColor;
+}
+
+TipoSensorDeInclinacion* Programa::obtenerSensorDeInclinacion()
+{
+    return this->tipoSensorDeInclinacion;
+}
+
+TipoSensorDeLuz* Programa::obtenerSensorDeLuz()
+{
+    return this->tipoSensorDeLuz;
+}
+
+TipoSensorDeSonido* Programa::obtenerSensorDeSonido()
+{
+    return this->tipoSensorDeSonido;
+}
+
+TipoSensorDeTacto* Programa::obtenerSensorDeTacto()
+{
+    return this->tipoSensorDeTacto;
+}
+
+TipoSensorGiroscopico* Programa::obtenerSensorGiroscopico()
+{
+    return this->tipoSensorGiroscopico;
+}
+
+TipoSensorUltrasonico* Programa::obtenerSensorUltrasonico()
+{
+    return this->tipoSensorUltrasonico;
 }
 
 VariableDeclarada* Programa::existeVariable(string *identificador, int idDeExpresion)
@@ -218,19 +271,19 @@ string Programa::obtenerCodigoFuente(string nombreArchivo,
 bool Programa::existeFuncionIncorporada(string nombreFuncion, Lista *parametros)
 {
     bool encontrado = false;
-    if( funcionesIncorporadas.find(nombreFuncion) != funcionesIncorporadas.end())
+    if( funcionesIncorporadas->find(nombreFuncion) != funcionesIncorporadas->end())
     {
         /*Existe!*/
-        vector<vector<TipoParametro>*>* posiblesParametros =funcionesIncorporadas[nombreFuncion];
+        vector<Funcion*>* posiblesParametros = (*funcionesIncorporadas)[nombreFuncion];
         for(unsigned int i=0; i<posiblesParametros->size(); i++)
         {
-            vector<TipoParametro>* posibleFuncion = posiblesParametros->at(i);
-            if( posibleFuncion->size() == parametros->lista->size())
+            Funcion* posibleFuncion = posiblesParametros->at(i);
+            if( posibleFuncion->parametros->size() == parametros->lista->size())
             {
                 bool encaja = true;
-                for(unsigned int j = 0; j<posibleFuncion->size(); j++)
+                for(unsigned int j = 0; j<posibleFuncion->parametros->size(); j++)
                 {
-                    TipoParametro tp = posibleFuncion->at(j);
+                    TipoParametro tp = posibleFuncion->parametros->at(j);
                     Expresion *expresion = parametros->lista->at(j);
                     if( obtenerTipoEnBaseATipoParametro(tp) != expresion->validarSemantica() )
                     {

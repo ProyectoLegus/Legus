@@ -1,2 +1,5 @@
 #include "Programa/Tipos/Tipo.h"
-Tipo::Tipo(){}
+Tipo::Tipo(Tipos tipo)
+{
+    this->tipo = tipo;
+}

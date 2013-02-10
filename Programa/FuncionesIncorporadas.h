@@ -4,7 +4,11 @@
 enum TipoParametro
 {
     TEntero,TCadena,TCaracter,
-    TBooleano,TFlotante
+    TBooleano,TFlotante, TArreglo,
+    TMotor, TSensorUltrasonico, TSensorDeTacto,
+    TSensorDeLuz, TSensorDeColor,
+    TSensorDeInclinacion, TSensorDeSonido,
+    TSensorGiroscopico, TSensorDeBrujula
 };
 
 #include <iostream>
@@ -15,6 +19,8 @@ enum TipoParametro
 
 #include "Bison_Flex/Lista.h"
 #include "Programa/Programa.h"
+#include "Programa/Tipos/Tipo.h"
+#include "Funcion.h"
 
 using namespace std;
 
@@ -22,10 +28,11 @@ class FuncionesIncorporadas
 {
 public:
     FuncionesIncorporadas();
-    map<string, vector<vector<TipoParametro>*>*> obtenerFuncionesIncorporadas();
+    map<string, vector<Funcion*>*>* obtenerFuncionesIncorporadas();
 
 private:
     vector<TipoParametro>* obtenerVectorParametros(int cantidadArgumentos, ...);
+    Tipo* obtenerTipo(TipoParametro tipoParam);
 };
 
 #endif // FUNCIONESINCORPORADAS_H

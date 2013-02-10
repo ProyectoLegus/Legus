@@ -1,7 +1,6 @@
 #include "Programa/Tipos/TipoArreglo.h"
 
 TipoArreglo::TipoArreglo()
-    :Tipo()
+    :Tipo(Arreglo)
 {
-    this->tipo = Arreglo;
 }

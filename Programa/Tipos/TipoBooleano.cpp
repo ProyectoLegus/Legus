@@ -1,7 +1,6 @@
 #include "Programa/Tipos/TipoBooleano.h"
 
 TipoBooleano::TipoBooleano()
-    :Tipo()
+    :Tipo(Booleano)
 {
-    this->tipo = Booleano;
 }

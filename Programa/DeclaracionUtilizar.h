@@ -4,6 +4,7 @@
 #include "Expresion/Variables/Variable.h"
 #include "Expresion/Variables/VariablePuerto.h"
 #include "Expresion/Variables/VariableSensor.h"
+#include <string.h>
 
 class DeclaracionUtilizar
 {
@@ -17,6 +18,7 @@ private:
     Variable       *variable;
     VariablePuerto *puerto;
     VariableSensor *sensor;
+    bool esPuertoYSensorValido(string* puerto, string* sensor);
 };
 
 #endif // DECLARACIONUTILIZAR_H

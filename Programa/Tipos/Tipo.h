@@ -5,13 +5,18 @@ enum Tipos
 {
     Booleano,Cadena,
     Caracter,Entero,
-    Flotante,Arreglo
+    Flotante,Arreglo,
+    Motor, SensorUltrasonico,
+    SensorDeTacto, SensorDeLuz,
+    SensorDeColor, SensorDeInclinacion,
+    SensorDeSonido,SensorGiroscopico,
+    SensorDeBrujula
 };
 
 class Tipo
 {
 public:
-    Tipo();
+    Tipo(Tipos tipo);
     Tipos tipo;
 };
 

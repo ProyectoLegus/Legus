@@ -74,7 +74,17 @@ SOURCES += main.cpp\
         Bison_Flex/Lista.cpp \
         Programa/VariableADeclarar.cpp \
         Expresion/ExpresionInstanciaDe.cpp \
-        Programa/FuncionesIncorporadas.cpp
+        Programa/FuncionesIncorporadas.cpp \
+        Programa/Funcion.cpp \
+        Programa/Tipos/TipoMotor.cpp \
+        Programa/Tipos/TipoSensorUltrasonico.cpp \
+        Programa/Tipos/TipoSensorDeTacto.cpp \
+        Programa/Tipos/TipoSensorDeLuz.cpp \
+        Programa/Tipos/TipoSensorDeBrujula.cpp \
+        Programa/Tipos/TipoSensorDeColor.cpp \
+        Programa/Tipos/TipoSensorDeInclinacion.cpp \
+        Programa/Tipos/TipoSensorDeSonido.cpp \
+        Programa/Tipos/TipoSensorGiroscopico.cpp
 
 HEADERS  += Editor/editor.h \
         Bison_Flex/tokens.h \
@@ -141,7 +151,17 @@ HEADERS  += Editor/editor.h \
         Bison_Flex/ParserImports.h \
         Programa/VariableADeclarar.h \
         Expresion/ExpresionInstanciaDe.h \
-        Programa/FuncionesIncorporadas.h
+        Programa/FuncionesIncorporadas.h \
+        Programa/Funcion.h \
+        Programa/Tipos/TipoMotor.h \
+        Programa/Tipos/TipoSensorUltrasonico.h \
+        Programa/Tipos/TipoSensorDeTacto.h \
+        Programa/Tipos/TipoSensorDeLuz.h \
+        Programa/Tipos/TipoSensorDeBrujula.h \
+        Programa/Tipos/TipoSensorDeColor.h \
+        Programa/Tipos/TipoSensorDeInclinacion.h \
+        Programa/Tipos/TipoSensorDeSonido.h \
+        Programa/Tipos/TipoSensorGiroscopico.h
 
 FORMS    += Editor/editor.ui
 

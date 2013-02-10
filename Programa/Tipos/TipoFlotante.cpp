@@ -1,7 +1,6 @@
 #include "Programa/Tipos/TipoFlotante.h"
 
 TipoFlotante::TipoFlotante()
-    :Tipo()
+    :Tipo(Flotante)
 {
-    this->tipo = Flotante;
 }

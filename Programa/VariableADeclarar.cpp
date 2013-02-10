@@ -1,4 +1,4 @@
-#include "VariableADeclarar.h"
+#include "Programa/VariableADeclarar.h"
 
 VariableADeclarar::VariableADeclarar(string *variable, Tipo *tipo, int id)
 {
