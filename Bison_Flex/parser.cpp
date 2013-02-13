@@ -1909,7 +1909,7 @@ yyreduce:
     {
             DeclaracionUtilizar *declrUtilizar = new DeclaracionUtilizar(new VariablePuerto((yyvsp[(3) - (12)].string), yylineno, correlativo++),
                                                                          new VariableSensor((yyvsp[(7) - (12)].string), yylineno, correlativo++),
-                                                                         new Variable((yyvsp[(11) - (12)].string), yylineno, correlativo++));
+                                                                         new VariableSensor((yyvsp[(11) - (12)].string), yylineno, correlativo++));
             Programa::obtenerInstancia()->tablaDePuertosYSensores->push_back(declrUtilizar);
         }
     break;

@@ -7,6 +7,7 @@ VariableSensor::VariableSensor(string *identificador, int numeroDeLinea, int idD
 
 Tipo* VariableSensor::validarSemantica()
 {
+    /*Validar el tipo del sensor( Como fue declarado )*/
     return 0;
 }
 

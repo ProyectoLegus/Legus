@@ -35,15 +35,14 @@ Tipo* Variable::validarSemantica()
     {
         expresion->validarSemantica();
     }
-
-    /*Que no sea una variable de Utilizar ni nombre de funcion*/
+    /*Buscar si es variable de sensor y devolver su tipo*/
     vector<DeclaracionUtilizar*> *tablaDePuertosYSensores = Programa::obtenerInstancia()->tablaDePuertosYSensores;
     for(unsigned int i = 0; i< tablaDePuertosYSensores->size(); i++)
     {
         DeclaracionUtilizar *declaracion = tablaDePuertosYSensores->at(i);
         if(this->identificador->compare(*declaracion->obtenerVariable()->obtenerIdentificador())==0)
         {
-            throw(ExcepcionLegus("Variable 'ReemplazarPorVariable' esta siendo utilizada en Puerto 'PUERTO' como 'SENSOR'"));
+            return declaracion->obtenerTipoSensor();
         }
     }
 
@@ -53,7 +52,10 @@ Tipo* Variable::validarSemantica()
         DeclaracionDeFuncion *declaracion = tablaDeFunciones->at(i);
         if( this->identificador->compare(*declaracion->obtenerVariable()->obtenerIdentificador()))
         {
-            throw(ExcepcionLegus("Variable 'ReemplazarPorVariable' esta siendo utilizada en funcion 'FUNCION'"));
+            stringstream ss;
+            ss << "Variable '" << *declaracion->obtenerVariable()->obtenerIdentificador() << "' ";
+            ss << "esta siendo como nombre de funcion";
+            throw(ExcepcionLegus(ss.str()));
         }
     }
 
@@ -135,6 +137,15 @@ string Variable::generarCodigoJava()
             codigoVariable << "$";
             codigoVariable << variableDeclarada->obtenerIdDeExpresion();
             codigoVariable << variableDeclarada->obtenerVariable()->obtenerIdentificador()->c_str();
+        }
+        else
+        {
+            /*De Utilizar!*/
+            DeclaracionUtilizar *util = Programa::obtenerInstancia()->existeEnTablaDePuertosYSensores(obtenerIdentificador());
+            if( util != 0)
+            {
+                codigoVariable << *util->obtenerCodigo();
+            }
         }
     }
     return codigoVariable.str();

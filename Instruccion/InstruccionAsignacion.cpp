@@ -24,7 +24,7 @@ void InstruccionAsignacion::validarSemantica()
         Variable *var = (Variable*)variable;
 
         /*Que no sea una variable de Utilizar ni nombre de funcion*/
-        if( Programa::obtenerInstancia()->existeEnTablaDePuertosYSensores(var->obtenerIdentificador(), var->obtenerIdDeExpresion()))
+        if( Programa::obtenerInstancia()->existeEnTablaDePuertosYSensores(var->obtenerIdentificador()))
         {
             throw(ExcepcionLegus("Variable 'ReemplazarPorVariable' esta siendo utilizada en Puerto 'PUERTO' como 'SENSOR'"));
         }
@@ -42,7 +42,7 @@ void InstruccionAsignacion::validarSemantica()
     else if( variable->tipo == ARREGLO)
     {
         VariableArreglo* var = (VariableArreglo*)variable;
-        if( Programa::obtenerInstancia()->existeEnTablaDePuertosYSensores(var->obtenerIdentificador(), var->obtenerIdDeExpresion()))
+        if( Programa::obtenerInstancia()->existeEnTablaDePuertosYSensores(var->obtenerIdentificador()))
         {
             throw(ExcepcionLegus("Variable 'ReemplazarPorVariable' esta siendo utilizada en Puerto 'PUERTO' como 'SENSOR'"));
         }

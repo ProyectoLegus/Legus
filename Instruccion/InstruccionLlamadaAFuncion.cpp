@@ -43,7 +43,6 @@ void InstruccionLlamadaAFuncion::validarSemantica()
     }
 
     /*DE LAS FUNCIONES BUILT-IN*/
-
     encontrado = Programa::obtenerInstancia()->existeFuncionIncorporada(*this->identificador, this->lista_parametros);
 
     if( !encontrado )
@@ -79,12 +78,12 @@ string InstruccionLlamadaAFuncion::generarCodigoJava()
     codigo << *this->identificador;
     codigo << "(";
 
-    for( unsigned int i = 0; i < this->lista_parametros->lista->size(); i++)
+    for( int i = this->lista_parametros->lista->size()-1; i >=0 ; i--)
     {
         Expresion *expresion = this->lista_parametros->lista->at(i);
         codigo << expresion->generarCodigoJava();
 
-        if( i < (this->lista_parametros->lista->size() - 1) )
+        if( i > 0 )
         {
             codigo << ", ";
         }

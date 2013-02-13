@@ -1,11 +1,13 @@
 #ifndef PROGRAMA_H
 #define PROGRAMA_H
 
+#include <algorithm>
 #include <iostream>
 #include <vector>
 #include <map>
 
 #include "Instruccion/Instruccion.h"
+#include "Instruccion/InstruccionLlamadaAFuncion.h"
 #include "Programa/DeclaracionDeFuncion.h"
 #include "Programa/DeclaracionUtilizar.h"
 #include "Expresion/Variables/VariableDeclarada.h"
@@ -28,23 +30,27 @@
 #include "Programa/VariableADeclarar.h"
 #include "Programa/FuncionesIncorporadas.h"
 #include "Funcion.h"
+#include "string.h"
 
 class Funcion;
+class DeclaracionUtilizar;
+class InstruccionLlamadaAFuncion;
 
 using namespace std;
 
 class Programa
 {
 public:
+    /*Agregar tabla de funciones que se estan utilizando!!!!*/
     static Programa* obtenerInstancia();
-    Instruccion                   *instrucciones;
-    vector<DeclaracionDeFuncion*> *tablaDeFunciones;
-    vector<DeclaracionUtilizar*>  *tablaDePuertosYSensores;
-    vector<VariableDeclarada*>    *tablaDeVariables;
+    Instruccion                       *instrucciones;
+    vector<DeclaracionDeFuncion*>     *tablaDeFunciones;
+    vector<DeclaracionUtilizar*>      *tablaDePuertosYSensores;
+    vector<VariableDeclarada*>        *tablaDeVariables;
+    vector<VariableADeclarar*>        *tablaDeVariablesADeclarar;
+    vector<InstruccionLlamadaAFuncion*> *tablaDeUsoDeFunciones;
 
-    vector<VariableADeclarar*>    *tablaDeVariablesADeclarar;
     string        obtenerCodigoVariablesADeclarar();
-
     TipoBooleano*           obtenerTipoBooleano();
     TipoCadena*             obtenerTipoCadena();
     TipoCaracter*           obtenerTipoCaracter();
@@ -52,25 +58,25 @@ public:
     TipoFlotante*           obtenerTipoFlotante();
     TipoArreglo*            obtenerTipoArreglo();
     TipoMotor*              obtenerTipoMotor();
-    TipoSensorDeBrujula*    obtenerSensorDeBrujula();
-    TipoSensorDeColor*      obtenerSensorDeColor();
-    TipoSensorDeInclinacion*obtenerSensorDeInclinacion();
-    TipoSensorDeLuz*        obtenerSensorDeLuz();
-    TipoSensorDeSonido*     obtenerSensorDeSonido();
-    TipoSensorDeTacto*      obtenerSensorDeTacto();
-    TipoSensorGiroscopico*  obtenerSensorGiroscopico();
-    TipoSensorUltrasonico*  obtenerSensorUltrasonico();
+    TipoSensorDeBrujula*    obtenerTipoSensorDeBrujula();
+    TipoSensorDeColor*      obtenerTipoSensorDeColor();
+    TipoSensorDeInclinacion*obtenerTipoSensorDeInclinacion();
+    TipoSensorDeLuz*        obtenerTipoSensorDeLuz();
+    TipoSensorDeSonido*     obtenerTipoSensorDeSonido();
+    TipoSensorDeTacto*      obtenerTipoSensorDeTacto();
+    TipoSensorGiroscopico*  obtenerTipoSensorGiroscopico();
+    TipoSensorUltrasonico*  obtenerTipoSensorUltrasonico();
 
     VariableDeclarada*    existeVariable(string *identificador, int idDeExpresion);
-    DeclaracionUtilizar*  existeEnTablaDePuertosYSensores(string *identificador, int idDeExpresion);
+    DeclaracionUtilizar*  existeEnTablaDePuertosYSensores(string *identificador);
     DeclaracionDeFuncion* existeEnTablaDeFunciones(string *identificador, int idDeExpresion);
 
+    bool existePuerto(string *puerto);
     void limpiarInstancia();
     void establecerIdDeExpresionAVariable(int idExpresion, int idExpresionACambiar);
     void cargarFuncionesIncorporadas();
 
-    bool existeFuncionIncorporada(string nombreFuncion, Lista *parametros);
-
+    Funcion* existeFuncionIncorporada(string nombreFuncion, Lista *parametros);
     string obtenerCodigoFuente( string nombreArchivo,
                                 string inclusiones,
                                 string declaracionFunciones,

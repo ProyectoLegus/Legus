@@ -128,7 +128,7 @@
         {
             DeclaracionUtilizar *declrUtilizar = new DeclaracionUtilizar(new VariablePuerto($3, yylineno, correlativo++),
                                                                          new VariableSensor($7, yylineno, correlativo++),
-                                                                         new Variable($11, yylineno, correlativo++));
+                                                                         new VariableSensor($11, yylineno, correlativo++));
             Programa::obtenerInstancia()->tablaDePuertosYSensores->push_back(declrUtilizar);
         }
         |/*Epsilon*/

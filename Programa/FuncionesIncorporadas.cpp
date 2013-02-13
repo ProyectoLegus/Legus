@@ -77,20 +77,20 @@ map<string, vector<Funcion*>*>* FuncionesIncorporadas::obtenerFuncionesIncorpora
     estaEnMovimiento->push_back( new Funcion( obtenerTipo(TBooleano), obtenerVectorParametros(1, TMotor)) );
     (*funcionesIncorporadas)["esta_en_movimiento"] =    estaEnMovimiento;
 
-    /*EstaRotando*/
-    vector<Funcion*> *estaRotando = new vector<Funcion*>();
-    estaRotando->push_back( new Funcion( obtenerTipo(TBooleano) , obtenerVectorParametros(1, TMotor)) );
-    (*funcionesIncorporadas)["esta_rotando"] = estaRotando;
+//    /*EstaRotando*/
+//    vector<Funcion*> *estaRotando = new vector<Funcion*>();
+//    estaRotando->push_back( new Funcion( obtenerTipo(TBooleano) , obtenerVectorParametros(1, TMotor)) );
+//    (*funcionesIncorporadas)["esta_rotando"] = estaRotando;
 
     /*Bloquear*/
     vector<Funcion*> *bloquear = new vector<Funcion*>();
     bloquear->push_back( new Funcion(0 , obtenerVectorParametros(2, TMotor, TEntero)) );
     (*funcionesIncorporadas)["bloquear"] = bloquear;
 
-    /*InvertirDireccion*/
-    vector<Funcion*> *invertirDireccion = new vector<Funcion*>();
-    invertirDireccion->push_back( new Funcion(0 , obtenerVectorParametros(1, TMotor)) );
-    (*funcionesIncorporadas)["invertir_direccion"] = invertirDireccion;
+//    /*InvertirDireccion*/
+//    vector<Funcion*> *invertirDireccion = new vector<Funcion*>();
+//    invertirDireccion->push_back( new Funcion(0 , obtenerVectorParametros(1, TMotor)) );
+//    (*funcionesIncorporadas)["invertir_direccion"] = invertirDireccion;
 
     /*EsperarCompletacion???*/
 

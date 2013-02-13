@@ -72,42 +72,42 @@ TipoMotor* Programa::obtenerTipoMotor()
     return this->tipoMotor;
 }
 
-TipoSensorDeBrujula* Programa::obtenerSensorDeBrujula()
+TipoSensorDeBrujula* Programa::obtenerTipoSensorDeBrujula()
 {
     return this->tipoSensorDeBrujula;
 }
 
-TipoSensorDeColor* Programa::obtenerSensorDeColor()
+TipoSensorDeColor* Programa::obtenerTipoSensorDeColor()
 {
     return this->tipoSensorDeColor;
 }
 
-TipoSensorDeInclinacion* Programa::obtenerSensorDeInclinacion()
+TipoSensorDeInclinacion* Programa::obtenerTipoSensorDeInclinacion()
 {
     return this->tipoSensorDeInclinacion;
 }
 
-TipoSensorDeLuz* Programa::obtenerSensorDeLuz()
+TipoSensorDeLuz* Programa::obtenerTipoSensorDeLuz()
 {
     return this->tipoSensorDeLuz;
 }
 
-TipoSensorDeSonido* Programa::obtenerSensorDeSonido()
+TipoSensorDeSonido* Programa::obtenerTipoSensorDeSonido()
 {
     return this->tipoSensorDeSonido;
 }
 
-TipoSensorDeTacto* Programa::obtenerSensorDeTacto()
+TipoSensorDeTacto* Programa::obtenerTipoSensorDeTacto()
 {
     return this->tipoSensorDeTacto;
 }
 
-TipoSensorGiroscopico* Programa::obtenerSensorGiroscopico()
+TipoSensorGiroscopico* Programa::obtenerTipoSensorGiroscopico()
 {
     return this->tipoSensorGiroscopico;
 }
 
-TipoSensorUltrasonico* Programa::obtenerSensorUltrasonico()
+TipoSensorUltrasonico* Programa::obtenerTipoSensorUltrasonico()
 {
     return this->tipoSensorUltrasonico;
 }
@@ -144,7 +144,7 @@ DeclaracionDeFuncion* Programa::existeEnTablaDeFunciones(string *identificador, 
     return 0;
 }
 
-DeclaracionUtilizar* Programa::existeEnTablaDePuertosYSensores(string *identificador, int idDeExpresion)
+DeclaracionUtilizar* Programa::existeEnTablaDePuertosYSensores(string *identificador)
 {
     for(unsigned int i = 0; i< tablaDePuertosYSensores->size(); i++)
     {
@@ -155,6 +155,19 @@ DeclaracionUtilizar* Programa::existeEnTablaDePuertosYSensores(string *identific
         }
     }
     return 0;
+}
+
+bool Programa::existePuerto(string *puerto)
+{
+    for(unsigned int i = 0; i< tablaDePuertosYSensores->size(); i++)
+    {
+        DeclaracionUtilizar *declaracion = tablaDePuertosYSensores->at(i);
+        if(strcmpi(puerto->c_str(), declaracion->obtenerPuerto()->obtenerIdentificador()->c_str())==0)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 /*El primero es el id de expresion de la variable que quiero cambiar
@@ -240,7 +253,6 @@ string Programa::obtenerCodigoVariablesADeclarar()
 void Programa::cargarFuncionesIncorporadas()
 {
     FuncionesIncorporadas fi;
-
     this->funcionesIncorporadas = fi.obtenerFuncionesIncorporadas();
 }
 
@@ -268,12 +280,20 @@ string Programa::obtenerCodigoFuente(string nombreArchivo,
     return codigoFuente.str();
 }
 
-bool Programa::existeFuncionIncorporada(string nombreFuncion, Lista *parametros)
+Funcion* Programa::existeFuncionIncorporada(string nombreFuncion, Lista *parametros)
 {
-    bool encontrado = false;
+//    Lista *parametros = new Lista();
+//    for( int i = parametross->lista->size() - 1 ; i>=0; i--)
+//    {
+//        Expresion * e = parametross->lista->at(i);
+//        parametros->lista->push_back( e );
+//    }
+
+    Funcion* encontrado = 0;
     if( funcionesIncorporadas->find(nombreFuncion) != funcionesIncorporadas->end())
     {
         /*Existe!*/
+        transform(nombreFuncion.begin(), nombreFuncion.end(), nombreFuncion.begin(), ::tolower);
         vector<Funcion*>* posiblesParametros = (*funcionesIncorporadas)[nombreFuncion];
         for(unsigned int i=0; i<posiblesParametros->size(); i++)
         {
@@ -281,10 +301,11 @@ bool Programa::existeFuncionIncorporada(string nombreFuncion, Lista *parametros)
             if( posibleFuncion->parametros->size() == parametros->lista->size())
             {
                 bool encaja = true;
+                int k = parametros->lista->size()-1;
                 for(unsigned int j = 0; j<posibleFuncion->parametros->size(); j++)
                 {
                     TipoParametro tp = posibleFuncion->parametros->at(j);
-                    Expresion *expresion = parametros->lista->at(j);
+                    Expresion *expresion = parametros->lista->at(k--);
                     if( obtenerTipoEnBaseATipoParametro(tp) != expresion->validarSemantica() )
                     {
                         encaja = false;
@@ -292,7 +313,7 @@ bool Programa::existeFuncionIncorporada(string nombreFuncion, Lista *parametros)
                 }
                 if( encaja )
                 {
-                    encontrado = true;
+                    encontrado = posibleFuncion;
                     break;
                 }
             }
@@ -322,5 +343,41 @@ Tipo* Programa::obtenerTipoEnBaseATipoParametro(TipoParametro tipoParam)
     else if(tipoParam == TBooleano)
     {
         return tipoBooleano;
+    }
+    else if( tipoParam == TMotor)
+    {
+        return tipoMotor;
+    }
+    else if( tipoParam == TSensorDeBrujula)
+    {
+        return tipoSensorDeBrujula;
+    }
+    else if( tipoParam == TSensorDeColor)
+    {
+        return tipoSensorDeColor;
+    }
+    else if( tipoParam == TSensorDeInclinacion)
+    {
+        return tipoSensorDeInclinacion;
+    }
+    else if( tipoParam == TSensorDeLuz)
+    {
+        return tipoSensorDeLuz;
+    }
+    else if( tipoParam == TSensorDeSonido)
+    {
+        return tipoSensorDeSonido;
+    }
+    else if( tipoParam == TSensorDeTacto)
+    {
+        return tipoSensorDeTacto;
+    }
+    else if( tipoParam == TSensorGiroscopico)
+    {
+        return tipoSensorGiroscopico;
+    }
+    else if( tipoParam == TSensorUltrasonico)
+    {
+        return tipoSensorUltrasonico;
     }
 }
