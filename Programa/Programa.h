@@ -43,11 +43,11 @@ class Programa
 public:
     /*Agregar tabla de funciones que se estan utilizando!!!!*/
     static Programa* obtenerInstancia();
-    Instruccion                       *instrucciones;
-    vector<DeclaracionDeFuncion*>     *tablaDeFunciones;
-    vector<DeclaracionUtilizar*>      *tablaDePuertosYSensores;
-    vector<VariableDeclarada*>        *tablaDeVariables;
-    vector<VariableADeclarar*>        *tablaDeVariablesADeclarar;
+    Instruccion                         *instrucciones;
+    vector<DeclaracionDeFuncion*>       *tablaDeFunciones;
+    vector<DeclaracionUtilizar*>        *tablaDePuertosYSensores;
+    vector<VariableDeclarada*>          *tablaDeVariables;
+    vector<VariableADeclarar*>          *tablaDeVariablesADeclarar;
     vector<InstruccionLlamadaAFuncion*> *tablaDeUsoDeFunciones;
 
     string        obtenerCodigoVariablesADeclarar();

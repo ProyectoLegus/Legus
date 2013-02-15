@@ -146,3 +146,17 @@ Tipo* FuncionesIncorporadas::obtenerTipo(TipoParametro tipoParam)
     }
     return 0;
 }
+
+/*
+CODIGO MOTORES
+        public static void adelante(NXTRegulatedMotor m){m.forward();}
+        public static void atras(NXTRegulatedMotor m){m.backward();}
+        public static void detener(NXTRegulatedMotor m){m.stop();}
+        public static void rotar_motor(NXTRegulatedMotor m,int r){m.rotate(r);}
+        public static void rotar_motor_hacia(NXTRegulatedMotor m,int r){m.rotateTo(r);}
+        public static void establecer_velocidad(NXTRegulatedMotor m,int v){m.setSpeed(v)}
+        public static int obtener_angulo(NXTRegulatedMotor m){return m.getLimitAngle();}
+        public static int obtener_velocidad(NXTRegulatedMotor m){return m.getSpeed();}
+        public static boolean esta_en_movimiento(NXTRegulatedMotor m){return m.isMoving();}
+        public static void bloquear(NXTRegulatedMotor m,int p){m.lock(p);}
+*/

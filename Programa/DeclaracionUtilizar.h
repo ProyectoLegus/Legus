@@ -22,8 +22,8 @@ private:
     VariableSensor *variable;
     VariablePuerto *puerto;
     VariableSensor *sensor;
-    Tipo*       tipoSensor;
-    string*     codigo;
+    Tipo           *tipoSensor;
+    string         *codigo;
     bool  esPuertoYSensorValido(string* puerto, string* sensor, string *variable);
     int   obtenerNumeroPuerto(string *puerto);
     char  obtenerCaracterDePuerto(string *puerto);
