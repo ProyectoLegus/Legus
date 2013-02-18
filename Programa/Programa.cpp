@@ -9,6 +9,10 @@ Programa::Programa()
     this->tablaDePuertosYSensores = new vector<DeclaracionUtilizar*>();
     this->tablaDeVariablesADeclarar = new vector<VariableADeclarar*>();
 
+    this->tablaDeUsoDeFunciones = new map<string, Funcion*>();
+    this->codigoDefunciones = 0;
+    compilarParaNxt = true;
+
     /*Instancia de los tipos*/
     this->tipoBooleano = new TipoBooleano();
     this->tipoCadena = new TipoCadena();
@@ -33,6 +37,7 @@ Programa* Programa::obtenerInstancia()
     {
         instancia = new Programa();
         instancia->cargarFuncionesIncorporadas();
+        instancia->cargarCodigoFunciones();
     }
     return instancia;
 }
@@ -214,7 +219,7 @@ string Programa::obtenerCodigoVariablesADeclarar()
             resultado << "$";
             resultado << variable->id;
             resultado << *variable->variable;
-            resultado << "=0.0;";
+            resultado << "=0.0f;";
         }
 
         if( tipoVariable->tipo == Caracter)
@@ -256,8 +261,15 @@ void Programa::cargarFuncionesIncorporadas()
     this->funcionesIncorporadas = fi.obtenerFuncionesIncorporadas();
 }
 
+void Programa::cargarCodigoFunciones()
+{
+    FuncionesIncorporadas fi;
+    this->codigoDefunciones = fi.obtenerCodigoFunciones();
+}
+
 string Programa::obtenerCodigoFuente(string nombreArchivo,
                                      string inclusiones,
+                                     string funcsIncorporadas,
                                      string declaracionFunciones,
                                      string bloqueCodigo)
 {
@@ -267,11 +279,13 @@ string Programa::obtenerCodigoFuente(string nombreArchivo,
     codigoFuente << nombreArchivo;
     codigoFuente << "{\n";
 
-        codigoFuente << declaracionFunciones;
+        codigoFuente << funcsIncorporadas;
         codigoFuente << "\n";
+        codigoFuente << declaracionFunciones;
 
         codigoFuente << "public static void main(String args[])";
         codigoFuente << "{\n";
+            codigoFuente << obtenerCodigoVariablesADeclarar();
             codigoFuente << bloqueCodigo;
             codigoFuente << "\n";
         codigoFuente << "}\n";
@@ -282,42 +296,18 @@ string Programa::obtenerCodigoFuente(string nombreArchivo,
 
 Funcion* Programa::existeFuncionIncorporada(string nombreFuncion, Lista *parametros)
 {
-//    Lista *parametros = new Lista();
-//    for( int i = parametross->lista->size() - 1 ; i>=0; i--)
-//    {
-//        Expresion * e = parametross->lista->at(i);
-//        parametros->lista->push_back( e );
-//    }
+    /*a minusculas*/
+    transform(nombreFuncion.begin(), nombreFuncion.end(), nombreFuncion.begin(), ::tolower);
+
+    // transformarlo a una entrada en la tabla
+    string nombre = convertirAEntradaEnTabla(nombreFuncion, parametros);
 
     Funcion* encontrado = 0;
-    if( funcionesIncorporadas->find(nombreFuncion) != funcionesIncorporadas->end())
+    if( funcionesIncorporadas->find(nombre) != funcionesIncorporadas->end())
     {
         /*Existe!*/
-        transform(nombreFuncion.begin(), nombreFuncion.end(), nombreFuncion.begin(), ::tolower);
-        vector<Funcion*>* posiblesParametros = (*funcionesIncorporadas)[nombreFuncion];
-        for(unsigned int i=0; i<posiblesParametros->size(); i++)
-        {
-            Funcion* posibleFuncion = posiblesParametros->at(i);
-            if( posibleFuncion->parametros->size() == parametros->lista->size())
-            {
-                bool encaja = true;
-                int k = parametros->lista->size()-1;
-                for(unsigned int j = 0; j<posibleFuncion->parametros->size(); j++)
-                {
-                    TipoParametro tp = posibleFuncion->parametros->at(j);
-                    Expresion *expresion = parametros->lista->at(k--);
-                    if( obtenerTipoEnBaseATipoParametro(tp) != expresion->validarSemantica() )
-                    {
-                        encaja = false;
-                    }
-                }
-                if( encaja )
-                {
-                    encontrado = posibleFuncion;
-                    break;
-                }
-            }
-        }
+        Funcion* funcion = (*funcionesIncorporadas)[nombre];
+        return funcion;
     }
     return encontrado;
 }
@@ -380,4 +370,128 @@ Tipo* Programa::obtenerTipoEnBaseATipoParametro(TipoParametro tipoParam)
     {
         return tipoSensorUltrasonico;
     }
+    return 0;
+}
+
+string Programa::obtenerTipoEnBaseATipo(Tipo *tipo)
+{
+    if(tipo==tipoEntero)                    return "entero";
+    else if(tipo==tipoMotor)                return "motor";
+    else if(tipo==tipoFlotante)             return "flotante";
+    else if(tipo==tipoCadena)               return "cadena";
+    else if(tipo==tipoCaracter)             return "caracter";
+    else if(tipo==tipoBooleano)             return "booleano";
+    else if(tipo==tipoSensorDeBrujula)      return "brujula";
+    else if(tipo==tipoSensorDeColor)        return "color";
+    else if(tipo==tipoSensorDeInclinacion)  return "inclinacion";
+    else if(tipo==tipoSensorDeLuz)          return "luz";
+    else if(tipo==tipoSensorDeSonido)       return "sonido";
+    else if(tipo==tipoSensorDeTacto)        return "tacto";
+    else if(tipo==tipoSensorGiroscopico)    return "giroscopico";
+    else if(tipo==tipoSensorUltrasonico)    return "ultrasonico";
+    return "";
+}
+
+bool Programa::obtenerTipoDeCompilacion()
+{
+    return this->compilarParaNxt;
+}
+
+void Programa::agregarUsoDeFuncionATabla(string id, Lista *params, Funcion *funcion)
+{
+    string nombre = convertirAEntradaEnTabla(id, params);
+    if( tablaDeUsoDeFunciones->find(nombre) == tablaDeUsoDeFunciones->end())
+    {
+        // No existe...
+        (*tablaDeUsoDeFunciones)[nombre] = funcion;
+    }
+}
+
+string Programa::convertirAEntradaEnTabla(string nombreFuncion, Lista *parametros)
+{
+    stringstream nfunc;
+    nfunc << nombreFuncion;
+    nfunc << "|";
+
+    for(int k = parametros->lista->size()-1; k>=0; k--)
+    {
+        Expresion *expr = parametros->lista->at(k);
+        nfunc << obtenerTipoEnBaseATipo(expr->validarSemantica());
+
+        if(k!=0)
+        {
+            nfunc << ",";
+        }
+    }
+    return nfunc.str();
+}
+
+string Programa::obtenerCodigoFunciones()
+{
+    stringstream codigoFuncs;
+    map<string, Funcion*>::iterator it;
+    for(it = tablaDeUsoDeFunciones->begin();
+        it != tablaDeUsoDeFunciones->end();
+        it++)
+    {
+        string codigo = (*it).first;
+
+        if( this->codigoDefunciones != 0)
+        {
+            if(this->codigoDefunciones->find(codigo) != codigoDefunciones->end())
+            {
+                codigoFuncs << (*this->codigoDefunciones)[codigo];
+                codigoFuncs << "\n";
+            }
+        }
+    }
+    return codigoFuncs.str();
+}
+
+void Programa::validarSemantica()
+{
+    Instruccion *actual = this->instrucciones;
+    while(actual!=0)
+    {
+        actual->validarSemantica();
+        actual = actual->obtenerSiguiente();
+    }
+}
+
+void Programa::generarArchivo(string nombreArchivo)
+{
+    // Revisar si el codigo esta correcto
+    validarSemantica();
+
+    // generar el archivo
+    string codigoPrograma = obtenerCodigoFuente(nombreArchivo,
+                                                obtenerInclusiones(),
+                                                obtenerCodigoFunciones(),
+                                                "",
+                                                obtenerCodigoInstrucciones());
+
+    ofstream archivo;
+    string nombre = nombreArchivo + ".java";
+    archivo.open(nombre.c_str());
+        archivo << codigoPrograma.c_str();
+    archivo.close();
+}
+
+string Programa::obtenerCodigoInstrucciones()
+{
+    string codigo="";
+    Instruccion *actual = this->instrucciones;
+    while(actual!=0)
+    {
+        codigo += actual->generarCodigoJava();
+        actual = actual->obtenerSiguiente();
+    }
+    return codigo;
+}
+
+string Programa::obtenerInclusiones()
+{
+    return "import lejos.nxt.*;\n"
+           "import lejos.util.*;\n"
+           "import java.util.ArrayList;\n";
 }
