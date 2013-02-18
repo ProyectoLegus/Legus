@@ -19,6 +19,8 @@ Tipo* VariableFuncion::validarSemantica()
 
     if(funcion!=0)
     {
+        /*Existe incorporarla a tabla de funciones utilizadas*/
+        Programa::obtenerInstancia()->agregarUsoDeFuncionATabla(*obtenerIdentificador(), lista_parametros, funcion);
         return funcion->tipoDeRetorno;
     }
     return 0;

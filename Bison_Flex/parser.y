@@ -30,8 +30,9 @@
 
     void yyerror(const char *s)
     {
+        cout << "Error Sintactico";
         //QMessageBox::about(0,"","Error Sintactico: " + QString(s) + "linea: " + QString::number(yylineno));
-        QMessageBox::critical(0,"Error",QString(GeneradorDeErrores::obtenerTokenEsperado(token_esperado).c_str()));
+        //QMessageBox::critical(0,"Error",QString(GeneradorDeErrores::obtenerTokenEsperado(token_esperado).c_str()));
     }
 %}
 

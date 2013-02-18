@@ -67,7 +67,10 @@ void Editor::on_btnCompilar_clicked()
             actual = actual->obtenerSiguiente();
         }
 
-        QMessageBox::about(0,"Codigo Generado",QString(Programa::obtenerInstancia()->obtenerCodigoVariablesADeclarar().c_str()) +
+        QString funcs = QString(Programa::obtenerInstancia()->obtenerCodigoFunciones().c_str()) ;
+        QMessageBox::about(0,"Codigo Generado",
+                           funcs+
+                           QString(Programa::obtenerInstancia()->obtenerCodigoVariablesADeclarar().c_str()) +
                            QString(codigo.c_str()) );
         correlativo = 0;
 
@@ -85,8 +88,6 @@ void Editor::on_btnCompilar_clicked()
             }
             ui->listVariables->addItem(res);
         }
-
-
 
         Programa::obtenerInstancia()->limpiarInstancia();
     }

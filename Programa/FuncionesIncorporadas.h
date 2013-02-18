@@ -28,7 +28,8 @@ class FuncionesIncorporadas
 {
 public:
     FuncionesIncorporadas();
-    map<string, vector<Funcion*>*>* obtenerFuncionesIncorporadas();
+    map<string, Funcion*>* obtenerFuncionesIncorporadas();
+    map<string, string>            *obtenerCodigoFunciones();
 
 private:
     vector<TipoParametro>* obtenerVectorParametros(int cantidadArgumentos, ...);

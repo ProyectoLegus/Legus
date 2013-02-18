@@ -43,7 +43,18 @@ void InstruccionLlamadaAFuncion::validarSemantica()
     }
 
     /*DE LAS FUNCIONES BUILT-IN*/
-    encontrado = Programa::obtenerInstancia()->existeFuncionIncorporada(*this->identificador, this->lista_parametros);
+    transform(this->identificador->begin(), this->identificador->end(), this->identificador->begin(), ::tolower);
+    Funcion *fun = Programa::obtenerInstancia()->existeFuncionIncorporada(*this->identificador, this->lista_parametros);
+
+    // true -> Funcion Existe
+    encontrado = fun!=0;
+
+    if( fun!=0 )
+    {
+        // Insertarlo a la tabla!
+        Programa::obtenerInstancia()->agregarUsoDeFuncionATabla(*this->identificador, this->lista_parametros, fun);
+    }
+
 
     if( !encontrado )
     {

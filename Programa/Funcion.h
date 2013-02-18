@@ -16,6 +16,7 @@ public:
     Funcion(Tipo* tipoDeRetorno, vector<TipoParametro>* parametros);
     Tipo* tipoDeRetorno;
     vector<TipoParametro>* parametros;
+    string *codigo;
 };
 
 #endif // FUNCION_H

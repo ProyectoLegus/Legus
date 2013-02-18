@@ -2,7 +2,6 @@
 %x MULTI_COMMENT
 %{
     #include "parser.h"
-    #include <QMessageBox>
     #include <string>
     #include <iostream>
 

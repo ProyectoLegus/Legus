@@ -650,7 +650,6 @@ char *yytext;
 
 #line 4 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
     #include "parser.h"
-    #include <QMessageBox>
     #include <string>
     #include <iostream>
 
@@ -659,7 +658,7 @@ char *yytext;
 
     extern "C" int yywrap(){}
 /*FALTA: Comentario de 1 linea*/
-#line 663 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.cpp"
+#line 662 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.cpp"
 
 #define INITIAL 0
 #define MULTI_COMMENT 1
@@ -842,9 +841,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 24 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 23 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 
-#line 848 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.cpp"
+#line 847 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -939,354 +938,354 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 27 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 26 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 {BEGIN(MULTI_COMMENT);}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 29 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 28 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_SIMBOLO_IGUAL); }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 30 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 29 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_SUMA);}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 31 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 30 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_RESTA);}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 32 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 31 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_MULTIPLICACION);}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 33 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 32 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_DIVISION);}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 34 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 33 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_SIMBOLO_MODULO);}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 35 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 34 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_EXPONENCIACION);}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 36 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 35 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_MAYOR_IGUAL);}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 37 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 36 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_MENOR_IGUAL);}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 38 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 37 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_MENOR);}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 39 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 38 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_MAYOR);}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 40 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 39 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_IGUALDAD);}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 41 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 40 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_NEGACION);}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 42 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 41 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_DESIGUALDAD);}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 43 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 42 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_SIMBOLO_OPERADOR_Y);}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 44 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 43 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_SIMBOLO_OPERADOR_O);}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 45 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 44 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_CORCHETE_IZQUIERDO);}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 46 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 45 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_CORCHETE_DERECHO);}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 47 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 46 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_PARENTESIS_IZQUIERDO);}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 48 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 47 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_PARENTESIS_DERECHO);}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 49 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 48 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_DOS_PUNTOS);}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 50 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 49 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_COMA);}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 52 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 51 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_MODULO);}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 53 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 52 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_DIVISION_ENTERA);}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 54 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 53 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_IGUAL);}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 55 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 54 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_A);}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 56 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 55 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_DISTINTO);}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 57 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 56 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_DE);}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 58 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 57 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_OPERADOR_Y);}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 59 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 58 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_OPERADOR_O);}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 60 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 59 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_NO);}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 61 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 60 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_SI);}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 62 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 61 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_ENTONCES);}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 63 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 62 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_FIN);}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 64 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 63 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_SINO);}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 65 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 64 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_CASO);}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 66 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 65 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_MIENTRAS);}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 67 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 66 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_HAGA);}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 68 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 67 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_EJECUTE);}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 69 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 68 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_REPETIR);}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 70 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 69 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_INFINITAS);}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 71 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 70 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_VECES);}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 72 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 71 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_PARA);}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 73 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 72 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_DESDE);}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 74 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 73 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_REPITA);}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 75 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 74 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_CADA);}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 76 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 75 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_EN);}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 77 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 76 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_FUNCION);}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 78 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 77 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_RETORNA);}
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 79 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 78 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_RETORNAR);}
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 80 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 79 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_UTILIZAR);}
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 81 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 80 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_COMO);}
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 82 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 81 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_DEFINIR);}
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 83 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 82 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_VERDADERO);}
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 84 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 83 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_FALSO);}
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 85 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 84 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_HASTA);}
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 86 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 85 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_ENTERO);}
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 87 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 86 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_CADENA);}
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 88 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 87 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_BOOLEANO);}
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 89 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 88 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_CARACTER);}
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 90 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 89 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_FLOTANTE);}
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 91 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 90 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_ES);}
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 93 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 92 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_IDENTIFICADOR);}
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 94 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 93 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_LITERAL_NUMERICA);}
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 95 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 94 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_LITERAL_FLOTANTE);}
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 96 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 95 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 { GUARDAR_TOKEN(T_LITERAL_CARACTER);}
 	YY_BREAK
 case 68:
 /* rule 68 can match eol */
 YY_RULE_SETUP
-#line 97 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 96 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 {GUARDAR_TOKEN(T_LITERAL_CADENA);}
 	YY_BREAK
 case 69:
 /* rule 69 can match eol */
 YY_RULE_SETUP
-#line 98 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 97 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 {;}
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 99 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 98 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 {
                             yyterminate();
                         }
@@ -1295,32 +1294,32 @@ YY_RULE_SETUP
 
 case 71:
 YY_RULE_SETUP
-#line 105 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 104 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 {BEGIN(INITIAL);}
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 106 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 105 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 {}
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 107 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 106 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 {}
 	YY_BREAK
 case 74:
 /* rule 74 can match eol */
 YY_RULE_SETUP
-#line 108 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 107 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 {};
 	YY_BREAK
 
 case 75:
 YY_RULE_SETUP
-#line 110 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 109 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 ECHO;
 	YY_BREAK
-#line 1324 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.cpp"
+#line 1323 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.cpp"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(MULTI_COMMENT):
 	yyterminate();
@@ -2331,7 +2330,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 110 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
+#line 109 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\tokens.l"
 
 
 

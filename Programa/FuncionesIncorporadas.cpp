@@ -4,22 +4,25 @@ FuncionesIncorporadas::FuncionesIncorporadas()
 {
 }
 
-map<string, vector<Funcion*>*>* FuncionesIncorporadas::obtenerFuncionesIncorporadas()
+map<string, Funcion*>* FuncionesIncorporadas::obtenerFuncionesIncorporadas()
 {
     /*¿Como manejar el tipo de retorno? ... Like a Boss!*/
 
-    map<string, vector<Funcion*>*> *funcionesIncorporadas = new map<string, vector<Funcion*>*>();
+    map<string, Funcion*> *funcionesIncorporadas = new map<string, Funcion*>();
 
-    /*No retornan nada!*/
     /*Escriba!*/
-    vector<Funcion*>* escriba = new vector<Funcion*>();
-    escriba->push_back( new Funcion( 0, obtenerVectorParametros(1, TEntero)));
-    escriba->push_back( new Funcion( 0, obtenerVectorParametros(1, TFlotante)));
-    escriba->push_back( new Funcion( 0, obtenerVectorParametros(1, TCaracter)));
-    escriba->push_back( new Funcion( 0, obtenerVectorParametros(1, TCadena)));
-    escriba->push_back( new Funcion( 0, obtenerVectorParametros(1, TBooleano)));
-    (*funcionesIncorporadas)["escriba"] = escriba;
-    //funcionesIncorporadas->operator []("escriba") = escriba;
+    (*funcionesIncorporadas)["escriba|entero"] = new Funcion( 0, obtenerVectorParametros(1, TEntero));
+    (*funcionesIncorporadas)["escriba|flotante"] = new Funcion( 0, obtenerVectorParametros(1, TFlotante));
+    (*funcionesIncorporadas)["escriba|caracter"] = new Funcion( 0, obtenerVectorParametros(1, TCaracter));
+    (*funcionesIncorporadas)["escriba|cadena"] = new Funcion( 0, obtenerVectorParametros(1, TCadena));
+    (*funcionesIncorporadas)["escriba|booleano"] = new Funcion( 0, obtenerVectorParametros(1, TBooleano));
+
+    (*funcionesIncorporadas)["escriba|entero,entero,entero"] = new Funcion( 0, obtenerVectorParametros(3, TEntero, TEntero, TEntero));
+    (*funcionesIncorporadas)["escriba|flotante,entero,entero"] = new Funcion( 0, obtenerVectorParametros(3, TFlotante, TEntero, TEntero));
+    (*funcionesIncorporadas)["escriba|caracter,entero,entero"] = new Funcion( 0, obtenerVectorParametros(3, TCaracter, TEntero, TEntero));
+    (*funcionesIncorporadas)["escriba|cadena,entero,entero"] = new Funcion( 0, obtenerVectorParametros(3, TCadena, TEntero, TEntero));
+    (*funcionesIncorporadas)["escriba|booleano,entero,entero"] = new Funcion( 0, obtenerVectorParametros(3, TBooleano, TEntero, TEntero));
+
     /*Con Retorno*/
     /*Leer*/
 
@@ -27,75 +30,71 @@ map<string, vector<Funcion*>*>* FuncionesIncorporadas::obtenerFuncionesIncorpora
 
     /*Lego NXT*/
     /*Funciones incorporadas para LCD*/
-    vector<Funcion*> *limpiarPantalla = new vector<Funcion*>();
-    limpiarPantalla->push_back( new Funcion(0 , obtenerVectorParametros(0) ) );
-    (*funcionesIncorporadas)["limpiar_pantalla"] = limpiarPantalla;
+    (*funcionesIncorporadas)["limpiar_pantalla"] = new Funcion(0 , obtenerVectorParametros(0) );
 
     /*Funciones Incorporadas para MOTORES*/
     /*Adelante*/
-    vector<Funcion*> *adelante = new vector<Funcion*>();
-    adelante->push_back( new Funcion(0 , obtenerVectorParametros(1, TMotor)) );
-    (*funcionesIncorporadas)["adelante"] = adelante;
+    (*funcionesIncorporadas)["adelante|motor"] = new Funcion(0 , obtenerVectorParametros(1, TMotor));
 
     /*Atras*/
-    vector<Funcion*> *atras = new vector<Funcion*>();
-    atras->push_back( new Funcion(0 , obtenerVectorParametros(1, TMotor)) );
-    (*funcionesIncorporadas)["atras"] = atras;
+    (*funcionesIncorporadas)["atras|motor"] = new Funcion(0 , obtenerVectorParametros(1, TMotor));
 
     /*Detener*/
-    vector<Funcion*> *detener = new vector<Funcion*>();
-    detener->push_back( new Funcion(0 , obtenerVectorParametros(1, TMotor)) );
-    (*funcionesIncorporadas)["detener"] = detener;
+    (*funcionesIncorporadas)["detener|motor"] = new Funcion(0 , obtenerVectorParametros(1, TMotor));
 
     /*RotarMotor*/
-    vector<Funcion*> *rotarMotor = new vector<Funcion*>();
-    rotarMotor->push_back( new Funcion(0 , obtenerVectorParametros(2, TMotor, TEntero)) );
-    (*funcionesIncorporadas)["rotar_motor"] = rotarMotor;
+    (*funcionesIncorporadas)["rotar_motor|motor,entero"] = new Funcion(0 , obtenerVectorParametros(2, TMotor, TEntero));
 
     /*RotarMotorHacia*/
-    vector<Funcion*> *rotarMotorHacia = new vector<Funcion*>();
-    rotarMotorHacia->push_back( new Funcion(0 , obtenerVectorParametros(2, TMotor, TEntero)) );
-    (*funcionesIncorporadas)["rotar_motor_hacia"] = rotarMotorHacia;
+    (*funcionesIncorporadas)["rotar_motor_hacia|motor,entero"] = new Funcion(0 , obtenerVectorParametros(2, TMotor, TEntero));
 
     /*Establecer Velocidad*/
-    vector<Funcion*> *establecerVelocidad = new vector<Funcion*>();
-    establecerVelocidad->push_back( new Funcion(0 , obtenerVectorParametros(2, TMotor, TEntero)) );
-    (*funcionesIncorporadas)["establecer_velocidad"] = establecerVelocidad;
+    (*funcionesIncorporadas)["establecer_velocidad|motor,entero"] = new Funcion(0 , obtenerVectorParametros(2, TMotor, TEntero));
 
     /*Obtener Angulo*/
-    vector<Funcion*> *obtenerAngulo = new vector<Funcion*>();
-    obtenerAngulo->push_back( new Funcion( obtenerTipo(TEntero) , obtenerVectorParametros(1, TMotor)) );
-    (*funcionesIncorporadas)["obtener_angulo"] = obtenerAngulo;
+    (*funcionesIncorporadas)["obtener_angulo|motor"] = new Funcion( obtenerTipo(TEntero) , obtenerVectorParametros(1, TMotor));
 
     /*Obtener Velocidad*/
-    vector<Funcion*> *obtenerVelocidad = new vector<Funcion*>();
-    obtenerVelocidad->push_back( new Funcion( obtenerTipo(TEntero) , obtenerVectorParametros(1, TMotor)) );
-    (*funcionesIncorporadas)["obtener_velocidad"] = obtenerVelocidad;
+    (*funcionesIncorporadas)["obtener_velocidad|motor"] = new Funcion( obtenerTipo(TEntero) , obtenerVectorParametros(1, TMotor));
 
     /*EstaEnMovimiento*/
-    vector<Funcion*> *estaEnMovimiento = new vector<Funcion*>();
-    estaEnMovimiento->push_back( new Funcion( obtenerTipo(TBooleano), obtenerVectorParametros(1, TMotor)) );
-    (*funcionesIncorporadas)["esta_en_movimiento"] =    estaEnMovimiento;
-
-//    /*EstaRotando*/
-//    vector<Funcion*> *estaRotando = new vector<Funcion*>();
-//    estaRotando->push_back( new Funcion( obtenerTipo(TBooleano) , obtenerVectorParametros(1, TMotor)) );
-//    (*funcionesIncorporadas)["esta_rotando"] = estaRotando;
+    (*funcionesIncorporadas)["esta_en_movimiento|motor"] = new Funcion( obtenerTipo(TBooleano), obtenerVectorParametros(1, TMotor));
 
     /*Bloquear*/
-    vector<Funcion*> *bloquear = new vector<Funcion*>();
-    bloquear->push_back( new Funcion(0 , obtenerVectorParametros(2, TMotor, TEntero)) );
-    (*funcionesIncorporadas)["bloquear"] = bloquear;
-
-//    /*InvertirDireccion*/
-//    vector<Funcion*> *invertirDireccion = new vector<Funcion*>();
-//    invertirDireccion->push_back( new Funcion(0 , obtenerVectorParametros(1, TMotor)) );
-//    (*funcionesIncorporadas)["invertir_direccion"] = invertirDireccion;
+    (*funcionesIncorporadas)["bloquear|motor,entero"] = new Funcion(0 , obtenerVectorParametros(2, TMotor, TEntero));
 
     /*EsperarCompletacion???*/
 
     /*Funciones Incorporadas para SENSORES*/
+    /*Sensor Ultrasonico*/
+    (*funcionesIncorporadas)["obtener_distancia|ultrasonico"] = new Funcion( obtenerTipo(TEntero), obtenerVectorParametros(1, TSensorUltrasonico));
 
+    /*Sensor de Tacto*/
+    (*funcionesIncorporadas)["esta_presionado|tacto"] = new Funcion( obtenerTipo(TBooleano), obtenerVectorParametros(1, TSensorDeTacto));
+
+    /*Sensor de Luz*/
+    (*funcionesIncorporadas)["obtener_luz|luz"] = new Funcion( obtenerTipo(TEntero), obtenerVectorParametros(1, TSensorDeLuz)) ;
+
+    /*Sensor de Color*/
+
+    /*Sensor de Inclinacion*/
+
+    /*Sensor de Sonido ? */
+
+    /*Sensor Giroscopico ?*/
+
+    /*Sensor de Brujula ? */
+
+    /*Funciones INCORPORADAS PARA BOTONES DE NXT*/
+    /*Izq, Der, Bajo, Enter*/
+
+    /*Extras!*/
+    //Random
+    (*funcionesIncorporadas)["numero_aleatorio|entero"] = new Funcion( obtenerTipo(TEntero), obtenerVectorParametros(1, TEntero) );
+    (*funcionesIncorporadas)["numero_aleatorio|entero,entero"] = new Funcion( obtenerTipo(TEntero), obtenerVectorParametros(2, TEntero, TEntero) );
+
+    // Delay
+    (*funcionesIncorporadas)["retrasar|entero"] = new Funcion( 0, obtenerVectorParametros(1, TEntero) );
 
     return funcionesIncorporadas;
 }
@@ -147,16 +146,81 @@ Tipo* FuncionesIncorporadas::obtenerTipo(TipoParametro tipoParam)
     return 0;
 }
 
+map<string, string>* FuncionesIncorporadas::obtenerCodigoFunciones()
+{
+    // Estas funciones estan hard-coded para mejorar el rendimiento
+    bool compilarNxt = Programa::obtenerInstancia()->obtenerTipoDeCompilacion();
+    map<string, string>* codigo = new map<string, string>();
+
+    /*UniPrograma(para pc y nxt) -> Como Unisex*/
+    /*Escriba*/
+    (*codigo)["escriba|entero"] = compilarNxt?
+              "public static void escriba(int i){LCD.drawInt(i,0,0);}" :
+              "";
+    (*codigo)["escriba|flotante"] = compilarNxt?
+              "public static void escriba(float f){LCD.drawString(f+\"\",0,0);}":
+              "";
+    (*codigo)["escriba|caracter"] = compilarNxt?
+              "public static void escriba(char c){LCD.drawString(c+\"\",0,0);}":
+              "";
+    (*codigo)["escriba|cadena"] = compilarNxt?
+              "public static void escriba(String s){LCD.drawString(s,0,0);}":
+              "";
+    (*codigo)["escriba|booleano"] = compilarNxt?
+              "public static void escriba(boolean b){LCD.drawString(b+\"\",0,0);}":
+              "";
+
+    (*codigo)["escriba|entero,entero,entero"] = compilarNxt?
+              "public static void escriba(int i,int x,int y){LCD.drawInt(i,x,y);}":
+              "";
+    (*codigo)["escriba|flotante,entero,entero"] = compilarNxt?
+              "public static void escriba(float f,int x,int y){LCD.drawString(f+\"\",x,y);}":
+              "";
+    (*codigo)["escriba|caracter,entero,entero"] = compilarNxt?
+              "public static void escriba(char c,int x, int y){LCD.drawString(c+\"\",x,y);}":
+              "";
+    (*codigo)["escriba|cadena,entero,entero"] = compilarNxt?
+              "public static void escriba(String s,int x,int y){LCD.drawString(s,x,y);}":
+              "";
+    (*codigo)["escriba|booleano,entero,entero"] = compilarNxt?
+              "public static void escriba(boolean b,int x,int y){LCD.drawString(b+\"\",x,y);}":
+              "";
+
+
+    /*NXT*/
+    /*LCD*/
+//    (*codigo)[""] = "";
+
+    //Motores
+    (*codigo)["adelante|motor"] =                    "public static void adelante(NXTRegulatedMotor m){m.forward();}";
+    (*codigo)["atras|motor"] =                       "public static void atras(NXTRegulatedMotor m){m.backward();}";
+    (*codigo)["detener|motor"] =                     "public static void detener(NXTRegulatedMotor m){m.stop();}";
+    (*codigo)["rotar_motor|motor,entero"] =          "public static void rotar_motor(NXTRegulatedMotor m,int r){m.rotate(r);}";
+    (*codigo)["rotar_motor_hacia|motor,entero"] =    "public static void rotar_motor_hacia(NXTRegulatedMotor m,int r){m.rotateTo(r);}";
+    (*codigo)["establecer_velocidad|motor,entero"] = "public static void establecer_velocidad(NXTRegulatedMotor m,int v){m.setSpeed(v);}";
+    (*codigo)["obtener_angulo|motor"] =              "public static int obtener_angulo(NXTRegulatedMotor m){return m.getLimitAngle();}";
+    (*codigo)["obtener_velocidad|motor"] =           "public static int obtener_velocidad(NXTRegulatedMotor m){return m.getSpeed();}";
+    (*codigo)["esta_en_movimiento|motor"] =          "public static boolean esta_en_movimiento(NXTRegulatedMotor m){return m.isMoving();}";
+    (*codigo)["bloquear|motor,entero"] =             "public static void bloquear(NXTRegulatedMotor m,int p){m.lock(p);}";
+
+    //Sensores
+    // UltraSonico
+    (*codigo)["obtener_distancia|ultrasonico"] = "";
+
+    //Tacto
+    (*codigo)["esta_presionado|tacto"] = "";
+
+    //Luz
+    (*codigo)["obtener_luz|luz"] = "";
+
+
+    //Utilidades
+    (*codigo)["numero_aleatorio|entero"] = "";
+    (*codigo)["numero_aleatorio|entero,entero"] = "";
+    (*codigo)["retrasar|entero"] = "";
+    return codigo;
+}
+
 /*
 CODIGO MOTORES
-        public static void adelante(NXTRegulatedMotor m){m.forward();}
-        public static void atras(NXTRegulatedMotor m){m.backward();}
-        public static void detener(NXTRegulatedMotor m){m.stop();}
-        public static void rotar_motor(NXTRegulatedMotor m,int r){m.rotate(r);}
-        public static void rotar_motor_hacia(NXTRegulatedMotor m,int r){m.rotateTo(r);}
-        public static void establecer_velocidad(NXTRegulatedMotor m,int v){m.setSpeed(v)}
-        public static int obtener_angulo(NXTRegulatedMotor m){return m.getLimitAngle();}
-        public static int obtener_velocidad(NXTRegulatedMotor m){return m.getSpeed();}
-        public static boolean esta_en_movimiento(NXTRegulatedMotor m){return m.isMoving();}
-        public static void bloquear(NXTRegulatedMotor m,int p){m.lock(p);}
 */

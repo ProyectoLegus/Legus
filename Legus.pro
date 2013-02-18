@@ -4,13 +4,19 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core
+QT       -= gui
+
 
 TARGET = Legus
+
+CONFIG   += console
+CONFIG   -= app_bundle
+
 TEMPLATE = app
 
 SOURCES += main.cpp\
-        Editor/editor.cpp \
+        #Editor/editor.cpp \
         Bison_Flex/tokens.cpp \
         Bison_Flex/parser.cpp \
         Expresion/Expresion.cpp \
@@ -84,10 +90,11 @@ SOURCES += main.cpp\
         Programa/Tipos/TipoSensorDeColor.cpp \
         Programa/Tipos/TipoSensorDeInclinacion.cpp \
         Programa/Tipos/TipoSensorDeSonido.cpp \
-        Programa/Tipos/TipoSensorGiroscopico.cpp
+        Programa/Tipos/TipoSensorGiroscopico.cpp \
+    Programa/FuncionUtilizada.cpp
 
-HEADERS  += Editor/editor.h \
-        Bison_Flex/tokens.h \
+#HEADERS  += Editor/editor.h \
+ HEADERS  +=        Bison_Flex/tokens.h \
         Bison_Flex/parser.h \
         Expresion/Expresion.h \
         Expresion/ExpresionBinaria/ExpresionBinaria.h \
@@ -161,9 +168,10 @@ HEADERS  += Editor/editor.h \
         Programa/Tipos/TipoSensorDeColor.h \
         Programa/Tipos/TipoSensorDeInclinacion.h \
         Programa/Tipos/TipoSensorDeSonido.h \
-        Programa/Tipos/TipoSensorGiroscopico.h
+        Programa/Tipos/TipoSensorGiroscopico.h \
+        Programa/FuncionUtilizada.h
 
-FORMS    += Editor/editor.ui
+#FORMS    += Editor/editor.ui
 
 OTHER_FILES += Bison_Flex/parser.y \
                Bison_Flex/tokens.l

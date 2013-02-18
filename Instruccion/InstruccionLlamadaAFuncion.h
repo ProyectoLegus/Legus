@@ -1,6 +1,7 @@
 #ifndef INSTRUCCIONLLAMADAAFUNCION_H
 #define INSTRUCCIONLLAMADAAFUNCION_H
 
+#include <algorithm>
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -22,6 +23,7 @@ public:
 private:
     string *identificador;
     Lista  *lista_parametros;
+    string *AMinusculas(string *str);
 };
 
 #endif // INSTRUCCIONLLAMADAAFUNCION_H

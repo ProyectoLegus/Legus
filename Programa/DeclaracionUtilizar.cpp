@@ -155,6 +155,7 @@ int DeclaracionUtilizar::obtenerNumeroPuerto(string *puerto)
     else if(std::string::npos != puerto->find("2")){return 2;}
     else if(std::string::npos != puerto->find("3")){return 3;}
     else if(std::string::npos != puerto->find("4")){return 4;}
+    return 0;
 }
 
 char DeclaracionUtilizar::obtenerCaracterDePuerto(string *puerto)
@@ -168,6 +169,7 @@ char DeclaracionUtilizar::obtenerCaracterDePuerto(string *puerto)
     else if( std::string::npos != puerto->find("C") ||
              std::string::npos != puerto->find("c"))
     { return 'C'; }
+    return 0;
 }
 
 string* DeclaracionUtilizar::obtenerCodigo()

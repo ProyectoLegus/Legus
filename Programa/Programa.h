@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <iostream>
 #include <vector>
+#include <fstream>
 #include <map>
 
 #include "Instruccion/Instruccion.h"
@@ -26,6 +27,7 @@
 #include "Programa/Tipos/TipoSensorDeTacto.h"
 #include "Programa/Tipos/TipoSensorGiroscopico.h"
 #include "Programa/Tipos/TipoSensorUltrasonico.h"
+#include "Programa/FuncionUtilizada.h"
 
 #include "Programa/VariableADeclarar.h"
 #include "Programa/FuncionesIncorporadas.h"
@@ -48,9 +50,8 @@ public:
     vector<DeclaracionUtilizar*>        *tablaDePuertosYSensores;
     vector<VariableDeclarada*>          *tablaDeVariables;
     vector<VariableADeclarar*>          *tablaDeVariablesADeclarar;
-    vector<InstruccionLlamadaAFuncion*> *tablaDeUsoDeFunciones;
 
-    string        obtenerCodigoVariablesADeclarar();
+    string                  obtenerCodigoVariablesADeclarar();
     TipoBooleano*           obtenerTipoBooleano();
     TipoCadena*             obtenerTipoCadena();
     TipoCaracter*           obtenerTipoCaracter();
@@ -75,16 +76,36 @@ public:
     void limpiarInstancia();
     void establecerIdDeExpresionAVariable(int idExpresion, int idExpresionACambiar);
     void cargarFuncionesIncorporadas();
+    void cargarCodigoFunciones();
+    void agregarUsoDeFuncionATabla(string id, Lista* param, Funcion* funcion);
 
     Funcion* existeFuncionIncorporada(string nombreFuncion, Lista *parametros);
     string obtenerCodigoFuente( string nombreArchivo,
                                 string inclusiones,
+                                string funcsIncorporadas,
                                 string declaracionFunciones,
                                 string bloqueCodigo);
+    /*
+        Esta funcion ocasiona que el codigo generado
+        pueda ser ejecutado en una pc
+    */
+    void establecerCompilacionParaPc();
+    bool obtenerTipoDeCompilacion();
+    string obtenerCodigoFunciones();
+    string obtenerInclusiones();
+
+    void validarSemantica();
+    string obtenerCodigoInstrucciones();
+    void generarArchivo(string nombreArchivo);
 
 private:
     Programa();
     static Programa* instancia;
+    /*
+        true  -> compilar Nxt
+        false -> compilar PC
+    */
+    bool compilarParaNxt;
 
     /*Una sola instancia para los Tipos*/
     TipoBooleano            *tipoBooleano;
@@ -103,9 +124,20 @@ private:
     TipoSensorGiroscopico   *tipoSensorGiroscopico;
     TipoSensorUltrasonico   *tipoSensorUltrasonico;
 
-    /*Solo aqui la puedo*/
+    /*Solo aqui la puedo usar*/
     Tipo* obtenerTipoEnBaseATipoParametro(TipoParametro tipoParam);
-    map<string, vector<Funcion*>*>* funcionesIncorporadas;
+
+    //Funciones incorporadas que legus soporta, ver FuncionIncorporadas.cpp
+    map<string, Funcion*>               *funcionesIncorporadas;
+
+    //Funciones que estan siendo utilizadas en el programa.
+    map<string, Funcion*>               *tablaDeUsoDeFunciones;
+
+    //Codigo de las funcion en Legus
+    map<string, string>                 *codigoDefunciones;
+
+    string obtenerTipoEnBaseATipo(Tipo*);
+    string convertirAEntradaEnTabla(string nombreFuncion, Lista *parametros);
 };
 
 #endif // PROGRAMA_H

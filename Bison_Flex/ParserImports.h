@@ -7,8 +7,6 @@ enum TOKENS
 };
 
 /*Necesarios*/
-#include <QMessageBox>
-#include <QString>
 #include <iostream>
 #include <vector>
 #include <stdio.h>
