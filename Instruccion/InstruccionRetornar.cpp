@@ -21,5 +21,7 @@ string InstruccionRetornar::generarCodigoJava()
     codigoInstruccionRetornar << this->expresion_de_retorno->generarCodigoJava();
     codigoInstruccionRetornar << ";\n";
 
+    /*No puede tener siguiente instruccion, si la hay se ignora*/
+
     return codigoInstruccionRetornar.str();
 }

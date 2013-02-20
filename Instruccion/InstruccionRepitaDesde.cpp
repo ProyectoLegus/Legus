@@ -22,6 +22,15 @@ void InstruccionRepitaDesde::validarSemantica()
     {
         throw(ExcepcionLegus("Expresion final en instruccion 'repita desde' debe evaluar a entero"));
     }
+
+    if( instrucciones != 0)
+    {
+        instrucciones->validarSemantica();
+        if( instrucciones->obtenerSiguiente() != 0)
+        {
+            instrucciones->obtenerSiguiente()->validarSemantica();
+        }
+    }
 }
 
 string InstruccionRepitaDesde::generarCodigoJava()
@@ -38,6 +47,10 @@ string InstruccionRepitaDesde::generarCodigoJava()
     if( this->instrucciones != 0)
     {
         codigoInstruccionRepetir << this->instrucciones->generarCodigoJava();
+        if( instrucciones->obtenerSiguiente() != 0)
+        {
+            codigoInstruccionRepetir << instrucciones->obtenerSiguiente()->generarCodigoJava();
+        }
     }
 
     codigoInstruccionRepetir << "\n}\n";

@@ -38,6 +38,10 @@ string InstruccionMientras::generarCodigoJava()
     if( this->instrucciones != 0)
     {
         codigoInstruccionMientras << this->instrucciones->generarCodigoJava();
+        if( instrucciones->obtenerSiguiente() != 0)
+        {
+            codigoInstruccionMientras << this->instrucciones->obtenerSiguiente()->generarCodigoJava();
+        }
     }
 
     codigoInstruccionMientras << "\n}\n";

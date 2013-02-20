@@ -58,6 +58,10 @@ void InstruccionAsignacion::validarSemantica()
         }
     }
 
+    if( obtenerSiguiente() != 0)
+    {
+        obtenerSiguiente()->validarSemantica();
+    }
 }
 
 Expresion* InstruccionAsignacion::obtenerExpresion()
@@ -143,6 +147,11 @@ string InstruccionAsignacion::generarCodigoJava()
         codigoAsignacion << var->obtenerIdDeExpresion();
         codigoAsignacion << var->obtenerIdentificador()->c_str();
         codigoAsignacion << " = new ArrayList<Object>();\n";
+    }
+
+    if( obtenerSiguiente() != 0)
+    {
+        codigoAsignacion << obtenerSiguiente()->generarCodigoJava();
     }
 
     return codigoAsignacion.str();

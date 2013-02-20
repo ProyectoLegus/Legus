@@ -54,6 +54,10 @@ string InstruccionSi::generarCodigoJava()
     if( this->instruccionesSiVerdadero != 0)
     {
         codigoInstruccionSi << this->instruccionesSiVerdadero->generarCodigoJava();
+        if( instruccionesSiVerdadero->obtenerSiguiente() != 0)
+        {
+            codigoInstruccionSi << instruccionesSiVerdadero->obtenerSiguiente()->generarCodigoJava();
+        }
     }
     codigoInstruccionSi << "\n}\n";
 
@@ -65,7 +69,11 @@ string InstruccionSi::generarCodigoJava()
 
         if( this->instruccionSiAnidado != 0 )
         {
-            /*si anidado pensarlo*/
+            codigoInstruccionSi << instruccionesSiFalso->generarCodigoJava();
+            if( instruccionesSiFalso->obtenerSiguiente() != 0)
+            {
+                codigoInstruccionSi << instruccionesSiFalso->obtenerSiguiente()->generarCodigoJava();
+            }
         }
 
         codigoInstruccionSi << "\n}\n";

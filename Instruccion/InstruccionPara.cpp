@@ -52,6 +52,10 @@ string InstruccionPara::generarCodigoJava()
     if( this->instrucciones != 0)
     {
         codigoInstruccionPara << instrucciones->generarCodigoJava();
+        if( instrucciones->obtenerSiguiente() != 0)
+        {
+            codigoInstruccionPara << instrucciones->obtenerSiguiente()->generarCodigoJava();
+        }
     }
 
     codigoInstruccionPara << "\n}\n";

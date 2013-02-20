@@ -39,6 +39,7 @@ int main(int argc, char *argv[])
         Codigos de Error:
             1 -> Cantidad incorrecta de argumentos
             2 -> opcion no valida
+            3 -> Error de parser
     */
     try
     {
@@ -85,6 +86,9 @@ int main(int argc, char *argv[])
             if( yyparse() )
             {
                 cout << "Error de analisis" << endl;
+                // Borrar!
+                system("pause");
+                exit(3);
             }
             else
             {

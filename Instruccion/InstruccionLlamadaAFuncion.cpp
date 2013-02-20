@@ -55,7 +55,6 @@ void InstruccionLlamadaAFuncion::validarSemantica()
         Programa::obtenerInstancia()->agregarUsoDeFuncionATabla(*this->identificador, this->lista_parametros, fun);
     }
 
-
     if( !encontrado )
     {
         stringstream error;
@@ -63,6 +62,11 @@ void InstruccionLlamadaAFuncion::validarSemantica()
         error << *this->identificador;
         error << "'";
         throw(ExcepcionLegus(error.str()));
+    }
+
+    if( obtenerSiguiente() != 0)
+    {
+        obtenerSiguiente()->validarSemantica();
     }
 
     /*Siempre revisar que sea distnto de nulo por si es incorporada*/
@@ -99,7 +103,12 @@ string InstruccionLlamadaAFuncion::generarCodigoJava()
             codigo << ", ";
         }
     }
-
     codigo << ");\n";
+
+    if(obtenerSiguiente()!=0)
+    {
+        codigo << obtenerSiguiente()->generarCodigoJava();
+    }
+
     return codigo.str();
 }

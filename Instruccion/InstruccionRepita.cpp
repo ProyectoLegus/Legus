@@ -14,6 +14,7 @@ void InstruccionRepita::validarSemantica()
     {
         throw(ExcepcionLegus("Expresion en instruccion 'repita' debe evaluar a booleano"));
     }
+
 }
 
 Expresion* InstruccionRepita::obtenerCondicion()

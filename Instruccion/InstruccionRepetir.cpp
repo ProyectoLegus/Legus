@@ -38,6 +38,10 @@ string InstruccionRepetir::generarCodigoJava()
     if( this->instrucciones != 0)
     {
         codigoInstruccionRepetir << this->instrucciones->generarCodigoJava();
+        if( instrucciones->obtenerSiguiente() != 0)
+        {
+            codigoInstruccionRepetir << instrucciones->obtenerSiguiente()->generarCodigoJava();
+        }
     }
 
     codigoInstruccionRepetir << "\n}\n";

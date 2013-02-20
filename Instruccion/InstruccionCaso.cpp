@@ -33,6 +33,14 @@ void InstruccionCaso::validarSemantica()
             {
                 throw(ExcepcionLegus("En caso expresion debe evaluar a lo mismo que variable"));
             }
+            if( casos->obtenerInstruccion() != 0)
+            {
+                casos->obtenerInstruccion()->validarSemantica();
+                if( casos->obtenerInstruccion()->obtenerSiguiente() != 0)
+                {
+                    casos->obtenerInstruccion()->obtenerSiguiente()->validarSemantica();
+                }
+            }
             casos = casos->obtenerSiguiente();
         }
     }
@@ -46,6 +54,14 @@ void InstruccionCaso::validarSemantica()
             if( tipoDelCaso->tipo != Booleano)
             {
                 throw(ExcepcionLegus("En caso expresion debe evaluar a 'Booleano'"));
+            }
+            if( casos->obtenerInstruccion() != 0)
+            {
+                casos->obtenerInstruccion()->validarSemantica();
+                if( casos->obtenerInstruccion()->obtenerSiguiente() != 0)
+                {
+                    casos->obtenerInstruccion()->obtenerSiguiente()->validarSemantica();
+                }
             }
             casos = casos->obtenerSiguiente();
         }
@@ -87,7 +103,16 @@ string InstruccionCaso::generarCodigoJava()
                 codigoInstruccionCaso << casos->obtenerExpresion()->generarCodigoJava();
                 codigoInstruccionCaso << ")";
                 codigoInstruccionCaso << "\n{\n";
-                codigoInstruccionCaso << casos->obtenerInstruccion()->generarCodigoJava();
+
+                if( casos->obtenerInstruccion()!= 0)
+                {
+                    codigoInstruccionCaso << casos->obtenerInstruccion()->generarCodigoJava();
+                    if(casos->obtenerInstruccion()->obtenerSiguiente() != 0)
+                    {
+                        codigoInstruccionCaso << casos->obtenerInstruccion()->obtenerSiguiente()->generarCodigoJava();
+                    }
+                }
+
                 codigoInstruccionCaso << "\n}\n";
             }
 
@@ -107,7 +132,14 @@ string InstruccionCaso::generarCodigoJava()
             codigoInstruccionCaso << casos->obtenerExpresion()->generarCodigoJava();
             codigoInstruccionCaso << ")";
             codigoInstruccionCaso << "\n{\n";
-            codigoInstruccionCaso << casos->obtenerInstruccion()->generarCodigoJava();
+            if( casos->obtenerInstruccion()!= 0)
+            {
+                codigoInstruccionCaso << casos->obtenerInstruccion()->generarCodigoJava();
+                if(casos->obtenerInstruccion()->obtenerSiguiente() != 0)
+                {
+                    codigoInstruccionCaso << casos->obtenerInstruccion()->obtenerSiguiente()->generarCodigoJava();
+                }
+            }
             codigoInstruccionCaso << "\n}\n";
 
             casos = casos->obtenerSiguiente();
