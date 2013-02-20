@@ -40,7 +40,12 @@ string InstruccionRepetir::generarCodigoJava()
         codigoInstruccionRepetir << this->instrucciones->generarCodigoJava();
         if( instrucciones->obtenerSiguiente() != 0)
         {
-            codigoInstruccionRepetir << instrucciones->obtenerSiguiente()->generarCodigoJava();
+            Instruccion *actual = instrucciones->obtenerSiguiente();
+            while(actual!=0)
+            {
+                codigoInstruccionRepetir << actual->generarCodigoJava();
+                actual = actual->obtenerSiguiente();
+            }
         }
     }
 

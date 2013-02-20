@@ -56,7 +56,12 @@ string InstruccionSi::generarCodigoJava()
         codigoInstruccionSi << this->instruccionesSiVerdadero->generarCodigoJava();
         if( instruccionesSiVerdadero->obtenerSiguiente() != 0)
         {
-            codigoInstruccionSi << instruccionesSiVerdadero->obtenerSiguiente()->generarCodigoJava();
+            Instruccion *actual = instruccionesSiVerdadero->obtenerSiguiente();
+            while(actual!=0)
+            {
+                codigoInstruccionSi << actual->generarCodigoJava();
+                actual = actual->obtenerSiguiente();
+            }
         }
     }
     codigoInstruccionSi << "\n}\n";
@@ -72,7 +77,12 @@ string InstruccionSi::generarCodigoJava()
             codigoInstruccionSi << instruccionesSiFalso->generarCodigoJava();
             if( instruccionesSiFalso->obtenerSiguiente() != 0)
             {
-                codigoInstruccionSi << instruccionesSiFalso->obtenerSiguiente()->generarCodigoJava();
+                Instruccion *actual = instruccionesSiFalso->obtenerSiguiente();
+                while(actual!=0)
+                {
+                    codigoInstruccionSi << actual->generarCodigoJava();
+                    actual = actual->obtenerSiguiente();
+                }
             }
         }
 

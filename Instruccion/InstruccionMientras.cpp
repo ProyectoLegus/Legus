@@ -40,7 +40,12 @@ string InstruccionMientras::generarCodigoJava()
         codigoInstruccionMientras << this->instrucciones->generarCodigoJava();
         if( instrucciones->obtenerSiguiente() != 0)
         {
-            codigoInstruccionMientras << this->instrucciones->obtenerSiguiente()->generarCodigoJava();
+            Instruccion *actual = instrucciones->obtenerSiguiente();
+            while( actual != 0)
+            {
+                codigoInstruccionMientras << actual->generarCodigoJava();
+                actual = actual->obtenerSiguiente();
+            }
         }
     }
 

@@ -98,6 +98,7 @@ int main(int argc, char *argv[])
         fclose(yyin);
         Programa::obtenerInstancia()->generarArchivo("nxt");
         cout << "Archivo generado exitosamente" << endl;
+        Programa::obtenerInstancia()->limpiarInstancia();
         system("pause");
     }
     catch(ExcepcionLegus legusExcep)

@@ -54,7 +54,12 @@ string InstruccionPara::generarCodigoJava()
         codigoInstruccionPara << instrucciones->generarCodigoJava();
         if( instrucciones->obtenerSiguiente() != 0)
         {
-            codigoInstruccionPara << instrucciones->obtenerSiguiente()->generarCodigoJava();
+            Instruccion *actual = instrucciones->obtenerSiguiente();
+            while(actual!=0)
+            {
+                codigoInstruccionPara << actual->generarCodigoJava();
+                actual = actual->obtenerSiguiente();
+            }
         }
     }
 

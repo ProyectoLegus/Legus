@@ -194,6 +194,29 @@ void  Programa::establecerIdDeExpresionAVariable(int idExpresion, int idExpresio
 void Programa::limpiarInstancia()
 {
     this->instancia = 0;
+    delete instrucciones;
+    delete tablaDeFunciones;
+    delete tablaDePuertosYSensores;
+    delete tablaDeVariables;
+    delete tablaDeVariablesADeclarar;
+    delete tipoBooleano;
+    delete tipoCadena;
+    delete tipoCaracter;
+    delete tipoEntero;
+    delete tipoFlotante;
+    delete tipoArreglo;
+    delete tipoMotor;
+    delete tipoSensorDeBrujula;
+    delete tipoSensorDeColor;
+    delete tipoSensorDeInclinacion;
+    delete tipoSensorDeLuz;
+    delete tipoSensorDeSonido;
+    delete tipoSensorDeTacto;
+    delete tipoSensorGiroscopico;
+    delete tipoSensorUltrasonico;
+    delete funcionesIncorporadas;
+    delete tablaDeUsoDeFunciones;
+    delete codigoDefunciones;
 }
 
 string Programa::obtenerCodigoVariablesADeclarar()
@@ -486,6 +509,7 @@ string Programa::obtenerCodigoInstrucciones()
         codigo += actual->generarCodigoJava();
         actual = actual->obtenerSiguiente();
     }
+
     return codigo;
 }
 

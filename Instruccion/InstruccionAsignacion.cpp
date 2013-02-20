@@ -149,10 +149,10 @@ string InstruccionAsignacion::generarCodigoJava()
         codigoAsignacion << " = new ArrayList<Object>();\n";
     }
 
-    if( obtenerSiguiente() != 0)
+    /*if( obtenerSiguiente() != 0)
     {
         codigoAsignacion << obtenerSiguiente()->generarCodigoJava();
-    }
+    }*/
 
     return codigoAsignacion.str();
 }

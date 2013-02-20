@@ -105,10 +105,10 @@ string InstruccionLlamadaAFuncion::generarCodigoJava()
     }
     codigo << ");\n";
 
-    if(obtenerSiguiente()!=0)
+    /*if(obtenerSiguiente()!=0)
     {
         codigo << obtenerSiguiente()->generarCodigoJava();
-    }
+    }*/
 
     return codigo.str();
 }

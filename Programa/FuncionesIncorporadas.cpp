@@ -94,7 +94,7 @@ map<string, Funcion*>* FuncionesIncorporadas::obtenerFuncionesIncorporadas()
     (*funcionesIncorporadas)["numero_aleatorio|entero,entero"] = new Funcion( obtenerTipo(TEntero), obtenerVectorParametros(2, TEntero, TEntero) );
 
     // Delay
-    (*funcionesIncorporadas)["retrasar|entero"] = new Funcion( 0, obtenerVectorParametros(1, TEntero) );
+    (*funcionesIncorporadas)["retrasar_programa|entero"] = new Funcion( 0, obtenerVectorParametros(1, TEntero) );
 
     return funcionesIncorporadas;
 }
@@ -215,9 +215,9 @@ map<string, string>* FuncionesIncorporadas::obtenerCodigoFunciones()
 
 
     //Utilidades
-    (*codigo)["numero_aleatorio|entero"] = "";
-    (*codigo)["numero_aleatorio|entero,entero"] = "";
-    (*codigo)["retrasar|entero"] = "";
+    (*codigo)["numero_aleatorio|entero"] = "public static int numero_aleatorio(int m){return new Random().nextInt(m);}";
+    (*codigo)["numero_aleatorio|entero,entero"] = "public static int numero_aleatorio(int m,int x){if(m==x){return m;}int l=m<x?m:x;int b=m>x?m:x;return (new Random().nextInt(b-l))+l;}";
+    (*codigo)["retrasar_programa|entero"] = "public static void retrasar_programa(int t){Delay.msDelay(t);}";
     return codigo;
 }
 
