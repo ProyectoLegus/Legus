@@ -106,6 +106,8 @@ int main(int argc, char *argv[])
         int linea = legusExcep.obtenerNumeroDeLinea();
         cout << legusExcep.obtenerMensaje()
              << "\nAlrededor de la linea: "
-             << linea;
+             << linea << endl;
+        system("pause");
     }
+    return 0;
 }

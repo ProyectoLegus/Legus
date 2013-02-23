@@ -36,9 +36,16 @@ Tipo* VariableArreglo::validarSemantica()
             this->lista_indices != 0)
         {
             Lista* li =  variable->obtenerListaIndices();
-                if( li->lista->size() != this->lista_indices->lista->size() )
+            if( li->lista != 0)
             {
-                throw( ExcepcionLegus("Arreglo no coincide con declaracion") );
+                if( li->lista->size() != this->lista_indices->lista->size() )
+                {
+                    throw( ExcepcionLegus("Arreglo no coincide con declaracion") );
+                }
+            }
+            else
+            {
+
             }
         }
 
@@ -47,13 +54,22 @@ Tipo* VariableArreglo::validarSemantica()
             Lista *lista = variable->obtenerListaIndices();
         }
     }
-
     /*Retornar esto si en la lista de indices no hay nada*/
     return Programa::obtenerInstancia()->obtenerTipoArreglo();
 }
 
 string VariableArreglo::generarCodigoJava()
 {
-    /**/
+    /*Que hago aqui?*/
     return "dd";
+}
+
+void VariableArreglo::establecerTipoDeDato(Tipo *tipo)
+{
+    this->tipoDeDato = tipo;
+}
+
+Tipo* VariableArreglo::obtenerTipoDeDato()
+{
+    return this->tipoDeDato;
 }

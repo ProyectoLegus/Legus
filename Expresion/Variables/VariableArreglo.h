@@ -16,8 +16,12 @@ public:
     virtual Tipo* validarSemantica();
     virtual string generarCodigoJava();
 
+    Tipo* obtenerTipoDeDato();
+    void establecerTipoDeDato(Tipo *tipo);
+
 private:
     Lista *lista_indices;
+    Tipo* tipoDeDato;
 };
 
 #endif // VARIABLEARREGLO_H

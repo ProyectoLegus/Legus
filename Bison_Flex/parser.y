@@ -26,7 +26,8 @@
         variable para mostrar un mensaje acorde.
     */
     int token_esperado = -1;
-    int correlativo = 0;
+    int correlativo = 200;
+    int correlativoExtra =0;
 
     void yyerror(const char *s)
     {
@@ -239,7 +240,18 @@
         T_PARA
         {
             /*identificador, inicio, final, instrucciones, siguiente*/
-            $$ = new InstruccionPara(new InstruccionAsignacion(new Variable($3, yylineno, correlativo++),$6,0, correlativo++),
+            /*
+                Para arreglar el problema del idDeExpresion del para
+                establecer el id de la variable en 0 para que todas las
+                instrucciones dentro del para puedan usar la variable.
+                Esto pasa porque las instrucciones dentro del para
+                van a tener un id mas pequeño debido al metodo de
+                parsing ( Bottom-up ) de Bison.
+            */
+            int cori = correlativoExtra++;
+            Variable *var = new Variable($3, $6, yylineno, cori);
+            Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var,$6->validarSemantica(), cori));
+            $$ = new InstruccionPara(new InstruccionAsignacion(var,$6,0, correlativo++),
                                                                $9, $12, 0, correlativo++);
         };
 

@@ -13,7 +13,6 @@ void InstruccionLlamadaAFuncion::validarSemantica()
     Implementar lo de XML y Jar
         Hacer testing del jar en Lejos
      */
-
     /*DENTRO DE FUNCIONES DECLARADAS*/
     /*Ver si existe la funcion*/
     vector<DeclaracionDeFuncion*> *tablaDeFunciones = Programa::obtenerInstancia()->tablaDeFunciones;
@@ -104,11 +103,6 @@ string InstruccionLlamadaAFuncion::generarCodigoJava()
         }
     }
     codigo << ");\n";
-
-    /*if(obtenerSiguiente()!=0)
-    {
-        codigo << obtenerSiguiente()->generarCodigoJava();
-    }*/
 
     return codigo.str();
 }

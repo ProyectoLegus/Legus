@@ -399,6 +399,7 @@ Tipo* Programa::obtenerTipoEnBaseATipoParametro(TipoParametro tipoParam)
 string Programa::obtenerTipoEnBaseATipo(Tipo *tipo)
 {
     if(tipo==tipoEntero)                    return "entero";
+    else if(tipo==tipoArreglo)              return "arreglo";
     else if(tipo==tipoMotor)                return "motor";
     else if(tipo==tipoFlotante)             return "flotante";
     else if(tipo==tipoCadena)               return "cadena";
@@ -433,19 +434,27 @@ void Programa::agregarUsoDeFuncionATabla(string id, Lista *params, Funcion *func
 string Programa::convertirAEntradaEnTabla(string nombreFuncion, Lista *parametros)
 {
     stringstream nfunc;
+    stringstream params;
     nfunc << nombreFuncion;
-    nfunc << "|";
 
+    bool tieneParametros = false;
     for(int k = parametros->lista->size()-1; k>=0; k--)
     {
         Expresion *expr = parametros->lista->at(k);
-        nfunc << obtenerTipoEnBaseATipo(expr->validarSemantica());
+        params << obtenerTipoEnBaseATipo(expr->validarSemantica());
 
         if(k!=0)
         {
-            nfunc << ",";
+            params << ",";
         }
+        tieneParametros = true;
     }
+
+    if(tieneParametros)
+    {
+        nfunc << "|";
+    }
+    nfunc << params.str();
     return nfunc.str();
 }
 
