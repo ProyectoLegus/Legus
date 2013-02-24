@@ -1,9 +1,11 @@
 #include "Expresion/Variables/VariableArreglo.h"
 #include "Programa/Programa.h"
 
-VariableArreglo::VariableArreglo(string *identificador, Lista *lista_indices, int numeroDeLinea, int idDeExpresion)
+VariableArreglo::VariableArreglo(string *identificador, Lista *lista_indices, int numeroDeLinea, int idDeExpresion, Tipo *t)
     :Variable(identificador,numeroDeLinea, idDeExpresion, ARREGLO)
 {
+    this->tipoDeDato = 0;
+    establecerTipoDeDato(0);
     this->lista_indices = lista_indices;
     if( this->lista_indices == 0)
     {
@@ -27,7 +29,11 @@ Tipo* VariableArreglo::validarSemantica()
 
     if(variableDeclarada == 0)
     {
-        throw(ExcepcionLegus("Error variable 'VAR' no declarada"));
+        stringstream ss;
+        ss << "Error, variable '";
+        ss << *obtenerIdentificador();
+        ss << "' no esta definida";
+        throw(ExcepcionLegus(ss.str()));
     }
     else
     {
@@ -71,5 +77,5 @@ void VariableArreglo::establecerTipoDeDato(Tipo *tipo)
 
 Tipo* VariableArreglo::obtenerTipoDeDato()
 {
-    return this->tipoDeDato;
+    return tipoDeDato;
 }

@@ -3,6 +3,7 @@
 
 #include "Expresion/ExpresionBinaria/ExpresionBinaria.h"
 #include "Programa/Programa.h"
+#include "Expresion/Variables/VariableArreglo.h"
 
 class ExpresionBinariaSuma : public ExpresionBinaria
 {
@@ -13,6 +14,8 @@ public:
 
 private:
     string codigoExpresion(Expresion *expresion);
+    VariableArreglo *obtenerVarArreglo(string id);
+    string obtenerTipoEnLenguajeNatural(Tipo* tipo);
 };
 
 #endif // EXPRESIONBINARIASUMA_H

@@ -19,11 +19,15 @@ public:
     virtual string generarCodigoJava();
     Expresion*  obtenerVariable();
     Expresion*  obtenerExpresion();
+    /*Este metodo esta diseñado para InstruccionPara*/
+    string obtenerVariableConIdDeExpresion();
 
 private:
     Expresion *variable;
     Expresion *expresion;
     Lista     *listaIndices;
+
+    string variableConIdDeExpresion;
 };
 
 #endif // INSTRUCCIONASIGNACION_H

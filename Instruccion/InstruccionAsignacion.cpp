@@ -97,6 +97,7 @@ string InstruccionAsignacion::generarCodigoJava()
             codigoAsignacion << var->obtenerIdDeExpresion();
             /*Falta el nombre de la variables*/
             codigoAsignacion << var->obtenerIdentificador()->c_str();
+                /*InstruccionPara*/ variableConIdDeExpresion = codigoAsignacion.str();
             codigoAsignacion << " = ";
             codigoAsignacion << this->expresion->generarCodigoJava();
             codigoAsignacion << "; \n";
@@ -118,6 +119,7 @@ string InstruccionAsignacion::generarCodigoJava()
             }
             else
             {
+                /*InstruccionPara*/ variableConIdDeExpresion = codigoAsignacion.str();
                 codigoAsignacion << " = ";
             }
 
@@ -133,6 +135,7 @@ string InstruccionAsignacion::generarCodigoJava()
             codigoAsignacion << var->obtenerIdDeExpresion();
             /*Falta el nombre de la variables*/
             codigoAsignacion << var->obtenerIdentificador()->c_str();
+                /*InstruccionPara*/ variableConIdDeExpresion = codigoAsignacion.str();
             codigoAsignacion << " = ";
             codigoAsignacion << this->expresion->generarCodigoJava();
             codigoAsignacion << "; \n";
@@ -155,4 +158,9 @@ string InstruccionAsignacion::generarCodigoJava()
     }*/
 
     return codigoAsignacion.str();
+}
+
+string InstruccionAsignacion::obtenerVariableConIdDeExpresion()
+{
+    return this->variableConIdDeExpresion;
 }

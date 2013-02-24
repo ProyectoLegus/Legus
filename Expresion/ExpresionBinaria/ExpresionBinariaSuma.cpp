@@ -66,8 +66,65 @@ Tipo* ExpresionBinariaSuma::validarSemantica()
     }
 
     /*Arreglos*/
-    if( tipoIzquierda->tipo == Arreglo || tipoDerecha->tipo == Arreglo )
+    /*Si el tipoDeDato del arreglo esta en null establecer el que viene
+        en la expresion opuesta.
+    */
+    if( tipoIzquierda->tipo == Arreglo )
     {
+        Variable *v = (Variable*)obtenerExpresionIzquierda();
+        VariableArreglo *arreglo = obtenerVarArreglo(*v->obtenerIdentificador());
+        if( arreglo != 0)
+        {
+            if( arreglo->tipoDeDato == 0)
+            {
+                arreglo->tipoDeDato = (tipoDerecha);
+            }
+            else
+            {
+                if( arreglo->tipoDeDato != tipoDerecha )
+                {
+                    /*Quiere agregar al arreglo otro valor, Lanzar error*/
+                    stringstream ss;
+                    ss << "Arreglo '";
+                    ss << *v->obtenerIdentificador();
+                    ss << "' esta siendo utilizado para almacenar ";
+                    ss << obtenerTipoEnLenguajeNatural(arreglo->tipoDeDato);
+                    ss << "\nno puedes utilizarlo para almacenar ";
+                    ss << obtenerTipoEnLenguajeNatural(tipoDerecha);
+                    throw(ExcepcionLegus(ss.str()));
+                }
+            }
+        }
+        this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoArreglo();
+        return this->tipoInferido;
+    }
+
+    if( tipoDerecha->tipo == Arreglo )
+    {
+        Variable *v = (Variable*)obtenerExpresionDerecha();
+        VariableArreglo *arreglo = obtenerVarArreglo(*v->obtenerIdentificador());
+        if( arreglo != 0)
+        {
+            if( arreglo->tipoDeDato == 0)
+            {
+                arreglo->tipoDeDato = (tipoIzquierda);
+            }
+            else
+            {
+                if( arreglo->tipoDeDato != tipoIzquierda)
+                {
+                    /*Quiere agregar al arreglo otro valor, Lanzar error*/
+                    stringstream ss;
+                    ss << "Arreglo '";
+                    ss << *v->obtenerIdentificador();
+                    ss << "' esta siendo utilizado para almacenar ";
+                    ss << obtenerTipoEnLenguajeNatural(arreglo->tipoDeDato);
+                    ss << "\nno puedes utilizarlo para almacenar ";
+                    ss << obtenerTipoEnLenguajeNatural(tipoIzquierda);
+                    throw(ExcepcionLegus(ss.str()));
+                }
+            }
+        }
         this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoArreglo();
         return this->tipoInferido;
     }
@@ -92,6 +149,7 @@ string ExpresionBinariaSuma::generarCodigoJava()
                 Llamar a una funcion built-in que
                 concatene ambos arreglos
             */
+
         }
         else if(tipoIzquierda->tipo != Arreglo &&
                 tipoDerecha->tipo == Arreglo)
@@ -158,3 +216,58 @@ string ExpresionBinariaSuma::codigoExpresion(Expresion *expresion)
 
     return codigo.str();
 }
+
+VariableArreglo* ExpresionBinariaSuma::obtenerVarArreglo(string id)
+{
+    vector<VariableDeclarada*> *variables = Programa::obtenerInstancia()->tablaDeVariables;
+    VariableDeclarada* ultimaVariable = 0;
+
+    for(unsigned int i = 0 ; i< variables->size(); i++)
+    {
+        VariableDeclarada* variable = variables->at(i);
+        /*mismo identificador y que posea un idDeExpresion menor al mio*/
+
+        if( variable->obtenerVariable()->obtenerIdentificador()->compare( id ) == 0 )
+        {
+            ultimaVariable = variable;
+        }
+    }
+
+    if(ultimaVariable != 0)
+    {
+        if( ultimaVariable->obtenerTipo()!=0)
+        {
+            if( ultimaVariable->obtenerTipo()->tipo == Arreglo)
+            {
+                return (VariableArreglo*)ultimaVariable->obtenerVariable();
+            }
+        }
+    }
+    return 0;
+}
+
+string ExpresionBinariaSuma::obtenerTipoEnLenguajeNatural(Tipo *tipo)
+{
+    if( tipo == Programa::obtenerInstancia()->obtenerTipoEntero())
+    {return " numeros enteros ";}
+    if( tipo == Programa::obtenerInstancia()->obtenerTipoCaracter())
+    {return " caracteres ";}
+    if( tipo == Programa::obtenerInstancia()->obtenerTipoCadena())
+    {return " cadenas ";}
+    if( tipo == Programa::obtenerInstancia()->obtenerTipoFlotante())
+    {return " numeros con decimales ";}
+    if( tipo == Programa::obtenerInstancia()->obtenerTipoBooleano())
+    {return " valores booleanos ";}
+}
+
+
+
+
+
+
+
+
+
+
+
+

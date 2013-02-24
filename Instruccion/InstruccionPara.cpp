@@ -44,9 +44,13 @@ string InstruccionPara::generarCodigoJava()
     /*Falta variable++*/
     codigoInstruccionPara << "for( ";
     codigoInstruccionPara << codigoExpresionInicial;
+    codigoInstruccionPara << this->instruccionAsignacion->obtenerVariableConIdDeExpresion();
+    codigoInstruccionPara << "<";
     codigoInstruccionPara << codigoExpersionFinal;
     /*Agregar en instruccionAsignacion un metodo para obtener el valor de la variable*/
-    codigoInstruccionPara << "; CAMBIARESTO++ )";
+    codigoInstruccionPara << ";";
+    codigoInstruccionPara << this->instruccionAsignacion->obtenerVariableConIdDeExpresion();
+    codigoInstruccionPara << "++)";
     codigoInstruccionPara << "\n{\n";
 
     if( this->instrucciones != 0)

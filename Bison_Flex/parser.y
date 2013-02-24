@@ -26,7 +26,8 @@
         variable para mostrar un mensaje acorde.
     */
     int token_esperado = -1;
-    int correlativo = 200;
+    /*Over 9000!*/
+    int correlativo = 9001;
     int correlativoExtra =0;
 
     void yyerror(const char *s)
@@ -290,7 +291,7 @@
          T_SIMBOLO_IGUAL
          lista_indices_declaracion
         {
-            VariableArreglo* variableArreglo = new VariableArreglo($1, 0, yylineno, correlativo);
+            VariableArreglo* variableArreglo = new VariableArreglo($1, 0, yylineno, correlativo, 0);
             TipoArreglo *tipoArreglo = Programa::obtenerInstancia()->obtenerTipoArreglo();
             Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(variableArreglo, tipoArreglo, correlativo));
             $$ = new InstruccionAsignacion(variableArreglo, 0, 0, correlativo++);
@@ -585,7 +586,7 @@
         T_IDENTIFICADOR
         lista_indices
         {
-            $$ = new VariableArreglo($1, $2, yylineno, correlativo++);
+            $$ = new VariableArreglo($1, $2, yylineno, correlativo++,0);
         };
 
     /*Literales*/
