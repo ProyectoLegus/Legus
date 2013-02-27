@@ -86,7 +86,19 @@ map<string, Funcion*>* FuncionesIncorporadas::obtenerFuncionesIncorporadas()
     /*Sensor de Brujula ? */
 
     /*Funciones INCORPORADAS PARA BOTONES DE NXT*/
-    /*Izq, Der, Bajo, Enter*/
+    /*Izq, Der, enter, escape*/
+
+    // EsperarPresion
+    (*funcionesIncorporadas)["esperar_presion|boton_derecho"] = new Funcion(0, obtenerVectorParametros(1, TBotonDerecho));
+    (*funcionesIncorporadas)["esperar_presion|boton_izquierdo"] = new Funcion(0, obtenerVectorParametros(1, TBotonIzquierdo));
+    (*funcionesIncorporadas)["esperar_presion|boton_central"] = new Funcion(0, obtenerVectorParametros(1, TBotonCentral));
+    (*funcionesIncorporadas)["esperar_presion|boton_escape"] = new Funcion(0, obtenerVectorParametros(1, TBotonEscape));
+
+    // EsperarPresionYLiberacion
+    (*funcionesIncorporadas)["esperar_presion_liberacion|boton_derecho"] = new Funcion(0, obtenerVectorParametros(1, TBotonDerecho));
+    (*funcionesIncorporadas)["esperar_presion_liberacion|boton_izquierdo"] = new Funcion(0, obtenerVectorParametros(1, TBotonIzquierdo));
+    (*funcionesIncorporadas)["esperar_presion_liberacion|boton_central"] = new Funcion(0, obtenerVectorParametros(1, TBotonCentral));
+    (*funcionesIncorporadas)["esperar_presion_liberacion|boton_escape"] = new Funcion(0, obtenerVectorParametros(1, TBotonEscape));
 
     /*Extras!*/
     //Random
@@ -213,6 +225,20 @@ map<string, string>* FuncionesIncorporadas::obtenerCodigoFunciones()
 
     //Luz
     (*codigo)["obtener_luz|luz"] = "";
+
+    //Botones LCD
+    // EsperarPresion
+    (*codigo)["esperar_presion|boton_derecho"] = "public static void esperar_presion(Button b){b.waitForPress();}";
+    (*codigo)["esperar_presion|boton_izquierdo"] = "public static void esperar_presion(Button b){b.waitForPress();}";
+    (*codigo)["esperar_presion|boton_central"] = "public static void esperar_presion(Button b){b.waitForPress();}";
+    (*codigo)["esperar_presion|boton_escape"] = "public static void esperar_presion(Button b){b.waitForPress();}";
+
+    // EsperarPresionYLiberacion
+    (*codigo)["esperar_presion_liberacion|boton_derecho"] = "public static void esperar_presion_liberacion(Button b){b.waitForPressAndRelease();}";
+    (*codigo)["esperar_presion_liberacion|boton_izquierdo"] = "public static void esperar_presion_liberacion(Button b){b.waitForPressAndRelease();}";
+    (*codigo)["esperar_presion_liberacion|boton_central"] = "public static void esperar_presion_liberacion(Button b){b.waitForPressAndRelease();}";
+    (*codigo)["esperar_presion_liberacion|boton_escape"] = "public static void esperar_presion_liberacion(Button b){b.waitForPressAndRelease();}";
+
 
     //Utilidades
     (*codigo)["numero_aleatorio|entero"] = "public static int numero_aleatorio(int m){return new Random().nextInt(m);}";

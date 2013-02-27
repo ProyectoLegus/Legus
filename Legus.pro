@@ -91,7 +91,11 @@ SOURCES += main.cpp\
         Programa/Tipos/TipoSensorDeInclinacion.cpp \
         Programa/Tipos/TipoSensorDeSonido.cpp \
         Programa/Tipos/TipoSensorGiroscopico.cpp \
-    Programa/FuncionUtilizada.cpp
+        Programa/FuncionUtilizada.cpp \
+        Programa/Tipos/TipoBotonDerecho.cpp \
+        Programa/Tipos/TipoBotonIzquierdo.cpp \
+        Programa/Tipos/TipoBotonCentral.cpp \
+        Programa/Tipos/TipoBotonEscape.cpp
 
 #HEADERS  += Editor/editor.h \
  HEADERS  +=        Bison_Flex/tokens.h \
@@ -169,7 +173,11 @@ SOURCES += main.cpp\
         Programa/Tipos/TipoSensorDeInclinacion.h \
         Programa/Tipos/TipoSensorDeSonido.h \
         Programa/Tipos/TipoSensorGiroscopico.h \
-        Programa/FuncionUtilizada.h
+        Programa/FuncionUtilizada.h \
+        Programa/Tipos/TipoBotonDerecho.h \
+        Programa/Tipos/TipoBotonIzquierdo.h \
+        Programa/Tipos/TipoBotonCentral.h \
+        Programa/Tipos/TipoBotonEscape.h
 
 #FORMS    += Editor/editor.ui
 

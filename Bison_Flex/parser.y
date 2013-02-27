@@ -35,8 +35,6 @@
         cout << "Error Sintactico:" << endl;
         cout << "Linea: " << yylineno << endl;
         cout << GeneradorDeErrores::obtenerTokenEsperado(token_esperado).c_str() << endl;
-        //QMessageBox::about(0,"","Error Sintactico: " + QString(s) + "linea: " + QString::number(yylineno));
-        //QMessageBox::critical(0,"Error",QString(GeneradorDeErrores::obtenerTokenEsperado(token_esperado).c_str()));
     }
 %}
 
@@ -266,6 +264,17 @@
         {
             /*Cantidad, instrucciones, siguiente*/
             $$ = new InstruccionRepetir($2, $5, 0, correlativo++);
+        }
+        |
+        T_REPETIR
+        T_INFINITAS             {token_esperado=41;}
+        T_VECES
+        instrucciones           {token_esperado=33;}
+        T_FIN                   {token_esperado=39;}
+        T_REPETIR
+        {
+            /*Cantidad, instrucciones, siguiente*/
+            $$ = new InstruccionRepetir(0, $5, 0, correlativo++);
         };
 
     instruccion_asignacion :

@@ -12,8 +12,12 @@ public:
     virtual void validarSemantica();
     virtual string generarCodigoJava();
 
+    void establecerTipoDeRetorno(Tipo *tipoDeRetorno);
+    Tipo* obtenerTipoDeRetorno();
+
 private:
     Expresion *expresion_de_retorno;
+    Tipo* tipoDeRetorno;
 };
 
 #endif // INSTRUCCIONRETORNAR_H

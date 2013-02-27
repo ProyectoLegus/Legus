@@ -27,6 +27,10 @@
 #include "Programa/Tipos/TipoSensorDeTacto.h"
 #include "Programa/Tipos/TipoSensorGiroscopico.h"
 #include "Programa/Tipos/TipoSensorUltrasonico.h"
+#include "Programa/Tipos/TipoBotonCentral.h"
+#include "Programa/Tipos/TipoBotonDerecho.h"
+#include "Programa/Tipos/TipoBotonEscape.h"
+#include "Programa/Tipos/TipoBotonIzquierdo.h"
 #include "Programa/FuncionUtilizada.h"
 
 #include "Programa/VariableADeclarar.h"
@@ -37,6 +41,7 @@
 class Funcion;
 class DeclaracionUtilizar;
 class InstruccionLlamadaAFuncion;
+class DeclaracionDeFuncion;
 
 using namespace std;
 
@@ -50,6 +55,13 @@ public:
     vector<DeclaracionUtilizar*>        *tablaDePuertosYSensores;
     vector<VariableDeclarada*>          *tablaDeVariables;
     vector<VariableADeclarar*>          *tablaDeVariablesADeclarar;
+
+    // Tabla de variables de parametro
+    // Ira de la siguienteManera NombreFuncion|CantidadParams
+    // Ej. suma|2  o suma|3 y tendra
+    //map<string, vector<>>       *tablaDeFuncionesLocales;
+    map<string, string>                 *FuncionesLocales;
+    //vector<string>                      *FuncionesLocales;
 
     string                  obtenerCodigoVariablesADeclarar();
     TipoBooleano*           obtenerTipoBooleano();
@@ -67,10 +79,17 @@ public:
     TipoSensorDeTacto*      obtenerTipoSensorDeTacto();
     TipoSensorGiroscopico*  obtenerTipoSensorGiroscopico();
     TipoSensorUltrasonico*  obtenerTipoSensorUltrasonico();
+    TipoBotonCentral*       obtenerTipoBotonCentral();
+    TipoBotonDerecho*       obtenerTipoBotonDerecho();
+    TipoBotonEscape*        obtenerTipoBotonEscape();
+    TipoBotonIzquierdo*     obtenerTipoBotonIzquierdo();
 
     VariableDeclarada*    existeVariable(string *identificador, int idDeExpresion);
     DeclaracionUtilizar*  existeEnTablaDePuertosYSensores(string *identificador);
     DeclaracionDeFuncion* existeEnTablaDeFunciones(string *identificador, int idDeExpresion);
+    DeclaracionDeFuncion* existeEnTablaDeFunciones(string *identificador, Lista *lista_parametros);
+
+    bool existeEnTablaDeFuncionesIdentica(string *identificador, Lista *lista_parametros);
 
     bool existePuerto(string *puerto);
     void limpiarInstancia();
@@ -85,6 +104,8 @@ public:
                                 string funcsIncorporadas,
                                 string declaracionFunciones,
                                 string bloqueCodigo);
+
+    void ingresarATablaDeFuncionesLocales(string nombreFunc, string codigo);
     /*
         Esta funcion ocasiona que el codigo generado
         pueda ser ejecutado en una pc
@@ -97,6 +118,7 @@ public:
     void validarSemantica();
     string obtenerCodigoInstrucciones();
     void generarArchivo(string nombreArchivo);
+    string obtenerTipoJavaEnBaseATipo(Tipo* tipo);
 
 private:
     Programa();
@@ -123,6 +145,10 @@ private:
     TipoSensorDeTacto       *tipoSensorDeTacto;
     TipoSensorGiroscopico   *tipoSensorGiroscopico;
     TipoSensorUltrasonico   *tipoSensorUltrasonico;
+    TipoBotonCentral        *tipoBotonCentral;
+    TipoBotonDerecho        *tipoBotonDerecho;
+    TipoBotonEscape         *tipoBotonEscape;
+    TipoBotonIzquierdo      *tipoBotonIzquierdo;
 
     /*Solo aqui la puedo usar*/
     Tipo* obtenerTipoEnBaseATipoParametro(TipoParametro tipoParam);
@@ -138,6 +164,7 @@ private:
 
     string obtenerTipoEnBaseATipo(Tipo*);
     string convertirAEntradaEnTabla(string nombreFuncion, Lista *parametros);
+    string obtenerFuncionesLocales();
 };
 
 #endif // PROGRAMA_H

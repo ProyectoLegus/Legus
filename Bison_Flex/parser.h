@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 2.5.  */
+/* A Bison parser, made by GNU Bison 2.7.  */
 
 /* Bison interface for Yacc-like parsers in C
    
-      Copyright (C) 1984, 1989-1990, 2000-2011 Free Software Foundation, Inc.
+      Copyright (C) 1984, 1989-1990, 2000-2012 Free Software Foundation, Inc.
    
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -30,10 +30,17 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
+#ifndef YY_YY_D_DROPBOX_PROYECTOCODIGO_LEGUS_BISON_FLEX_PARSER_H_INCLUDED
+# define YY_YY_D_DROPBOX_PROYECTOCODIGO_LEGUS_BISON_FLEX_PARSER_H_INCLUDED
+/* Enabling traces.  */
+#ifndef YYDEBUG
+# define YYDEBUG 0
+#endif
+#if YYDEBUG
+extern int yydebug;
+#endif
 /* "%code requires" blocks.  */
 
-/* Line 2068 of yacc.c  */
-#line 3 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
 
     #include <string>
     #include "Expresion/Expresion.h"
@@ -43,8 +50,6 @@
 
 
 
-/* Line 2068 of yacc.c  */
-#line 48 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.h"
 
 /* Tokens.  */
 #ifndef YYTOKENTYPE
@@ -125,13 +130,10 @@
 #endif
 
 
-
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
 {
 
-/* Line 2068 of yacc.c  */
-#line 43 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.y"
 
     std::string              *string;
     Expresion                *expresion;
@@ -142,15 +144,11 @@ typedef union YYSTYPE
 
 
 
-/* Line 2068 of yacc.c  */
-#line 147 "D:\\DropBox\\ProyectoCodigo\\Legus\\Bison_Flex\\parser.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 #endif
-
-extern YYSTYPE yylval;
 
 #if ! defined YYLTYPE && ! defined YYLTYPE_IS_DECLARED
 typedef struct YYLTYPE
@@ -165,5 +163,20 @@ typedef struct YYLTYPE
 # define YYLTYPE_IS_TRIVIAL 1
 #endif
 
+extern YYSTYPE yylval;
 extern YYLTYPE yylloc;
+#ifdef YYPARSE_PARAM
+#if defined __STDC__ || defined __cplusplus
+int yyparse (void *YYPARSE_PARAM);
+#else
+int yyparse ();
+#endif
+#else /* ! YYPARSE_PARAM */
+#if defined __STDC__ || defined __cplusplus
+int yyparse (void);
+#else
+int yyparse ();
+#endif
+#endif /* ! YYPARSE_PARAM */
 
+#endif /* !YY_YY_D_DROPBOX_PROYECTOCODIGO_LEGUS_BISON_FLEX_PARSER_H_INCLUDED  */

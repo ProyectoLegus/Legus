@@ -65,13 +65,13 @@ int main(int argc, char *argv[])
         }
         else
         {
-            if( strcmpi(argv[1], "-p") || strcmpi(argv[1],"--pc"))
-            {
-                nombreArchivo = "pc.java";
-            }
-            else if( strcmpi(argv[1], "-n") || strcmpi(argv[1],"--nxt"))
+            if( strcmpi(argv[1], "-n") || strcmpi(argv[1],"--nxt"))
             {
                 nombreArchivo = "nxt.java";
+            }
+            else if( strcmpi(argv[1], "-p") || strcmpi(argv[1],"--pc"))
+            {
+                nombreArchivo = "pc.java";
             }
             else
             {
@@ -87,7 +87,6 @@ int main(int argc, char *argv[])
             {
                 cout << "Error de analisis" << endl;
                 // Borrar!
-                system("pause");
                 exit(3);
             }
             else
@@ -99,7 +98,6 @@ int main(int argc, char *argv[])
         Programa::obtenerInstancia()->generarArchivo("nxt");
         cout << "Archivo generado exitosamente" << endl;
         Programa::obtenerInstancia()->limpiarInstancia();
-        system("pause");
     }
     catch(ExcepcionLegus legusExcep)
     {
@@ -107,7 +105,7 @@ int main(int argc, char *argv[])
         cout << legusExcep.obtenerMensaje()
              << "\nAlrededor de la linea: "
              << linea << endl;
-        system("pause");
     }
+    system("pause");
     return 0;
 }

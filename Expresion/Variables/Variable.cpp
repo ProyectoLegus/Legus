@@ -50,7 +50,7 @@ Tipo* Variable::validarSemantica()
     for(unsigned int i = 0; i< tablaDeFunciones->size(); i++)
     {
         DeclaracionDeFuncion *declaracion = tablaDeFunciones->at(i);
-        if( this->identificador->compare(*declaracion->obtenerVariable()->obtenerIdentificador()))
+        if( this->identificador->compare(*declaracion->obtenerVariable()->obtenerIdentificador())==0)
         {
             stringstream ss;
             ss << "Variable '" << *declaracion->obtenerVariable()->obtenerIdentificador() << "' ";

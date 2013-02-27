@@ -8,7 +8,9 @@ enum TipoParametro
     TMotor, TSensorUltrasonico, TSensorDeTacto,
     TSensorDeLuz, TSensorDeColor,
     TSensorDeInclinacion, TSensorDeSonido,
-    TSensorGiroscopico, TSensorDeBrujula
+    TSensorGiroscopico, TSensorDeBrujula,
+    TBotonDerecho, TBotonIzquierdo, TBotonCentral,
+    TBotonEscape
 };
 
 #include <iostream>

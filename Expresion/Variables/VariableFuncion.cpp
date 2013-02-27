@@ -23,6 +23,35 @@ Tipo* VariableFuncion::validarSemantica()
         Programa::obtenerInstancia()->agregarUsoDeFuncionATabla(*obtenerIdentificador(), lista_parametros, funcion);
         return funcion->tipoDeRetorno;
     }
+
+    // cambiar a declaracion que retorne la exacta cantidad de parametros  con el mismo nombre
+    DeclaracionDeFuncion *funcDeclr = Programa::obtenerInstancia()->existeEnTablaDeFunciones(obtenerIdentificador(), obtenerListaParametros());
+
+    if( funcDeclr != 0)
+    {
+       Tipo *tipo = funcDeclr->validarSemantica(obtenerIdentificador(), obtenerListaParametros());
+       if( tipo == 0)
+       {
+           // no se puede asignar una variable
+           stringstream ss;
+           ss << "La funcion '";
+           ss << *obtenerIdentificador();
+           ss << "' no retorna valor, no puede ser utilizada de esta manera";
+           throw(ExcepcionLegus(ss.str(),numeroDeLinea));
+       }
+       this->tipoInferido = tipo;
+       return tipoInferido;
+    }
+    else
+    {
+        // No existe la funcion que se quiere llamar
+        stringstream ss;
+        ss << "Funcion '";
+        ss << *obtenerIdentificador();
+        ss << "' no existe";
+        throw(ExcepcionLegus(""));
+    }
+
     return 0;
 }
 

@@ -8,9 +8,15 @@ InstruccionRetornar::InstruccionRetornar(Expresion *expresion_de_retorno, Instru
 
 void InstruccionRetornar::validarSemantica()
 {
-    Tipo *expresionDeRetorno = expresion_de_retorno->validarSemantica();
+    establecerTipoDeRetorno( expresion_de_retorno->validarSemantica() );
 
-    // Aun no se que hacer
+    // Validar que no este en la linea principal de instrucciones...
+    // Que no tenga Siguiente!
+    if(obtenerSiguiente() != 0)
+    {
+        // Decorar esto mas bonito
+        throw(ExcepcionLegus("No pueden haber instrucciones debajo de la instruccion Retornar"));
+    }
 }
 
 string InstruccionRetornar::generarCodigoJava()
@@ -22,6 +28,15 @@ string InstruccionRetornar::generarCodigoJava()
     codigoInstruccionRetornar << ";\n";
 
     /*No puede tener siguiente instruccion, si la hay se ignora*/
-
     return codigoInstruccionRetornar.str();
+}
+
+void InstruccionRetornar::establecerTipoDeRetorno(Tipo *tipoDeRetorno)
+{
+    this->tipoDeRetorno = tipoDeRetorno;
+}
+
+Tipo* InstruccionRetornar::obtenerTipoDeRetorno()
+{
+    return this->tipoDeRetorno;
 }

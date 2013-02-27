@@ -10,7 +10,9 @@ enum Tipos
     SensorDeTacto, SensorDeLuz,
     SensorDeColor, SensorDeInclinacion,
     SensorDeSonido,SensorGiroscopico,
-    SensorDeBrujula,Nulo
+    SensorDeBrujula,Nulo,
+    BotonDerecho, BotonIzquierdo,
+    BotonCentral, BotonEscape
 };
 
 class Tipo

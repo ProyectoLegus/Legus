@@ -16,29 +16,13 @@ void InstruccionLlamadaAFuncion::validarSemantica()
     /*DENTRO DE FUNCIONES DECLARADAS*/
     /*Ver si existe la funcion*/
     vector<DeclaracionDeFuncion*> *tablaDeFunciones = Programa::obtenerInstancia()->tablaDeFunciones;
-    DeclaracionDeFuncion* funcionDeclarada = 0;
+    DeclaracionDeFuncion* funcionDeclarada = Programa::obtenerInstancia()->existeEnTablaDeFunciones(this->identificador, lista_parametros);
     bool encontrado = false;
-    for(unsigned int i = 0; i< tablaDeFunciones->size(); i++)
+
+    if( funcionDeclarada )
     {
-        DeclaracionDeFuncion *declaracion = tablaDeFunciones->at(i);
-        if( this->identificador->compare(*declaracion->obtenerVariable()->obtenerIdentificador())==0)
-        {
-            encontrado = true;
-            /*Revisar la cantidad de parametros*/
-            if( declaracion->obtenerListaParametros()->lista->size() != lista_parametros->lista->size() )
-            {
-                encontrado = false;
-                stringstream error;
-                error << "La funcion '";
-                error << *this->identificador;
-                error << "' ha sido llamada de manera incorrecta";
-                throw(ExcepcionLegus(error.str()));
-            }
-            else
-            {
-                funcionDeclarada = declaracion;
-            }
-        }
+        funcionDeclarada->validarSemantica(this->identificador, lista_parametros);
+        encontrado = true;
     }
 
     /*DE LAS FUNCIONES BUILT-IN*/
@@ -46,7 +30,10 @@ void InstruccionLlamadaAFuncion::validarSemantica()
     Funcion *fun = Programa::obtenerInstancia()->existeFuncionIncorporada(*this->identificador, this->lista_parametros);
 
     // true -> Funcion Existe
-    encontrado = fun!=0;
+    if( !encontrado ) // Validar que no se haya encontrado ya en las locales
+    {
+        encontrado = fun!=0;
+    }
 
     if( fun!=0 )
     {

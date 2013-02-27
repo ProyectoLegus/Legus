@@ -9,11 +9,20 @@ InstruccionRepetir::InstruccionRepetir(Expresion *cantidad, Instruccion *instruc
 
 void InstruccionRepetir::validarSemantica()
 {
-    Tipo* tipoCantidad = cantidad->validarSemantica();
-
-    if( tipoCantidad->tipo != Entero )
+    if( cantidad != 0)
     {
-        throw(ExcepcionLegus("Expresion en instruccion 'repetir' debe evaluar a entero"));
+        // Entra aqui si viene una expresion, esta deberia
+        // reducir a entero
+        Tipo* tipoCantidad = cantidad->validarSemantica();
+
+        if( tipoCantidad->tipo != Entero )
+        {
+            throw(ExcepcionLegus("Expresion en instruccion 'repetir' debe evaluar a entero"));
+        }
+    }
+    else
+    {
+        // Aqui no se hace nada, la expresion reduce a infinito
     }
 
     if( instrucciones != 0)
@@ -30,9 +39,16 @@ string InstruccionRepetir::generarCodigoJava()
 {
     stringstream codigoInstruccionRepetir;
 
-    codigoInstruccionRepetir << "for( int $$i = 0; $$i < ";
-    codigoInstruccionRepetir << this->cantidad->generarCodigoJava();
-    codigoInstruccionRepetir << " ; $$i++)";
+    if( cantidad != 0)
+    {
+        codigoInstruccionRepetir << "for( int $$i = 0; $$i < ";
+        codigoInstruccionRepetir << this->cantidad->generarCodigoJava();
+        codigoInstruccionRepetir << " ; $$i++)";
+    }
+    else
+    {
+        codigoInstruccionRepetir << "while(true)";
+    }
     codigoInstruccionRepetir << "\n{\n";
 
     if( this->instrucciones != 0)

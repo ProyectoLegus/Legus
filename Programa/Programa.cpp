@@ -10,6 +10,7 @@ Programa::Programa()
     this->tablaDeVariablesADeclarar = new vector<VariableADeclarar*>();
 
     this->tablaDeUsoDeFunciones = new map<string, Funcion*>();
+    this->FuncionesLocales = new map<string, string>();
     this->codigoDefunciones = 0;
     compilarParaNxt = true;
 
@@ -29,6 +30,10 @@ Programa::Programa()
     this->tipoSensorDeTacto = new TipoSensorDeTacto();
     this->tipoSensorGiroscopico = new TipoSensorGiroscopico();
     this->tipoSensorUltrasonico = new TipoSensorUltrasonico();
+    this->tipoBotonCentral = new TipoBotonCentral();
+    this->tipoBotonDerecho = new TipoBotonDerecho();
+    this->tipoBotonEscape = new TipoBotonEscape();
+    this->tipoBotonIzquierdo = new TipoBotonIzquierdo();
 }
 
 Programa* Programa::obtenerInstancia()
@@ -141,12 +146,47 @@ DeclaracionDeFuncion* Programa::existeEnTablaDeFunciones(string *identificador, 
     for(unsigned int i = 0; i< tablaDeFunciones->size(); i++)
     {
         DeclaracionDeFuncion *declaracion = tablaDeFunciones->at(i);
+        // #if linux
         if( identificador->compare(*declaracion->obtenerVariable()->obtenerIdentificador())==0)
         {
             return declaracion;
         }
     }
     return 0;
+}
+
+DeclaracionDeFuncion* Programa::existeEnTablaDeFunciones(string *identificador, Lista *lista_parametros)
+{
+    for(unsigned int i = 0; i< tablaDeFunciones->size(); i++)
+    {
+        DeclaracionDeFuncion *declaracion = tablaDeFunciones->at(i);
+        // #if linux
+        if( identificador->compare(*declaracion->obtenerVariable()->obtenerIdentificador())==0)
+        {
+            if( lista_parametros->lista->size() == declaracion->obtenerListaParametros()->lista->size())
+            {
+                return declaracion;
+            }
+        }
+    }
+    return 0;
+}
+
+bool Programa::existeEnTablaDeFuncionesIdentica(string *identificador, Lista *lista_parametros)
+{
+    for(unsigned int i = 0; i< tablaDeFunciones->size(); i++)
+    {
+        DeclaracionDeFuncion *declaracion = tablaDeFunciones->at(i);
+        // #if linux
+        if( identificador->compare(*declaracion->obtenerVariable()->obtenerIdentificador())==0)
+        {
+            if( lista_parametros->lista->size() == declaracion->obtenerListaParametros()->lista->size())
+            {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 DeclaracionUtilizar* Programa::existeEnTablaDePuertosYSensores(string *identificador)
@@ -214,6 +254,10 @@ void Programa::limpiarInstancia()
     delete tipoSensorDeTacto;
     delete tipoSensorGiroscopico;
     delete tipoSensorUltrasonico;
+    delete tipoBotonCentral;
+    delete tipoBotonDerecho;
+    delete tipoBotonEscape;
+    delete tipoBotonIzquierdo;
     delete funcionesIncorporadas;
     delete tablaDeUsoDeFunciones;
     delete codigoDefunciones;
@@ -393,6 +437,22 @@ Tipo* Programa::obtenerTipoEnBaseATipoParametro(TipoParametro tipoParam)
     {
         return tipoSensorUltrasonico;
     }
+    else if( tipoParam == TBotonDerecho)
+    {
+        return tipoBotonDerecho;
+    }
+    else if( tipoParam == TBotonCentral)
+    {
+        return tipoBotonCentral;
+    }
+    else if( tipoParam == TBotonIzquierdo)
+    {
+        return tipoBotonIzquierdo;
+    }
+    else if( tipoParam == TBotonEscape)
+    {
+        return tipoBotonEscape;
+    }
     return 0;
 }
 
@@ -413,6 +473,33 @@ string Programa::obtenerTipoEnBaseATipo(Tipo *tipo)
     else if(tipo==tipoSensorDeTacto)        return "tacto";
     else if(tipo==tipoSensorGiroscopico)    return "giroscopico";
     else if(tipo==tipoSensorUltrasonico)    return "ultrasonico";
+    else if(tipo==tipoBotonCentral)         return "boton_central";
+    else if(tipo==tipoBotonDerecho)         return "boton_derecho";
+    else if(tipo==tipoBotonEscape)          return "boton_escape";
+    else if(tipo==tipoBotonIzquierdo)       return "boton_izquierdo";
+    return "";
+}
+
+string Programa::obtenerTipoJavaEnBaseATipo(Tipo *tipo)
+{
+    if(tipo==tipoEntero)                    return " int ";
+    else if(tipo==tipoMotor)                return " NXTRegulatedMotor ";
+    else if(tipo==tipoFlotante)             return " float ";
+    else if(tipo==tipoCadena)               return " String ";
+    else if(tipo==tipoCaracter)             return " char ";
+    else if(tipo==tipoBooleano)             return " boolean ";
+    else if(tipo==tipoSensorDeBrujula)      return "";
+    else if(tipo==tipoSensorDeColor)        return "";
+    else if(tipo==tipoSensorDeInclinacion)  return "";
+    else if(tipo==tipoSensorDeLuz)          return "";
+    else if(tipo==tipoSensorDeSonido)       return "";
+    else if(tipo==tipoSensorDeTacto)        return "";
+    else if(tipo==tipoSensorGiroscopico)    return "";
+    else if(tipo==tipoSensorUltrasonico)    return "";
+    else if(tipo==tipoBotonCentral)         return " Button ";
+    else if(tipo==tipoBotonDerecho)         return " Button ";
+    else if(tipo==tipoBotonEscape)          return " Button ";
+    else if(tipo==tipoBotonIzquierdo)       return " Button ";
     return "";
 }
 
@@ -495,11 +582,14 @@ void Programa::generarArchivo(string nombreArchivo)
     // Revisar si el codigo esta correcto
     validarSemantica();
 
+    // Generar codigo para las funciones declaradas por el usuario
+    // este codigo ya deberia estar Escrito en una tabla global
+
     // generar el archivo
     string codigoPrograma = obtenerCodigoFuente(nombreArchivo,
                                                 obtenerInclusiones(),
                                                 obtenerCodigoFunciones(),
-                                                "",
+                                                obtenerFuncionesLocales(),
                                                 obtenerCodigoInstrucciones());
 
     ofstream archivo;
@@ -507,6 +597,29 @@ void Programa::generarArchivo(string nombreArchivo)
     archivo.open(nombre.c_str());
         archivo << codigoPrograma.c_str();
     archivo.close();
+}
+
+string Programa::obtenerFuncionesLocales()
+{
+    stringstream str;
+    map<string, string>::iterator it;
+    for(it = FuncionesLocales->begin();
+        it != FuncionesLocales->end();
+        it++)
+    {
+        string codigo = (*it).second;
+        str << codigo;
+    }
+    return str.str();
+}
+
+void Programa::ingresarATablaDeFuncionesLocales(string nombreFunc, string codigo)
+{
+    if( FuncionesLocales->find(nombreFunc) == FuncionesLocales->end() )
+    {
+        // no existe ingresarlo
+        (*FuncionesLocales)[nombreFunc] = codigo;
+    }
 }
 
 string Programa::obtenerCodigoInstrucciones()
