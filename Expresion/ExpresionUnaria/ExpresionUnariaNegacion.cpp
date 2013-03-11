@@ -15,8 +15,7 @@ Tipo* ExpresionUnariaNegacion::validarSemantica()
         this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoBooleano();
         return Programa::obtenerInstancia()->obtenerTipoBooleano();
     }
-
-    throw(ExcepcionLegus("Tipos incompatibles en operacion unaria negacion 'no' "));
+    throw(ExcepcionLegus("Tipos incompatibles en operacion unaria negacion 'no' ",numeroDeLinea));
 }
 
 string ExpresionUnariaNegacion::generarCodigoJava()

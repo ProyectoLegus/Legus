@@ -11,22 +11,28 @@
 class DeclaracionUtilizar
 {
 public:
-    DeclaracionUtilizar(VariablePuerto *puerto, VariableSensor *sensor, VariableSensor *variable);
+    DeclaracionUtilizar(VariablePuerto *puerto, VariableSensor *sensor,
+                        VariableSensor *variable, int numeroDeLinea);
     VariableSensor*     obtenerVariable();
     VariablePuerto*     obtenerPuerto();
     VariableSensor*     obtenerSensor();
     Tipo*               obtenerTipoSensor();
-    string*             obtenerCodigo();
+    string              obtenerCodigo();
+    string              obtenerCodigoDeclarar();
 
 private:
     VariableSensor *variable;
     VariablePuerto *puerto;
     VariableSensor *sensor;
     Tipo           *tipoSensor;
-    string         *codigo;
+    string         codigo;
+    string         codigoDeclarar;
+    int             numeroDeLinea;
     bool  esPuertoYSensorValido(string* puerto, string* sensor, string *variable);
     int   obtenerNumeroPuerto(string *puerto);
     char  obtenerCaracterDePuerto(string *puerto);
+    string obtenerPuertoJava(string *puerto);
+    string establecerCodigo(string tipo, string puerto, string sensor);
 };
 
 #endif // DECLARACIONUTILIZAR_H

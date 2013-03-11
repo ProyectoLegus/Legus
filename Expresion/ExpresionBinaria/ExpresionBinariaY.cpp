@@ -18,7 +18,7 @@ Tipo* ExpresionBinariaY::validarSemantica()
     }
 
     /*Lanzar Error*/
-    throw(ExcepcionLegus("Tipos incompatibles en operacion logica Y", numeroDeLinea));
+    throw(ExcepcionLegus("Tipos incompatibles en operacion logica 'Y'", numeroDeLinea));
 }
 
 string ExpresionBinariaY::generarCodigoJava()

@@ -59,7 +59,7 @@
 %token <string> T_NEGACION T_SIMBOLO_OPERADOR_Y T_SIMBOLO_OPERADOR_O T_CORCHETE_IZQUIERDO
 %token <string> T_CORCHETE_DERECHO T_PARENTESIS_IZQUIERDO T_PARENTESIS_DERECHO T_DOS_PUNTOS
 %token <string> T_DESIGUALDAD T_LITERAL_CARACTER T_LITERAL_FLOTANTE T_LITERAL_CADENA T_COMA
-%token <string> T_ENTER T_EOF T_ENTERO T_FLOTANTE T_BOOLEANO T_CARACTER T_CADENA T_ES
+%token <string> T_ENTER T_EOF T_ES
 
 
 /* PALABRAS RESERVADAS */
@@ -70,7 +70,7 @@
 
 
 /* NO TERMINALES */
-%type <string>          declaracion_sensores_motores declaracion_funciones tipo_de_dato
+%type <string>          declaracion_sensores_motores declaracion_funciones
 %type <instruccion>     instrucciones instruccion instruccion_si instruccion_caso instruccion_mientras
                         instruccion_para instruccion_repetir instruccion_asignacion
                         instruccion_repita_desde instruccion_para_cada instruccion_llamada_a_funcion
@@ -81,6 +81,7 @@
 %type <lista>           lista_parametros acumulador_parametros
 %type <lista_de_caso>   lista_casos
 %type <expresion>       literales literal_booleana relacionales expresiones factores terminales
+                        unarios
 
 
 /* PUNTO DE ENTRADA */
@@ -111,7 +112,8 @@
         T_FUNCION
         declaracion_funciones
         {
-            DeclaracionDeFuncion *declrFuncion = new DeclaracionDeFuncion(new Variable($3, yylineno, correlativo++), $6, $9);
+            DeclaracionDeFuncion *declrFuncion = new DeclaracionDeFuncion(new Variable($3, yylineno, correlativo++),
+                                                                          $6, $9, yylineno);
             Programa::obtenerInstancia()->tablaDeFunciones->push_back(declrFuncion);
         }
         |/*Epsilon*/
@@ -131,7 +133,8 @@
         {
             DeclaracionUtilizar *declrUtilizar = new DeclaracionUtilizar(new VariablePuerto($3, yylineno, correlativo++),
                                                                          new VariableSensor($7, yylineno, correlativo++),
-                                                                         new VariableSensor($11, yylineno, correlativo++));
+                                                                         new VariableSensor($11, yylineno, correlativo++),
+                                                                         yylineno);
             Programa::obtenerInstancia()->tablaDePuertosYSensores->push_back(declrUtilizar);
         }
         |/*Epsilon*/
@@ -179,7 +182,7 @@
         T_SI
         {
             /* Parametros: condicion, instruccionSiVerdadero, instruccionSiFalso,instruccionSiAnidado, Siguiente*/
-            $$ = new InstruccionSi($2, $4, 0, 0, 0, correlativo++);
+            $$ = new InstruccionSi($2, $4, 0, 0, 0, correlativo++, yylineno);
         }
         |T_SI
          relacionales
@@ -191,7 +194,7 @@
          T_SI
         {
             /* Parametros: condicion, instruccionSiVerdadero, instruccionSiFalso,instruccionSiAnidado, Siguiente*/
-            $$ = new InstruccionSi($2, $4, $7, 0, 0, correlativo++);
+            $$ = new InstruccionSi($2, $4, $7, 0, 0, correlativo++, yylineno);
         }
         ;
 
@@ -203,7 +206,7 @@
         T_FIN               {token_esperado=35;}
         T_CASO
         {
-            $$ = new InstruccionCaso( new Variable($3, yylineno, correlativo++), $4, $5, 0, correlativo++);
+            $$ = new InstruccionCaso( new Variable($3, yylineno, correlativo++), $4, $5, 0, correlativo++, yylineno);
         }
         |T_CASO
         lista_casos
@@ -211,7 +214,7 @@
         T_FIN               {token_esperado=35;}
         T_CASO
         {
-            $$ = new InstruccionCaso(0, $2, $3, 0, correlativo++);
+            $$ = new InstruccionCaso(0, $2, $3, 0, correlativo++, yylineno);
         };
 
     instruccion_mientras:
@@ -223,7 +226,7 @@
         T_MIENTRAS
         {
             /* Parametros:   condicion, instrucciones, siguiente */
-            $$ = new InstruccionMientras($2, $5, 0, correlativo++);
+            $$ = new InstruccionMientras($2, $5, 0, correlativo++, yylineno);
         };
 
     instruccion_para :
@@ -250,8 +253,8 @@
             int cori = correlativoExtra++;
             Variable *var = new Variable($3, $6, yylineno, cori);
             Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var,$6->validarSemantica(), cori));
-            $$ = new InstruccionPara(new InstruccionAsignacion(var,$6,0, correlativo++),
-                                                               $9, $12, 0, correlativo++);
+            $$ = new InstruccionPara(new InstruccionAsignacion(var,$6,0, correlativo++, yylineno),
+                                                               $9, $12, 0, correlativo++, yylineno);
         };
 
     instruccion_repetir :
@@ -263,7 +266,7 @@
         T_REPETIR
         {
             /*Cantidad, instrucciones, siguiente*/
-            $$ = new InstruccionRepetir($2, $5, 0, correlativo++);
+            $$ = new InstruccionRepetir($2, $5, 0, correlativo++, yylineno);
         }
         |
         T_REPETIR
@@ -274,7 +277,7 @@
         T_REPETIR
         {
             /*Cantidad, instrucciones, siguiente*/
-            $$ = new InstruccionRepetir(0, $5, 0, correlativo++);
+            $$ = new InstruccionRepetir(0, $5, 0, correlativo++, yylineno);
         };
 
     instruccion_asignacion :
@@ -286,15 +289,16 @@
             /* SI relacionales devuelve una variable arreglo?*/
 
             Variable *var = new Variable($1, $3, yylineno, correlativo);
-            Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var,$3->validarSemantica(), correlativo));
-            $$ = new InstruccionAsignacion(var, $3, 0, correlativo++);
+            //Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var,$3->validarSemantica(), correlativo));
+            Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var,Programa::obtenerInstancia()->obtenerTipoEntero(), correlativo));
+            $$ = new InstruccionAsignacion(var, $3, 0, correlativo++, yylineno);
         }
         |id_arreglo         {token_esperado=19;}
          T_SIMBOLO_IGUAL
          relacionales
         {
             /*Variable, Expresion, siguiente*/
-            $$ = new InstruccionAsignacion($1, $4, 0, correlativo++);
+            $$ = new InstruccionAsignacion($1, $4, 0, correlativo++, yylineno);
         }
         |T_IDENTIFICADOR
          T_SIMBOLO_IGUAL
@@ -303,7 +307,7 @@
             VariableArreglo* variableArreglo = new VariableArreglo($1, 0, yylineno, correlativo, 0);
             TipoArreglo *tipoArreglo = Programa::obtenerInstancia()->obtenerTipoArreglo();
             Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(variableArreglo, tipoArreglo, correlativo));
-            $$ = new InstruccionAsignacion(variableArreglo, 0, 0, correlativo++);
+            $$ = new InstruccionAsignacion(variableArreglo, 0, 0, correlativo++, yylineno);
         };
 
     instruccion_auto_asignacion:
@@ -317,7 +321,7 @@
 
             Variable *var = new Variable($1, suma, yylineno, correlativo);
             Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var, suma->validarSemantica(), correlativo));
-            $$ = new InstruccionAsignacion(var, suma, 0, correlativo++);
+            $$ = new InstruccionAsignacion(var, suma, 0, correlativo++, yylineno);
         }
         |
         T_IDENTIFICADOR     {token_esperado=3;}
@@ -330,7 +334,7 @@
 
             Variable *var = new Variable($1, division, yylineno, correlativo);
             Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var, division->validarSemantica(), correlativo));
-            $$ = new InstruccionAsignacion(var, division, 0, correlativo++);
+            $$ = new InstruccionAsignacion(var, division, 0, correlativo++, yylineno);
         }
         |T_IDENTIFICADOR    {token_esperado=4;}
          T_SIMBOLO_MODULO   {token_esperado=19;}
@@ -342,7 +346,7 @@
 
             Variable *var = new Variable($1, modulo, yylineno, correlativo);
             Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var, modulo->validarSemantica(), correlativo));
-            $$ = new InstruccionAsignacion(var, modulo, 0, correlativo++);
+            $$ = new InstruccionAsignacion(var, modulo, 0, correlativo++, yylineno);
         }
         |T_IDENTIFICADOR    {token_esperado=2;}
          T_MULTIPLICACION   {token_esperado=19;}
@@ -354,7 +358,7 @@
 
             Variable *var = new Variable($1, multiplicacion, yylineno, correlativo);
             Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var, multiplicacion->validarSemantica(), correlativo));
-            $$ = new InstruccionAsignacion(var, multiplicacion, 0, correlativo++);
+            $$ = new InstruccionAsignacion(var, multiplicacion, 0, correlativo++, yylineno);
         }
         |T_IDENTIFICADOR    {token_esperado=1;}
          T_RESTA            {token_esperado=19;}
@@ -366,7 +370,7 @@
 
             Variable *var = new Variable($1, resta, yylineno, correlativo);
             Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var, resta->validarSemantica(), correlativo));
-            $$ = new InstruccionAsignacion(var, resta, 0, correlativo++);
+            $$ = new InstruccionAsignacion(var, resta, 0, correlativo++, yylineno);
         }
         |T_IDENTIFICADOR    {token_esperado=5;}
          T_EXPONENCIACION   {token_esperado=19;}
@@ -378,7 +382,7 @@
 
             Variable *var = new Variable($1, exponenciacion, yylineno, correlativo);
             Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var, exponenciacion->validarSemantica(), correlativo));
-            $$ = new InstruccionAsignacion(var, exponenciacion, 0, correlativo++);
+            $$ = new InstruccionAsignacion(var, exponenciacion, 0, correlativo++, yylineno);
         }
         ;
 
@@ -395,7 +399,7 @@
         T_REPITA
         {
             /* inicio , final , instrucciones , siguiente*/
-            $$ = new InstruccionRepitaDesde($4, $7, $10, 0, correlativo++);
+            $$ = new InstruccionRepitaDesde($4, $7, $10, 0, correlativo++, yylineno);
         };
 
     instruccion_para_cada :
@@ -411,7 +415,7 @@
         T_CADA
         {
             /* variable, coleccion, instrucciones, siguientes */
-            $$ = new InstruccionParaCada($4, $7, $10, 0, correlativo++);
+            $$ = new InstruccionParaCada($4, $7, $10, 0, correlativo++, yylineno);
         };
 
     instruccion_llamada_a_funcion :
@@ -420,19 +424,34 @@
         lista_parametros            {token_esperado=17;}
         T_PARENTESIS_DERECHO
         {
-            $$ = new InstruccionLlamadaAFuncion($1, $4, 0, correlativo++);
+            $$ = new InstruccionLlamadaAFuncion($1, $4, 0, correlativo++, yylineno);
         };
 
     instruccion_retornar :
         T_RETORNAR
         relacionales
         {
-            $$ = new InstruccionRetornar($2, 0, correlativo++);
+            $$ = new InstruccionRetornar($2, 0, correlativo++, yylineno);
         }
         ;
     /******************** Expresiones  ********************/
 
-    relacionales :
+    relacionales:
+        T_RESTA unarios
+        {
+            $$ = new ExpresionUnariaNegativo($2, yylineno);
+        }
+        |T_NO unarios
+        {
+            $$ = new ExpresionUnariaNegacion($2, yylineno);
+        }
+        |unarios
+        {
+            $$ = $1;
+        }
+        ;
+
+    unarios :
         relacionales
         T_MENOR
         expresiones
@@ -558,19 +577,7 @@
         |T_IDENTIFICADOR
         {
             $$ = new Variable($1, yylineno, correlativo++);
-        }
-        |T_PARENTESIS_IZQUIERDO relacionales T_PARENTESIS_DERECHO T_ES tipo_de_dato
-        {
-
         };
-
-    tipo_de_dato:
-        T_ENTERO        { $$=$1; }
-        |T_FLOTANTE     { $$=$1; }
-        |T_CADENA       { $$=$1; }
-        |T_BOOLEANO     { $$=$1; }
-        |T_CARACTER     { $$=$1; }
-        ;
 
     id_variable :
         id_funcion

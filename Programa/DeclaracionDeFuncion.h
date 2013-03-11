@@ -9,7 +9,8 @@
 class DeclaracionDeFuncion
 {
 public:
-    DeclaracionDeFuncion(Variable *variable, Lista *lista_parametros, Instruccion *instrucciones);
+    DeclaracionDeFuncion(Variable *variable, Lista *lista_parametros,
+                         Instruccion *instrucciones, int numeroDeLinea);
     Variable    *obtenerVariable();
     Lista       *obtenerListaParametros();
     Instruccion *obtenerInstruccion();
@@ -24,6 +25,10 @@ private:
     Lista       *lista_parametros;
     Instruccion *instrucciones;
     Tipo* tipoDevolucionFuncion;
+
+    int numeroDeLinea;
+    Tipo* obtenerTipoRetornar(Instruccion* instr);
+    string convertirAEntraFuncLocl(Lista*);
 };
 
 #endif // DECLARACIONDEFUNCION_H

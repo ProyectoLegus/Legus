@@ -6,6 +6,8 @@
 #include <vector>
 #include <fstream>
 #include <map>
+#include <dirent.h>
+#include "TinyXML/tinyxml.h"
 
 #include "Instruccion/Instruccion.h"
 #include "Instruccion/InstruccionLlamadaAFuncion.h"
@@ -32,6 +34,8 @@
 #include "Programa/Tipos/TipoBotonEscape.h"
 #include "Programa/Tipos/TipoBotonIzquierdo.h"
 #include "Programa/FuncionUtilizada.h"
+#include "Programa/Tipos/TipoFuncion.h"
+#include "Expresion/Variables/VariableArreglo.h"
 
 #include "Programa/VariableADeclarar.h"
 #include "Programa/FuncionesIncorporadas.h"
@@ -55,6 +59,15 @@ public:
     vector<DeclaracionUtilizar*>        *tablaDePuertosYSensores;
     vector<VariableDeclarada*>          *tablaDeVariables;
     vector<VariableADeclarar*>          *tablaDeVariablesADeclarar;
+    map<string, string>                 *tablaDeUsoFuncionesXml;
+
+    void actualizarVariableArreglo(VariableArreglo* var);
+
+    // Tablita para variables de parametro
+    vector<VariableDeclarada*>          *tablaVariableFuncsLocales;
+    void eliminarTablaVariablesFuncsLocales();
+    void establecerTablaVariablesFuncsLocales(Lista *parametros, Lista *p2);
+    VariableDeclarada* obtenerVDeclaradaVariablesFuncsLocales(string*);
 
     // Tabla de variables de parametro
     // Ira de la siguienteManera NombreFuncion|CantidadParams
@@ -63,6 +76,7 @@ public:
     map<string, string>                 *FuncionesLocales;
     //vector<string>                      *FuncionesLocales;
 
+    string                  obtenerCodigoSensoresDeclarados();
     string                  obtenerCodigoVariablesADeclarar();
     TipoBooleano*           obtenerTipoBooleano();
     TipoCadena*             obtenerTipoCadena();
@@ -83,6 +97,7 @@ public:
     TipoBotonDerecho*       obtenerTipoBotonDerecho();
     TipoBotonEscape*        obtenerTipoBotonEscape();
     TipoBotonIzquierdo*     obtenerTipoBotonIzquierdo();
+    TipoFuncion*            obtenerTipoFuncion();
 
     VariableDeclarada*    existeVariable(string *identificador, int idDeExpresion);
     DeclaracionUtilizar*  existeEnTablaDePuertosYSensores(string *identificador);
@@ -106,20 +121,27 @@ public:
                                 string bloqueCodigo);
 
     void ingresarATablaDeFuncionesLocales(string nombreFunc, string codigo);
+    void agregarVariableADeclarar(string*, Tipo*, int);
     /*
         Esta funcion ocasiona que el codigo generado
         pueda ser ejecutado en una pc
     */
     void establecerCompilacionParaPc();
+    void establecerCompilacionParaNxt();
     bool obtenerTipoDeCompilacion();
     string obtenerCodigoFunciones();
     string obtenerInclusiones();
+
+    void actualizarVariableADeclarar(string *id, int idExp, Tipo* tipo);
 
     void validarSemantica();
     string obtenerCodigoInstrucciones();
     void generarArchivo(string nombreArchivo);
     string obtenerTipoJavaEnBaseATipo(Tipo* tipo);
+    string obtenerTipoEnBaseATipo(Tipo*);
 
+    bool* existeFuncionEnXmls(string nombrefuncion, Lista *listaParametros);
+    Funcion* funcionEnXml(string archivo, string nombrefuncion, Lista *listaParametros);
 private:
     Programa();
     static Programa* instancia;
@@ -149,6 +171,7 @@ private:
     TipoBotonDerecho        *tipoBotonDerecho;
     TipoBotonEscape         *tipoBotonEscape;
     TipoBotonIzquierdo      *tipoBotonIzquierdo;
+    TipoFuncion             *tipoFuncion;
 
     /*Solo aqui la puedo usar*/
     Tipo* obtenerTipoEnBaseATipoParametro(TipoParametro tipoParam);
@@ -162,9 +185,10 @@ private:
     //Codigo de las funcion en Legus
     map<string, string>                 *codigoDefunciones;
 
-    string obtenerTipoEnBaseATipo(Tipo*);
     string convertirAEntradaEnTabla(string nombreFuncion, Lista *parametros);
     string obtenerFuncionesLocales();
+
+    string obtenerSensorEnJava(string sensor);
 };
 
 #endif // PROGRAMA_H

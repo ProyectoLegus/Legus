@@ -9,6 +9,7 @@
 #include "Instruccion/Instruccion.h"
 #include "Programa/DeclaracionDeFuncion.h"
 #include "Programa/ExcepcionLegus.h"
+#include <QString>
 
 #include "Programa/GeneradorDeErrores.h"
 
@@ -18,17 +19,8 @@ extern int yyparse();
 extern FILE *yyin;
 extern int correlativo;
 
-//#include <QtGui/QApplication>
-//#include "Editor/editor.h"
-
 int main(int argc, char *argv[])
 {
-//    QApplication a(argc, argv);
-//    Editor w;
-//    w.show();
-//    return a.exec();
-
-    // Argumentos!
     /*
         Utilizacion : legus <opciones> <archivoAcompilar>
 
@@ -65,12 +57,14 @@ int main(int argc, char *argv[])
         }
         else
         {
-            if( strcmpi(argv[1], "-n") || strcmpi(argv[1],"--nxt"))
+            if( strcmpi(argv[1], "-n")==0 || strcmpi(argv[1],"--nxt")==0)
             {
+                Programa::obtenerInstancia()->establecerCompilacionParaNxt();
                 nombreArchivo = "nxt.java";
             }
-            else if( strcmpi(argv[1], "-p") || strcmpi(argv[1],"--pc"))
+            else if( strcmpi(argv[1], "-p")==0 || strcmpi(argv[1],"--pc")==0)
             {
+                Programa::obtenerInstancia()->establecerCompilacionParaPc();
                 nombreArchivo = "pc.java";
             }
             else
@@ -86,7 +80,6 @@ int main(int argc, char *argv[])
             if( yyparse() )
             {
                 cout << "Error de analisis" << endl;
-                // Borrar!
                 exit(3);
             }
             else
@@ -106,6 +99,5 @@ int main(int argc, char *argv[])
              << "\nAlrededor de la linea: "
              << linea << endl;
     }
-    system("pause");
     return 0;
 }

@@ -1,7 +1,8 @@
 #include "Instruccion/InstruccionPara.h"
 
-InstruccionPara::InstruccionPara(InstruccionAsignacion *instruccionAsignacion, Expresion *final, Instruccion *instrucciones, Instruccion *siguiente, int idDeExpresion)
-    :Instruccion(siguiente, PARA, idDeExpresion)
+InstruccionPara::InstruccionPara(InstruccionAsignacion *instruccionAsignacion, Expresion *final, Instruccion *instrucciones,
+                                 Instruccion *siguiente, int idDeExpresion, int numeroDeLinea)
+    :Instruccion(siguiente, PARA, idDeExpresion, numeroDeLinea)
 {
     this->instruccionAsignacion = instruccionAsignacion;
     this->final = final;
@@ -16,12 +17,12 @@ void InstruccionPara::validarSemantica()
 
     if( tipoExpresionInicial->tipo != Entero )
     {
-        throw(ExcepcionLegus("Expresion inicial en instruccion 'para' debe evaluar a entero"));
+        throw(ExcepcionLegus("Expresion inicial en instruccion 'para' debe evaluar a entero",numeroDeLinea));
     }
 
     if( tipoExpresionFinal->tipo != Entero)
     {
-        throw(ExcepcionLegus("Expresion final en instruccion 'para' debe evaluar a entero"));
+        throw(ExcepcionLegus("Expresion final en instruccion 'para' debe evaluar a entero",numeroDeLinea));
     }
 
     if( instrucciones != 0)

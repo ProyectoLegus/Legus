@@ -10,7 +10,9 @@
 class InstruccionCaso : public Instruccion
 {
 public:
-    InstruccionCaso(Expresion *expresion, ListaDeCaso *listaDeCaso, Instruccion *instrucciones_sino, Instruccion *siguiente, int idDeExpresion);
+    InstruccionCaso(Expresion *expresion, ListaDeCaso *listaDeCaso,
+                    Instruccion *instrucciones_sino,Instruccion *siguiente,
+                    int idDeExpresion, int numeroDeLinea);
     virtual void validarSemantica();
     virtual string generarCodigoJava();
 

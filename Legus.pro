@@ -95,7 +95,13 @@ SOURCES += main.cpp\
         Programa/Tipos/TipoBotonDerecho.cpp \
         Programa/Tipos/TipoBotonIzquierdo.cpp \
         Programa/Tipos/TipoBotonCentral.cpp \
-        Programa/Tipos/TipoBotonEscape.cpp
+        Programa/Tipos/TipoBotonEscape.cpp \
+        Programa/Tipos/TipoFuncion.cpp \
+    TinyXML/tinyxmlparser.cpp \
+    TinyXML/tinyxmlerror.cpp \
+    TinyXML/tinyxml.cpp \
+    TinyXML/tinystr.cpp
+#        Programa/Tipos/TipoFuncion.cpp
 
 #HEADERS  += Editor/editor.h \
  HEADERS  +=        Bison_Flex/tokens.h \
@@ -177,7 +183,11 @@ SOURCES += main.cpp\
         Programa/Tipos/TipoBotonDerecho.h \
         Programa/Tipos/TipoBotonIzquierdo.h \
         Programa/Tipos/TipoBotonCentral.h \
-        Programa/Tipos/TipoBotonEscape.h
+        Programa/Tipos/TipoBotonEscape.h \
+        Programa/Tipos/TipoFuncion.h \
+    TinyXML/tinyxml.h \
+    TinyXML/tinystr.h
+#        Programa/Tipos/TipoFuncion.h
 
 #FORMS    += Editor/editor.ui
 

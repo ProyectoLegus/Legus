@@ -1,7 +1,9 @@
 #include "Instruccion/InstruccionRetornar.h"
 
-InstruccionRetornar::InstruccionRetornar(Expresion *expresion_de_retorno, Instruccion *siguiente, int idDeExpresion)
-    :Instruccion(siguiente, RETORNAR, idDeExpresion)
+InstruccionRetornar::InstruccionRetornar(Expresion *expresion_de_retorno,
+                                         Instruccion *siguiente, int idDeExpresion,
+                                         int numeroDeLinea)
+    :Instruccion(siguiente, RETORNAR, idDeExpresion, numeroDeLinea)
 {
     this->expresion_de_retorno = expresion_de_retorno;
 }
@@ -15,7 +17,7 @@ void InstruccionRetornar::validarSemantica()
     if(obtenerSiguiente() != 0)
     {
         // Decorar esto mas bonito
-        throw(ExcepcionLegus("No pueden haber instrucciones debajo de la instruccion Retornar"));
+        throw(ExcepcionLegus("No pueden haber instrucciones debajo de la instruccion Retornar",numeroDeLinea));
     }
 }
 

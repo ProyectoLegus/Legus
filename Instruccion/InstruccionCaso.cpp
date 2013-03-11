@@ -1,7 +1,8 @@
 #include "Instruccion/InstruccionCaso.h"
 
-InstruccionCaso::InstruccionCaso(Expresion *expresion, ListaDeCaso *listaDeCaso, Instruccion *instrucciones_sino, Instruccion *siguiente, int idDeExpresion)
-    :Instruccion(siguiente, CASO, idDeExpresion)
+InstruccionCaso::InstruccionCaso(Expresion *expresion, ListaDeCaso *listaDeCaso, Instruccion *instrucciones_sino,
+                                 Instruccion *siguiente, int idDeExpresion, int numeroDeLinea)
+    :Instruccion(siguiente, CASO, idDeExpresion, numeroDeLinea)
 {
     this->expresion = expresion;
     this->listaDeCaso = listaDeCaso;
@@ -22,7 +23,7 @@ void InstruccionCaso::validarSemantica()
         Tipo* tipoVariable = expresion->validarSemantica();
         if( tipoVariable->tipo == Booleano)
         {
-            throw(ExcepcionLegus("Expresion no puede evaluar a 'Booleano' cuando se utiliza una variable en instruccion caso"));
+            throw(ExcepcionLegus("Expresion no puede evaluar a 'Booleano' cuando se utiliza una variable en instruccion caso",numeroDeLinea));
         }
 
         ListaDeCaso *casos = listaDeCaso;
@@ -31,7 +32,7 @@ void InstruccionCaso::validarSemantica()
             Tipo *tipoDelCaso = casos->obtenerExpresion()->validarSemantica();
             if( tipoDelCaso->tipo != tipoVariable->tipo)
             {
-                throw(ExcepcionLegus("En caso expresion debe evaluar a lo mismo que variable"));
+                throw(ExcepcionLegus("En caso expresion debe evaluar a lo mismo que variable",numeroDeLinea));
             }
             if( casos->obtenerInstruccion() != 0)
             {
@@ -53,7 +54,7 @@ void InstruccionCaso::validarSemantica()
             Tipo *tipoDelCaso = casos->obtenerExpresion()->validarSemantica();
             if( tipoDelCaso->tipo != Booleano)
             {
-                throw(ExcepcionLegus("En caso expresion debe evaluar a 'Booleano'"));
+                throw(ExcepcionLegus("En caso expresion debe evaluar a 'Booleano'",numeroDeLinea));
             }
             if( casos->obtenerInstruccion() != 0)
             {

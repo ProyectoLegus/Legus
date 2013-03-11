@@ -49,7 +49,7 @@ Tipo* VariableFuncion::validarSemantica()
         ss << "Funcion '";
         ss << *obtenerIdentificador();
         ss << "' no existe";
-        throw(ExcepcionLegus(""));
+        throw(ExcepcionLegus(ss.str(),numeroDeLinea));
     }
 
     return 0;
@@ -58,7 +58,10 @@ Tipo* VariableFuncion::validarSemantica()
 string VariableFuncion::generarCodigoJava()
 {
     stringstream codigo;
-    codigo << *this->obtenerIdentificador();
+    string id = *this->obtenerIdentificador();
+    transform(id.begin(), id.end(), id.begin(), ::tolower);
+
+    codigo << id;
     codigo << "(";
 
     for( int i = this->lista_parametros->lista->size()-1; i >=0 ; i--)

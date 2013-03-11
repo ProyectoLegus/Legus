@@ -13,8 +13,12 @@
 class InstruccionAsignacion : public Instruccion
 {
 public:
-    InstruccionAsignacion(Expresion *variable, Expresion *expresion, Instruccion *siguiente, int idDeExpresion);
-    InstruccionAsignacion(VariableArreglo *variable, Lista *listaIndices, Instruccion *siguiente, int idDeExpresion);
+    InstruccionAsignacion(Expresion *variable, Expresion *expresion,
+                          Instruccion *siguiente, int idDeExpresion,
+                          int numeroDeLinea);
+    InstruccionAsignacion(VariableArreglo *variable, Lista *listaIndices,
+                          Instruccion *siguiente, int idDeExpresion,
+                          int numeroDeLinea);
     virtual void validarSemantica();
     virtual string generarCodigoJava();
     Expresion*  obtenerVariable();

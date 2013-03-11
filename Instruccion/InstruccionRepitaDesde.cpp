@@ -1,7 +1,8 @@
 #include "Instruccion/InstruccionRepitaDesde.h"
 
-InstruccionRepitaDesde::InstruccionRepitaDesde(Expresion *inicio, Expresion *final, Instruccion *instrucciones, Instruccion *siguiente, int idDeExpresion)
-    :Instruccion(siguiente,REPITADESDE, idDeExpresion)
+InstruccionRepitaDesde::InstruccionRepitaDesde(Expresion *inicio, Expresion *final, Instruccion *instrucciones,
+                                               Instruccion *siguiente, int idDeExpresion, int numeroDeLinea)
+    :Instruccion(siguiente,REPITADESDE, idDeExpresion, numeroDeLinea)
 {
     this->inicio = inicio;
     this->final = final;
@@ -15,12 +16,12 @@ void InstruccionRepitaDesde::validarSemantica()
 
     if( tipoExpresionInicial->tipo != Entero)
     {
-        throw(ExcepcionLegus("Expresion inicial en instruccion 'repita desde' debe evaluar a entero"));
+        throw(ExcepcionLegus("Expresion inicial en instruccion 'repita desde' debe evaluar a entero",numeroDeLinea));
     }
 
     if( tipoExpresionFinal->tipo != Entero)
     {
-        throw(ExcepcionLegus("Expresion final en instruccion 'repita desde' debe evaluar a entero"));
+        throw(ExcepcionLegus("Expresion final en instruccion 'repita desde' debe evaluar a entero",numeroDeLinea));
     }
 
     if( instrucciones != 0)

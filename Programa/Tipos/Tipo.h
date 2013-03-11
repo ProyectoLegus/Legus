@@ -12,7 +12,7 @@ enum Tipos
     SensorDeSonido,SensorGiroscopico,
     SensorDeBrujula,Nulo,
     BotonDerecho, BotonIzquierdo,
-    BotonCentral, BotonEscape
+    BotonCentral, BotonEscape, _Funcion
 };
 
 class Tipo

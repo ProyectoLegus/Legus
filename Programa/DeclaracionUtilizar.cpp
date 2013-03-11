@@ -1,12 +1,22 @@
 #include "Programa/DeclaracionUtilizar.h"
 
-DeclaracionUtilizar::DeclaracionUtilizar(VariablePuerto *puerto, VariableSensor *sensor, VariableSensor *variable)
+DeclaracionUtilizar::DeclaracionUtilizar(VariablePuerto *puerto, VariableSensor *sensor,
+                                         VariableSensor *variable, int numeroDeLinea)
 {
     /*
       Validar que uso correcto puerto y sensor correspondiente,
       que la variable no este siendo utilizada
     */
-    this->codigo = new string();
+    /*True = NXT, False=PC*/
+    this->numeroDeLinea = numeroDeLinea;
+    if( !Programa::obtenerInstancia()->obtenerTipoDeCompilacion() )
+    {
+        throw(ExcepcionLegus("Esta opcion no esta disponible para Legus version PC", numeroDeLinea));
+    }
+
+    this->codigo = "";
+    this->codigoDeclarar = "";
+    //this->codigo = new string();
     if( esPuertoYSensorValido(puerto->obtenerIdentificador(),
                               sensor->obtenerIdentificador(),
                               variable->obtenerIdentificador()))
@@ -43,7 +53,7 @@ bool DeclaracionUtilizar::esPuertoYSensorValido(string *puerto, string *sensor, 
         ss << (*variable);
         ss << "' ";
         ss << " ya esta siendo utilizada";
-        throw(ExcepcionLegus(ss.str()));
+        throw(ExcepcionLegus(ss.str(),numeroDeLinea));
     }
     else
     {
@@ -56,7 +66,7 @@ bool DeclaracionUtilizar::esPuertoYSensorValido(string *puerto, string *sensor, 
             ss << (*puerto);
             ss << "' ";
             ss << " ya esta siendo utilizado";
-            throw(ExcepcionLegus(ss.str()));
+            throw(ExcepcionLegus(ss.str(),numeroDeLinea));
         }
     }
 
@@ -73,8 +83,8 @@ bool DeclaracionUtilizar::esPuertoYSensorValido(string *puerto, string *sensor, 
         if( strcmpi(sensor->c_str(), "Motor")==0 )
         {
             /*Ingresarlo a la tabla de simbolos como Variable TipoMotor*/
-            *codigo+="Motor.";
-            *codigo+=obtenerCaracterDePuerto(puerto);
+            codigo+="Motor.";
+            codigo+=obtenerCaracterDePuerto(puerto);
             this->tipoSensor = Programa::obtenerInstancia()->obtenerTipoMotor();
             return true;
         }
@@ -85,50 +95,59 @@ bool DeclaracionUtilizar::esPuertoYSensorValido(string *puerto, string *sensor, 
        strcmpi(puerto->c_str(), "Puerto3")==0 ||
        strcmpi(puerto->c_str(), "Puerto4")==0)
     {
+        // Nombre Vars $$SensorPuerto#puerto
         if( strcmpi(sensor->c_str(), "SensorUltrasonico")==0)
         {
+            establecerCodigo("UltrasonicSensor",*puerto, *sensor);
             this->tipoSensor = Programa::obtenerInstancia()->obtenerTipoSensorUltrasonico();
             return true;
         }
 
         if(strcmpi(sensor->c_str(), "SensorDeLuz")==0)
         {
+            establecerCodigo("LightSensor",*puerto, *sensor);
             this->tipoSensor = Programa::obtenerInstancia()->obtenerTipoSensorDeLuz();
             return true;
         }
 
         if(strcmpi(sensor->c_str(), "SensorDeColor")==0)
         {
+            establecerCodigo("ColorSensor",*puerto, *sensor);
             this->tipoSensor = Programa::obtenerInstancia()->obtenerTipoSensorDeColor();
             return true;
         }
 
         if(strcmpi(sensor->c_str(), "SensorDeInclinacion")==0)
         {
+            establecerCodigo("TiltSensor",*puerto, *sensor);
             this->tipoSensor = Programa::obtenerInstancia()->obtenerTipoSensorDeInclinacion();
             return true;
         }
 
         if(strcmpi(sensor->c_str(), "SensorDeSonido")==0)
         {
+            establecerCodigo("SoundSensor",*puerto, *sensor);
             this->tipoSensor = Programa::obtenerInstancia()->obtenerTipoSensorDeSonido();
             return true;
         }
 
         if(strcmpi(sensor->c_str(), "SensorGiroscopico")==0)
         {
+            establecerCodigo("GyroSensor",*puerto, *sensor);
             this->tipoSensor = Programa::obtenerInstancia()->obtenerTipoSensorGiroscopico();
             return true;
         }
 
         if(strcmpi(sensor->c_str(), "SensorDeBrujula")==0)
         {
+            establecerCodigo("CompassSensor",*puerto, *sensor);
             this->tipoSensor = Programa::obtenerInstancia()->obtenerTipoSensorDeBrujula();
             return true;
         }
 
         if( strcmpi(sensor->c_str(), "SensorDeTacto")==0 )
         {
+            establecerCodigo("TouchSensor",*puerto, *sensor);
             this->tipoSensor = Programa::obtenerInstancia()->obtenerTipoSensorDeTacto();
             return true;
         }
@@ -141,7 +160,7 @@ bool DeclaracionUtilizar::esPuertoYSensorValido(string *puerto, string *sensor, 
     ss << "en el puerto '";
     ss << (*puerto);
     ss << "'";
-    throw(ExcepcionLegus(ss.str()));
+    throw(ExcepcionLegus(ss.str(),numeroDeLinea));
 }
 
 Tipo* DeclaracionUtilizar::obtenerTipoSensor()
@@ -158,6 +177,14 @@ int DeclaracionUtilizar::obtenerNumeroPuerto(string *puerto)
     return 0;
 }
 
+string DeclaracionUtilizar::obtenerPuertoJava(string *puerto)
+{
+    if(std::string::npos != puerto->find("1"))     {return "SensorPort.S1";}
+    else if(std::string::npos != puerto->find("2")){return "SensorPort.S2";}
+    else if(std::string::npos != puerto->find("3")){return "SensorPort.S3";}
+    else if(std::string::npos != puerto->find("4")){return "SensorPort.S4";}
+}
+
 char DeclaracionUtilizar::obtenerCaracterDePuerto(string *puerto)
 {
     if( std::string::npos != puerto->find("A") ||
@@ -172,7 +199,36 @@ char DeclaracionUtilizar::obtenerCaracterDePuerto(string *puerto)
     return 0;
 }
 
-string* DeclaracionUtilizar::obtenerCodigo()
+string DeclaracionUtilizar::obtenerCodigo()
 {
     return this->codigo;
+}
+
+string DeclaracionUtilizar::establecerCodigo(string tipo, string puerto, string sensor)
+{
+    stringstream ss;
+
+    stringstream CodDeclr;
+    CodDeclr << " $$";
+    CodDeclr << sensor;
+    CodDeclr << obtenerNumeroPuerto(&puerto);
+
+    // Tipo nombreVar = new Tipo( puerto )
+    // nombreVar es $$tipoPuerto
+    ss << "public final static ";
+    ss << tipo;
+    ss << CodDeclr.str();
+    ss << " = new ";
+    ss << tipo;
+    ss << "(";
+    ss << obtenerPuertoJava(&puerto);
+    ss << ");";
+
+    this->codigo = CodDeclr.str();
+    this->codigoDeclarar = ss.str();
+}
+
+string DeclaracionUtilizar::obtenerCodigoDeclarar()
+{
+    return this->codigoDeclarar;
 }

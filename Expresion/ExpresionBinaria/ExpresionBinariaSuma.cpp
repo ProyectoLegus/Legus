@@ -48,6 +48,17 @@ Tipo* ExpresionBinariaSuma::validarSemantica()
         return Programa::obtenerInstancia()->obtenerTipoCadena();
     }
 
+    if((tipoIzquierda->tipo == Entero && tipoDerecha->tipo == Caracter))
+    {
+        this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoEntero();
+        return this->tipoInferido;
+    }
+    if((tipoIzquierda->tipo == Caracter && tipoDerecha->tipo == Entero))
+    {
+        this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoCaracter();
+        return this->tipoInferido;
+    }
+
     /*Cadena + Caracter || Caracter + Cadena*/
     if((tipoIzquierda->tipo == Cadena && tipoDerecha->tipo == Caracter)||
        (tipoIzquierda->tipo == Caracter && tipoDerecha->tipo == Cadena))
@@ -91,10 +102,12 @@ Tipo* ExpresionBinariaSuma::validarSemantica()
                     ss << obtenerTipoEnLenguajeNatural(arreglo->tipoDeDato);
                     ss << "\nno puedes utilizarlo para almacenar ";
                     ss << obtenerTipoEnLenguajeNatural(tipoDerecha);
-                    throw(ExcepcionLegus(ss.str()));
+                    throw(ExcepcionLegus(ss.str(),numeroDeLinea));
                 }
             }
         }
+        // Actualizar el Arreglo ...
+        Programa::obtenerInstancia()->actualizarVariableArreglo(arreglo);
         this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoArreglo();
         return this->tipoInferido;
     }
@@ -121,7 +134,7 @@ Tipo* ExpresionBinariaSuma::validarSemantica()
                     ss << obtenerTipoEnLenguajeNatural(arreglo->tipoDeDato);
                     ss << "\nno puedes utilizarlo para almacenar ";
                     ss << obtenerTipoEnLenguajeNatural(tipoIzquierda);
-                    throw(ExcepcionLegus(ss.str()));
+                    throw(ExcepcionLegus(ss.str(),numeroDeLinea));
                 }
             }
         }
@@ -130,7 +143,7 @@ Tipo* ExpresionBinariaSuma::validarSemantica()
     }
 
     /*Lanzar Error*/
-    throw(ExcepcionLegus("Tipos incompatibles en operacion suma '+' "));
+    throw(ExcepcionLegus("Tipos incompatibles en operacion suma '+' ",numeroDeLinea));
 }
 
 string ExpresionBinariaSuma::generarCodigoJava()

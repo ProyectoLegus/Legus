@@ -1,15 +1,18 @@
 #include "Instruccion/InstruccionAsignacion.h"
 
-InstruccionAsignacion::InstruccionAsignacion(Expresion *variable, Expresion *expresion, Instruccion *siguiente, int idDeExpresion)
-    :Instruccion(siguiente, ASIGNACION, idDeExpresion)
+InstruccionAsignacion::InstruccionAsignacion(Expresion *variable, Expresion *expresion, Instruccion *siguiente,
+                                             int idDeExpresion, int numeroDeLinea)
+    :Instruccion(siguiente, ASIGNACION, idDeExpresion, numeroDeLinea)
 {
     this->variable = variable;
     this->expresion = expresion;
     this->listaIndices = 0;
 }
 
-InstruccionAsignacion::InstruccionAsignacion(VariableArreglo *variable, Lista *listaIndices, Instruccion *siguiente, int idDeExpresion)
-    :Instruccion(siguiente,ASIGNACION, idDeExpresion)
+InstruccionAsignacion::InstruccionAsignacion(VariableArreglo *variable, Lista *listaIndices,
+                                             Instruccion *siguiente, int idDeExpresion,
+                                             int numeroDeLinea)
+    :Instruccion(siguiente,ASIGNACION, idDeExpresion,numeroDeLinea)
 {
     this->variable = variable;
     this->listaIndices = listaIndices;
@@ -26,17 +29,20 @@ void InstruccionAsignacion::validarSemantica()
         /*Que no sea una variable de Utilizar ni nombre de funcion*/
         if( Programa::obtenerInstancia()->existeEnTablaDePuertosYSensores(var->obtenerIdentificador()))
         {
-            throw(ExcepcionLegus("Variable 'ReemplazarPorVariable' esta siendo utilizada en Puerto 'PUERTO' como 'SENSOR'"));
+            throw(ExcepcionLegus("Variable 'ReemplazarPorVariable' esta siendo utilizada en Puerto 'PUERTO' como 'SENSOR'",numeroDeLinea));
         }
 
         if( Programa::obtenerInstancia()->existeEnTablaDeFunciones(var->obtenerIdentificador(), var->obtenerIdDeExpresion()) )
         {
-            throw(ExcepcionLegus("Variable 'ReemplazarPorVariable' esta siendo utilizada en funcion 'FUNCION'"));
+            throw(ExcepcionLegus("Variable 'ReemplazarPorVariable' esta siendo utilizada en funcion 'FUNCION'",numeroDeLinea));
         }
 
         if( expresion != 0)
         {
             var->tipoInferido = this->expresion->validarSemantica();
+            int x = 10;
+            // Actualizar Tabla De Variables A Declarar
+            Programa::obtenerInstancia()->actualizarVariableADeclarar(var->obtenerIdentificador(), var->obtenerIdDeExpresion(), var->tipoInferido);
         }
     }
     else if( variable->tipo == ARREGLO)
@@ -44,12 +50,12 @@ void InstruccionAsignacion::validarSemantica()
         VariableArreglo* var = (VariableArreglo*)variable;
         if( Programa::obtenerInstancia()->existeEnTablaDePuertosYSensores(var->obtenerIdentificador()))
         {
-            throw(ExcepcionLegus("Variable 'ReemplazarPorVariable' esta siendo utilizada en Puerto 'PUERTO' como 'SENSOR'"));
+            throw(ExcepcionLegus("Variable 'ReemplazarPorVariable' esta siendo utilizada en Puerto 'PUERTO' como 'SENSOR'",numeroDeLinea));
         }
 
         if( Programa::obtenerInstancia()->existeEnTablaDeFunciones(var->obtenerIdentificador(), var->obtenerIdDeExpresion()) )
         {
-            throw(ExcepcionLegus("Variable 'ReemplazarPorVariable' esta siendo utilizada en funcion 'FUNCION'"));
+            throw(ExcepcionLegus("Variable 'ReemplazarPorVariable' esta siendo utilizada en funcion 'FUNCION'",numeroDeLinea));
         }
 
         if( expresion != 0)
@@ -90,7 +96,8 @@ string InstruccionAsignacion::generarCodigoJava()
         VariableDeclarada* variableDeclarada = Programa::obtenerInstancia()->existeVariable(var->obtenerIdentificador(), var->obtenerIdDeExpresion());
         if( variableDeclarada == 0 )
         {
-            Programa::obtenerInstancia()->tablaDeVariablesADeclarar->push_back(new VariableADeclarar(var->obtenerIdentificador(),var->validarSemantica(), var->obtenerIdDeExpresion()));
+            //Programa::obtenerInstancia()->tablaDeVariablesADeclarar->push_back(new VariableADeclarar(var->obtenerIdentificador(),var->validarSemantica(), var->obtenerIdDeExpresion()));
+            Programa::obtenerInstancia()->agregarVariableADeclarar(var->obtenerIdentificador(), var->validarSemantica(), var->obtenerIdDeExpresion());
             /*No hay variable*/
             //codigoAsignacion << codigoVariable;
             codigoAsignacion << "$";
@@ -128,7 +135,8 @@ string InstruccionAsignacion::generarCodigoJava()
         }
         else
         {
-            Programa::obtenerInstancia()->tablaDeVariablesADeclarar->push_back(new VariableADeclarar(var->obtenerIdentificador(),var->validarSemantica(), var->obtenerIdDeExpresion()));
+            //Programa::obtenerInstancia()->tablaDeVariablesADeclarar->push_back(new VariableADeclarar(var->obtenerIdentificador(),var->validarSemantica(), var->obtenerIdDeExpresion()));
+            Programa::obtenerInstancia()->agregarVariableADeclarar(var->obtenerIdentificador(), var->validarSemantica(), var->obtenerIdDeExpresion());
             /*Ya existe y el tipo no es igual*/
             //codigoAsignacion << codigoVariable;
             codigoAsignacion << "$";

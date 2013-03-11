@@ -1,7 +1,8 @@
 #include "Programa/DeclaracionDeFuncion.h"
 #include "Instruccion/InstruccionRetornar.h"
 
-DeclaracionDeFuncion::DeclaracionDeFuncion(Variable *variable, Lista *lista_parametros, Instruccion *instrucciones)
+DeclaracionDeFuncion::DeclaracionDeFuncion(Variable *variable, Lista *lista_parametros,
+                                           Instruccion *instrucciones, int numeroDeLinea)
 {
     this->variable = variable;
     this->lista_parametros = lista_parametros;
@@ -16,7 +17,7 @@ DeclaracionDeFuncion::DeclaracionDeFuncion(Variable *variable, Lista *lista_para
         ss << "El nombre '";
         ss << *variable->obtenerIdentificador();
         ss << "' ya esta siendo utilizado por otra funcion";
-        throw(ExcepcionLegus(ss.str()));
+        throw(ExcepcionLegus(ss.str(),numeroDeLinea));
     }
     this->tipoDevolucionFuncion = 0;
 }
@@ -61,10 +62,11 @@ Tipo* DeclaracionDeFuncion::validarSemantica(string *id, Lista *lista_params)
     if( obtenerListaParametros()->lista->size() !=
         lista_params->lista->size())
     {
-        throw(ExcepcionLegus("Error llamada a funcion con mala cantidad de parametros"));
+        throw(ExcepcionLegus("Error llamada a funcion con mala cantidad de parametros",numeroDeLinea));
     }
 
     // actualizar a tabla de funciones locales
+    Programa::obtenerInstancia()->establecerTablaVariablesFuncsLocales(obtenerListaParametros(), lista_params);
     Instruccion *instrucciones = obtenerInstruccion();
     if(instrucciones!=0)
     {
@@ -74,6 +76,9 @@ Tipo* DeclaracionDeFuncion::validarSemantica(string *id, Lista *lista_params)
             instrucciones->obtenerSiguiente()->validarSemantica();
         }
     }
+    // Eliminar Tabla funciones locales
+    Programa::obtenerInstancia()->tablaVariableFuncsLocales = 0;
+
     /*Todo esta bien? ahora revisar que haya por lo menos 1 return
         si hay mas de 1, todos los return deben tener el mismo tipo
     */
@@ -81,13 +86,32 @@ Tipo* DeclaracionDeFuncion::validarSemantica(string *id, Lista *lista_params)
     Tipo* tipoDevolucion = 0;
     while( actual != 0)
     {
+        Tipo* tRet = obtenerTipoRetornar(actual);
+        if(tRet != 0)
+        {
+            if( tipoDevolucion == 0)
+            {
+                tipoDevolucion = tRet;
+            }
+            else
+            {
+                if( tipoDevolucion != tRet)
+                {
+                    stringstream ss;
+                    ss << "En llamada a Funcion '";
+                    ss << *id;
+                    ss << "' las llamadas a la instruccion Retornar deben devolver el mismo tipo.";
+                    throw(ExcepcionLegus(ss.str(),numeroDeLinea));
+                }
+            }
+        }
         /*Debe ser una busqueda recursiva!!!!*/
-        if(actual->obtenerTipo() == RETORNAR)
+        /*if(actual->obtenerTipo() == RETORNAR)
         {
             InstruccionRetornar *instrRet = (InstruccionRetornar*) actual;
             if( tipoDevolucion == 0)
             {
-                /*Es el primer return!*/
+                //*Es el primer return!/
                 tipoDevolucion = instrRet->obtenerTipoDeRetorno();
             }
             else
@@ -101,7 +125,7 @@ Tipo* DeclaracionDeFuncion::validarSemantica(string *id, Lista *lista_params)
                     throw(ExcepcionLegus(ss.str()));
                 }
             }
-        }
+        }*/
         actual = actual->obtenerSiguiente();
     }
     this->tipoDevolucionFuncion = tipoDevolucion;
@@ -112,7 +136,7 @@ Tipo* DeclaracionDeFuncion::validarSemantica(string *id, Lista *lista_params)
     stringstream nombreFunc;
     nombreFunc << *obtenerVariable()->obtenerIdentificador();
     nombreFunc << "|";
-    nombreFunc << lista_params->lista->size();
+    nombreFunc << convertirAEntraFuncLocl(lista_params);
     Programa::obtenerInstancia()->ingresarATablaDeFuncionesLocales(nombreFunc.str(), codigo);
     return this->tipoDevolucionFuncion;
 }
@@ -157,4 +181,42 @@ string DeclaracionDeFuncion::generarCodigoJava(Lista *listaParams)
     codigoFuncion << "\n}\n";
 
     return codigoFuncion.str();
+}
+
+Tipo* DeclaracionDeFuncion::obtenerTipoRetornar(Instruccion *instr)
+{
+    if( instr->obtenerTipo() == RETORNAR)
+    {
+        InstruccionRetornar* instRet = (InstruccionRetornar*)instr;
+        return instRet->obtenerTipoDeRetorno();
+    }
+    else if( instr->obtenerSiguiente() == 0)
+    {
+        return 0;
+    }
+    else
+    {
+        if( instr->obtenerSiguiente() != 0)
+        {
+            return obtenerTipoRetornar(instr->obtenerSiguiente());
+        }
+    }
+}
+
+string DeclaracionDeFuncion::convertirAEntraFuncLocl(Lista *ll)
+{
+    stringstream ss;
+
+    for(int k=ll->lista->size()-1; k>=0; k--)
+    {
+        Expresion *tip = ll->lista->at(k);
+        ss << Programa::obtenerInstancia()->obtenerTipoJavaEnBaseATipo(tip->tipoInferido);
+
+        if( k>0)
+        {
+            ss << ",";
+        }
+    }
+
+    return ss.str();
 }

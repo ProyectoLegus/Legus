@@ -1,7 +1,9 @@
 #include "Instruccion/InstruccionRepetir.h"
 
-InstruccionRepetir::InstruccionRepetir(Expresion *cantidad, Instruccion *instrucciones, Instruccion *siguiente, int idDeExpresion)
-    :Instruccion(siguiente, REPETIR, idDeExpresion)
+InstruccionRepetir::InstruccionRepetir(Expresion *cantidad, Instruccion *instrucciones,
+                                       Instruccion *siguiente, int idDeExpresion,
+                                       int numeroDeLinea)
+    :Instruccion(siguiente, REPETIR, idDeExpresion,numeroDeLinea)
 {
     this->cantidad = cantidad;
     this->instrucciones = instrucciones;
@@ -17,7 +19,7 @@ void InstruccionRepetir::validarSemantica()
 
         if( tipoCantidad->tipo != Entero )
         {
-            throw(ExcepcionLegus("Expresion en instruccion 'repetir' debe evaluar a entero"));
+            throw(ExcepcionLegus("Expresion en instruccion 'repetir' debe evaluar a entero",numeroDeLinea));
         }
     }
     else

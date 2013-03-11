@@ -9,7 +9,9 @@
 class InstruccionSi : public Instruccion
 {
 public:
-    InstruccionSi(Expresion *condicion, Instruccion *instruccionesSiVerdadero, Instruccion *instruccionesSiFalso, Instruccion *instruccionSiAnidado, Instruccion *siguiente, int idDeExpresion);
+    InstruccionSi(Expresion *condicion, Instruccion *instruccionesSiVerdadero,
+                  Instruccion *instruccionesSiFalso, Instruccion *instruccionSiAnidado,
+                  Instruccion *siguiente, int idDeExpresion, int numeroDeLinea);
     virtual void validarSemantica();
     virtual string generarCodigoJava();
 

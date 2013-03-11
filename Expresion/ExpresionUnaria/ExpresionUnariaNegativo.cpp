@@ -21,7 +21,7 @@ Tipo* ExpresionUnariaNegativo::validarSemantica()
         return Programa::obtenerInstancia()->obtenerTipoFlotante();
     }
 
-    throw(ExcepcionLegus("Tipos incompatibles en operacion unaria negativo '-' "));
+    throw(ExcepcionLegus("Tipos incompatibles en operacion unaria negativo '-' ",numeroDeLinea));
 }
 
 string ExpresionUnariaNegativo::generarCodigoJava()

@@ -7,6 +7,7 @@ Variable::Variable(string *identificador, int numeroDeLinea, int idDeExpresion, 
     this->identificador = identificador;
     this->idDeExpresion = idDeExpresion;
     this->expresion = 0;
+    this->dclr = 0;
 }
 
 Variable::Variable(string *identificador,Expresion *expresion ,int numeroDeLinea, int idDeExpresion, Expresiones tipo)
@@ -35,6 +36,29 @@ Tipo* Variable::validarSemantica()
     {
         expresion->validarSemantica();
     }
+    // Revisar si es un boton
+    if( strcmpi(obtenerIdentificador()->c_str(),"BotonDerecho") == 0)
+    {
+        this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoBotonDerecho();
+        return this->tipoInferido;
+    }
+    else if( strcmpi(obtenerIdentificador()->c_str(), "BotonIzquierdo")==0)
+    {
+        this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoBotonIzquierdo();
+        return this->tipoInferido;
+    }
+    else if( strcmpi(obtenerIdentificador()->c_str(), "BotonCentral")==0)
+    {
+        this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoBotonCentral();
+        return this->tipoInferido;
+    }
+    else if( strcmpi(obtenerIdentificador()->c_str(), "BotonEscape")==0)
+    {
+        this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoBotonEscape();
+        return this->tipoInferido;
+    }
+
+
     /*Buscar si es variable de sensor y devolver su tipo*/
     vector<DeclaracionUtilizar*> *tablaDePuertosYSensores = Programa::obtenerInstancia()->tablaDePuertosYSensores;
     for(unsigned int i = 0; i< tablaDePuertosYSensores->size(); i++)
@@ -52,10 +76,12 @@ Tipo* Variable::validarSemantica()
         DeclaracionDeFuncion *declaracion = tablaDeFunciones->at(i);
         if( this->identificador->compare(*declaracion->obtenerVariable()->obtenerIdentificador())==0)
         {
-            stringstream ss;
-            ss << "Variable '" << *declaracion->obtenerVariable()->obtenerIdentificador() << "' ";
-            ss << "esta siendo como nombre de funcion";
-            throw(ExcepcionLegus(ss.str()));
+            this->tipoInferido = Programa::obtenerInstancia()->obtenerTipoFuncion();
+            return this->tipoInferido;
+//            stringstream ss;
+//            ss << "Variable '" << *declaracion->obtenerVariable()->obtenerIdentificador() << "' ";
+//            ss << "esta siendo como nombre de funcion";
+//            throw(ExcepcionLegus(ss.str()));
         }
     }
 
@@ -67,10 +93,30 @@ Tipo* Variable::validarSemantica()
         return tipoDeVariable;
     }
 
-    string mensajeDeError = "¡Variable '";
-    mensajeDeError += *this->identificador;
-    mensajeDeError += "' no esta definida!";
-    throw(ExcepcionLegus(mensajeDeError,numeroDeLinea));
+    if( Programa::obtenerInstancia()->tablaVariableFuncsLocales != 0)
+    {
+        // Exito !
+        VariableDeclarada *dc = Programa::obtenerInstancia()->obtenerVDeclaradaVariablesFuncsLocales(obtenerIdentificador());
+        if( dc != 0)
+        {
+            dclr = dc;
+            this->tipoInferido = dc->obtenerTipo();
+            return this->tipoInferido;
+        }
+    }
+
+    if( dclr == 0)
+    {
+        string mensajeDeError = "¡Variable '";
+        mensajeDeError += *this->identificador;
+        mensajeDeError += "' no esta definida!";
+        throw(ExcepcionLegus(mensajeDeError,numeroDeLinea));
+    }
+    else
+    {
+        this->tipoInferido = dclr->obtenerTipo();
+        return this->tipoInferido;
+    }
 }
 
 Tipo* Variable::obtenerTipoDeVariable()
@@ -100,33 +146,7 @@ string Variable::generarCodigoJava()
 
     if( expresion != 0 )
     {
-        Tipo* tipoVariable = expresion->validarSemantica();
-/*
-        if( tipoVariable->tipo == Entero )
-        {
-            codigoVariable << "int ";
-        }
-
-        if( tipoVariable->tipo == Flotante )
-        {
-            codigoVariable << "float ";
-        }
-
-        if( tipoVariable->tipo == Caracter)
-        {
-            codigoVariable << "char ";
-        }
-
-        if( tipoVariable->tipo == Cadena)
-        {
-            codigoVariable << "String ";
-        }
-
-        if( tipoVariable->tipo == Booleano )
-        {
-            codigoVariable << "boolean ";
-        }
-        */
+//        Tipo* tipoVariable = expresion->validarSemantica();
     }
     else
     {
@@ -144,10 +164,39 @@ string Variable::generarCodigoJava()
             DeclaracionUtilizar *util = Programa::obtenerInstancia()->existeEnTablaDePuertosYSensores(obtenerIdentificador());
             if( util != 0)
             {
-                codigoVariable << *util->obtenerCodigo();
+                codigoVariable << util->obtenerCodigo();
+            }
+            else
+            {
+                if( this->dclr != 0)
+                {
+                    // La que tengo local, debe ser en funcion que estoy
+                    codigoVariable << *this->dclr->obtenerVariable()->obtenerIdentificador();
+                }
+                else
+                {
+                    // No se como hacer aqui:!
+                }
             }
         }
     }
+    if( strcmpi(obtenerIdentificador()->c_str(),"BotonDerecho") == 0)
+    {
+        codigoVariable << "Button.RIGHT";
+    }
+    else if( strcmpi(obtenerIdentificador()->c_str(), "BotonIzquierdo")==0)
+    {
+        codigoVariable << "Button.LEFT";
+    }
+    else if( strcmpi(obtenerIdentificador()->c_str(), "BotonCentral")==0)
+    {
+        codigoVariable << "Button.ENTER";
+    }
+    else if( strcmpi(obtenerIdentificador()->c_str(), "BotonEscape")==0)
+    {
+        codigoVariable << "Button.ESCAPE";
+    }
+
     return codigoVariable.str();
 }
 
@@ -155,3 +204,4 @@ void Variable::establecerIdDeExpresion(int idDeExpresion)
 {
     this->idDeExpresion = idDeExpresion;
 }
+

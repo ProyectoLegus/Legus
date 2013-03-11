@@ -36,3 +36,13 @@ void VariableDeclarada::establecerIdDeExpresion(int idDeExpresion)
 {
     this->idDeExpresion = idDeExpresion;
 }
+
+void VariableDeclarada::establecerVariable(Variable *var)
+{
+    this->variable = var;
+}
+
+void VariableDeclarada::establecerTipoDeExpresion(Tipo *tipoInf)
+{
+    this->tipoInferido = tipoInf;
+}

@@ -33,7 +33,7 @@ Tipo* ExpresionBinariaDivision::validarSemantica()
         return Programa::obtenerInstancia()->obtenerTipoFlotante();
     }
 
-    throw(ExcepcionLegus("Tipos incompatibles en operacion division / ", numeroDeLinea));
+    throw(ExcepcionLegus("Tipos incompatibles en operacion division '/' ", numeroDeLinea));
 }
 
 string ExpresionBinariaDivision::generarCodigoJava()

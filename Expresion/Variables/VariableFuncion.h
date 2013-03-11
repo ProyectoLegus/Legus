@@ -12,7 +12,8 @@ using namespace std;
 class VariableFuncion : public Variable
 {
 public:
-    VariableFuncion(string *identificador, Lista *lista_parametros, int numeroDeLinea, int idDeExpresion);
+    VariableFuncion(string *identificador, Lista *lista_parametros,
+                    int numeroDeLinea, int idDeExpresion);
     Lista* obtenerListaParametros();
     virtual Tipo* validarSemantica();
     virtual string generarCodigoJava();

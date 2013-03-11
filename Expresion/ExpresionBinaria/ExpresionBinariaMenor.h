@@ -7,7 +7,8 @@
 class ExpresionBinariaMenor : public ExpresionBinaria
 {
 public:
-    ExpresionBinariaMenor(Expresion *izquierda, Expresion *derecha, int numeroDeLinea);
+    ExpresionBinariaMenor(Expresion *izquierda, Expresion *derecha,
+                          int numeroDeLinea);
     virtual Tipo* validarSemantica();
     virtual string generarCodigoJava();
 

@@ -10,8 +10,11 @@ Programa::Programa()
     this->tablaDeVariablesADeclarar = new vector<VariableADeclarar*>();
 
     this->tablaDeUsoDeFunciones = new map<string, Funcion*>();
+    this->tablaDeUsoFuncionesXml = new map<string, string>();
     this->FuncionesLocales = new map<string, string>();
     this->codigoDefunciones = 0;
+
+    this->tablaVariableFuncsLocales = 0;
     compilarParaNxt = true;
 
     /*Instancia de los tipos*/
@@ -34,6 +37,7 @@ Programa::Programa()
     this->tipoBotonDerecho = new TipoBotonDerecho();
     this->tipoBotonEscape = new TipoBotonEscape();
     this->tipoBotonIzquierdo = new TipoBotonIzquierdo();
+    this->tipoFuncion = new TipoFuncion();
 }
 
 Programa* Programa::obtenerInstancia()
@@ -41,8 +45,8 @@ Programa* Programa::obtenerInstancia()
     if(!instancia)
     {
         instancia = new Programa();
-        instancia->cargarFuncionesIncorporadas();
-        instancia->cargarCodigoFunciones();
+//        instancia->cargarFuncionesIncorporadas();
+  //      instancia->cargarCodigoFunciones();
     }
     return instancia;
 }
@@ -120,6 +124,31 @@ TipoSensorGiroscopico* Programa::obtenerTipoSensorGiroscopico()
 TipoSensorUltrasonico* Programa::obtenerTipoSensorUltrasonico()
 {
     return this->tipoSensorUltrasonico;
+}
+
+TipoBotonCentral* Programa::obtenerTipoBotonCentral()
+{
+    return this->tipoBotonCentral;
+}
+
+TipoBotonDerecho* Programa::obtenerTipoBotonDerecho()
+{
+    return this->tipoBotonDerecho;
+}
+
+TipoBotonIzquierdo* Programa::obtenerTipoBotonIzquierdo()
+{
+    return this->tipoBotonIzquierdo;
+}
+
+TipoBotonEscape* Programa::obtenerTipoBotonEscape()
+{
+    return this->tipoBotonEscape;
+}
+
+TipoFuncion*    Programa::obtenerTipoFuncion()
+{
+    return this->tipoFuncion;
 }
 
 VariableDeclarada* Programa::existeVariable(string *identificador, int idDeExpresion)
@@ -231,6 +260,25 @@ void  Programa::establecerIdDeExpresionAVariable(int idExpresion, int idExpresio
     }
 }
 
+void Programa::agregarVariableADeclarar(string *id, Tipo *t, int idExp)
+{
+    bool existe = false;
+    for(unsigned int i = 0; i<this->tablaDeVariablesADeclarar->size(); i++)
+    {
+        VariableADeclarar *variable = this->tablaDeVariablesADeclarar->at(i);
+        if(idExp == variable->id && t->tipo == variable->tipo->tipo)
+        {
+            existe = true;
+            break;
+        }
+    }
+
+    if( !existe )
+    {
+        this->tablaDeVariablesADeclarar->push_back(new VariableADeclarar(id, t, idExp));
+    }
+}
+
 void Programa::limpiarInstancia()
 {
     this->instancia = 0;
@@ -273,7 +321,7 @@ string Programa::obtenerCodigoVariablesADeclarar()
 
         if( tipoVariable->tipo == Entero )
         {
-            resultado << "int ";
+            resultado << "public static int ";
             resultado << "$";
             resultado << variable->id;
             resultado << *variable->variable;
@@ -282,7 +330,7 @@ string Programa::obtenerCodigoVariablesADeclarar()
 
         if( tipoVariable->tipo == Flotante )
         {
-            resultado << "float ";
+            resultado << "public static float ";
             resultado << "$";
             resultado << variable->id;
             resultado << *variable->variable;
@@ -291,7 +339,7 @@ string Programa::obtenerCodigoVariablesADeclarar()
 
         if( tipoVariable->tipo == Caracter)
         {
-            resultado << "char ";
+            resultado << "public static char ";
             resultado << "$";
             resultado << variable->id;
             resultado << *variable->variable;
@@ -300,7 +348,7 @@ string Programa::obtenerCodigoVariablesADeclarar()
 
         if( tipoVariable->tipo == Cadena)
         {
-            resultado << "String ";
+            resultado << "public static String ";
             resultado << "$";
             resultado << variable->id;
             resultado << *variable->variable;
@@ -309,7 +357,7 @@ string Programa::obtenerCodigoVariablesADeclarar()
 
         if( tipoVariable->tipo == Booleano )
         {
-            resultado << "boolean ";
+            resultado << "public static boolean ";
             resultado << "$";
             resultado << variable->id;
             resultado << *variable->variable;
@@ -345,20 +393,34 @@ string Programa::obtenerCodigoFuente(string nombreArchivo,
     codigoFuente << "public class ";
     codigoFuente << nombreArchivo;
     codigoFuente << "{\n";
-
+        // Agregar Sensores Declarados
+        codigoFuente << obtenerCodigoSensoresDeclarados();
+        codigoFuente << obtenerCodigoVariablesADeclarar();
         codigoFuente << funcsIncorporadas;
         codigoFuente << "\n";
         codigoFuente << declaracionFunciones;
 
         codigoFuente << "public static void main(String args[])";
         codigoFuente << "{\n";
-            codigoFuente << obtenerCodigoVariablesADeclarar();
             codigoFuente << bloqueCodigo;
             codigoFuente << "\n";
         codigoFuente << "}\n";
     codigoFuente << "}\n";
 
     return codigoFuente.str();
+}
+
+string Programa::obtenerCodigoSensoresDeclarados()
+{
+    stringstream ss;
+    // El nombreSera $$sensor#Puerto
+    for(int i=0; i<tablaDePuertosYSensores->size(); i++)
+    {
+        DeclaracionUtilizar *utilizar = tablaDePuertosYSensores->at(i);
+        ss << utilizar->obtenerCodigoDeclarar();
+        ss << "\n";
+    }
+    return ss.str();
 }
 
 Funcion* Programa::existeFuncionIncorporada(string nombreFuncion, Lista *parametros)
@@ -477,6 +539,7 @@ string Programa::obtenerTipoEnBaseATipo(Tipo *tipo)
     else if(tipo==tipoBotonDerecho)         return "boton_derecho";
     else if(tipo==tipoBotonEscape)          return "boton_escape";
     else if(tipo==tipoBotonIzquierdo)       return "boton_izquierdo";
+    else if(tipo==tipoFuncion)              return "funcion";
     return "";
 }
 
@@ -599,6 +662,35 @@ void Programa::generarArchivo(string nombreArchivo)
     archivo.close();
 }
 
+void Programa::actualizarVariableArreglo(VariableArreglo *var)
+{
+    vector<VariableDeclarada*> *variables = tablaDeVariables;
+    VariableDeclarada* ultimaVariable = 0;
+
+    for(unsigned int i = 0 ; i< variables->size(); i++)
+    {
+        VariableDeclarada* variable = variables->at(i);
+        /*mismo identificador y que posea un idDeExpresion menor al mio*/
+
+        if( variable->obtenerVariable()->obtenerIdentificador()->compare( *var->obtenerIdentificador() ) == 0 )
+        {
+            ultimaVariable = variable;
+        }
+    }
+
+    if(ultimaVariable != 0)
+    {
+        if( ultimaVariable->obtenerTipo()!=0)
+        {
+            if( ultimaVariable->obtenerTipo()->tipo == Arreglo)
+            {
+                ultimaVariable->establecerVariable(var);
+            }
+        }
+    }
+
+}
+
 string Programa::obtenerFuncionesLocales()
 {
     stringstream str;
@@ -620,6 +712,10 @@ void Programa::ingresarATablaDeFuncionesLocales(string nombreFunc, string codigo
         // no existe ingresarlo
         (*FuncionesLocales)[nombreFunc] = codigo;
     }
+    else
+    {
+        // Existe.. ¬¬ tenes que agregarlo, o cambia el formato de la llave
+    }
 }
 
 string Programa::obtenerCodigoInstrucciones()
@@ -637,7 +733,150 @@ string Programa::obtenerCodigoInstrucciones()
 
 string Programa::obtenerInclusiones()
 {
-    return "import lejos.nxt.*;\n"
-           "import lejos.util.*;\n"
-           "import java.util.ArrayList;\n";
+    stringstream ss;
+    if(compilarParaNxt)
+    {
+        ss << "import lejos.nxt.*;\n";
+        ss << "import lejos.util.*;\n";
+        ss << "import java.util.ArrayList;\n";
+        ss << "import java.lang.*;\n";
+    }
+    else
+    {
+        ss << "import java.util.*;\n";
+    }
+
+    return ss.str();
+}
+
+void Programa::eliminarTablaVariablesFuncsLocales()
+{
+    delete tablaVariableFuncsLocales;
+    tablaVariableFuncsLocales = 0;
+}
+
+void Programa::establecerTablaVariablesFuncsLocales(Lista *parametros, Lista* p2)
+{
+    tablaVariableFuncsLocales = new vector<VariableDeclarada*>();
+    for(int i=0; i<parametros->lista->size();i++)
+    {
+        Variable* var = (Variable*)parametros->lista->at(i);
+        Expresion *t = p2->lista->at(i);
+        tablaVariableFuncsLocales->push_back(new VariableDeclarada(var,t->tipoInferido, 0));
+    }
+}
+
+VariableDeclarada* Programa::obtenerVDeclaradaVariablesFuncsLocales(string *id)
+{
+    for(int i=0; i<this->tablaVariableFuncsLocales->size(); i++)
+    {
+        VariableDeclarada* dclr = tablaVariableFuncsLocales->at(i);
+        if(strcmpi(dclr->obtenerVariable()->obtenerIdentificador()->c_str(),id->c_str())==0)
+        {
+            return dclr;
+        }
+    }
+    return 0;
+}
+
+void Programa::establecerCompilacionParaPc()
+{
+    this->compilarParaNxt = false;
+    instancia->cargarFuncionesIncorporadas();
+    instancia->cargarCodigoFunciones();
+}
+
+void Programa::establecerCompilacionParaNxt()
+{
+    this->compilarParaNxt = true;
+    instancia->cargarFuncionesIncorporadas();
+    instancia->cargarCodigoFunciones();
+}
+
+void Programa::actualizarVariableADeclarar(string *id, int idExp, Tipo *tipo)
+{
+    for(int i=0; i<this->tablaDeVariables->size(); i++)
+    {
+        VariableDeclarada* declr = this->tablaDeVariables->at(i);
+        if( strcmpi( declr->obtenerVariable()->obtenerIdentificador()->c_str(), id->c_str())==0 &&
+            idExp == declr->obtenerIdDeExpresion())
+        {
+            declr->establecerTipoDeExpresion(tipo);
+        }
+        (*tablaDeVariables)[i] = declr;
+    }
+    int x = 0;
+    int s = x + 10;
+}
+
+Funcion* Programa::existeFuncionEnXmls(string nombrefuncion, Lista *listaParametros)
+{
+    DIR *dir;
+    struct dirent *ent;
+    if ((dir = opendir ("xml/")) != NULL)
+    {
+      while ((ent = readdir (dir)) != NULL)
+      {
+          if(strcmp(ent->d_name,".")!=0 && strcmp(ent->d_name,"..")!=0)
+          {
+             string archivo = "xml/";
+             archivo += ent->d_name;
+             Funcion *fun = funcionEnXml(archivo);
+             if( fun != 0)
+             {
+                 // ingresar a tabla de uso funciones xml
+                 break;
+             }
+          }
+      }
+      closedir (dir);
+    }
+    else
+    {
+        // Guardar estos mensajes en un log
+    }
+}
+
+Funcion* Programa::funcionEnXml(string archivo, string nombrefuncion,
+                                Lista *listaParametros)
+{
+    Funcion *resultado = 0;
+    TiXmlDocument doc(archivo);
+
+    if(!doc.LoadFile()){cout << "error";return;}
+
+    TiXmlHandle hDoc(&doc);
+
+    TiXmlElement *raiz = doc.FirstChildElement();
+    TiXmlElement *func, *params, *param, *codigo;
+    if(raiz)
+    {
+        func = raiz->FirstChildElement("funcion");
+        while(func)
+        {
+            if( strcmpi(nombrefuncion.c_str(), func->Attribute("nombre"))==0 )
+            {
+                cout << func->Value() << endl;
+
+                // solo deberia haber 1
+                params = func->FirstChildElement("parametros");
+
+                // varios parametros
+                param = params->FirstChildElement("parametro");
+                while(param)
+                {
+                    param = param->NextSiblingElement("parametro");
+                }
+
+                // solo deberia haber 1
+                codigo = func->FirstChildElement("codigo");
+            }
+            func = func->NextSiblingElement("funcion");
+        }
+    }
+    else
+    {
+        // Log
+    }
+    return resultado;
 }

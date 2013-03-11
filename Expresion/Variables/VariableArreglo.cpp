@@ -33,7 +33,7 @@ Tipo* VariableArreglo::validarSemantica()
         ss << "Error, variable '";
         ss << *obtenerIdentificador();
         ss << "' no esta definida";
-        throw(ExcepcionLegus(ss.str()));
+        throw(ExcepcionLegus(ss.str(),numeroDeLinea));
     }
     else
     {
@@ -46,7 +46,7 @@ Tipo* VariableArreglo::validarSemantica()
             {
                 if( li->lista->size() != this->lista_indices->lista->size() )
                 {
-                    throw( ExcepcionLegus("Arreglo no coincide con declaracion") );
+                    throw( ExcepcionLegus("Arreglo no coincide con declaracion",numeroDeLinea) );
                 }
             }
             else

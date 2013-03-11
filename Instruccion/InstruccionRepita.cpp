@@ -1,7 +1,8 @@
 #include "Instruccion/InstruccionRepita.h"
 
-InstruccionRepita::InstruccionRepita(Expresion *condicion, Instruccion *siguiente, int idDeExpresion)
-    :Instruccion(siguiente, REPITA, idDeExpresion)
+InstruccionRepita::InstruccionRepita(Expresion *condicion, Instruccion *siguiente,
+                                     int idDeExpresion, int numeroDeLinea)
+    :Instruccion(siguiente, REPITA, idDeExpresion, numeroDeLinea)
 {
     this->condicion = condicion;
 }
@@ -12,7 +13,7 @@ void InstruccionRepita::validarSemantica()
 
     if( tipoCondicion->tipo != Booleano )
     {
-        throw(ExcepcionLegus("Expresion en instruccion 'repita' debe evaluar a booleano"));
+        throw(ExcepcionLegus("Expresion en instruccion 'repita' debe evaluar a booleano",numeroDeLinea));
     }
 
 }

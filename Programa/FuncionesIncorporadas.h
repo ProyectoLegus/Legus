@@ -10,7 +10,7 @@ enum TipoParametro
     TSensorDeInclinacion, TSensorDeSonido,
     TSensorGiroscopico, TSensorDeBrujula,
     TBotonDerecho, TBotonIzquierdo, TBotonCentral,
-    TBotonEscape
+    TBotonEscape,_TFuncion
 };
 
 #include <iostream>
@@ -18,7 +18,9 @@ enum TipoParametro
 #include <map>
 #include <stdio.h>
 #include "stdarg.h"
+#include "dirent.h"
 
+#include "TinyXML/tinyxml.h"
 #include "Bison_Flex/Lista.h"
 #include "Programa/Programa.h"
 #include "Programa/Tipos/Tipo.h"

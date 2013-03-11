@@ -82,11 +82,6 @@ CARACTER            "'"."'"
     "verdadero"         { GUARDAR_TOKEN(T_VERDADERO);}
     "falso"             { GUARDAR_TOKEN(T_FALSO);}
     "hasta"             { GUARDAR_TOKEN(T_HASTA);}
-    "entero"            { GUARDAR_TOKEN(T_ENTERO);}
-    "cadena"            { GUARDAR_TOKEN(T_CADENA);}
-    "booleano"          { GUARDAR_TOKEN(T_BOOLEANO);}
-    "caracter"          { GUARDAR_TOKEN(T_CARACTER);}
-    "flotante"          { GUARDAR_TOKEN(T_FLOTANTE);}
     "es"                { GUARDAR_TOKEN(T_ES);}
 
     {ID}                { GUARDAR_TOKEN(T_IDENTIFICADOR);}

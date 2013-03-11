@@ -1,7 +1,8 @@
 #include "Instruccion/InstruccionMientras.h"
 
-InstruccionMientras::InstruccionMientras(Expresion *condicion, Instruccion *instrucciones, Instruccion *siguiente, int idDeExpresion)
-    :Instruccion(siguiente, MIENTRAS, idDeExpresion)
+InstruccionMientras::InstruccionMientras(Expresion *condicion, Instruccion *instrucciones,
+                                         Instruccion *siguiente, int idDeExpresion, int numeroDeLinea)
+    :Instruccion(siguiente, MIENTRAS, idDeExpresion, numeroDeLinea)
 {
     this->condicion = condicion;
     this->instrucciones = instrucciones;
@@ -13,7 +14,7 @@ void InstruccionMientras::validarSemantica()
 
     if( tipoExpresion != Programa::obtenerInstancia()->obtenerTipoBooleano() )
     {
-        throw(ExcepcionLegus("La expresion de la instruccion 'mientras' debe evaluar a booleano"));
+        throw(ExcepcionLegus("La expresion de la instruccion 'mientras' debe evaluar a booleano",numeroDeLinea));
     }
 
     if( instrucciones != 0)

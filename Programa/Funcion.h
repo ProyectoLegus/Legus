@@ -14,6 +14,7 @@ class Funcion
 {
 public:
     Funcion(Tipo* tipoDeRetorno, vector<TipoParametro>* parametros);
+    Funcion(Tipo* tipoDeRetorno, vector<TipoParametro>* parametros, string *codigo);
     Tipo* tipoDeRetorno;
     vector<TipoParametro>* parametros;
     string *codigo;
