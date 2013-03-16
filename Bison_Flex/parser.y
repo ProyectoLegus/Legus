@@ -437,13 +437,13 @@
     /******************** Expresiones  ********************/
 
     relacionales:
-        T_RESTA unarios
+        T_RESTA expresiones
         {
             $$ = new ExpresionUnariaNegativo($2, yylineno);
         }
-        |T_NO unarios
+        |T_NO T_PARENTESIS_IZQUIERDO unarios T_PARENTESIS_DERECHO
         {
-            $$ = new ExpresionUnariaNegacion($2, yylineno);
+            $$ = new ExpresionUnariaNegacion($3, yylineno);
         }
         |unarios
         {

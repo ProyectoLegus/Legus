@@ -80,6 +80,7 @@ int main(int argc, char *argv[])
             if( yyparse() )
             {
                 cout << "Error de analisis" << endl;
+                system("pause");
                 exit(3);
             }
             else
@@ -99,5 +100,6 @@ int main(int argc, char *argv[])
              << "\nAlrededor de la linea: "
              << linea << endl;
     }
+    system("pause");
     return 0;
 }

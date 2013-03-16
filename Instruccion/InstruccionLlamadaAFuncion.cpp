@@ -44,7 +44,13 @@ void InstruccionLlamadaAFuncion::validarSemantica()
     }
 
     /*No esta ni en locales ni built-in, buscarlo en xml*/
-    bool agregado = Programa::obtenerInstancia()->existeFuncionEnXmls(*this->identificador);
+
+    Tipo *agregado = Programa::obtenerInstancia()->existeFuncionEnXmls(*this->identificador,this->lista_parametros);
+
+    if( agregado )
+    {
+        encontrado = true;
+    }
 
     if( !encontrado )
     {

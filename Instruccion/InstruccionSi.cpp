@@ -71,9 +71,9 @@ string InstruccionSi::generarCodigoJava()
     if( this->instruccionesSiFalso != 0)
     {
         codigoInstruccionSi << "else" << "\n{\n";
-        codigoInstruccionSi << this->instruccionesSiFalso->generarCodigoJava();
+        //codigoInstruccionSi << this->instruccionesSiFalso->generarCodigoJava();
 
-        if( this->instruccionSiAnidado != 0 )
+        if( this->instruccionesSiFalso!= 0 )
         {
             codigoInstruccionSi << instruccionesSiFalso->generarCodigoJava();
             if( instruccionesSiFalso->obtenerSiguiente() != 0)

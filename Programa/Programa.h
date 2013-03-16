@@ -140,8 +140,10 @@ public:
     string obtenerTipoJavaEnBaseATipo(Tipo* tipo);
     string obtenerTipoEnBaseATipo(Tipo*);
 
-    bool* existeFuncionEnXmls(string nombrefuncion, Lista *listaParametros);
+    Tipo* existeFuncionEnXmls(string nombrefuncion, Lista *listaParametros);
     Funcion* funcionEnXml(string archivo, string nombrefuncion, Lista *listaParametros);
+    void establecerBusquedaEnFuncionesXml(bool valor);
+
 private:
     Programa();
     static Programa* instancia;
@@ -150,6 +152,7 @@ private:
         false -> compilar PC
     */
     bool compilarParaNxt;
+    bool puedoBuscarEnFuncionesXml;
 
     /*Una sola instancia para los Tipos*/
     TipoBooleano            *tipoBooleano;
@@ -176,6 +179,9 @@ private:
     /*Solo aqui la puedo usar*/
     Tipo* obtenerTipoEnBaseATipoParametro(TipoParametro tipoParam);
 
+    Tipo* obtenerTipoEnBaseTipoEnXml(const char* texto);
+    vector<TipoParametro>*              obtenerVectorTipoParametro(vector<Tipo*> *);
+    TipoParametro                       parametroEnBaseATipo(Tipo*);
     //Funciones incorporadas que legus soporta, ver FuncionIncorporadas.cpp
     map<string, Funcion*>               *funcionesIncorporadas;
 
@@ -187,6 +193,7 @@ private:
 
     string convertirAEntradaEnTabla(string nombreFuncion, Lista *parametros);
     string obtenerFuncionesLocales();
+    string obtenerFuncionesXml();
 
     string obtenerSensorEnJava(string sensor);
 };

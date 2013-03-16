@@ -102,50 +102,43 @@ bool DeclaracionUtilizar::esPuertoYSensorValido(string *puerto, string *sensor, 
             this->tipoSensor = Programa::obtenerInstancia()->obtenerTipoSensorUltrasonico();
             return true;
         }
-
-        if(strcmpi(sensor->c_str(), "SensorDeLuz")==0)
-        {
-            establecerCodigo("LightSensor",*puerto, *sensor);
-            this->tipoSensor = Programa::obtenerInstancia()->obtenerTipoSensorDeLuz();
-            return true;
-        }
-
-        if(strcmpi(sensor->c_str(), "SensorDeColor")==0)
-        {
-            establecerCodigo("ColorSensor",*puerto, *sensor);
-            this->tipoSensor = Programa::obtenerInstancia()->obtenerTipoSensorDeColor();
-            return true;
-        }
-
-        if(strcmpi(sensor->c_str(), "SensorDeInclinacion")==0)
-        {
-            establecerCodigo("TiltSensor",*puerto, *sensor);
-            this->tipoSensor = Programa::obtenerInstancia()->obtenerTipoSensorDeInclinacion();
-            return true;
-        }
-
-        if(strcmpi(sensor->c_str(), "SensorDeSonido")==0)
-        {
-            establecerCodigo("SoundSensor",*puerto, *sensor);
-            this->tipoSensor = Programa::obtenerInstancia()->obtenerTipoSensorDeSonido();
-            return true;
-        }
-
-        if(strcmpi(sensor->c_str(), "SensorGiroscopico")==0)
+        else if(strcmpi(sensor->c_str(), "SensorGiroscopico")==0)
         {
             establecerCodigo("GyroSensor",*puerto, *sensor);
             this->tipoSensor = Programa::obtenerInstancia()->obtenerTipoSensorGiroscopico();
             return true;
         }
-
-        if(strcmpi(sensor->c_str(), "SensorDeBrujula")==0)
+        else if(strcmpi(sensor->c_str(), "SensorDeLuz")==0)
+        {
+            this->tipoSensor = Programa::obtenerInstancia()->obtenerTipoSensorDeLuz();
+            establecerCodigo("LightSensor",*puerto, *sensor);
+            return true;
+        }
+        else if(strcmpi(sensor->c_str(), "SensorDeColor")==0)
+        {
+            establecerCodigo("ColorSensor",*puerto, *sensor);
+            this->tipoSensor = Programa::obtenerInstancia()->obtenerTipoSensorDeColor();
+            return true;
+        }
+        else if(strcmpi(sensor->c_str(), "SensorDeInclinacion")==0)
+        {
+            establecerCodigo("TiltSensor",*puerto, *sensor);
+            this->tipoSensor = Programa::obtenerInstancia()->obtenerTipoSensorDeInclinacion();
+            return true;
+        }
+        else if(strcmpi(sensor->c_str(), "SensorDeSonido")==0)
+        {
+            establecerCodigo("SoundSensor",*puerto, *sensor);
+            this->tipoSensor = Programa::obtenerInstancia()->obtenerTipoSensorDeSonido();
+            return true;
+        }
+        else if(strcmpi(sensor->c_str(), "SensorDeBrujula")==0)
         {
             establecerCodigo("CompassSensor",*puerto, *sensor);
             this->tipoSensor = Programa::obtenerInstancia()->obtenerTipoSensorDeBrujula();
             return true;
         }
-
-        if( strcmpi(sensor->c_str(), "SensorDeTacto")==0 )
+        else if( strcmpi(sensor->c_str(), "SensorDeTacto")==0 )
         {
             establecerCodigo("TouchSensor",*puerto, *sensor);
             this->tipoSensor = Programa::obtenerInstancia()->obtenerTipoSensorDeTacto();
@@ -204,7 +197,7 @@ string DeclaracionUtilizar::obtenerCodigo()
     return this->codigo;
 }
 
-string DeclaracionUtilizar::establecerCodigo(string tipo, string puerto, string sensor)
+void DeclaracionUtilizar::establecerCodigo(string tipo, string puerto, string sensor)
 {
     stringstream ss;
 

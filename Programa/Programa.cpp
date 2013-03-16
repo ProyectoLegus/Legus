@@ -16,6 +16,7 @@ Programa::Programa()
 
     this->tablaVariableFuncsLocales = 0;
     compilarParaNxt = true;
+    puedoBuscarEnFuncionesXml = true;
 
     /*Instancia de los tipos*/
     this->tipoBooleano = new TipoBooleano();
@@ -395,12 +396,13 @@ string Programa::obtenerCodigoFuente(string nombreArchivo,
     codigoFuente << "{\n";
         // Agregar Sensores Declarados
         codigoFuente << obtenerCodigoSensoresDeclarados();
+        codigoFuente << obtenerFuncionesXml();
         codigoFuente << obtenerCodigoVariablesADeclarar();
         codigoFuente << funcsIncorporadas;
         codigoFuente << "\n";
         codigoFuente << declaracionFunciones;
 
-        codigoFuente << "public static void main(String args[])";
+        codigoFuente << "public static void main(String args[]) throws Exception";
         codigoFuente << "{\n";
             codigoFuente << bloqueCodigo;
             codigoFuente << "\n";
@@ -705,6 +707,21 @@ string Programa::obtenerFuncionesLocales()
     return str.str();
 }
 
+string Programa::obtenerFuncionesXml()
+{
+    stringstream str;
+    map<string, string>::iterator it;
+    for(it = tablaDeUsoFuncionesXml->begin();
+        it != tablaDeUsoFuncionesXml->end();
+        it++)
+    {
+        string codigo = (*it).second;
+        str << codigo;
+        str << "\n";
+    }
+    return str.str();
+}
+
 void Programa::ingresarATablaDeFuncionesLocales(string nombreFunc, string codigo)
 {
     if( FuncionesLocales->find(nombreFunc) == FuncionesLocales->end() )
@@ -809,7 +826,7 @@ void Programa::actualizarVariableADeclarar(string *id, int idExp, Tipo *tipo)
     int s = x + 10;
 }
 
-Funcion* Programa::existeFuncionEnXmls(string nombrefuncion, Lista *listaParametros)
+Tipo* Programa::existeFuncionEnXmls(string nombrefuncion, Lista *listaParametros)
 {
     DIR *dir;
     struct dirent *ent;
@@ -821,11 +838,15 @@ Funcion* Programa::existeFuncionEnXmls(string nombrefuncion, Lista *listaParamet
           {
              string archivo = "xml/";
              archivo += ent->d_name;
-             Funcion *fun = funcionEnXml(archivo);
+             Funcion *fun = funcionEnXml(archivo,nombrefuncion,listaParametros);
              if( fun != 0)
              {
-                 // ingresar a tabla de uso funciones xml
-                 break;
+                // ingresar a tabla de uso funciones xml
+                if( this->tablaDeUsoFuncionesXml->find(nombrefuncion) == this->tablaDeUsoFuncionesXml->end())
+                {
+                    (*tablaDeUsoFuncionesXml)[nombrefuncion] = *fun->codigo;
+                }
+                return fun->tipoDeRetorno;
              }
           }
       }
@@ -835,20 +856,22 @@ Funcion* Programa::existeFuncionEnXmls(string nombrefuncion, Lista *listaParamet
     {
         // Guardar estos mensajes en un log
     }
+    return false;
 }
 
 Funcion* Programa::funcionEnXml(string archivo, string nombrefuncion,
                                 Lista *listaParametros)
 {
     Funcion *resultado = 0;
-    TiXmlDocument doc(archivo);
+    TiXmlDocument doc(archivo.c_str());
 
-    if(!doc.LoadFile()){cout << "error";return;}
+    if(!doc.LoadFile()){cout << "error";return 0;}
 
     TiXmlHandle hDoc(&doc);
 
     TiXmlElement *raiz = doc.FirstChildElement();
     TiXmlElement *func, *params, *param, *codigo;
+    string *cod;
     if(raiz)
     {
         func = raiz->FirstChildElement("funcion");
@@ -856,20 +879,54 @@ Funcion* Programa::funcionEnXml(string archivo, string nombrefuncion,
         {
             if( strcmpi(nombrefuncion.c_str(), func->Attribute("nombre"))==0 )
             {
-                cout << func->Value() << endl;
+                Tipo* tipoRetorno = obtenerTipoEnBaseTipoEnXml(func->Attribute("retorna"));
 
+                //cout << func->Value() << endl;
                 // solo deberia haber 1
                 params = func->FirstChildElement("parametros");
-
                 // varios parametros
+                bool encaja = false;
                 param = params->FirstChildElement("parametro");
+
+                int indice = listaParametros->lista->size() - 1;
+                vector<Tipo*> *vP = new vector<Tipo*>();
                 while(param)
                 {
+                    vP->push_back( obtenerTipoEnBaseTipoEnXml(param->Attribute("tipo")) );
                     param = param->NextSiblingElement("parametro");
+                }
+
+                if( vP->size() == listaParametros->lista->size())
+                {
+                    int j = 0;
+                    bool coincide = true;
+                    for(int i=listaParametros->lista->size()-1; i>=0; i--)
+                    {
+                        Expresion *expr = listaParametros->lista->at(i);
+                        if(expr->tipoInferido != vP->at(j) )
+                        {
+                            coincide = false;
+                            break;
+                        }
+                        j++;
+                    }
+                    if(coincide)
+                    {
+                        encaja = true;
+                    }
                 }
 
                 // solo deberia haber 1
                 codigo = func->FirstChildElement("codigo");
+                if( encaja )
+                {
+                    cod = new string();
+                    (*cod) = "";
+                    stringstream sss;
+                    sss << codigo->GetText();
+                    (*cod) += sss.str();
+                    return new Funcion(tipoRetorno,obtenerVectorTipoParametro(vP),cod);
+                }
             }
             func = func->NextSiblingElement("funcion");
         }
@@ -880,3 +937,61 @@ Funcion* Programa::funcionEnXml(string archivo, string nombrefuncion,
     }
     return resultado;
 }
+
+void Programa::establecerBusquedaEnFuncionesXml(bool valor)
+{
+    this->puedoBuscarEnFuncionesXml = valor;
+}
+
+Tipo* Programa::obtenerTipoEnBaseTipoEnXml(const char *texto)
+{
+    if( strcmpi(texto,"entero")==0)
+    {
+        return tipoEntero;
+    }
+    else if( strcmpi(texto,"cadena")==0)
+    {
+        return tipoCadena;
+    }
+    else if( strcmpi(texto,"caracter")==0)
+    {
+        return tipoCaracter;
+    }
+    else if( strcmpi(texto,"flotante")==0)
+    {
+        return tipoFlotante;
+    }
+    else if( strcmpi(texto,"booleano")==0)
+    {
+        return tipoBooleano;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+vector<TipoParametro>* Programa::obtenerVectorTipoParametro(vector<Tipo *> *v)
+{
+    vector<TipoParametro>* vv = new vector<TipoParametro>();
+    for(int i=0; i<v->size(); i++)
+    {
+        vv->push_back(parametroEnBaseATipo(v->at(i)));
+    }
+    return vv;
+}
+
+TipoParametro Programa::parametroEnBaseATipo(Tipo *t)
+{
+    if( t == tipoBooleano)
+    {return TBooleano;}
+    if( t == tipoEntero)
+    {return TEntero;}
+    if( t == tipoFlotante)
+    {return TFlotante;}
+    if( t == tipoCadena)
+    {return TCadena;}
+    if( t == tipoCaracter)
+    {return TCaracter;}
+}
+

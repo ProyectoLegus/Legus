@@ -32,7 +32,7 @@ private:
     int   obtenerNumeroPuerto(string *puerto);
     char  obtenerCaracterDePuerto(string *puerto);
     string obtenerPuertoJava(string *puerto);
-    string establecerCodigo(string tipo, string puerto, string sensor);
+    void establecerCodigo(string tipo, string puerto, string sensor);
 };
 
 #endif // DECLARACIONUTILIZAR_H

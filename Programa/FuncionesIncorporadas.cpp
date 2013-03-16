@@ -84,6 +84,7 @@ map<string, Funcion*>* FuncionesIncorporadas::obtenerFuncionesIncorporadas()
 
         /*Sensor de Luz*/
         (*funcionesIncorporadas)["obtener_luz|luz"] = new Funcion( obtenerTipo(TEntero), obtenerVectorParametros(1, TSensorDeLuz)) ;
+        (*funcionesIncorporadas)["establecer_inundacion|luz,booleano"] = new Funcion( obtenerTipo(TEntero), obtenerVectorParametros(2, TSensorDeLuz, TBooleano) );
 
         /*Sensor de Color*/
         /*Sensor de Inclinacion*/
@@ -123,7 +124,8 @@ map<string, Funcion*>* FuncionesIncorporadas::obtenerFuncionesIncorporadas()
         (*funcionesIncorporadas)["salir"] = new Funcion(0, obtenerVectorParametros(0));
 
         // sonido!
-        (*funcionesIncorporadas)["reproducir_tono|entero,entero"] = new Funcion(0, obtenerVectorParametros(2, TEntero, TEntero));
+        (*funcionesIncorporadas)["tono|entero,entero"] = new Funcion(0, obtenerVectorParametros(2, TEntero, TEntero));
+        (*funcionesIncorporadas)["tono|entero,entero,entero"] = new Funcion(0, obtenerVectorParametros(3, TEntero, TEntero, TEntero));
     }
 
     /*Extras!*/
@@ -132,7 +134,7 @@ map<string, Funcion*>* FuncionesIncorporadas::obtenerFuncionesIncorporadas()
     (*funcionesIncorporadas)["numero_aleatorio|entero,entero"] = new Funcion( obtenerTipo(TEntero), obtenerVectorParametros(2, TEntero, TEntero) );
 
     // Delay
-    (*funcionesIncorporadas)["esperar|entero"] = new Funcion( 0, obtenerVectorParametros(1, TEntero) );
+    //(*funcionesIncorporadas)["esperar|entero"] = new Funcion( 0, obtenerVectorParametros(1, TEntero) );
     (*funcionesIncorporadas)["obtener_cantidad|arreglo"] = new Funcion( obtenerTipo(TEntero),obtenerVectorParametros(1, TArreglo) );
 
     return funcionesIncorporadas;
@@ -262,7 +264,8 @@ map<string, string>* FuncionesIncorporadas::obtenerCodigoFunciones()
         (*codigo)["esta_presionado|tacto"] = "";
 
         //Luz
-        (*codigo)["obtener_luz|luz"] = "";
+        (*codigo)["obtener_luz|luz"] = "public static int obtener_luz(LightSensor s){return s.readValue();}";
+        (*codigo)["establecer_inundacion|luz,booleano"] = "public static void establecer_inundacion(LightSensor s, boolean b){s.setFloodlight(b);}";
 
         //Botones LCD
 
@@ -283,6 +286,7 @@ map<string, string>* FuncionesIncorporadas::obtenerCodigoFunciones()
         (*codigo)["esperar_presion_liberacion|boton_izquierdo"] = "public static void esperar_presion_liberacion(Button b){b.waitForPressAndRelease();}";
         (*codigo)["esperar_presion_liberacion|boton_central"] = "public static void esperar_presion_liberacion(Button b){b.waitForPressAndRelease();}";
         (*codigo)["esperar_presion_liberacion|boton_escape"] = "public static void esperar_presion_liberacion(Button b){b.waitForPressAndRelease();}";
+
         (*codigo)["esperar|entero"] = "public static void esperar(int t){Delay.msDelay(t);}";
 
         // Eventos, falta ver como van a funcionar
@@ -291,7 +295,8 @@ map<string, string>* FuncionesIncorporadas::obtenerCodigoFunciones()
         (*codigo)["cuando_se_presione|boton_central"] = "Button.ENTER.addButtonListener(new ButtonListener(){public void buttonPressed(Button b) {$$_REEMPLAZAR_POR_CODIGO_$$}});";
         (*codigo)["cuando_se_presione|boton_escape"] = "Button.ESCAPE.addButtonListener(new ButtonListener(){public void buttonPressed(Button b) {$$_REEMPLAZAR_POR_CODIGO_$$}});";
 
-        (*codigo)["reproducir_tono|entero,entero"] = "public static void reproducir_tono(int a,int b){Sound.playTone(a,b);}";
+        (*codigo)["tono|entero,entero"] = "public static void tono(int a,int b){Sound.playTone(a,b);}";
+        (*codigo)["tono|entero,entero,entero"] = "public static void tono(int a,int b,int t){Sound.playTone(a,b);Delay.msDelay(t);}";
         (*codigo)["salir"] = "public static void salir(){System.exit(0);}";
     }
     else
@@ -301,7 +306,7 @@ map<string, string>* FuncionesIncorporadas::obtenerCodigoFunciones()
     //Utilidades
     (*codigo)["numero_aleatorio|entero"] = "public static int numero_aleatorio(int m){return new Random().nextInt(m);}";
     (*codigo)["numero_aleatorio|entero,entero"] = "public static int numero_aleatorio(int m,int x){if(m==x){return m;}int l=m<x?m:x;int b=m>x?m:x;return (new Random().nextInt(b-l))+l;}";
-    (*codigo)["esperar|entero"] = "public static void retrasar_programa(int t){Delay.msDelay(t);}";
+    //(*codigo)["esperar|entero"] = "public static void retrasar_programa(int t){Delay.msDelay(t);}";
 
     (*codigo)["obtener_cantidad|arreglo"] = "public static int obtener_cantidad(ArrayList<Object> a){return a.size();}";
     return codigo;
