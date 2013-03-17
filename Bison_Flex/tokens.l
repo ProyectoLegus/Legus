@@ -66,7 +66,7 @@ CARACTER            "'"."'"
     "haga"              { GUARDAR_TOKEN(T_HAGA);}
     "ejecute"           { GUARDAR_TOKEN(T_EJECUTE);}
     "repetir"           { GUARDAR_TOKEN(T_REPETIR);}
-    "infinitas"         { GUARDAR_TOKEN(T_INFINITAS);}
+    "infinitamente"         { GUARDAR_TOKEN(T_INFINITAS);}
     "veces"             { GUARDAR_TOKEN(T_VECES);}
     "para"              { GUARDAR_TOKEN(T_PARA);}
     "desde"             { GUARDAR_TOKEN(T_DESDE);}

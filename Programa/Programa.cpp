@@ -676,11 +676,12 @@ void Programa::actualizarVariableArreglo(VariableArreglo *var)
 
         if( variable->obtenerVariable()->obtenerIdentificador()->compare( *var->obtenerIdentificador() ) == 0 )
         {
-            ultimaVariable = variable;
+            variable->establecerVariable(var);
+            //ultimaVariable = variable;
         }
     }
 
-    if(ultimaVariable != 0)
+    /*if(ultimaVariable != 0)
     {
         if( ultimaVariable->obtenerTipo()!=0)
         {
@@ -689,7 +690,7 @@ void Programa::actualizarVariableArreglo(VariableArreglo *var)
                 ultimaVariable->establecerVariable(var);
             }
         }
-    }
+    }*/
 
 }
 

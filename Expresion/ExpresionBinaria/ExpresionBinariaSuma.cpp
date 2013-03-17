@@ -88,7 +88,8 @@ Tipo* ExpresionBinariaSuma::validarSemantica()
         {
             if( arreglo->tipoDeDato == 0)
             {
-                arreglo->tipoDeDato = (tipoDerecha);
+                arreglo->tipoDeDato = tipoDerecha;
+                arreglo->establecerTipoInferido(tipoDerecha);
             }
             else
             {
@@ -120,7 +121,8 @@ Tipo* ExpresionBinariaSuma::validarSemantica()
         {
             if( arreglo->tipoDeDato == 0)
             {
-                arreglo->tipoDeDato = (tipoIzquierda);
+                arreglo->tipoDeDato = tipoIzquierda;
+                arreglo->establecerTipoInferido(tipoIzquierda);
             }
             else
             {

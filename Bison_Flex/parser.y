@@ -270,14 +270,13 @@
         }
         |
         T_REPETIR
-        T_INFINITAS             {token_esperado=41;}
-        T_VECES
+        T_INFINITAS
         instrucciones           {token_esperado=33;}
         T_FIN                   {token_esperado=39;}
         T_REPETIR
         {
             /*Cantidad, instrucciones, siguiente*/
-            $$ = new InstruccionRepetir(0, $5, 0, correlativo++, yylineno);
+            $$ = new InstruccionRepetir(0, $3, 0, correlativo++, yylineno);
         };
 
     instruccion_asignacion :
@@ -289,8 +288,8 @@
             /* SI relacionales devuelve una variable arreglo?*/
 
             Variable *var = new Variable($1, $3, yylineno, correlativo);
-            //Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var,$3->validarSemantica(), correlativo));
-            Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var,Programa::obtenerInstancia()->obtenerTipoEntero(), correlativo));
+            Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var,$3->validarSemantica(), correlativo));
+            //Programa::obtenerInstancia()->tablaDeVariables->push_back(new VariableDeclarada(var,Programa::obtenerInstancia()->obtenerTipoEntero(), correlativo));
             $$ = new InstruccionAsignacion(var, $3, 0, correlativo++, yylineno);
         }
         |id_arreglo         {token_esperado=19;}
@@ -298,7 +297,8 @@
          relacionales
         {
             /*Variable, Expresion, siguiente*/
-            $$ = new InstruccionAsignacion($1, $4, 0, correlativo++, yylineno);
+            //$$ = new InstruccionAsignacion($1, $4, 0, correlativo++, yylineno);
+            $$ = new InstruccionAsignacionArreglo((VariableArreglo*)$1, $4,0,correlativo++, yylineno);
         }
         |T_IDENTIFICADOR
          T_SIMBOLO_IGUAL

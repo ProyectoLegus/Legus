@@ -15,6 +15,9 @@ enum TOKENS
 
 /* Expresiones */
 
+#include "ExpresionArreglo.h"
+#include "InstruccionAsignacionArreglo.h"
+
 /*Expresion Binaria*/
 #include "Expresion/ExpresionBinaria/ExpresionBinariaDistinto.h"
 #include "Expresion/ExpresionBinaria/ExpresionBinariaDivision.h"

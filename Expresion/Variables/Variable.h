@@ -25,6 +25,7 @@ public:
     int     obtenerIdDeExpresion();
     virtual string generarCodigoJava();
     void establecerIdDeExpresion(int idDeExpresion);
+    void establecerTipoInferido(Tipo* tipo);
 
 private:
     string *identificador;

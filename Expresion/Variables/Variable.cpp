@@ -205,3 +205,7 @@ void Variable::establecerIdDeExpresion(int idDeExpresion)
     this->idDeExpresion = idDeExpresion;
 }
 
+void Variable::establecerTipoInferido(Tipo *tipo)
+{
+    this->tipoInferido = tipo;
+}

@@ -100,7 +100,9 @@ SOURCES += main.cpp\
     TinyXML/tinyxmlparser.cpp \
     TinyXML/tinyxmlerror.cpp \
     TinyXML/tinyxml.cpp \
-    TinyXML/tinystr.cpp
+    TinyXML/tinystr.cpp \
+    ExpresionArreglo.cpp \
+    InstruccionAsignacionArreglo.cpp
 #        Programa/Tipos/TipoFuncion.cpp
 
 #HEADERS  += Editor/editor.h \
@@ -186,7 +188,9 @@ SOURCES += main.cpp\
         Programa/Tipos/TipoBotonEscape.h \
         Programa/Tipos/TipoFuncion.h \
     TinyXML/tinyxml.h \
-    TinyXML/tinystr.h
+    TinyXML/tinystr.h \
+    ExpresionArreglo.h \
+    InstruccionAsignacionArreglo.h
 #        Programa/Tipos/TipoFuncion.h
 
 #FORMS    += Editor/editor.ui

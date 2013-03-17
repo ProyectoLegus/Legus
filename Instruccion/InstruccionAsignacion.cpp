@@ -1,4 +1,5 @@
 #include "Instruccion/InstruccionAsignacion.h"
+#include "ExpresionArreglo.h"
 
 InstruccionAsignacion::InstruccionAsignacion(Expresion *variable, Expresion *expresion, Instruccion *siguiente,
                                              int idDeExpresion, int numeroDeLinea)
@@ -16,7 +17,7 @@ InstruccionAsignacion::InstruccionAsignacion(VariableArreglo *variable, Lista *l
 {
     this->variable = variable;
     this->listaIndices = listaIndices;
-    this->expresion = 0;
+    this->expresion = new ExpresionArreglo(numeroDeLinea);
 }
 
 void InstruccionAsignacion::validarSemantica()
@@ -40,7 +41,6 @@ void InstruccionAsignacion::validarSemantica()
         if( expresion != 0)
         {
             var->tipoInferido = this->expresion->validarSemantica();
-            int x = 10;
             // Actualizar Tabla De Variables A Declarar
             Programa::obtenerInstancia()->actualizarVariableADeclarar(var->obtenerIdentificador(), var->obtenerIdDeExpresion(), var->tipoInferido);
         }
@@ -60,7 +60,8 @@ void InstruccionAsignacion::validarSemantica()
 
         if( expresion != 0)
         {
-            this->expresion->validarSemantica();
+            var->tipoInferido = this->expresion->validarSemantica();
+            Programa::obtenerInstancia()->actualizarVariableADeclarar(var->obtenerIdentificador(), var->obtenerIdDeExpresion(), var->tipoInferido);
         }
     }
 
@@ -82,7 +83,8 @@ Expresion* InstruccionAsignacion::obtenerVariable()
 
 string InstruccionAsignacion::generarCodigoJava()
 {
-    /*Caso, buscar nombre de variable
+    /*
+    Caso, buscar nombre de variable
         1. si ya existe verificar que la expresion reduzca al mismo tipo en que esta declarado
         2. si no existe declarar la variable.
     */
