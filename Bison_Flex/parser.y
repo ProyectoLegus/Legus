@@ -26,6 +26,7 @@
         variable para mostrar un mensaje acorde.
     */
     int token_esperado = -1;
+
     /*Over 9000!*/
     int correlativo = 9001;
     int correlativoExtra =0;
@@ -428,8 +429,7 @@
         };
 
     instruccion_retornar :
-        T_RETORNAR
-        relacionales
+        T_RETORNAR relacionales
         {
             $$ = new InstruccionRetornar($2, 0, correlativo++, yylineno);
         }
@@ -470,20 +470,15 @@
         {
             $$ = new ExpresionBinariaMayorIgual($1, $3, yylineno);
         }
-        |relacionales
-         T_MENOR_IGUAL
-         expresiones
+        |relacionales T_MENOR_IGUAL expresiones
         {
             $$ = new ExpresionBinariaMenorIgual($1, $3, yylineno);
         }
-        |relacionales
-         T_IGUALDAD
-         expresiones
+        |relacionales T_IGUALDAD expresiones
         {
             $$ = new ExpresionBinariaIgualdad($1, $3, yylineno);
         }
-        |relacionales
-         T_DESIGUALDAD
+        |relacionales T_DESIGUALDAD
          expresiones
         {
             $$ = new ExpresionBinariaDistinto($1, $3, yylineno);
@@ -495,25 +490,25 @@
 
     expresiones :
         expresiones
-        T_SUMA
+            T_SUMA
         factores
         {
             $$ = new ExpresionBinariaSuma($1, $3, yylineno);
         }
         |expresiones
-         T_RESTA
+            T_RESTA
          factores
         {
             $$ = new ExpresionBinariaResta($1, $3, yylineno);
         }
         |expresiones
-         T_OPERADOR_O
+            T_OPERADOR_O
          factores
         {
             $$ = new ExpresionBinariaO($1, $3, yylineno);
         }
         |expresiones
-         T_SIMBOLO_OPERADOR_O
+            T_SIMBOLO_OPERADOR_O
          factores
         {
             $$ = new ExpresionBinariaO($1, $3, yylineno);
@@ -525,31 +520,31 @@
 
     factores :
         factores
-        T_MULTIPLICACION
+            T_MULTIPLICACION
         terminales
         {
             $$ = new ExpresionBinariaMultiplicacion($1, $3, yylineno);
         }
         |factores
-         T_DIVISION
+            T_DIVISION
          terminales
         {
             $$ = new ExpresionBinariaDivision($1, $3, yylineno);
         }
         |factores
-         T_OPERADOR_Y
+            T_OPERADOR_Y
          terminales
         {
             $$ = new ExpresionBinariaY($1, $3, yylineno);
         }
         |factores
-         T_SIMBOLO_OPERADOR_Y
+            T_SIMBOLO_OPERADOR_Y
          terminales
         {
             $$ = new ExpresionBinariaY($1, $3, yylineno);
         }
         |factores
-         T_SIMBOLO_MODULO
+            T_SIMBOLO_MODULO
          terminales
         {
             $$ = new ExpresionBinariaModulo($1, $3, yylineno);
@@ -561,7 +556,7 @@
 
     terminales :
         T_PARENTESIS_IZQUIERDO
-        relacionales
+            relacionales
         T_PARENTESIS_DERECHO
         {
             $$ = $2;
@@ -705,18 +700,14 @@
             $5->establecerSiguiente(new ListaDeCaso($2, $4, 0) );
             $$ = $5;
          }
-        |T_DOS_PUNTOS
-         relacionales
-         T_DOS_PUNTOS
-         instrucciones
+        |T_DOS_PUNTOS relacionales T_DOS_PUNTOS instrucciones
         {
             /*Parametros, Expresion, Instruccion, Siguiente*/
             $$ = new ListaDeCaso($2, $4, 0);
         };
 
     sino_caso :
-        T_SINO
-        instrucciones
+        T_SINO instrucciones
         {
             $$ = $2;
         }
