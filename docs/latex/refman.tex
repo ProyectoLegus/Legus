@@ -1,0 +1,181 @@
+\documentclass{book}
+\usepackage[a4paper,top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm]{geometry}
+\usepackage{makeidx}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{ifthen}
+\usepackage[table]{xcolor}
+\usepackage{textcomp}
+\usepackage{alltt}
+\usepackage{ifpdf}
+\ifpdf
+\usepackage[pdftex,
+            pagebackref=true,
+            colorlinks=true,
+            linkcolor=blue,
+            unicode
+           ]{hyperref}
+\else
+\usepackage[ps2pdf,
+            pagebackref=true,
+            colorlinks=true,
+            linkcolor=blue,
+            unicode
+           ]{hyperref}
+\usepackage{pspicture}
+\fi
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{mathptmx}
+\usepackage[scaled=.90]{helvet}
+\usepackage{courier}
+\usepackage{sectsty}
+\usepackage{amssymb}
+\usepackage[titles]{tocloft}
+\usepackage{doxygen}
+\lstset{language=C++,inputencoding=utf8,basicstyle=\footnotesize,breaklines=true,breakatwhitespace=true,tabsize=4,numbers=left }
+\makeindex
+\setcounter{tocdepth}{3}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\familydefault}{\sfdefault}
+\hfuzz=15pt
+\setlength{\emergencystretch}{15pt}
+\hbadness=750
+\tolerance=750
+\begin{document}
+\hypersetup{pageanchor=false,citecolor=blue}
+\begin{titlepage}
+\vspace*{7cm}
+\begin{center}
+{\Large Legus }\\
+\vspace*{1cm}
+{\large Generado por Doxygen 1.8.3.1}\\
+\vspace*{0.5cm}
+{\small Viernes, 29 de Marzo de 2013 11:29:00}\\
+\end{center}
+\end{titlepage}
+\clearemptydoublepage
+\pagenumbering{roman}
+\tableofcontents
+\clearemptydoublepage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true,citecolor=blue}
+\chapter{Lista de obsoletos}
+\label{deprecated}
+\hypertarget{deprecated}{}
+\input{deprecated}
+\chapter{Indice jerárquico}
+\input{hierarchy}
+\chapter{Índice de clases}
+\input{annotated}
+\chapter{Documentación de las clases}
+\input{class_declaracion_de_funcion}
+\input{class_declaracion_utilizar}
+\input{class_editor}
+\input{class_entrada_simbolo}
+\input{class_excepcion_legus}
+\input{class_expresion}
+\input{class_expresion_arreglo}
+\input{class_expresion_binaria}
+\input{class_expresion_binaria_distinto}
+\input{class_expresion_binaria_division}
+\input{class_expresion_binaria_division_entera}
+\input{class_expresion_binaria_exponenciacion}
+\input{class_expresion_binaria_igualdad}
+\input{class_expresion_binaria_mayor}
+\input{class_expresion_binaria_mayor_igual}
+\input{class_expresion_binaria_menor}
+\input{class_expresion_binaria_menor_igual}
+\input{class_expresion_binaria_modulo}
+\input{class_expresion_binaria_multiplicacion}
+\input{class_expresion_binaria_o}
+\input{class_expresion_binaria_resta}
+\input{class_expresion_binaria_suma}
+\input{class_expresion_binaria_y}
+\input{class_expresion_instancia_de}
+\input{class_expresion_literal_booleana}
+\input{class_expresion_literal_cadena}
+\input{class_expresion_literal_caracter}
+\input{class_expresion_literal_entera}
+\input{class_expresion_literal_flotante}
+\input{class_expresion_unaria}
+\input{class_expresion_unaria_negacion}
+\input{class_expresion_unaria_negativo}
+\input{class_funcion}
+\input{class_funciones_incorporadas}
+\input{class_funcion_utilizada}
+\input{class_generador_de_errores}
+\input{class_instruccion}
+\input{class_instruccion_asignacion}
+\input{class_instruccion_asignacion_arreglo}
+\input{class_instruccion_caso}
+\input{class_instruccion_llamada_a_funcion}
+\input{class_instruccion_mientras}
+\input{class_instruccion_para}
+\input{class_instruccion_para_cada}
+\input{class_instruccion_repetir}
+\input{class_instruccion_repita}
+\input{class_instruccion_repita_desde}
+\input{class_instruccion_retornar}
+\input{class_instruccion_si}
+\input{class_lista}
+\input{class_lista_de_caso}
+\input{class_programa}
+\input{class_tabla_de_funciones}
+\input{class_tipo}
+\input{class_tipo_arreglo}
+\input{class_tipo_booleano}
+\input{class_tipo_boton_central}
+\input{class_tipo_boton_derecho}
+\input{class_tipo_boton_escape}
+\input{class_tipo_boton_izquierdo}
+\input{class_tipo_cadena}
+\input{class_tipo_caracter}
+\input{class_tipo_entero}
+\input{class_tipo_flotante}
+\input{class_tipo_funcion}
+\input{class_tipo_motor}
+\input{class_tipo_sensor_de_brujula}
+\input{class_tipo_sensor_de_color}
+\input{class_tipo_sensor_de_inclinacion}
+\input{class_tipo_sensor_de_luz}
+\input{class_tipo_sensor_de_sonido}
+\input{class_tipo_sensor_de_tacto}
+\input{class_tipo_sensor_giroscopico}
+\input{class_tipo_sensor_ultrasonico}
+\input{class_ti_xml_attribute}
+\input{class_ti_xml_attribute_set}
+\input{class_ti_xml_base}
+\input{class_ti_xml_comment}
+\input{struct_ti_xml_cursor}
+\input{class_ti_xml_declaration}
+\input{class_ti_xml_document}
+\input{class_ti_xml_element}
+\input{class_ti_xml_handle}
+\input{class_ti_xml_node}
+\input{class_ti_xml_out_stream}
+\input{class_ti_xml_parsing_data}
+\input{class_ti_xml_printer}
+\input{class_ti_xml_string}
+\input{class_ti_xml_text}
+\input{class_ti_xml_unknown}
+\input{class_ti_xml_visitor}
+\input{class_variable}
+\input{class_variable_a_declarar}
+\input{class_variable_arreglo}
+\input{class_variable_declarada}
+\input{class_variable_funcion}
+\input{class_variable_puerto}
+\input{class_variable_sensor}
+\input{structyy__buffer__state}
+\input{structyy__trans__info}
+\input{unionyyalloc}
+\input{struct_y_y_l_t_y_p_e}
+\input{union_y_y_s_t_y_p_e}
+\addcontentsline{toc}{part}{Índice}
+\printindex
+\end{document}

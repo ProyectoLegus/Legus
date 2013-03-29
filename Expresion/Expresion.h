@@ -1,7 +1,11 @@
 #ifndef EXPRESION_H
 #define EXPRESION_H
 
-
+/*!
+    \public
+    \enum Expresiones
+    \brief Utilizado para describir que tipo de expresion es el objeto.
+*/
 enum Expresiones
 {
     IGUALDAD, MAYOR, MAYORIGUAL, MENOR, MENORIGUAL,
@@ -13,6 +17,11 @@ enum Expresiones
     PUERTO, SENSOR, INSTANCIADE
 };
 
+/*!
+    \enum TipoDato
+    \brief Utilizado para describir el tipo de dato que actualmente
+           tiene la variable.
+*/
 enum TipoDato
 {
     ENTERO, FLOTANTE, CADENA,
@@ -22,7 +31,6 @@ enum TipoDato
 #include "Programa/Tipos/Tipo.h"
 #include "Programa/ExcepcionLegus.h"
 
-/*Para no incluirlo en los demas*/
 using namespace std;
 
 class Expresion

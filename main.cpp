@@ -25,8 +25,12 @@ int main(int argc, char *argv[])
         Utilizacion : legus <opciones> <archivoAcompilar>
 
         Donde las posibles opciones son:
+          Solo se puede escojer una de las siguientes 2
             -p, --pc      Genera Archivo de Java para pc's
             -n, --nxt     Genera archivo de java para Lejos Virtual Machine
+          Otras Opciones
+            -x, --xml     Toma en consideracion funciones declaradas en la carpeta de xml
+
 
         Codigos de Error:
             1 -> Cantidad incorrecta de argumentos
@@ -45,7 +49,9 @@ int main(int argc, char *argv[])
                  <<
                     "-p, --pc\tGenera archivo de java para pc's" << endl
                  <<
-                    "-n, --nxt\tGenera archivo de java para Lejos Virtual Machine"
+                    "-n, --nxt\tGenera archivo de java para Lejos Virtual Machine" << endl
+                 <<
+                    "-x, --xml\ten consideracion funciones declaradas en la carpeta de xml"
                  << endl;
             exit(1);
         }
@@ -80,7 +86,7 @@ int main(int argc, char *argv[])
             if( yyparse() )
             {
                 cout << "Error de analisis" << endl;
-                system("pause");
+                //system("pause");
                 exit(3);
             }
             else
@@ -100,6 +106,6 @@ int main(int argc, char *argv[])
              << "\nAlrededor de la linea: "
              << linea << endl;
     }
-    system("pause");
+    //system("pause");
     return 0;
 }

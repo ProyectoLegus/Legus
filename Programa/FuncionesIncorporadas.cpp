@@ -136,6 +136,7 @@ map<string, Funcion*>* FuncionesIncorporadas::obtenerFuncionesIncorporadas()
     // Delay
     //(*funcionesIncorporadas)["esperar|entero"] = new Funcion( 0, obtenerVectorParametros(1, TEntero) );
     (*funcionesIncorporadas)["obtener_cantidad|arreglo"] = new Funcion( obtenerTipo(TEntero),obtenerVectorParametros(1, TArreglo) );
+    (*funcionesIncorporadas)["aentero|flotante"] = new Funcion(obtenerTipo(TEntero), obtenerVectorParametros(1, TFlotante));
 
     return funcionesIncorporadas;
 }
@@ -309,6 +310,7 @@ map<string, string>* FuncionesIncorporadas::obtenerCodigoFunciones()
     //(*codigo)["esperar|entero"] = "public static void retrasar_programa(int t){Delay.msDelay(t);}";
 
     (*codigo)["obtener_cantidad|arreglo"] = "public static int obtener_cantidad(ArrayList<Object> a){return a.size();}";
+    (*codigo)["aentero|flotante"] = "public static int aentero(double b){return (int)b;}";
     return codigo;
 }
 
